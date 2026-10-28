@@ -1,11 +1,11 @@
-# Atelier Muel : site et espace de modification
+# Grégoire Muel, sites internet : site et espace de modification
 
-Le site de Grégoire Muel EI (nom commercial Atelier Muel) : création et refonte de sites pour les commerces, les artisans et les entreprises. Moteur « agence » de la méthode (`gregoiremuel/kit-sites-boutiques`), hébergé gratuitement chez Cloudflare, avec son espace de modification (`/admin`).
+Le site de Grégoire Muel EI pour son activité de création et refonte de sites (commerces, artisans, entreprises). « Atelier Muel » est gardé pour la joaillerie et n'apparaît pas ici ; seul le nom technique du dépôt et du projet Cloudflare (`site-atelier-muel`) le contient. Moteur « agence » de la méthode (`gregoiremuel/kit-sites-boutiques`), hébergé gratuitement chez Cloudflare, avec son espace de modification (`/admin`).
 
 - **Accueil** : promesse, trois repères, présentation (« Un site, et la main dessus ») et chiffres, les trois offres avec leur prix de départ, le bloc « Essayez l'espace de modification » (liens vers les démonstrations), les réalisations, la méthode, l'appel « Une maquette gratuite en 48 h ».
 - **Offres** (`/expertises`) : site vitrine, boutique et catalogue, site d'entreprise ou refonte, avec le détail, la méthode et ce qui est compris dans chaque site.
 - **Réalisations** : Opéria (refonte en cours), la fromagerie de quartier (site d'exemple tiré de la maquette, nom masqué) et la joaillerie imaginaire, chacune avec sa fiche et un bouton vers la démonstration.
-- **L'atelier** (`/agence`) : qui tu es, ta façon de travailler, tes engagements.
+- **À propos** (`/agence`) : qui tu es, ta façon de travailler, tes engagements.
 - **Contact** : formulaire « Votre demande » (créer, refaire, boutique, entretien, autre). Les demandes arrivent dans l'espace de modification, avec un statut.
 - **Démonstrations** : `public/demos/fromagerie-exemple.html` et `public/demos/joaillerie-exemple.html`, deux commerces imaginaires que le visiteur peut modifier lui-même (rien n'est publié, tout reste dans son navigateur). Non indexées par Google.
 - **Visuels** : de vraies captures des sites (parties sans photo) dans des cadres d'ordinateur et de téléphone, fabriquées par script. Aucune photo de banque d'images sur ce site.
@@ -20,7 +20,7 @@ Le site de Grégoire Muel EI (nom commercial Atelier Muel) : création et refont
 5. **Zone** : « Paris et alentours, et à distance partout en France ».
 6. **TVA** : « TVA non applicable, article 293 B du CGI » suppose que tu es en franchise de TVA (cas normal d'une micro-entreprise qui n'a pas choisi la TVA).
 7. **Adresse** : les mentions légales affichent l'adresse déclarée au registre (36 rue Chardon-Lagache), obligatoire. Elle n'apparaît nulle part ailleurs sur le site. Si c'est ton domicile et que tu préfères ne pas la publier, il faut une domiciliation d'entreprise.
-8. **Phrase « Artisan joaillier de formation »** dans « L'atelier » : à garder ou à retirer.
+8. **Phrase « Artisan joaillier de formation »** dans « À propos » : à garder ou à retirer.
 9. **Portrait** : sans photo, tes initiales s'affichent.
 10. **Mentions légales et confidentialité** : brouillons, à faire relire.
 
@@ -61,5 +61,5 @@ Elles viennent des moteurs vitrine et catalogue du kit, avec les contenus de `ex
 | `exemples/` | Contenus des deux commerces imaginaires des démonstrations |
 | `public/demos/` | Les deux démonstrations à essayer |
 | `public/assets/photos/` | Visuels (captures des sites dans des cadres) |
-| `public/assets/atelier-muel-monogramme.svg` | Icône d'onglet |
+| `public/assets/gregoire-muel-monogramme.svg` | Icône d'onglet (GM) |
 | `src/worker.js`, `public/assets/*`, `outils/` | Le moteur agence (voir le kit) |

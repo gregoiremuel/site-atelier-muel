@@ -1,6 +1,6 @@
-# Site Atelier Muel : instructions pour Claude
+# Site Grégoire Muel (sites internet) : instructions pour Claude
 
-Site de Grégoire Muel EI, nom commercial Atelier Muel : création et refonte de sites pour commerces, artisans et entreprises. Moteur « agence » de la méthode de Greg (dépôt `gregoiremuel/kit-sites-boutiques`, `METHODE.md`).
+Site de Grégoire Muel EI pour son activité de création et refonte de sites (commerces, artisans, entreprises). Le nom « Atelier Muel » est réservé à sa future joaillerie : il n'apparaît pas sur ce site. Le dépôt et le projet Cloudflare gardent le nom technique `site-atelier-muel`. Moteur « agence » de la méthode de Greg (dépôt `gregoiremuel/kit-sites-boutiques`, `METHODE.md`).
 
 - Lis `LISEZMOI.md` avant toute tâche : contenu, ce qui reste à valider, mise en ligne, démonstrations.
 - Le contenu de départ est `contenu-initial.json` ; une fois en ligne, il vit dans l'espace de modification (KV) et se modifie depuis `/admin`.

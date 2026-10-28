@@ -1,5 +1,5 @@
 {
-  // Site d’Atelier Muel (Grégoire Muel EI) : Cloudflare Worker + stockage KV.
+  // Site de Grégoire Muel EI (sites internet) : Cloudflare Worker + stockage KV. Le nom technique « site-atelier-muel » reste celui du projet Cloudflare.
   "name": "site-atelier-muel",
   "main": "src/worker.js",
   "compatibility_date": "2026-09-01",

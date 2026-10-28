@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Site et espace de modification d’Atelier Muel (Cloudflare Workers)",
+  "description": "Site et espace de modification de Grégoire Muel EI, sites internet (Cloudflare Workers)",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "node outils/verifier.mjs && wrangler deploy",

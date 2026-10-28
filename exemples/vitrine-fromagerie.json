@@ -169,7 +169,7 @@
     "offres_titre": "Plateaux et commandes",
     "offres_texte": "Les clients choisissent un plateau et un jour de retrait : la demande arrive dans l’espace boutique.",
     "offres_photo": "https://images.unsplash.com/photo-1662490880638-db5aa5ed08eb",
-    "description_google": "Site d’exemple d’une fromagerie imaginaire, créé par Atelier Muel pour montrer l’espace boutique."
+    "description_google": "Site d’exemple d’une fromagerie imaginaire, créé par Grégoire Muel pour montrer l’espace boutique."
   },
   "produits": [
     {
@@ -274,7 +274,7 @@
   "questions": [
     {
       "question": "Ce site est-il celui d’une vraie boutique ?",
-      "reponse": "Non, c’est un site d’exemple créé par Atelier Muel. Les noms, l’adresse et le téléphone sont imaginaires."
+      "reponse": "Non, c’est un site d’exemple créé par Grégoire Muel. Les noms, l’adresse et le téléphone sont imaginaires."
     },
     {
       "question": "Que peut changer le commerçant lui-même ?",

@@ -1,8 +1,8 @@
 {
   "_schema": "agence v1",
   "agence": {
-    "nom": "Atelier Muel",
-    "logo": "/assets/atelier-muel-monogramme.svg",
+    "nom": "Grégoire Muel",
+    "logo": "/assets/gregoire-muel-monogramme.svg",
     "nom_image": "",
     "nom_image_blanc": "",
     "activite": "Création et refonte de sites internet",
@@ -14,7 +14,7 @@
     "email": "",
     "linkedin": "",
     "instagram": "",
-    "description_google": "Atelier Muel crée et refait les sites des commerces, des artisans et des entreprises, à Paris 16e et à distance : maquette gratuite en 48 h, et un espace de modification pour tout changer soi-même."
+    "description_google": "Grégoire Muel crée et refait les sites des commerces, des artisans et des entreprises, à Paris 16e et à distance : maquette gratuite en 48 h, et un espace de modification pour tout changer soi-même."
   },
   "theme": {
     "fond": "#f5f3ee",
@@ -248,8 +248,8 @@
     }
   ],
   "presentation": {
-    "titre": "L’atelier",
-    "texte": "Atelier Muel, c’est moi : Grégoire Muel, entrepreneur individuel installé à Auteuil, dans le 16e arrondissement de Paris. Je conçois, crée, refais et entretiens les sites des commerces, des artisans et des entreprises.\n\n## Ma façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Un espace de modification simple, pensé pour le téléphone.\n- Un seul interlocuteur, du premier échange à la mise en ligne, puis pour l’entretien.\n\nArtisan joaillier de formation, j’ai gardé l’habitude du travail précis et des finitions soignées.",
+    "titre": "À propos",
+    "texte": "Je suis Grégoire Muel, entrepreneur individuel installé à Auteuil, dans le 16e arrondissement de Paris. Je conçois, crée, refais et entretiens les sites des commerces, des artisans et des entreprises.\n\n## Ma façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Un espace de modification simple, pensé pour le téléphone.\n- Un seul interlocuteur, du premier échange à la mise en ligne, puis pour l’entretien.\n\nArtisan joaillier de formation, j’ai gardé l’habitude du travail précis et des finitions soignées.",
     "photo": "/assets/photos/intro.jpg"
   },
   "garanties": {
@@ -291,7 +291,7 @@
     "confirmation": "Merci, votre demande est bien partie. Je vous recontacte pour en parler."
   },
   "mentions": {
-    "raison_sociale": "Grégoire Muel EI, nom commercial Atelier Muel",
+    "raison_sociale": "Grégoire Muel EI",
     "forme": "entrepreneur individuel",
     "rcs": "131 703 951 00015 (Registre national des entreprises)",
     "adresse": "36 rue Chardon-Lagache, 75016 Paris",
@@ -300,18 +300,18 @@
     "mediateur": "",
     "tva": "TVA non applicable, article 293 B du code général des impôts"
   },
-  "credits_photos": "Visuels : captures des sites réalisés par Atelier Muel. Les sites d’exemple utilisent des photos d’illustration (Unsplash).",
+  "credits_photos": "Visuels : captures des sites réalisés par Grégoire Muel. Les sites d’exemple utilisent des photos d’illustration (Unsplash).",
   "reglages": {
     "url": ""
   },
   "libelles": {
     "nav_expertises": "Offres",
     "nav_realisations": "Réalisations",
-    "nav_agence": "L’atelier",
+    "nav_agence": "À propos",
     "bouton_principal": "Recevoir ma maquette gratuite",
     "bouton_realisations": "Voir les réalisations",
     "bouton_appel": "Demander ma maquette",
-    "intro_lien": "L’atelier",
+    "intro_lien": "À propos",
     "exp_sur": "Offres",
     "exp_titre": "Trois formules, un seul interlocuteur",
     "exp_lien": "Le détail",
@@ -330,7 +330,7 @@
     "fiche_surface": "Type de site",
     "interventions": "Ce qui a été fait",
     "garanties_sur": "Engagements",
-    "equipe_sur": "L’atelier",
+    "equipe_sur": "À propos",
     "equipe_titre": "Votre interlocuteur",
     "contact_titre": "Parlons de votre site",
     "contact_chapo": "Quelques lignes sur votre activité et sur ce que vous attendez de votre site suffisent pour commencer.",

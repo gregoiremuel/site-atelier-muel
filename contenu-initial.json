@@ -388,7 +388,7 @@
   },
   "credits_photos": "Vignettes : captures d’écran des démonstrations. Photos d’illustration des démonstrations (Unsplash) : Sander Hallaste, Bailey Alexander, Craft Kitties, HENG YIN, Minh Đức (atelier) ; Vika Fleysher, Oxana Melis, Viktoriia Yatsentiuk, Roman Kraft (fleuriste) ; Timur Shakerzianov (plombier) ; Glenov Brankovic, Antonio Araujo (restaurant). Photos d’illustration du site (Unsplash) : le poste de travail (Christin Hume) et la rue parisienne (Shalev Cohen) ne montrent ni l’auteur ni un client. Les démonstrations ne montrent pas de vrais clients.",
   "reglages": {
-    "url": ""
+    "url": "https://gregoiremuel.fr"
   },
   "libelles": {
     "nav_expertises": "Offres",
@@ -413,6 +413,7 @@
     "lots_sur": "Compris",
     "lots_titre": "Dans chaque site",
     "page_real_titre": "Réalisations et démonstrations",
+    "page_real_chapo": "Ces quatre sites sont des démonstrations imaginaires : aucun de ces commerces n’existe. Chacune montre un métier (ébéniste, fleuriste, plombier, restaurant) avec sa propre mise en page. Ouvrez-en une, touchez « Essayer la page de modification » et changez un horaire, un texte ou une photo : rien n’est publié, tout reste sur votre appareil. Les premiers sites de vrais clients prendront leur place ici, avec leur accord écrit.",
     "fiche_surface": "Type de site",
     "interventions": "Ce qui a été fait",
     "garanties_sur": "Garanties",

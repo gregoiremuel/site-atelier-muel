@@ -210,7 +210,8 @@ async function tests() {
 
   /* Adresse canonique : seulement hors version de travail et si l'adresse du site est connue */
   const Cc = structuredClone(C); Cc.reglages = { ...(Cc.reglages || {}), url: 'https://gregoiremuel.fr/' };
-  verif(/<link rel="canonical" href="https:\/\/gregoiremuel\.fr\/expertises">/.test(rendrePage(Cc, '/expertises', { maquette: false }).html) && !/rel="canonical"/.test(rendrePage(Cc, '/expertises', { maquette: true }).html) && !/rel="canonical"/.test(rendrePage(C, '/expertises', { maquette: false }).html), 'Adresse canonique ajoutée seulement en ligne et avec l’adresse du site');
+  const Cs = structuredClone(C); Cs.reglages = { ...(Cs.reglages || {}), url: '' };
+  verif(/<link rel="canonical" href="https:\/\/gregoiremuel\.fr\/expertises">/.test(rendrePage(Cc, '/expertises', { maquette: false }).html) && !/rel="canonical"/.test(rendrePage(Cc, '/expertises', { maquette: true }).html) && !/rel="canonical"/.test(rendrePage(Cs, '/expertises', { maquette: false }).html), 'Adresse canonique ajoutée seulement en ligne et avec l’adresse du site');
 
   /* Rien sur la joaillerie dans les pages vues par les visiteurs */
   { let tout = ''; for (const ch of routes(C)) tout += rendrePage(C, ch, { maquette: false }).html; verif(!/joaill|bijou/i.test(tout), 'Aucune mention de la joaillerie sur le site'); }

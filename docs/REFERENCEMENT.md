@@ -10,6 +10,11 @@ Aucune promesse de position : personne ne peut garantir une place dans Google, e
 - Un site **rapide, lisible sur téléphone, en HTTPS**, sans cookie ni publicité (critères que Google regarde).
 - Des pages **par métier** avec un vrai texte, des prix de départ et une démonstration : ce sont tes meilleures chances d'apparaître sur « site internet restaurant Paris 16e » et assimilés.
 
+## 1 bis. Deux outils de contrôle (dans le dépôt)
+- `npm run referencement` : contrôle chaque page (titre, description unique et de bonne longueur, un seul titre principal, adresse canonique, données structurées lisibles, images avec texte alternatif, liens internes, quantité de texte). Il sort en erreur si une page a un défaut qui gêne Google. `npm run referencement -- --en-ligne https://adresse-du-site` contrôle aussi `robots.txt` et `sitemap.xml` du site publié (depuis un poste qui peut joindre le site).
+- `npm run look-ia` : repère ce qui donne une allure « faite par IA » (texte à la première personne, formules toutes faites, couleur d'accent trop vive, dégradés, coins arrondis, pages trop longues sur téléphone). C'est un détecteur d'indices, pas un juge.
+Les deux sont à relancer après chaque changement important, avec `npm run verifier` et `npm test`.
+
 ## 2. Avant l'ouverture (avec toi, dans `docs/MISE-EN-LIGNE.md`)
 1. Domaine acheté et actif sur Cloudflare.
 2. Dans le contenu : `reglages.url` = `https://gregoiremuel.fr` (je le fais quand tu me dis « go »).

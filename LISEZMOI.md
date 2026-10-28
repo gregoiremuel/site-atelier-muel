@@ -69,6 +69,8 @@ Photos : 1200 px de large, JPEG qualité 78, sans métadonnées (GPS comprises),
 | `npm run verifier` | Contrôle le contenu et liste ce qui reste à faire. |
 | `npm test` | Lance le vrai serveur sur l'ordinateur et le teste de bout en bout. |
 | `npm run apercu` | Fabrique `demonstration.html` (le site et son page de modification, en un fichier). |
+| `npm run referencement` | Contrôle le référencement de chaque page (titres, descriptions, canonique, données structurées, liens). |
+| `npm run look-ia` | Repère ce qui donne une allure « faite par IA » (textes, couleurs, formes, longueur). |
 | `npm run mot-de-passe` | Crée le mot de passe de départ de la page de modification et son empreinte (Secret `ADMIN_HASH`). |
 | `npm run accessibilite` | Audit d'accessibilité : axe-core (WCAG 2.2 AA) sur chaque page, en bureau, mobile et « moins d'animations », puis parcours au clavier (demande Playwright). |
 | `npm run demos` | Refait les quatre démonstrations avec le moteur vitrine du kit. |

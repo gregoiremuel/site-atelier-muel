@@ -13,7 +13,9 @@
     "mot-de-passe": "node outils/mot-de-passe.mjs",
     "accessibilite": "node outils/accessibilite.mjs",
     "demos": "node outils/demos.mjs",
-    "vignettes": "node outils/vignettes.mjs"
+    "vignettes": "node outils/vignettes.mjs",
+    "look-ia": "node outils/look-ia.mjs",
+    "referencement": "node outils/referencement.mjs"
   },
   "devDependencies": {
     "axe-core": "^4.14.0",

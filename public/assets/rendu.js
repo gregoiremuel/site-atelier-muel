@@ -34,7 +34,7 @@ export const LIBELLES = {
   mentions_immatriculation: 'RCS', mentions_siege: 'Siège',
   type_schema: 'GeneralContractor', bandeau_maquette: '',
   pages_sur: 'Par métier', pages_titre: 'Un site pensé pour votre métier', page_demo: 'Essayer la démonstration', page_maquette: 'Demander ma maquette gratuite', faq_sur: 'Questions', faq_titre: 'Les questions qu’on me pose', pied_metiers: 'Par métier',
-  comparaison_sur: 'Comparer', comparaison_titre: 'Un constructeur en ligne ou moi ?',
+  comparaison_sur: 'Comparer', comparaison_titre: 'Un constructeur en ligne, ou un site réalisé pour vous ?',
 };
 /* Valeur d'un libellé : le texte du site s'il est rempli, sinon celui par défaut ; vide("") accepté pour les champs du formulaire */
 export const libelle = (C, k) => { const v = (C && C.libelles && typeof C.libelles === 'object') ? C.libelles[k] : undefined; if (typeof v !== 'string') return LIBELLES[k]; return v.trim() || (/^form_(societe|type|surface|ville)$/.test(k) ? '' : LIBELLES[k]); };
@@ -136,6 +136,9 @@ const prixHtml = (p) => { const [v, ...r] = String(p == null ? '' : p).split('|'
 const telHref = (t) => 'tel:' + String(t || '').replace(/[^\d+]/g, '').replace(/^0/, '+33');
 
 /* Barre d'appel au contact, réutilisée en bas de plusieurs pages */
+/* Description d'une page pour les moteurs de recherche, propre à chaque page (150 signes au plus) */
+const descr = (C, quoi) => { const G = C.agence || {}; const t = `${quoi} : ${G.nom || ''}${G.activite ? ', ' + G.activite.charAt(0).toLowerCase() + G.activite.slice(1) : ''}${G.zone ? ' (' + G.zone + ')' : ''}.`; return t.length <= 155 ? t : t.slice(0, 152).replace(/[\s,;:]+\S*$/, '') + '…'; };
+
 function appel(C, court) {
   const A = C.accueil || {}, G = C.agence || {};
   if (court && (C.theme || {}).gabarit === 'edition') return `
@@ -543,7 +546,7 @@ function pageRealisations(C, D, secteurId) {
   const s = secteurId ? D.secteur(secteurId) : null;
   const liste = s ? D.realisations.filter((x) => x.secteur === s.id) : D.realisations;
   return {
-    classe: 'p-realisations', titre: s ? libelle(C, 'nav_realisations') + ' : ' + s.nom : libelle(C, 'nav_realisations'), rubrique: '/realisations', image: (liste[0] && liste[0].photos[0]) || '',
+    classe: 'p-realisations', description: descr(C, s ? libelle(C, 'nav_realisations') + ' : ' + s.nom : libelle(C, 'nav_realisations')), titre: s ? libelle(C, 'nav_realisations') + ' : ' + s.nom : libelle(C, 'nav_realisations'), rubrique: '/realisations', image: (liste[0] && liste[0].photos[0]) || '',
     corps: `
   <section class="tete-page wrap">
     <p class="sur">${esc(libelle(C, 'real_sur'))}</p>
@@ -567,7 +570,7 @@ function pageRealisation(C, D, id) {
   const fiche = [['fiche_client', x.client], ['fiche_lieu', x.lieu], ['fiche_surface', x.surface], ['fiche_mission', x.mission], ['fiche_annee', x.annee], ['fiche_secteur', s && s.nom]].map(([k, v]) => [libelle(C, k), v]).filter(([, v]) => v);
   const [p0, ...autres] = x.photos;
   return {
-    classe: 'p-realisation', titre: x.nom, rubrique: '/realisations', image: p0, description: x.accroche || `${x.nom} : ${meta(x)}`,
+    classe: 'p-realisation', titre: x.nom, rubrique: '/realisations', image: p0, description: ((x.lien ? 'Démonstration : ' : '') + (x.accroche || `${x.nom} : ${meta(x)}`)).slice(0, 158),
     corps: `
   <section class="real-tete">
     <div class="real-fig">${p0 ? img(p0, 2200, 'real-img', true, x.nom) + illus(p0) : '<span class="sans-photo">Photos à venir</span>'}${etiquette(x)}</div>
@@ -604,7 +607,7 @@ function pageAgence(C, D) {
   const P = C.presentation || {}, Gr = C.garanties || {}, G = C.agence || {};
   const gpts = (Array.isArray(Gr.points) ? Gr.points : []).filter(Boolean);
   return {
-    classe: 'p-agence', titre: P.titre || libelle(C, 'nav_agence'), rubrique: '/agence', image: P.photo,
+    classe: 'p-agence', description: descr(C, P.titre || libelle(C, 'nav_agence')), titre: P.titre || libelle(C, 'nav_agence'), rubrique: '/agence', image: P.photo,
     corps: `
   <section class="tete-page wrap">
     <p class="sur">${esc(G.nom || '')}</p>
@@ -648,7 +651,7 @@ function pageContact(C, D) {
   const L = (k) => libelle(C, k);
   const carte = G.adresse ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([G.nom, G.adresse, G.code_postal, G.ville].filter(Boolean).join(' '))}` : '';
   return {
-    classe: 'p-contact', titre: 'Contact', rubrique: '/contact',
+    classe: 'p-contact', description: descr(C, 'Contact'), titre: 'Contact', rubrique: '/contact',
     corps: `
   <section class="tete-page wrap">
     <p class="sur">Contact</p>
@@ -715,7 +718,7 @@ function pageMentions(C) {
   const M = C.mentions || {}, G = C.agence || {};
   const k = (v) => (v ? esc(v) : '<em>à compléter</em>');
   return {
-    classe: 'p-texte', titre: 'Mentions légales',
+    classe: 'p-texte', description: descr(C, 'Mentions légales'), titre: 'Mentions légales',
     corps: `
   <section class="tete-page wrap"><h1>Mentions légales</h1></section>
   <section class="sec sec-serre"><div class="wrap prose">
@@ -733,7 +736,7 @@ function pageMentions(C) {
 function pageConfidentialite(C) {
   const K = C.contact || {}, G = C.agence || {};
   return {
-    classe: 'p-texte', titre: 'Confidentialité',
+    classe: 'p-texte', description: descr(C, 'Politique de confidentialité'), titre: 'Confidentialité',
     corps: `
   <section class="tete-page wrap"><h1>Confidentialité</h1></section>
   <section class="sec sec-serre"><div class="wrap prose">

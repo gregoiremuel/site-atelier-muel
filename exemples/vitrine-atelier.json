@@ -142,11 +142,11 @@
     "intro": "Atelier d’ébénisterie à Paris 11e : restauration de meubles anciens, meubles sur mesure, réparation de chaises et de fauteuils. Chaque demande reçoit un devis écrit avant le début des travaux.",
     "photo_accueil": "/photos/atelier-craft",
     "boutique_titre": "L’atelier",
-    "boutique_texte": "Atelier du Merrain est une entreprise imaginaire, inventée pour cette démonstration. Voici ce que voit un client : qui travaille, ce qui est proposé, quand passer et comment demander un devis.\n\nL’artisan change lui-même ces textes, ses photos, ses travaux et ses horaires depuis la page de modification, sur son téléphone.",
+    "boutique_texte": "L’Atelier du Merrain restaure et fabrique des meubles à Paris 11e. Chaque pièce est examinée avant tout travail : on vous explique ce qui est possible, le délai et le prix, par écrit.\n\nOn passe à l’atelier sur rendez-vous, ou on vous donne un premier avis par téléphone à partir de quelques photos.",
     "boutique_photo_1": "/photos/atelier-bailey",
     "boutique_photo_2": "/photos/atelier-craft",
     "produits_titre": "Ce que fait l’atelier",
-    "produits_intro": "Quatre types de travaux, chacun avec son délai indicatif. La liste se change en quelques secondes depuis la page de modification.",
+    "produits_intro": "Quatre types de travaux, chacun avec son délai indicatif.",
     "produits_photo": "/photos/atelier-heng",
     "offres_titre": "Travaux courants",
     "offres_texte": "Trois demandes que l’atelier reçoit souvent. Pour chacune, le devis est écrit avant tout travail.",
@@ -230,7 +230,7 @@
     },
     {
       "question": "Comment demander un devis ?",
-      "reponse": "Le client décrit le meuble et le travail à faire, la demande arrive sur la page de modification de l’artisan, qui répond et envoie son devis."
+      "reponse": "Le client décrit le meuble et le travail à faire, la demande arrive directement à l’atelier, qui répond et envoie son devis."
     }
   ],
   "presse": [],

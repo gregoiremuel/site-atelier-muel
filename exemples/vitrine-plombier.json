@@ -128,11 +128,11 @@
     "intro": "Une fuite, un chauffe-eau en panne, une salle de bains à refaire : appelez pour un dépannage, ou décrivez vos travaux pour recevoir un devis.",
     "photo_accueil": "/photos/plombier-timur1",
     "boutique_titre": "L’entreprise",
-    "boutique_texte": "Plomberie Delorme est une entreprise imaginaire, inventée pour cette démonstration. Voici ce que voit un client : le numéro à appeler tout de suite, ce que l’entreprise répare, la zone où elle se déplace et comment demander un devis.\n\nL’artisan change lui-même ces textes, ses horaires, sa zone et ses interventions depuis la page de modification, sur son téléphone.",
+    "boutique_texte": "Plomberie Delorme intervient à Paris et en petite couronne : fuites, évacuations, chauffe-eau, salles de bains. Pour une urgence, on se déplace dans la journée ; pour des travaux, on passe voir sur place avant de vous envoyer un devis écrit.\n\nLe prix est annoncé avant le début de l’intervention.",
     "boutique_photo_1": "",
     "boutique_photo_2": "",
     "produits_titre": "Ce que nous faisons",
-    "produits_intro": "Six types d’intervention. La liste se change en quelques secondes depuis la page de modification.",
+    "produits_intro": "Six types d’intervention.",
     "produits_photo": "/photos/plombier-timur3",
     "offres_titre": "Dépannage ou devis",
     "offres_texte": "Trois façons de nous joindre selon votre besoin.",
@@ -236,7 +236,7 @@
     },
     {
       "question": "Comment demander un devis ?",
-      "reponse": "Le client décrit le problème ou les travaux dans le formulaire ; la demande arrive sur la page de modification de l’artisan, qui rappelle et envoie son devis."
+      "reponse": "Le client décrit le problème ou les travaux dans le formulaire ; la demande arrive directement à l’entreprise, qui rappelle et envoie son devis."
     }
   ],
   "presse": [],

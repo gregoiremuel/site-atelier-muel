@@ -158,11 +158,11 @@
     "intro": "Restaurant à Paris 9e. La carte change avec les arrivages ; la table se réserve en ligne, pour le déjeuner comme pour le dîner.",
     "photo_accueil": "/photos/restaurant-glenov",
     "boutique_titre": "Le restaurant",
-    "boutique_texte": "La Cuillère Haute est un restaurant imaginaire, inventé pour cette démonstration. Voici ce que voit un client : la carte, la façon de réserver, les horaires et l’adresse.\n\nLe restaurateur change lui-même la carte, ses horaires et ses textes depuis la page de modification, sur son téléphone.",
+    "boutique_texte": "La Cuillère Haute propose une cuisine de saison, qui change avec le marché. La carte est courte, les plats sont faits sur place.\n\nVous pouvez réserver en ligne ou par téléphone, pour le déjeuner comme pour le dîner.",
     "boutique_photo_1": "/photos/restaurant-antonio",
     "boutique_photo_2": "",
     "produits_titre": "La carte",
-    "produits_intro": "Dans cette démonstration, la carte n’affiche pas de prix : le restaurateur les saisit lui-même depuis la page de modification.",
+    "produits_intro": "Une carte courte, qui change avec les saisons.",
     "produits_photo": "",
     "offres_titre": "Réserver une table",
     "offres_texte": "Trois façons de réserver. Le restaurant confirme chaque demande par téléphone.",
@@ -286,11 +286,11 @@
     },
     {
       "question": "Comment réserver une table ?",
-      "reponse": "Le client choisit le service, le jour, l’heure et le nombre de couverts ; la demande arrive sur la page de modification du restaurateur, qui confirme."
+      "reponse": "Le client choisit le service, le jour, l’heure et le nombre de couverts ; la demande arrive directement au restaurant, qui confirme."
     },
     {
       "question": "Comment arrivent les réservations, et y a-t-il une commission ?",
-      "reponse": "Chaque demande arrive sur la page de modification du restaurateur, et par e-mail s’il le souhaite. Le site ne prélève aucune commission sur les réservations."
+      "reponse": "Chaque demande arrive directement au restaurant, et par e-mail s’il le souhaite. Le site ne prélève aucune commission sur les réservations."
     }
   ],
   "presse": [],

@@ -34,7 +34,7 @@ export const LIBELLES = {
   mentions_immatriculation: 'RCS', mentions_siege: 'Siège',
   type_schema: 'GeneralContractor', bandeau_maquette: '',
   pages_sur: 'Par métier', pages_titre: 'Un site pensé pour votre métier', page_demo: 'Essayer la démonstration', page_maquette: 'Demander ma maquette gratuite', faq_sur: 'Questions', faq_titre: 'Les questions qu’on me pose', pied_metiers: 'Par métier',
-  comparaison_sur: 'Comparer', comparaison_titre: 'Un constructeur en ligne ou moi ?',
+  comparaison_sur: 'Comparer', comparaison_titre: 'Un constructeur en ligne, ou un site réalisé pour vous ?',
 };
 /* Valeur d'un libellé : le texte du site s'il est rempli, sinon celui par défaut ; vide("") accepté pour les champs du formulaire */
 export const libelle = (C, k) => { const v = (C && C.libelles && typeof C.libelles === 'object') ? C.libelles[k] : undefined; if (typeof v !== 'string') return LIBELLES[k]; return v.trim() || (/^form_(societe|type|surface|ville)$/.test(k) ? '' : LIBELLES[k]); };
@@ -70,7 +70,7 @@ export function donnees(C) {
   const CP = C.comparaison && typeof C.comparaison === 'object' && !Array.isArray(C.comparaison) ? C.comparaison : null;
   const lignesCp = CP && Array.isArray(CP.lignes) ? CP.lignes.filter((l) => l && l.critere && l.a && l.b) : [];
   const colsCp = CP && Array.isArray(CP.colonnes) && CP.colonnes.length === 2 && CP.colonnes.every((c) => typeof c === 'string' && c.trim()) ? CP.colonnes : null;
-  const comparaison = CP && lignesCp.length && colsCp ? { sur: CP.sur || '', titre: CP.titre || '', intro: CP.intro || '', note: CP.note || '', colonnes: colsCp, lignes: lignesCp } : null;
+  const comparaison = CP && lignesCp.length && colsCp ? { actif: CP.actif === true, sur: CP.sur || '', titre: CP.titre || '', intro: CP.intro || '', note: CP.note || '', colonnes: colsCp, lignes: lignesCp } : null;
   return { secteurs, secteursUtiles, realisations, metiers, etapes, equipe, references, chiffres, lots, secteur, abonnements, engagements, pages, comparaison };
 }
 
@@ -136,8 +136,21 @@ const prixHtml = (p) => { const [v, ...r] = String(p == null ? '' : p).split('|'
 const telHref = (t) => 'tel:' + String(t || '').replace(/[^\d+]/g, '').replace(/^0/, '+33');
 
 /* Barre d'appel au contact, réutilisée en bas de plusieurs pages */
-function appel(C) {
+/* Description d'une page pour les moteurs de recherche, propre à chaque page (150 signes au plus) */
+const descr = (C, quoi) => { const G = C.agence || {}; const t = `${quoi} : ${G.nom || ''}${G.activite ? ', ' + G.activite.charAt(0).toLowerCase() + G.activite.slice(1) : ''}${G.zone ? ' (' + G.zone + ')' : ''}.`; return t.length <= 155 ? t : t.slice(0, 152).replace(/[\s,;:]+\S*$/, '') + '…'; };
+
+function appel(C, court) {
   const A = C.accueil || {}, G = C.agence || {};
+  if (court && (C.theme || {}).gabarit === 'edition') return `
+  <section class="appel appel-court">
+    <div class="wrap appel-in">
+      <h2>${esc(A.appel_titre || libelle(C, 'appel_titre'))}</h2>
+      <div class="actions">
+        <a class="btn btn-or" href="/contact">${esc(libelle(C, 'bouton_appel'))}</a>
+        ${G.telephone ? `<a class="btn btn-ligne-clair" href="${telHref(G.telephone)}">${ico.tel}<span>${esc(G.telephone)}</span></a>` : ''}
+      </div>
+    </div>
+  </section>`;
   return `
   <section class="appel">
     ${img(A.photo_appel, 2000, 'appel-img', false, '')}
@@ -236,7 +249,7 @@ ${page.corps}
       <a href="/confidentialite">Confidentialité</a>
       ${o.lienAdmin ? `<a href="${o.lienAdmin}">Page de modification</a>` : ''}
       <span>© ${new Date().getFullYear()} ${esc(nom)}</span>
-      ${C.credits_photos ? `<span class="credits">${esc(C.credits_photos)}</span>` : ''}
+      ${C.credits_photos ? ((C.theme || {}).gabarit === 'edition' ? `<details class="credits"><summary>Crédits des photos</summary><p>${esc(C.credits_photos)}</p></details>` : `<span class="credits">${esc(C.credits_photos)}</span>`) : ''}
     </div>
   </div>
 </footer>
@@ -281,7 +294,7 @@ const abonnementsHtml = (D) => {
 };
 const comparaisonHtml = (C, D) => {
   const K = D.comparaison;
-  if (!K) return '';
+  if (!K || K.actif !== true) return '';
   const [c1, c2] = K.colonnes;
   return `
   <section class="sec" id="comparaison" aria-labelledby="t-cmp">
@@ -421,18 +434,32 @@ const offreVolet = (C, m, i, ouvert) => `
         </div>
       </details>`;
 
-function pageExpertises(C, D) {
-  const edition = (C.theme || {}).gabarit === 'edition';
-  return {
-    classe: 'p-expertises', titre: libelle(C, 'nav_expertises'), rubrique: '/expertises', image: (D.metiers[0] || {}).photo,
-    description: libelle(C, 'page_exp_description') || `Space planning, maîtrise d'œuvre et contractant général : les métiers de ${(C.agence || {}).nom || 'l’agence'}.`,
-    corps: `
-  <section class="tete-page wrap">
-    <p class="sur">${esc(libelle(C, 'exp_sur'))}</p>
-    <h1>${esc(libelle(C, 'page_exp_titre'))}</h1>
-    <p class="chapo">${esc((C.agence || {}).activite || '')}${(C.agence || {}).zone ? ', ' + esc(C.agence.zone) : ''}.</p>
-  </section>
-  ${edition ? `<section class="sec sec-serre offres" aria-label="${esc(libelle(C, 'page_exp_titre'))}"><div class="wrap">${D.metiers.map((m, i) => offreVolet(C, m, i, false)).join('')}</div></section>` : D.metiers.map((m, i) => `
+/* Page des offres, gabarit « édition » : quatre onglets (les sites, les abonnements, comment ça marche, ce qui est inclus) ; sans JavaScript, tout reste affiché */
+function onglets(C, D) {
+  const etapes = D.etapes.length ? `
+      <section class="sec sec-serre" aria-labelledby="t-met"><div class="wrap">
+        <div class="sec-tete">${titreSection(libelle(C, 'methode_sur'), libelle(C, 'methode_titre_page'), 't-met')}</div>
+        ${etapesHtml(D)}
+      </div></section>` : '';
+  const lots = D.lots.length ? `
+      <section class="sec sec-serre" aria-labelledby="t-lots"><div class="wrap">
+        <div class="sec-tete">${titreSection(libelle(C, 'lots_sur'), libelle(C, 'lots_titre'), 't-lots')}</div>
+        <ul class="lots">${D.lots.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>
+      </div></section>` : '';
+  const cmp = comparaisonHtml(C, D);
+  const abo = abonnementsHtml(D);
+  const pans = [
+    ['sites', 'Les sites', `<section class="sec sec-serre offres" aria-label="${esc(libelle(C, 'page_exp_titre'))}"><div class="wrap">${D.metiers.map((m, i) => offreVolet(C, m, i, false)).join('')}</div></section>${pagesListeHtml(C, D)}`],
+    ...(abo ? [['abonnements', 'Abonnements', abo]] : []),
+    ...(etapes ? [['etapes', 'Comment ça marche', etapes]] : []),
+    ...(lots ? [['inclus', 'Inclus dans chaque site', lots]] : []),
+    ...(cmp ? [['comparaison', 'Comparer', cmp]] : []),
+  ];
+  return `<div class="onglets-barre" role="tablist" aria-label="Rubriques de la page" hidden><div class="wrap">${pans.map(([id, nom], i) => `<button type="button" role="tab" class="onglet" id="o-${id}" aria-controls="p-${id}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${esc(nom)}</button>`).join('')}</div></div>
+  ${pans.map(([id, , html]) => `<div class="onglet-panneau" role="tabpanel" id="p-${id}" aria-labelledby="o-${id}">${html}</div>`).join('\n  ')}`;
+}
+const classique = (C, D) => `
+  ${D.metiers.map((m, i) => `
   <section class="sec metier${i % 2 ? ' inverse' : ''}" id="${esc(m.id)}">
     <div class="wrap metier-grille">
       ${src(m.photo, 1400) ? `<figure class="metier-fig">${img(m.photo, 1400, 'metier-img', i === 0, '')}</figure>` : ''}
@@ -463,8 +490,21 @@ function pageExpertises(C, D) {
       <div class="sec-tete">${titreSection(libelle(C, 'lots_sur'), libelle(C, 'lots_titre'), 't-lots')}</div>
       <ul class="lots">${D.lots.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>
     </div>
-  </section>` : ''}
-  ${appel(C)}`,
+  </section>` : ''}`;
+
+function pageExpertises(C, D) {
+  const edition = (C.theme || {}).gabarit === 'edition';
+  return {
+    classe: 'p-expertises', titre: libelle(C, 'nav_expertises'), rubrique: '/expertises', image: (D.metiers[0] || {}).photo,
+    description: libelle(C, 'page_exp_description') || `Space planning, maîtrise d'œuvre et contractant général : les métiers de ${(C.agence || {}).nom || 'l’agence'}.`,
+    corps: `
+  <section class="tete-page wrap">
+    <p class="sur">${esc(libelle(C, 'exp_sur'))}</p>
+    <h1>${esc(libelle(C, 'page_exp_titre'))}</h1>
+    <p class="chapo">${esc((C.agence || {}).activite || '')}${(C.agence || {}).zone ? ', ' + esc(C.agence.zone) : ''}.</p>
+  </section>
+  ${edition ? onglets(C, D) : classique(C, D)}
+  ${appel(C, true)}`,
   };
 }
 
@@ -498,7 +538,7 @@ function pageMetier(C, D, id) {
       <div class="faq">${x.questions.map((q) => `<details><summary>${esc(q.q)}</summary><p>${esc(q.r)}</p></details>`).join('')}</div>
     </div>
   </section>` : ''}
-  ${appel(C)}`,
+  ${appel(C, true)}`,
   };
 }
 
@@ -506,7 +546,7 @@ function pageRealisations(C, D, secteurId) {
   const s = secteurId ? D.secteur(secteurId) : null;
   const liste = s ? D.realisations.filter((x) => x.secteur === s.id) : D.realisations;
   return {
-    classe: 'p-realisations', titre: s ? libelle(C, 'nav_realisations') + ' : ' + s.nom : libelle(C, 'nav_realisations'), rubrique: '/realisations', image: (liste[0] && liste[0].photos[0]) || '',
+    classe: 'p-realisations', description: descr(C, s ? libelle(C, 'nav_realisations') + ' : ' + s.nom : libelle(C, 'nav_realisations')), titre: s ? libelle(C, 'nav_realisations') + ' : ' + s.nom : libelle(C, 'nav_realisations'), rubrique: '/realisations', image: (liste[0] && liste[0].photos[0]) || '',
     corps: `
   <section class="tete-page wrap">
     <p class="sur">${esc(libelle(C, 'real_sur'))}</p>
@@ -518,7 +558,7 @@ function pageRealisations(C, D, secteurId) {
       ${liste.length ? `<ul class="cartes">${liste.map((x) => carte(D, x, false)).join('\n        ')}</ul>` : '<p class="vide">Aucune réalisation en ligne pour le moment.</p>'}
     </div>
   </section>
-  ${appel(C)}`,
+  ${appel(C, true)}`,
   };
 }
 
@@ -530,7 +570,7 @@ function pageRealisation(C, D, id) {
   const fiche = [['fiche_client', x.client], ['fiche_lieu', x.lieu], ['fiche_surface', x.surface], ['fiche_mission', x.mission], ['fiche_annee', x.annee], ['fiche_secteur', s && s.nom]].map(([k, v]) => [libelle(C, k), v]).filter(([, v]) => v);
   const [p0, ...autres] = x.photos;
   return {
-    classe: 'p-realisation', titre: x.nom, rubrique: '/realisations', image: p0, description: x.accroche || `${x.nom} : ${meta(x)}`,
+    classe: 'p-realisation', titre: x.nom, rubrique: '/realisations', image: p0, description: ((x.lien ? 'Démonstration : ' : '') + (x.accroche || `${x.nom} : ${meta(x)}`)).slice(0, 158),
     corps: `
   <section class="real-tete">
     <div class="real-fig">${p0 ? img(p0, 2200, 'real-img', true, x.nom) + illus(p0) : '<span class="sans-photo">Photos à venir</span>'}${etiquette(x)}</div>
@@ -559,7 +599,7 @@ function pageRealisation(C, D, id) {
     <a href="/realisations/${esc(prec.id)}">${ico.gauche}<span><small>Précédente</small>${esc(prec.nom)}</span></a>
     <a href="/realisations/${esc(suiv.id)}"><span><small>Suivante</small>${esc(suiv.nom)}</span>${ico.fleche}</a>
   </nav>` : ''}
-  ${appel(C)}`,
+  ${appel(C, true)}`,
   };
 }
 
@@ -567,7 +607,7 @@ function pageAgence(C, D) {
   const P = C.presentation || {}, Gr = C.garanties || {}, G = C.agence || {};
   const gpts = (Array.isArray(Gr.points) ? Gr.points : []).filter(Boolean);
   return {
-    classe: 'p-agence', titre: P.titre || libelle(C, 'nav_agence'), rubrique: '/agence', image: P.photo,
+    classe: 'p-agence', description: descr(C, P.titre || libelle(C, 'nav_agence')), titre: P.titre || libelle(C, 'nav_agence'), rubrique: '/agence', image: P.photo,
     corps: `
   <section class="tete-page wrap">
     <p class="sur">${esc(G.nom || '')}</p>
@@ -576,7 +616,7 @@ function pageAgence(C, D) {
   <section class="sec sec-serre">
     <div class="wrap intro-grille">
       <div class="prose prose-grande">${texteRiche(P.texte)}</div>
-      ${src(P.photo, 1200) ? `<figure class="intro-fig">${img(P.photo, 1200, 'intro-img', true, '')}</figure>` : ''}
+      ${src(P.photo, 1200) ? `<figure class="intro-fig">${img(P.photo, 1200, 'intro-img', true, '')}${((C.equipe || [])[0] || {}).nom ? `<figcaption><b>${esc(C.equipe[0].nom)}</b>${C.equipe[0].role ? `<span>${esc(C.equipe[0].role)}</span>` : ''}</figcaption>` : ''}</figure>` : ''}
     </div>
   </section>
   ${src(P.photo_2, 1600) ? `<section class="sec sec-serre agence-bande"><div class="wrap"><figure>${img(P.photo_2, 1600, 'bande-img', false, '')}</figure></div></section>` : ''}
@@ -601,7 +641,7 @@ function pageAgence(C, D) {
       ${referencesHtml(D)}
     </div>
   </section>` : ''}
-  ${appel(C)}`,
+  ${appel(C, true)}`,
   };
 }
 
@@ -611,7 +651,7 @@ function pageContact(C, D) {
   const L = (k) => libelle(C, k);
   const carte = G.adresse ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([G.nom, G.adresse, G.code_postal, G.ville].filter(Boolean).join(' '))}` : '';
   return {
-    classe: 'p-contact', titre: 'Contact', rubrique: '/contact',
+    classe: 'p-contact', description: descr(C, 'Contact'), titre: 'Contact', rubrique: '/contact',
     corps: `
   <section class="tete-page wrap">
     <p class="sur">Contact</p>
@@ -662,15 +702,15 @@ function pageEngagements(C, D) {
     <h1>${esc(libelle(C, 'page_eng_titre'))}</h1>
     ${chapo ? `<p class="chapo">${esc(chapo)}</p>` : ''}
   </section>
-  <section class="sec sec-serre">
+  ${(C.theme || {}).gabarit === 'edition' ? `<section class="sec sec-serre"><div class="wrap eng-vols">${D.engagements.map((b) => `<details class="offre eng-vol" id="${esc(b.id)}"><summary><span class="offre-tete"><h2>${esc(b.titre)}</h2></span></summary><div class="offre-corps eng-corps"><div class="metier-txt">${b.texte ? `<div class="prose">${texteRiche(b.texte)}</div>` : ''}${listeCoches(b.points)}</div></div></details>`).join('')}</div></section>` : `<section class="sec sec-serre">
     <div class="wrap eng-grille">
       <nav class="eng-index" aria-label="${esc(libelle(C, 'eng_index'))}"><p class="sur">${esc(libelle(C, 'eng_index'))}</p><ol>${D.engagements.map((b) => `<li><a href="#${esc(b.id)}">${esc(b.titre)}</a></li>`).join('')}</ol></nav>
       <div class="eng-blocs">
         ${D.engagements.map((b, i) => `<section class="eng-bloc" id="${esc(b.id)}" aria-labelledby="t-${esc(b.id)}"><span class="eng-num" aria-hidden="true">${num(i)}</span><h2 id="t-${esc(b.id)}">${esc(b.titre)}</h2>${b.texte ? `<div class="prose">${texteRiche(b.texte)}</div>` : ''}${listeCoches(b.points)}</section>`).join('\n        ')}
       </div>
     </div>
-  </section>
-  ${appel(C)}`,
+  </section>`}
+  ${appel(C, true)}`,
   };
 }
 
@@ -678,7 +718,7 @@ function pageMentions(C) {
   const M = C.mentions || {}, G = C.agence || {};
   const k = (v) => (v ? esc(v) : '<em>à compléter</em>');
   return {
-    classe: 'p-texte', titre: 'Mentions légales',
+    classe: 'p-texte', description: descr(C, 'Mentions légales'), titre: 'Mentions légales',
     corps: `
   <section class="tete-page wrap"><h1>Mentions légales</h1></section>
   <section class="sec sec-serre"><div class="wrap prose">
@@ -696,7 +736,7 @@ function pageMentions(C) {
 function pageConfidentialite(C) {
   const K = C.contact || {}, G = C.agence || {};
   return {
-    classe: 'p-texte', titre: 'Confidentialité',
+    classe: 'p-texte', description: descr(C, 'Politique de confidentialité'), titre: 'Confidentialité',
     corps: `
   <section class="tete-page wrap"><h1>Confidentialité</h1></section>
   <section class="sec sec-serre"><div class="wrap prose">

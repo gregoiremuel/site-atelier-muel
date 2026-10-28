@@ -63,7 +63,13 @@ async function tests() {
   r = await req('/'); let h = await r.text();
   verif(!h.includes('class="maquette"') && !h.includes('noindex'), 'Pas de bandeau de proposition quand MAQUETTE = non');
   if (C.abonnements) { r = await req('/expertises'); const hx = await r.text(); verif(hx.includes('class="abo-grille"') && C.abonnements.formules.every((f) => hx.includes(f.nom)), 'Les formules d’abonnement s’affichent sur la page des offres'); }
-  if ((C.comparaison || {}).lignes) { r = await req('/expertises'); const hc = await r.text(); verif(hc.includes('class="cmp"') && C.comparaison.lignes.every((l) => hc.includes(l.critere.replace(/&/g, '&amp;'))), 'Le tableau de comparaison s’affiche sur la page des offres'); }
+  if ((C.comparaison || {}).lignes) {
+    r = await req('/expertises'); const hc = await r.text();
+    verif(C.comparaison.actif === true ? hc.includes('class="cmp"') : !hc.includes('class="cmp"'), 'La comparaison n’est affichée que si elle est activée');
+    const Ca = structuredClone(C); Ca.comparaison.actif = true; const ha = rendrePage(Ca, '/expertises', { maquette: false }).html;
+    verif(ha.includes('class="cmp"') && Ca.comparaison.lignes.every((l) => ha.includes(l.critere.replace(/&/g, '&amp;'))) && ha.includes('id="o-comparaison"'), 'Activée, la comparaison s’affiche dans son onglet');
+  }
+  { const hx = rendrePage(C, '/expertises', { maquette: false }).html; verif((C.theme || {}).gabarit === 'edition' ? (/role="tablist"/.test(hx) && /id="p-sites"/.test(hx) && (hx.match(/role="tab"/g) || []).length === (hx.match(/role="tabpanel"/g) || []).length) : !/role="tablist"/.test(hx), 'La page des offres a ses onglets (gabarit édition), chacun avec son panneau'); }
   if ((C.pages_metier || []).length) {
     const P = C.pages_metier.filter((x) => x.visible !== false);
     let ok0 = 0;
@@ -205,6 +211,9 @@ async function tests() {
   /* Adresse canonique : seulement hors version de travail et si l'adresse du site est connue */
   const Cc = structuredClone(C); Cc.reglages = { ...(Cc.reglages || {}), url: 'https://gregoiremuel.fr/' };
   verif(/<link rel="canonical" href="https:\/\/gregoiremuel\.fr\/expertises">/.test(rendrePage(Cc, '/expertises', { maquette: false }).html) && !/rel="canonical"/.test(rendrePage(Cc, '/expertises', { maquette: true }).html) && !/rel="canonical"/.test(rendrePage(C, '/expertises', { maquette: false }).html), 'Adresse canonique ajoutée seulement en ligne et avec l’adresse du site');
+
+  /* Rien sur la joaillerie dans les pages vues par les visiteurs */
+  { let tout = ''; for (const ch of routes(C)) tout += rendrePage(C, ch, { maquette: false }).html; verif(!/joaill|bijou/i.test(tout), 'Aucune mention de la joaillerie sur le site'); }
 
   /* Changer le mot de passe depuis la page de modification */
   const NOUVEAU = 'nouvelle-phrase-secrete-42';

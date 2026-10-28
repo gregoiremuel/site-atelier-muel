@@ -14,15 +14,15 @@
     "email": "",
     "linkedin": "",
     "instagram": "",
-    "description_google": "Grégoire Muel crée et refait les sites des commerces, des artisans et des entreprises, et tient leur fiche Google : maquette gratuite en 48 h, à Paris 16e et à distance."
+    "description_google": "Création et refonte de sites pour commerces, artisans et entreprises à Paris 16e et partout en France : maquette gratuite en 48 h, site dès 590 € une fois."
   },
   "theme": {
     "fond": "#f6f6f2",
     "encre": "#101216",
     "gris": "#4b5058",
     "trait": "#d8d8d0",
-    "marine": "#1f48b8",
-    "or": "#b3c6ff",
+    "marine": "#22364f",
+    "or": "#d9dee6",
     "gabarit": "edition"
   },
   "annonce": {
@@ -34,19 +34,21 @@
     "video": "",
     "fond_video": false,
     "sur_titre": "",
-    "titre": "Votre site, et je m’en occupe.",
-    "texte": "Commerces, artisans, entreprises : je crée votre site, je le mets à jour quand vous me le demandez, et vous recevez les demandes de vos clients. Si vous préférez le faire vous-même, une page privée vous le permet depuis votre téléphone.",
+    "titre": "Un site à votre nom, créé et tenu à jour.",
+    "texte": "Nous créons le site de votre commerce, de votre atelier ou de votre entreprise, nous le tenons à jour, et vous recevez les demandes de vos clients. Vous préférez le modifier vous-même ? Une page privée le permet, depuis votre téléphone.",
     "reperes": [
       "590 € | une fois, sans abonnement obligatoire",
-      "48 h | pour votre maquette, gratuite"
+      "48 h | pour une maquette gratuite",
+      "1 nom de domaine | à vous, toujours",
+      "0 cookie | de suivi, ni publicité"
     ],
-    "intro_titre": "Je m’en occupe pour vous",
-    "intro_texte": "Beaucoup de sites vieillissent parce que personne n’a le temps de les mettre à jour. Avec moi, vous avez le choix : vous m’envoyez vos changements (un horaire, un prix, une photo) et je les fais, c’est compris dans l’abonnement Sérénité ou Croissance, sur devis sinon. Ou vous les faites vous-même depuis une page privée, sur votre téléphone.\n\nJe m’appelle Grégoire Muel et je travaille depuis Auteuil. Je prépare une maquette à votre nom, avec vos vraies informations ; vous décidez ensuite.",
-    "photo_intro": "/assets/photos/travail-clavier.jpg",
-    "essai_titre": "Quatre sites, quatre identités",
-    "essai_texte": "Ouvrez un site d’exemple, touchez « Essayer la page de modification », changez un horaire, un prix ou une photo, et regardez le site se mettre à jour.\n\nTout reste dans votre navigateur : rien n’est publié. Ces sites sont des démonstrations : les entreprises n’existent pas.",
+    "intro_titre": "",
+    "intro_texte": "",
+    "photo_intro": "",
+    "essai_titre": "Quatre sites d’exemple",
+    "essai_texte": "Ouvrez-en un, touchez « Essayer la page de modification », changez un horaire ou une photo : rien n’est publié. Les entreprises n’existent pas.",
     "appel_titre": "Une maquette de votre site, gratuite, en 48 h",
-    "appel_texte": "Dites-moi qui vous êtes et ce que vous faites. Je vous prépare une maquette à votre nom ; si elle ne vous plaît pas, vous ne me devez rien. Vous avez déjà un site, ou seulement une fiche Google ? Je regarde votre fiche gratuitement et je vous dis en une page ce qui manque pour qu’on vous trouve.",
+    "appel_texte": "Dites-nous qui vous êtes et ce que vous faites : nous préparons une maquette à votre nom. Elle ne vous plaît pas ? Vous ne nous devez rien.",
     "photo_appel": "",
     "cartes": false
   },
@@ -74,7 +76,7 @@
       "nom": "Site vitrine",
       "accroche": "Pour un commerce ou un artisan : ce que vous faites, vos horaires, vos tarifs, et un bouton pour vous appeler.",
       "prix": "590 € | une fois, sans abonnement obligatoire",
-      "texte": "Le site que vos clients consultent avant de passer vous voir. Il se lit d’abord sur téléphone : horaires du jour, itinéraire et appel en un geste.\n\nVous le tenez à jour vous-même, depuis votre téléphone, ou vous me confiez les changements (compris dans l’abonnement Sérénité, sur devis sinon).",
+      "texte": "Le site que vos clients consultent avant de passer vous voir. Il se lit d’abord sur téléphone : horaires du jour, itinéraire et appel en un geste.\n\nVous le tenez à jour vous-même, depuis votre téléphone, ou vous nous confiez les changements (compris dans l’abonnement Sérénité, sur devis sinon).",
       "points": [
         "Maquette gratuite à votre nom en 48 h",
         "Photos de la boutique comprises",
@@ -104,7 +106,7 @@
       "nom": "Site d’entreprise ou refonte",
       "accroche": "Pour une entreprise de services ou du bâtiment : vos métiers, vos réalisations, votre méthode, et des demandes de projet qualifiées.",
       "prix": "dès 1 900 € | une fois, abonnement facultatif",
-      "texte": "Un site qui inspire confiance à un client qui ne vous connaît pas encore : vos expertises, des réalisations classées par secteur, votre façon de travailler, vos engagements.\n\nSi vous avez déjà un site, je reprends ce qui est bon et je refais le reste.",
+      "texte": "Un site qui inspire confiance à un client qui ne vous connaît pas encore : vos expertises, des réalisations classées par secteur, votre façon de travailler, vos engagements.\n\nSi vous avez déjà un site, nous reprenons ce qui est bon et refaisons le reste.",
       "points": [
         "Pages métiers, réalisations et méthode",
         "Réalisations ajoutées par vous, avec leurs photos",
@@ -119,7 +121,7 @@
       "nom": "Visibilité Google",
       "accroche": "Pour être trouvé sur Google Maps, avec ou sans site : votre fiche Google tenue à jour chaque mois.",
       "prix": "39 € | par mois, sans engagement de durée",
-      "texte": "Quand quelqu’un cherche « plombier près de moi » ou « fleuriste Paris 16 », la première chose qu’il voit est une fiche Google. Je la tiens à jour chaque mois : horaires, photos, un message publié, réponses aux avis préparées pour que vous les validiez.\n\nJe ne promets pas une place dans Google ni dans les réponses des assistants IA : personne ne peut la garantir. Je promets un travail fait chaque mois, et un rapport d’une page qui le montre.",
+      "texte": "Quand quelqu’un cherche « plombier près de moi » ou « fleuriste Paris 16 », la première chose qu’il voit est une fiche Google. Nous la tenons à jour chaque mois : horaires, photos, un message publié, réponses aux avis préparées pour que vous les validiez.\n\nNous ne promettons pas une place dans Google ni dans les réponses des assistants IA : personne ne peut la garantir. Nous promettons un travail fait chaque mois, et un rapport d’une page qui le montre.",
       "points": [
         "Mini-diagnostic gratuit de votre fiche, avant de décider",
         "Horaires, congés et jours fériés à jour",
@@ -136,25 +138,19 @@
     {
       "titre": "Une maquette gratuite en 48 h",
       "points": [
-        "On échange quelques minutes, chez vous ou par téléphone",
-        "Je prépare une maquette à votre nom, avec vos vraies informations",
-        "Elle ne vous plaît pas : vous ne me devez rien"
+        "Un échange de quelques minutes, puis la maquette à votre nom. Elle ne vous plaît pas : vous ne devez rien."
       ]
     },
     {
       "titre": "Votre site, à votre image",
       "points": [
-        "Je prends les photos de la boutique (site vitrine)",
-        "Nous relisons les textes ensemble",
-        "J’ajuste jusqu’à ce que le site vous ressemble"
+        "Photos, textes, couleurs : nous ajustons ensemble jusqu’à ce qu’il vous ressemble."
       ]
     },
     {
       "titre": "En ligne, et vous êtes autonome",
       "points": [
-        "Le site est mis en ligne à votre nom",
-        "Quinze minutes de prise en main, sur votre téléphone",
-        "Ensuite, vous modifiez seul ou vous me confiez les changements"
+        "Mise en ligne à votre nom, puis quinze minutes de prise en main sur votre téléphone."
       ]
     }
   ],
@@ -330,12 +326,12 @@
   ],
   "presentation": {
     "titre": "À propos",
-    "texte": "Je suis Grégoire Muel, entrepreneur individuel installé à Auteuil, dans le 16e arrondissement de Paris. Je conçois, crée, refais et entretiens les sites des commerces, des artisans et des entreprises.\n\n## Ma façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, du premier échange à la mise en ligne, puis pour l’entretien.\n\nArtisan joaillier de formation, j’ai gardé l’habitude du travail précis et des finitions soignées.",
+    "texte": "Nous concevons, refaisons et entretenons les sites des commerces, des artisans et des entreprises, depuis Auteuil (Paris 16e). Grégoire Muel, entrepreneur individuel, est votre interlocuteur.\n\n## Notre façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, de la maquette à la mise en ligne, puis pour l’entretien.",
     "photo": "/assets/photos/gregoire-portrait.jpg",
     "photo_2": "/assets/photos/paris-16e-cafe.jpg"
   },
   "garanties": {
-    "titre": "En résumé",
+    "titre": "Nos engagements en bref",
     "texte": "",
     "points": [
       "Une maquette gratuite à votre nom avant toute décision",
@@ -356,7 +352,7 @@
   "references": [],
   "affichage": {
     "chiffres": false,
-    "equipe": true,
+    "equipe": false,
     "references": false
   },
   "contact": {
@@ -373,7 +369,7 @@
     ],
     "cle_web3forms": "",
     "email": "",
-    "confirmation": "Merci, votre demande est bien partie. Je vous recontacte pour en parler."
+    "confirmation": "Merci, votre demande est bien partie. Nous vous recontactons pour en parler."
   },
   "mentions": {
     "raison_sociale": "Grégoire Muel EI",
@@ -399,7 +395,7 @@
     "bouton_appel": "Demander ma maquette",
     "intro_lien": "À propos",
     "exp_sur": "Offres",
-    "exp_titre": "Sites et visibilité, un seul interlocuteur",
+    "exp_titre": "Quatre offres, prix affichés",
     "exp_lien": "Le détail",
     "essai_sur": "À essayer",
     "real_sur": "Réalisations",
@@ -408,7 +404,7 @@
     "methode_sur": "Méthode",
     "methode_titre": "De la maquette gratuite à la mise en ligne",
     "methode_titre_page": "Trois étapes, un seul interlocuteur",
-    "page_exp_titre": "Ce que je fais pour vous",
+    "page_exp_titre": "Ce que nous proposons",
     "page_exp_description": "Sites vitrines, boutiques, sites d’entreprise et fiche Google tenue à jour, avec une page pour tout modifier soi-même, à Paris et à distance : formules et prix.",
     "lots_sur": "Compris",
     "lots_titre": "Dans chaque site",
@@ -435,15 +431,15 @@
     "bandeau_maquette": "Version de travail non publiée : textes et prix à valider.",
     "nav_engagements": "Engagements",
     "eng_sur": "Engagements",
-    "page_eng_titre": "Hébergement, données, sauvegardes : ce que je m’engage à faire",
-    "page_eng_chapo": "Les réponses aux questions qu’on me pose avant de signer. Tout est écrit ici, noir sur blanc.",
+    "page_eng_titre": "Hébergement, données, sauvegardes : nos engagements",
+    "page_eng_chapo": "Les réponses aux questions qu’on nous pose avant de signer. Tout est écrit ici, noir sur blanc.",
     "eng_index": "Sur cette page",
     "eng_lien": "Voir tous les engagements",
-    "pages_titre": "Un site pensé pour votre métier"
+    "pages_titre": "Par métier"
   },
   "abonnements": {
     "titre": "Un coup de main au mois, seulement si vous le souhaitez",
-    "intro": "Le site est à vous dès sa livraison : vous pouvez le gérer seul depuis la page de modification. Si vous préférez que je m’en occupe, choisissez une formule mensuelle, sans engagement de durée. Pas sûr de votre choix ? Commencez sans abonnement : vous pourrez en prendre un plus tard, à tout moment.",
+    "intro": "Le site est à vous dès sa livraison : vous pouvez le gérer seul depuis la page de modification. Si vous préférez que nous nous en occupions, choisissez une formule mensuelle, sans engagement de durée. Pas sûr de votre choix ? Commencez sans abonnement : vous pourrez en prendre un plus tard, à tout moment.",
     "formules": [
       {
         "nom": "Sans abonnement",
@@ -461,11 +457,11 @@
         "nom": "Sérénité",
         "prix": "19 €",
         "periode": "par mois",
-        "description": "Pour ceux qui veulent que je fasse leurs petits changements : horaires, prix, photos.",
+        "description": "Pour ceux qui veulent que nous fassions leurs petits changements : horaires, prix, photos.",
         "points": [
           "Votre site reste en ligne, et l’adresse du site (nom de domaine) est renouvelée",
           "Copie de sauvegarde du contenu, plus une copie complète chaque mois",
-          "Petites modifications à ma charge : jusqu’à 30 minutes par mois",
+          "Petites modifications comprises : jusqu’à 30 minutes par mois",
           "Réponse sous 2 jours ouvrés"
         ],
         "recommande": true
@@ -487,7 +483,7 @@
         "nom": "Visibilité Google",
         "prix": "39 €",
         "periode": "par mois",
-        "description": "Pour être trouvé sur Google Maps, avec ou sans site : je tiens votre fiche à jour.",
+        "description": "Pour être trouvé sur Google Maps, avec ou sans site : nous tenons votre fiche à jour.",
         "points": [
           "Mini-diagnostic gratuit pour commencer",
           "Fiche à jour : horaires, photos, congés",
@@ -498,43 +494,43 @@
         "recommande": false
       }
     ],
-    "note": "Ce que ça coûte la première année, site vitrine compris et nom de domaine inclus : environ 600 € sans abonnement, environ 830 € avec Sérénité, environ 1 190 € avec Croissance. Visibilité Google seule : 468 € par an. Sans engagement de durée : les formules s’arrêtent à tout moment ; le site, son contenu et son nom de domaine restent à vous. Je ne promets pas de place dans Google : je promets un travail fait chaque mois."
+    "note": "Ce que ça coûte la première année, site vitrine compris et nom de domaine inclus : environ 600 € sans abonnement, environ 830 € avec Sérénité, environ 1 190 € avec Croissance. Visibilité Google seule : 468 € par an. Sans engagement de durée : les formules s’arrêtent à tout moment ; le site, son contenu et son nom de domaine restent à vous. Nous ne promettons pas de place dans Google : nous promettons un travail fait chaque mois."
   },
   "engagements": [
     {
       "titre": "Hébergement",
-      "texte": "Votre site est hébergé chez Cloudflare, une société américaine dont les serveurs sont répartis dans le monde : je ne peux pas garantir que vos données restent en Europe.\n\nAujourd’hui, l’hébergement de départ est gratuit chez Cloudflare. Seul le nom de domaine se paie, environ 10 € par an, et il est à votre nom. Si l’hébergement devenait payant, je vous le dirais avant toute facture.",
+      "texte": "Votre site est hébergé chez Cloudflare, une société américaine dont les serveurs sont répartis dans le monde : nous ne pouvons pas garantir que vos données restent en Europe.\n\nAujourd’hui, l’hébergement de départ est gratuit chez Cloudflare. Seul le nom de domaine se paie, environ 10 € par an, et il est à votre nom. Si l’hébergement devenait payant, nous vous le dirions avant toute facture.",
       "points": []
     },
     {
       "titre": "Données personnelles (RGPD)",
-      "texte": "Le site ne dépose aucun cookie, ni de mesure d’audience ni de publicité. Il compte seulement les pages vues, jour par jour (combien de visites, quelles pages, d’où l’on vient), sans enregistrer d’adresse IP ni d’identifiant : un visiteur ne peut pas être reconnu d’un jour à l’autre.\n\nLes demandes envoyées par le formulaire (nom, téléphone, e-mail, message) servent uniquement à vous répondre. Elles sont effacées automatiquement après 180 jours. Pour le site d’un commerce ou d’une entreprise, ce sont les données de ses propres clients : elles lui appartiennent et je ne les utilise pas pour moi.\n\nVous pouvez demander l’accès, la correction ou la suppression de vos données en m’appelant ou en m’écrivant, et vous pouvez saisir la CNIL.",
+      "texte": "Le site ne dépose aucun cookie, ni de mesure d’audience ni de publicité. Il compte seulement les pages vues, jour par jour (combien de visites, quelles pages, d’où l’on vient), sans enregistrer d’adresse IP ni d’identifiant : un visiteur ne peut pas être reconnu d’un jour à l’autre.\n\nLes demandes envoyées par le formulaire (nom, téléphone, e-mail, message) servent uniquement à vous répondre. Elles sont effacées automatiquement après 180 jours. Pour le site d’un commerce ou d’une entreprise, ce sont les données de ses propres clients : elles lui appartiennent et nous ne les utilisons pas pour nous.\n\nVous pouvez demander l’accès, la correction ou la suppression de vos données en nous appelant ou en nous écrivant, et vous pouvez saisir la CNIL.",
       "points": []
     },
     {
       "titre": "Sauvegardes",
-      "texte": "Le contenu du site est enregistré chez l’hébergeur, et la page de modification garde la version précédente : un clic suffit pour revenir en arrière après une erreur.\n\nChaque nuit, le serveur garde une copie du contenu pendant 7 nuits. Avec une formule mensuelle, je fais en plus, chaque mois, une copie complète (textes, réglages et photos) que je garde de mon côté. Sans abonnement, je vous remets une copie complète à la livraison, puis sur simple demande.",
+      "texte": "Le contenu du site est enregistré chez l’hébergeur, et la page de modification garde la version précédente : un clic suffit pour revenir en arrière après une erreur.\n\nChaque nuit, le serveur garde une copie du contenu pendant 7 nuits. Avec une formule mensuelle, nous faisons en plus, chaque mois, une copie complète (textes, réglages et photos) que nous gardons de notre côté. Sans abonnement, nous vous remettons une copie complète à la livraison, puis sur simple demande.",
       "points": []
     },
     {
       "titre": "Délai de réponse",
-      "texte": "Une demande envoyée par le formulaire ou par téléphone reçoit une réponse sous 2 jours ouvrés, avec ou sans abonnement. La maquette gratuite est livrée en 48 h.\n\nUne modification qui relève de votre formule mensuelle est faite dans le même délai. Hors formule, je vous envoie un devis avant de commencer.",
+      "texte": "Une demande envoyée par le formulaire ou par téléphone reçoit une réponse sous 2 jours ouvrés, avec ou sans abonnement. La maquette gratuite est livrée en 48 h.\n\nUne modification qui relève de votre formule mensuelle est faite dans le même délai. Hors formule, nous vous envoyons un devis avant de commencer.",
       "points": []
     },
     {
       "titre": "Si vous arrêtez l’abonnement",
-      "texte": "Vous pouvez arrêter à tout moment : il n’y a pas de durée minimale.\n\nLe site reste en ligne, son contenu et son nom de domaine restent à vous, et vous gardez la page de modification. Ce qui s’arrête : les sauvegardes régulières, les modifications à ma charge et le suivi. Le nom de domaine, lui, se renouvelle alors à votre charge.\n\nSi vous voulez déménager le site ailleurs, je vous remets une copie du contenu et des photos.",
+      "texte": "Vous pouvez arrêter à tout moment : il n’y a pas de durée minimale.\n\nLe site reste en ligne, son contenu et son nom de domaine restent à vous, et vous gardez la page de modification. Ce qui s’arrête : les sauvegardes régulières, les modifications comprises et le suivi. Le nom de domaine, lui, se renouvelle alors à votre charge.\n\nSi vous voulez déménager le site ailleurs, nous vous remettons une copie du contenu et des photos.",
       "points": []
     },
     {
-      "titre": "Mon accès à vos données",
-      "texte": "Pour créer et entretenir votre site, j’ai un accès technique à l’hébergement : je peux donc voir votre contenu et les demandes reçues.\n\nJe m’en sers uniquement pour créer, entretenir ou dépanner votre site, jamais pour autre chose, et je ne transmets rien à personne. Vous pouvez me demander à tout moment de changer le mot de passe de votre page de modification, et de fermer mon accès quand notre collaboration s’arrête.",
+      "titre": "Notre accès à vos données",
+      "texte": "Pour créer et entretenir votre site, nous avons un accès technique à l’hébergement : nous pouvons donc voir votre contenu et les demandes reçues.\n\nNous nous en servons uniquement pour créer, entretenir ou dépanner votre site, jamais pour autre chose, et nous ne transmettons rien à personne. Vous pouvez nous demander à tout moment de changer le mot de passe de votre page de modification, et de fermer notre accès quand notre collaboration s’arrête.",
       "points": []
     }
   ],
   "comparaison": {
     "sur": "Prix clair",
-    "titre": "Un constructeur en ligne, ou moi ?",
+    "titre": "Un constructeur en ligne, ou un site réalisé pour vous ?",
     "intro": "Un constructeur en ligne comme Wix est un bon choix si vous voulez tout faire vous-même et que vous avez le temps. Voici ce qui change.",
     "colonnes": [
       "Un constructeur en ligne (type Wix)",
@@ -544,7 +540,7 @@
       {
         "critere": "Qui crée le site",
         "a": "Vous, à partir d’un modèle",
-        "b": "Moi, avec vos informations ; vous validez"
+        "b": "Nous, avec vos informations ; vous validez"
       },
       {
         "critere": "Ce que vous payez",
@@ -559,7 +555,7 @@
       {
         "critere": "Changer un horaire ou un prix",
         "a": "Vous, depuis l’éditeur du constructeur",
-        "b": "Vous, depuis une page privée sur téléphone, ou moi (30 minutes par mois avec Sérénité)"
+        "b": "Vous, depuis une page privée sur téléphone, ou nous (30 minutes par mois avec Sérénité)"
       },
       {
         "critere": "Paiement en ligne, très gros catalogue",
@@ -572,15 +568,16 @@
         "b": "Le site reste en ligne ; son contenu et son nom de domaine restent à vous"
       }
     ],
-    "note": "Tarifs des constructeurs en ligne : abonnement annuel, TTC, relevés en octobre 2026 sur un comparatif public. Ils changent : vérifiez-les sur le site du constructeur. Ce tableau ne compte pas votre temps, ni le mien."
+    "note": "Tarifs des constructeurs en ligne : abonnement annuel, TTC, relevés en octobre 2026 sur un comparatif public. Ils changent : vérifiez-les sur le site du constructeur. Ce tableau ne compte pas votre temps, ni le nôtre.",
+    "actif": false
   },
   "pages_metier": [
     {
       "id": "site-restaurant",
       "nom": "Restaurants",
       "titre": "Un site pour votre restaurant",
-      "description": "La carte, la réservation et les horaires du service, lisibles sur téléphone, que vous changez vous-même ou que je change pour vous.",
-      "accroche": "La carte, la réservation et les horaires du service, lisibles sur téléphone, que vous changez vous-même ou que je change pour vous.",
+      "description": "La carte, la réservation et les horaires du service, lisibles sur téléphone, que vous changez vous-même ou que nous changeons pour vous.",
+      "accroche": "La carte, la réservation et les horaires du service, lisibles sur téléphone, que vous changez vous-même ou que nous changeons pour vous.",
       "texte": "Un client qui cherche un restaurant regarde trois choses : la carte, les horaires, et comment réserver. Le site les met en haut, sur téléphone, avec votre numéro cliquable.\n\nLa carte se change sans rien installer : un plat qui sort, un prix qui bouge. La réservation arrive dans votre page privée avec le jour, l’heure et le nombre de couverts ; vous rappelez le client pour confirmer.",
       "prix": "À partir de 590 €, une fois. Abonnement facultatif",
       "points": [
@@ -598,7 +595,7 @@
       "questions": [
         {
           "q": "Puis-je changer ma carte moi-même ?",
-          "r": "Oui, depuis une page privée qui s’ouvre sur votre téléphone : un plat ou un prix se change en quelques secondes. Si vous préférez, vous m’envoyez les changements et je les fais : c’est compris dans l’abonnement Sérénité, sur devis sinon."
+          "r": "Oui, depuis une page privée qui s’ouvre sur votre téléphone : un plat ou un prix se change en quelques secondes. Si vous préférez, vous nous envoyez les changements et nous les faisons : c’est compris dans l’abonnement Sérénité, sur devis sinon."
         },
         {
           "q": "Comment arrivent les réservations ?",
@@ -610,7 +607,7 @@
         },
         {
           "q": "Et pour être trouvé sur Google Maps ?",
-          "r": "C’est l’offre Visibilité Google, 39 € par mois, sans engagement de durée : je tiens votre fiche à jour. Pour commencer, je regarde la vôtre gratuitement."
+          "r": "C’est l’offre Visibilité Google, 39 € par mois, sans engagement de durée : nous tenons votre fiche à jour. Pour commencer, nous regardons la vôtre gratuitement."
         },
         {
           "q": "Puis-je voir un exemple ?",
@@ -643,15 +640,15 @@
       "questions": [
         {
           "q": "Mon téléphone sonnera-t-il davantage ?",
-          "r": "Je ne peux pas promettre un nombre d’appels. Le site rend votre numéro visible et cliquable. Pour être mieux trouvé sur Google Maps, c’est l’offre Visibilité Google."
+          "r": "Nous ne pouvons pas promettre un nombre d’appels. Le site rend votre numéro visible et cliquable. Pour être mieux trouvé sur Google Maps, c’est l’offre Visibilité Google."
         },
         {
           "q": "Puis-je afficher mes tarifs ?",
-          "r": "Seulement si vous le souhaitez : vous saisissez vous-même ce que vous voulez montrer. Je n’invente aucun prix."
+          "r": "Seulement si vous le souhaitez : vous saisissez vous-même ce que vous voulez montrer. Nous n’inventons aucun prix."
         },
         {
           "q": "Puis-je afficher mon assurance et mes garanties ?",
-          "r": "Oui. Vous me donnez les documents et les mentions exactes ; je ne les écris pas à votre place."
+          "r": "Oui. Vous nous donnez les documents et les mentions exactes ; nous ne les écrivons pas à votre place."
         },
         {
           "q": "Combien ça coûte ?",
@@ -659,7 +656,7 @@
         },
         {
           "q": "Puis-je tout changer moi-même ?",
-          "r": "Oui, depuis une page privée qui s’ouvre sur votre téléphone. Si vous préférez, vous m’envoyez les changements et je les fais : c’est compris dans l’abonnement Sérénité, sur devis sinon."
+          "r": "Oui, depuis une page privée qui s’ouvre sur votre téléphone. Si vous préférez, vous nous envoyez les changements et nous les faisons : c’est compris dans l’abonnement Sérénité, sur devis sinon."
         }
       ],
       "liste": true,
@@ -692,11 +689,11 @@
         },
         {
           "q": "Puis-je changer les fleurs de la semaine ?",
-          "r": "Oui, depuis votre téléphone, sans rien installer. Ou vous m’envoyez la liste et je la change (compris dans l’abonnement Sérénité, sur devis sinon)."
+          "r": "Oui, depuis votre téléphone, sans rien installer. Ou vous nous envoyez la liste et nous la changeons (compris dans l’abonnement Sérénité, sur devis sinon)."
         },
         {
           "q": "Qui prend les photos ?",
-          "r": "Les photos de la boutique sont comprises dans le prix du site vitrine : je les prends sur place."
+          "r": "Les photos de la boutique sont comprises dans le prix du site vitrine : nous les prenons sur place."
         },
         {
           "q": "Combien ça coûte ?",
@@ -704,7 +701,7 @@
         },
         {
           "q": "Et pour être trouvé sur Google Maps ?",
-          "r": "C’est l’offre Visibilité Google, 39 € par mois, sans engagement de durée : je tiens votre fiche à jour. Pour commencer, je regarde la vôtre gratuitement."
+          "r": "C’est l’offre Visibilité Google, 39 € par mois, sans engagement de durée : nous tenons votre fiche à jour. Pour commencer, nous regardons la vôtre gratuitement."
         }
       ],
       "liste": true,
@@ -733,11 +730,11 @@
       "questions": [
         {
           "q": "Avez-vous une démonstration pour mon métier ?",
-          "r": "Pas encore pour chaque commerce de bouche. La démonstration fleuriste montre le même fonctionnement : produits de saison et commande à retirer. Je prépare la maquette à votre nom en 48 h, gratuitement."
+          "r": "Pas encore pour chaque commerce de bouche. La démonstration fleuriste montre le même fonctionnement : produits de saison et commande à retirer. Nous préparons la maquette à votre nom en 48 h, gratuitement."
         },
         {
           "q": "Et les allergènes ?",
-          "r": "Le site n’affiche que ce que vous saisissez. Vous restez responsable de l’information sur les allergènes : je ne l’écris pas à votre place."
+          "r": "Le site n’affiche que ce que vous saisissez. Vous restez responsable de l’information sur les allergènes : nous ne l’écrivons pas à votre place."
         },
         {
           "q": "Combien ça coûte ?",
@@ -745,11 +742,11 @@
         },
         {
           "q": "Et pour être trouvé sur Google Maps ?",
-          "r": "C’est l’offre Visibilité Google, 39 € par mois, sans engagement de durée : je tiens votre fiche à jour. Pour commencer, je regarde la vôtre gratuitement."
+          "r": "C’est l’offre Visibilité Google, 39 € par mois, sans engagement de durée : nous tenons votre fiche à jour. Pour commencer, nous regardons la vôtre gratuitement."
         },
         {
           "q": "Puis-je tout changer moi-même ?",
-          "r": "Oui, depuis une page privée qui s’ouvre sur votre téléphone. Si vous préférez, vous m’envoyez les changements et je les fais : c’est compris dans l’abonnement Sérénité, sur devis sinon."
+          "r": "Oui, depuis une page privée qui s’ouvre sur votre téléphone. Si vous préférez, vous nous envoyez les changements et nous les faisons : c’est compris dans l’abonnement Sérénité, sur devis sinon."
         }
       ],
       "liste": true,
@@ -761,7 +758,7 @@
       "titre": "Votre fiche Google, tenue à jour chaque mois",
       "description": "Pour être trouvé sur Google Maps, avec ou sans site : horaires, photos, un message par mois et réponses aux avis, que vous validez.",
       "accroche": "Pour être trouvé sur Google Maps, avec ou sans site : horaires, photos, un message par mois et réponses aux avis, que vous validez.",
-      "texte": "Quand quelqu’un cherche « plombier près de moi » ou « fleuriste Paris 16 », la première chose qu’il voit est une fiche Google. Je la tiens à jour chaque mois : horaires, photos, un message publié, réponses aux avis préparées pour que vous les validiez.\n\nJe ne promets pas une place dans Google ni dans les réponses des assistants IA : personne ne peut la garantir. Je promets un travail fait chaque mois, et un rapport d’une page qui le montre.",
+      "texte": "Quand quelqu’un cherche « plombier près de moi » ou « fleuriste Paris 16 », la première chose qu’il voit est une fiche Google. Nous la tenons à jour chaque mois : horaires, photos, un message publié, réponses aux avis préparées pour que vous les validiez.\n\nNous ne promettons pas une place dans Google ni dans les réponses des assistants IA : personne ne peut la garantir. Nous promettons un travail fait chaque mois, et un rapport d’une page qui le montre.",
       "prix": "39 € par mois, sans engagement de durée",
       "points": [
         "Mini-diagnostic gratuit de votre fiche, avant de décider",
@@ -782,7 +779,7 @@
         },
         {
           "q": "Garantissez-vous une place dans Google ?",
-          "r": "Non. Personne ne peut garantir une place dans Google ni dans les réponses des assistants IA. Je m’engage sur le travail fait chaque mois, que le rapport montre."
+          "r": "Non. Personne ne peut garantir une place dans Google ni dans les réponses des assistants IA. Nous nous engageons sur le travail fait chaque mois, que le rapport montre."
         },
         {
           "q": "Faut-il un site ?",
@@ -790,7 +787,7 @@
         },
         {
           "q": "Qui répond aux avis ?",
-          "r": "Je prépare les réponses, vous les validez avant qu’elles soient publiées. Je ne publie jamais de faux avis."
+          "r": "Nous préparons les réponses, vous les validez avant qu’elles soient publiées. Nous ne publions jamais de faux avis."
         },
         {
           "q": "Combien de temps cela me demande-t-il ?",
@@ -798,7 +795,7 @@
         },
         {
           "q": "Puis-je arrêter ?",
-          "r": "À tout moment, sans durée minimale. Je suis ajouté comme gestionnaire de votre fiche ; vous en restez propriétaire et vous pouvez me retirer quand vous voulez."
+          "r": "À tout moment, sans durée minimale. Nous sommes ajoutés comme gestionnaires de votre fiche ; vous en restez propriétaire et vous pouvez nous retirer quand vous voulez."
         }
       ],
       "liste": false,

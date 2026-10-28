@@ -43,11 +43,11 @@
     }
   },
   "theme": {
-    "couleur": "#0b6b7a",
-    "couleur_foncee": "#073b44",
-    "couleur_pale": "#e6f1f3",
-    "accent": "#ffcf33",
-    "polices": "chantier",
+    "couleur": "#1f4f8f",
+    "couleur_foncee": "#11294d",
+    "couleur_pale": "#eef2f8",
+    "accent": "#d8392b",
+    "polices": "net",
     "gabarit": "depannage",
     "accueil": "sobre",
     "titres": "simple",
@@ -69,7 +69,8 @@
     "quartier": "",
     "acces": "Paris et proche banlieue",
     "email": "",
-    "instagram": ""
+    "instagram": "",
+    "logo": "/photos/logo-delorme"
   },
   "annonce": {
     "afficher": false,

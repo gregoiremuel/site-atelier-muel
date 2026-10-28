@@ -42,11 +42,11 @@
     }
   },
   "theme": {
-    "couleur": "#6b4a2e",
-    "couleur_foncee": "#3f2a1a",
-    "couleur_pale": "#efece7",
-    "accent": "#e9cd8a",
-    "polices": "etabli",
+    "couleur": "#8a5a2b",
+    "couleur_foncee": "#231a12",
+    "couleur_pale": "#f4efe7",
+    "accent": "#e3c694",
+    "polices": "classique",
     "accueil": "sobre",
     "titres": "filet",
     "angles": "droits",
@@ -68,7 +68,8 @@
     "quartier": "",
     "acces": "Visite de l’atelier sur rendez-vous",
     "email": "",
-    "instagram": ""
+    "instagram": "",
+    "logo": "/photos/logo-merrain"
   },
   "annonce": {
     "afficher": false,

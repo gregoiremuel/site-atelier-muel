@@ -60,9 +60,9 @@
   "theme": {
     "couleur": "#2f5d50",
     "couleur_foncee": "#1f4037",
-    "couleur_pale": "#eaf2ef",
-    "accent": "#f0d58c",
-    "polices": "serre",
+    "couleur_pale": "#f6f2ea",
+    "accent": "#d98aa0",
+    "polices": "jardin",
     "accueil": "sobre",
     "titres": "simple",
     "angles": "doux",
@@ -84,7 +84,8 @@
     "quartier": "",
     "acces": "",
     "email": "",
-    "instagram": ""
+    "instagram": "",
+    "logo": "/photos/logo-petale"
   },
   "annonce": {
     "afficher": false,

@@ -1175,3 +1175,4 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition .sec .sur,.g-edition .sec-tete .sur{display:none}
 .g-edition .etiq,.g-edition .carte-sec,.g-edition .pied h2{font-size:.875rem}
 .g-edition .hero:has(.hero-compo){row-gap:16px}
+:where(img[width][height]){height:auto}

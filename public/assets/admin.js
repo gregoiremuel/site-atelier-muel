@@ -1,4 +1,4 @@
-/* Espace de modification. Fonctionne avec le serveur (mode normal) ou seul dans un fichier (mode démonstration). */
+/* Page de modification. Fonctionne avec le serveur (mode normal) ou seul dans un fichier (mode démonstration). */
 import { rendrePage, slug, favicon, LIBELLES, libelle, libellesDemande } from './rendu.js';
 import { cssPolices } from './polices.js';
 
@@ -173,7 +173,7 @@ function ecranConnexion(message) {
     onsubmit: seConnecter,
   },
   el('h1', { text: nom }),
-  el('p', { class: 'sous', text: 'Espace de modification' }),
+  el('p', { class: 'sous', text: 'Page de modification' }),
   DEMO ? el('p', { class: 'aide', text: 'Démonstration : aucun mot de passe n’est demandé, vos essais restent sur cet appareil.' }) : null,
   el('div', { class: 'champ' }, el('label', { for: 'mdp', text: 'Mot de passe' }), el('div', { class: 'mdp' }, input, voir)),
   err, bouton,
@@ -414,11 +414,11 @@ function listeCommandes() {
 
 /* ---------- Rubriques ---------- */
 const montrer = (chemin) => { if (E.page !== chemin) { E.page = chemin; rendreApercu(true); } };
-/* Libellés modifiables, rangés pour l'espace de modification */
+/* Libellés modifiables, rangés pour la page de modification */
 const LIBELLES_GROUPES = [
-  ['Menu et boutons', ['nav_expertises', 'nav_realisations', 'nav_agence', 'bouton_principal', 'bouton_realisations', 'bouton_appel', 'appel_titre', 'intro_lien']],
+  ['Menu et boutons', ['nav_expertises', 'nav_realisations', 'nav_agence', 'nav_engagements', 'bouton_principal', 'bouton_realisations', 'bouton_appel', 'appel_titre', 'intro_lien']],
   ['Titres de l’accueil', ['exp_sur', 'exp_titre', 'exp_lien', 'essai_sur', 'real_sur', 'real_titre', 'real_tout', 'methode_sur', 'methode_titre', 'refs_sur', 'refs_titre']],
-  ['Autres pages', ['page_exp_titre', 'page_exp_description', 'methode_titre_page', 'lots_sur', 'lots_titre', 'page_real_titre', 'garanties_sur', 'garanties_titre', 'equipe_sur', 'equipe_titre']],
+  ['Autres pages', ['page_exp_titre', 'page_exp_description', 'methode_titre_page', 'lots_sur', 'lots_titre', 'page_real_titre', 'garanties_sur', 'garanties_titre', 'equipe_sur', 'equipe_titre', 'eng_sur', 'page_eng_titre', 'page_eng_chapo', 'eng_index', 'eng_lien']],
   ['Fiche d’une réalisation', ['fiche_client', 'fiche_lieu', 'fiche_surface', 'fiche_mission', 'fiche_annee', 'fiche_secteur', 'interventions']],
   ['Page contact et formulaire', ['contact_titre', 'contact_chapo', 'form_societe', 'form_type', 'form_surface', 'form_surface_exemple', 'form_ville', 'form_message', 'form_message_exemple', 'form_envoyer']],
   ['Pied de page et mentions', ['pied_trouver', 'pied_joindre', 'mentions_siege', 'mentions_immatriculation']],
@@ -429,6 +429,7 @@ const LIBELLES_NOMS = {
   page_exp_titre: 'Titre de la page des offres', page_exp_description: 'Description Google de cette page', methode_titre_page: 'Titre : méthode (page des offres)', lots_sur: 'Petite ligne : liste', lots_titre: 'Titre : liste', page_real_titre: 'Titre de la page des réalisations', garanties_sur: 'Petite ligne : engagements', garanties_titre: 'Titre : engagements (par défaut)', equipe_sur: 'Petite ligne : équipe', equipe_titre: 'Titre : équipe',
   fiche_client: 'Client', fiche_lieu: 'Lieu', fiche_surface: 'Surface (ou autre)', fiche_mission: 'Mission', fiche_annee: 'Année', fiche_secteur: 'Secteur', interventions: 'Titre de la liste',
   contact_titre: 'Titre de la page contact', contact_chapo: 'Phrase sous le titre', form_societe: 'Champ « société »', form_type: 'Champ « type »', form_surface: 'Champ « surface »', form_surface_exemple: 'Exemple dans ce champ', form_ville: 'Champ « ville »', form_message: 'Champ « message »', form_message_exemple: 'Exemple dans le message', form_envoyer: 'Bouton d’envoi',
+  nav_engagements: 'Menu : rubrique Engagements', eng_sur: 'Petite ligne : engagements', page_eng_titre: 'Titre de la page Engagements', page_eng_chapo: 'Phrase sous le titre (page Engagements)', eng_index: 'Titre du sommaire', eng_lien: 'Lien depuis « À propos »',
   pied_trouver: 'Pied : colonne adresse', pied_joindre: 'Pied : colonne contact', mentions_siege: 'Mentions : « Siège »', mentions_immatriculation: 'Mentions : « RCS »',
 };
 
@@ -476,6 +477,7 @@ function panneaux() {
             { k: 'interventions', l: libelle(E.C, 'interventions'), t: 'lignes' },
             { k: 'lien', l: 'Lien à ouvrir', ex: 'facultatif : le site en ligne ou une démonstration', ph: 'https://… ou /demos/…' },
             { k: 'lien_texte', l: 'Texte du bouton', ph: 'Ex. : Voir le site en ligne' },
+            { k: 'etiquette', l: 'Étiquette sur la vignette', ph: 'Ex. : Démonstration (laisser vide pour un vrai client)' },
             { k: 'a_la_une', l: 'À la une sur l’accueil', t: 'case' },
             { k: 'visible', l: 'Afficher sur le site', t: 'case' },
           ],
@@ -484,6 +486,18 @@ function panneaux() {
           el('p', { class: 'aide', text: 'Seuls les secteurs qui ont des réalisations apparaissent sur le site.' }),
           editeurListe('secteurs', { titre: 'nom', sansTitre: 'Nouveau secteur', vide: 'Aucun secteur.', ajouter: 'Ajouter un secteur', nouveau: { id: '', nom: '' }, apres: () => assurerIds(E.C), champs: [{ k: 'nom', l: 'Nom' }] }),
         ], '/realisations'),
+      ],
+    },
+    {
+      id: 'engagements', titre: 'Engagements', page: '/engagements',
+      resume: () => ((E.C.engagements || []).map((b) => b.titre).filter(Boolean).join(', ') || 'Page non affichée'),
+      corps: () => [
+        el('p', { class: 'aide', text: 'La page « Engagements » apparaît dans le menu dès qu’il y a au moins un bloc : hébergement, données personnelles, sauvegardes, délais de réponse…' }),
+        editeurListe('engagements', {
+          titre: 'titre', sansTitre: 'Nouvel engagement', vide: 'Aucun engagement : la page n’est pas affichée.', ajouter: 'Ajouter un engagement',
+          nouveau: { titre: '', texte: '', points: [] },
+          champs: [{ k: 'titre', l: 'Titre' }, { k: 'texte', l: 'Texte', t: 'zone', lignes: 7 }, { k: 'points', l: 'Liste à puces', ex: 'facultatif', t: 'lignes', lignes: 3 }],
+        }),
       ],
     },
     {
@@ -530,7 +544,7 @@ function panneaux() {
       resume: () => [(E.C.equipe || []).length + ' personnes', (E.C.references || []).length + ' références'].join(', '),
       corps: () => [
         groupe('Présentation', '', [champ(E.C, { k: 'presentation.titre', l: 'Titre' }), champ(E.C, { k: 'presentation.texte', l: 'Texte', t: 'zone', lignes: 8 }), champ(E.C, { k: 'presentation.photo', l: 'Photo', t: 'photo' })], '/agence'),
-        groupe('Engagements', 'Garanties et assurances', [champ(E.C, { k: 'garanties.titre', l: 'Titre' }), champ(E.C, { k: 'garanties.texte', l: 'Texte', t: 'zone' }), champ(E.C, { k: 'garanties.points', l: 'Points', t: 'lignes' })], '/agence'),
+        groupe('Garanties', 'Les points résumés sous « À propos »', [champ(E.C, { k: 'garanties.titre', l: 'Titre' }), champ(E.C, { k: 'garanties.texte', l: 'Texte', t: 'zone' }), champ(E.C, { k: 'garanties.points', l: 'Points', t: 'lignes' })], '/agence'),
         groupe('Équipe', 'Noms, rôles et portraits', [
           champ(E.C, { k: 'affichage.equipe', l: 'Afficher l’équipe', t: 'case' }),
           editeurListe('equipe', { titre: 'nom', sansTitre: 'Nouvelle personne', photo: 'photo', sous: (p) => p.role || '', vide: 'Personne pour l’instant.', ajouter: 'Ajouter une personne', nouveau: { nom: '', role: '', photo: '' }, champs: [{ k: 'nom', l: 'Nom' }, { k: 'role', l: 'Rôle' }, { k: 'photo', l: 'Portrait', ex: 'sans photo : les initiales', t: 'photo' }] }),
@@ -600,15 +614,15 @@ function panneaux() {
 }
 let PANNEAUX = [];
 
-/* ---------- Démonstration en un seul fichier : le site d'abord, puis l'espace maison ---------- */
+/* ---------- Démonstration en un seul fichier : le site d'abord, puis la page de modification ---------- */
 const optsDemo = (extra) => ({ maquette: true, urlPolice: (f) => DEMO.polices[f] || '', css: DEMO.css, js: DEMO.js, apiContact: '', apercu: true, ...extra });
 let pageDemo = '/';
 function vueSiteDemo() {
   let v = document.getElementById('demo-site');
   if (!v) {
-    v = el('div', { id: 'demo-site', class: 'apercu-plein' },
+    v = el('div', { id: 'demo-site', class: 'apercu-plein', role: 'region', 'aria-label': 'Aperçu du site' },
       el('div', { class: 'barre' }, el('b', { text: 'Le site' }),
-        el('button', { type: 'button', class: 'btn petit', text: 'Essayer l’espace de modification', onclick: () => { v.hidden = true; document.body.style.overflow = ''; } })),
+        el('button', { type: 'button', class: 'btn petit', text: 'Essayer la page de modification', onclick: () => { v.hidden = true; document.body.style.overflow = ''; } })),
       el('iframe', { title: 'Le site' }));
     document.body.append(v);
   }
@@ -700,7 +714,7 @@ function dessinerEditeur() {
 function ecranPrincipal() {
   racine.replaceChildren();
   const nom = E.C.agence.nom || 'Votre site';
-  document.title = nom + ' : espace de modification';
+  document.title = nom + ' : page de modification';
   PANNEAUX = panneaux().filter((p) => !p.seulementSi || p.seulementSi());
   appliquerTheme(E.C);
   const plein = el('div', { class: 'apercu-plein', hidden: true },
@@ -714,18 +728,18 @@ function ecranPrincipal() {
   etatBarre = el('span', { class: 'etat' });
   bEnr = el('button', { type: 'button', class: 'btn', text: 'Enregistrer', onclick: enregistrer });
   bAnn = el('button', { type: 'button', class: 'btn danger', onclick: annuler });
-  barre = el('div', { class: 'barre-enr' }, el('div', { class: 'in' }, etatBarre,
+  barre = el('div', { class: 'barre-enr', role: 'region', 'aria-label': 'Enregistrement' }, el('div', { class: 'in' }, etatBarre,
     el('button', { type: 'button', class: 'btn sec btn-apercu', text: 'Aperçu', onclick: () => { plein.hidden = false; document.body.style.overflow = 'hidden'; rendreApercu(); } }),
     bAnn, bEnr));
 
   racine.append(
     el('header', { class: 'haut' }, el('div', { class: 'haut-in' },
-      el('div', { class: 'haut-titre' }, el('b', { text: nom }), el('span', { text: 'Espace de modification' })),
+      el('div', { class: 'haut-titre' }, el('b', { text: nom }), el('span', { text: 'Page de modification' })),
       el('a', { class: 'btn', href: DEMO ? '#' : '/', target: DEMO ? null : '_blank', rel: 'noopener', text: 'Voir le site', onclick: DEMO ? (e) => { e.preventDefault(); plein.hidden = false; rendreApercu(); } : null }),
       el('button', { type: 'button', class: 'btn', text: 'Se déconnecter', onclick: async () => { if (modifie() && !confirm2()) return; await api.deconnexion(); ecranConnexion(); } }))),
-    DEMO ? el('p', { class: 'bandeau', text: 'Démonstration : vos essais restent sur cet appareil, rien n’est publié.' })
-      : (E.maquette ? el('p', { class: 'bandeau', text: 'Le site est encore en mode proposition : les demandes ne sont pas envoyées.' }) : null),
-    el('div', { class: 'cadre' }, editeur, colonne), barre, plein);
+    DEMO ? el('aside', { class: 'bandeau', 'aria-label': 'Information', text: 'Démonstration : vos essais restent sur cet appareil, rien n’est publié.' })
+      : (E.maquette ? el('aside', { class: 'bandeau', 'aria-label': 'Information', text: 'Le site est encore en mode proposition : les demandes ne sont pas envoyées.' }) : null),
+    el('main', { class: 'cadre' }, editeur, colonne), barre, plein);
   dessinerEditeur(); majBarre(); rendreApercu();
   api.demandes().then((L) => { E.nouvelles = L.filter((c) => c.statut === 'nouvelle').length; majResumes(); }).catch(() => {});
 }
@@ -754,7 +768,7 @@ async function demarrer() {
     if (brouillon && !DEMO) { E.C = normaliser(brouillon); memo.ecrire('brouillon', null); toast('Vos modifications non enregistrées ont été récupérées.'); }
     ecranPrincipal();
   } catch (x) {
-    racine.replaceChildren(el('main', { class: 'connexion' }, el('div', { class: 'erreur', text: 'Impossible de charger l’espace de modification : ' + x.message + ' Vérifiez la connexion internet et rechargez la page.' })));
+    racine.replaceChildren(el('main', { class: 'connexion' }, el('div', { class: 'erreur', text: 'Impossible de charger la page de modification : ' + x.message + ' Vérifiez la connexion internet et rechargez la page.' })));
   } finally {
     /* démonstration : on montre d'abord le site, une seule fois */
     if (DEMO && DEMO.siteDabord && !siteMontre) { siteMontre = true; vueSiteDemo(); }

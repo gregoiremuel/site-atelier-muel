@@ -2,7 +2,7 @@
   "_schema": "site-boutique v2",
   "metier": {
     "type_schema": "Florist",
-    "titre_page": "fleuriste (site d’exemple)",
+    "titre_page": "fleuriste",
     "nav_boutique": "La boutique",
     "produits": {
       "nav": "Les fleurs",
@@ -53,7 +53,8 @@
       "precisions": "Couleurs, occasion, budget",
       "exemple": "Ex. : un bouquet pastel pour un anniversaire, budget 40 €",
       "lien": "",
-      "lien_texte": ""
+      "lien_texte": "",
+      "qui": "la boutique"
     }
   },
   "theme": {
@@ -61,18 +62,19 @@
     "couleur_foncee": "#1f4037",
     "couleur_pale": "#eaf2ef",
     "accent": "#f0d58c",
-    "polices": "net",
+    "polices": "serre",
     "accueil": "sobre",
     "titres": "simple",
     "angles": "doux",
     "offres_fond": "clair",
     "ordre": [
-      "offres",
       "produits",
+      "offres",
       "boutique",
       "questions",
       "presse"
-    ]
+    ],
+    "gabarit": "marche"
   },
   "boutique": {
     "nom": "Le Pétale Sauvage",
@@ -137,19 +139,19 @@
   },
   "textes": {
     "titre": "Des fleurs de saison, des bouquets à emporter",
-    "intro": "Site d’exemple : cette boutique n’existe pas. Touchez « Essayer l’espace boutique » en haut de l’écran, puis changez ce texte, un horaire ou un bouquet.",
-    "photo_accueil": "",
+    "intro": "Fleuriste à Paris 16e. Les fleurs changent chaque semaine ; les bouquets se commandent en ligne et se retirent en boutique le jour choisi.",
+    "photo_accueil": "/photos/fleuriste-vika",
     "boutique_titre": "La boutique",
-    "boutique_texte": "Une boutique imaginaire, pour montrer ce que voit un client : qui vous êtes, ce que vous vendez, quand vous êtes ouverts et comment venir.\n\nDans l’espace boutique, la fleuriste change elle-même ces textes, ses photos, ses bouquets et ses horaires, depuis son téléphone.",
-    "boutique_photo_1": "",
-    "boutique_photo_2": "",
+    "boutique_texte": "Le Pétale Sauvage est une boutique imaginaire, inventée pour cette démonstration. Voici ce que voit un client : qui vous êtes, ce que vous vendez, quand vous êtes ouverts et comment venir.\n\nLa fleuriste change elle-même ces textes, ses photos, ses bouquets et ses horaires depuis la page de modification, sur son téléphone.",
+    "boutique_photo_1": "/photos/fleuriste-oxana",
+    "boutique_photo_2": "/photos/fleuriste-viktoriia",
     "produits_titre": "Dans les seaux cette semaine",
-    "produits_intro": "La liste se met à jour depuis l’espace boutique : une fleur arrive, une autre part, en quelques secondes.",
+    "produits_intro": "Les fleurs sont classées par saison. La liste se met à jour depuis la page de modification : une fleur arrive, une autre part, en quelques secondes.",
     "produits_photo": "",
     "offres_titre": "Bouquets et commandes",
     "offres_texte": "Choisissez un bouquet et le jour du retrait. La boutique confirme avec vous.",
-    "offres_photo": "",
-    "description_google": "Site d’exemple d’une fleuriste imaginaire, créé par Grégoire Muel pour montrer un site de commerce avec commande à retirer et espace boutique."
+    "offres_photo": "/photos/fleuriste-roman",
+    "description_google": "Démonstration : site d’une fleuriste imaginaire, créé par Grégoire Muel pour montrer un site de commerce avec commande à retirer."
   },
   "produits": [
     {
@@ -240,7 +242,7 @@
   "commandes": {
     "actif": true,
     "titre": "Commander un bouquet",
-    "intro": "Choisissez votre bouquet et le jour du retrait. Dans ce site d’exemple, rien n’est envoyé.",
+    "intro": "Choisissez votre bouquet et le jour du retrait. Dans cette démonstration, rien n’est envoyé.",
     "cle_web3forms": "",
     "email": "",
     "delai_heures": 24,
@@ -251,16 +253,16 @@
   },
   "questions": [
     {
-      "question": "Cette boutique existe-t-elle ?",
-      "reponse": "Non, c’est un site d’exemple créé par Grégoire Muel. Les noms, l’adresse et le téléphone sont imaginaires."
+      "question": "Cette boutique existe-t-il ?",
+      "reponse": "Non. C’est une démonstration créée par Grégoire Muel : le nom, l’adresse, le téléphone et les textes sont imaginaires, et les photos sont des photos d’illustration."
     },
     {
-      "question": "Que peut changer la fleuriste elle-même ?",
-      "reponse": "Ses horaires, ses fermetures, la liste des fleurs, ses bouquets, ses prix et ses photos, et elle reçoit les commandes."
+      "question": "Que peut changer le professionnel lui-même ?",
+      "reponse": "Ses horaires, ses textes, ses photos, ses fleurs et ses bouquets. Elle reçoit aussi les commandes à retirer."
     },
     {
-      "question": "Peut-on commander en ligne ?",
-      "reponse": "Oui : le client choisit un bouquet et un jour de retrait, la boutique reçoit la demande et confirme."
+      "question": "Comment commander un bouquet ?",
+      "reponse": "Le client choisit un bouquet et le jour du retrait ; la commande arrive sur la page de modification de la fleuriste, qui confirme le bouquet et le prix."
     }
   ],
   "presse": [],
@@ -276,9 +278,11 @@
     "directeur_publication": "",
     "email_contact": ""
   },
-  "credits_photos": "",
+  "credits_photos": "Photos d’illustration : Vika Fleysher, Oxana Melis, Viktoriia Yatsentiuk, Roman Kraft (Unsplash). Elles ne montrent pas cette boutique, qui n’existe pas.",
   "reglages": {
     "geo": [],
-    "url": ""
+    "url": "",
+    "bandeau": "Démonstration : fleuriste imaginaire, créée par Grégoire Muel. Aucun lien avec un commerce réel ; photos d’illustration.",
+    "illustration": true
   }
 }

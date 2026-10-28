@@ -14,7 +14,7 @@
     "email": "",
     "linkedin": "",
     "instagram": "",
-    "description_google": "Grégoire Muel crée et refait les sites des commerces, des artisans et des entreprises, à Paris 16e et à distance : maquette gratuite en 48 h, et un espace de modification pour tout changer soi-même."
+    "description_google": "Grégoire Muel crée et refait les sites des commerces, des artisans et des entreprises, à Paris 16e et à distance : maquette gratuite en 48 h, et une page privée pour tout changer soi-même."
   },
   "theme": {
     "fond": "#f2f4f3",
@@ -38,12 +38,12 @@
     "texte": "Commerces, artisans, entreprises : je crée votre site, puis vous changez vos horaires, vos prix et vos photos depuis votre téléphone, et vous recevez les demandes de vos clients.",
     "reperes": [],
     "intro_titre": "Un site, et la main dessus",
-    "intro_texte": "Beaucoup de sites vieillissent parce que personne ne peut les mettre à jour sans appeler quelqu’un. Chaque site que je crée vient avec un espace de modification : une page privée où vous changez vous-même vos horaires, vos tarifs, vos photos et vos textes, et où arrivent les demandes de vos clients.\n\nJe m’appelle Grégoire Muel et je travaille depuis Auteuil. Je prépare une maquette à votre nom, avec vos vraies informations ; vous décidez ensuite.",
+    "intro_texte": "Beaucoup de sites vieillissent parce que personne ne peut les mettre à jour sans appeler quelqu’un. Chaque site que je crée vient avec une page de modification : une page privée où vous changez vous-même vos horaires, vos tarifs, vos photos et vos textes, et où arrivent les demandes de vos clients.\n\nJe m’appelle Grégoire Muel et je travaille depuis Auteuil. Je prépare une maquette à votre nom, avec vos vraies informations ; vous décidez ensuite.",
     "photo_intro": "/assets/photos/intro.jpg",
-    "essai_titre": "Essayez l’espace de modification",
-    "essai_texte": "Ouvrez un site d’exemple, touchez « Essayer l’espace », changez un horaire, un prix ou une photo, et regardez le site se mettre à jour.\n\nTout reste dans votre navigateur : rien n’est publié.",
+    "essai_titre": "Modifiez un site d’exemple",
+    "essai_texte": "Ouvrez un site d’exemple, touchez « Essayer la page de modification », changez un horaire, un prix ou une photo, et regardez le site se mettre à jour.\n\nTout reste dans votre navigateur : rien n’est publié. Ces sites sont des démonstrations : les entreprises n’existent pas.",
     "appel_titre": "Une maquette de votre site, gratuite, en 48 h",
-    "appel_texte": "Dites-moi qui vous êtes et ce que vous faites. Je vous prépare une maquette à votre nom ; si elle ne vous plaît pas, vous ne me devez rien.",
+    "appel_texte": "Dites-moi qui vous êtes et ce que vous faites. Je vous prépare une maquette à votre nom ; si elle ne vous plaît pas, vous ne me devez rien. Les prix et l’abonnement, je vous les explique au téléphone, en mots simples.",
     "photo_appel": ""
   },
   "chiffres": [
@@ -135,7 +135,7 @@
   ],
   "lots": [
     "Lecture sur téléphone, tablette et ordinateur",
-    "Espace de modification protégé par mot de passe",
+    "Page de modification protégée par mot de passe",
     "Retour à la version précédente en un geste",
     "Formulaire de demande ou de commande",
     "Titres et descriptions pour Google",
@@ -154,7 +154,7 @@
     },
     {
       "id": "commerces",
-      "nom": "Commerces"
+      "nom": "Commerces et restaurants"
     },
     {
       "id": "entreprises",
@@ -163,92 +163,149 @@
   ],
   "realisations": [
     {
+      "id": "atelier-exemple",
+      "nom": "Atelier d’ébénisterie",
+      "client": "Démonstration : atelier imaginaire",
+      "secteur": "artisans",
+      "lieu": "Paris",
+      "surface": "Site d’artisan, demande de devis",
+      "annee": "2026",
+      "mission": "Démonstration",
+      "accroche": "Un atelier, ses travaux, ses horaires et une demande de devis que le client remplit depuis son téléphone.",
+      "texte": "Un atelier d’ébénisterie imaginaire, pour montrer un site d’artisan : ce que fait l’atelier, quand passer et comment demander un devis.\n\nL’artisan change lui-même ses textes, ses horaires et ses travaux depuis la page de modification, et les demandes de devis y arrivent.\n\nLes photos sont des photos d’illustration : elles ne montrent pas un vrai atelier.",
+      "interventions": [
+        "Travaux courants avec leur délai",
+        "Horaires avec l’ouverture du jour",
+        "Demande de devis en ligne",
+        "Page de modification sur téléphone"
+      ],
+      "photos": [
+        "/assets/photos/real-atelier-exemple.jpg",
+        "/assets/photos/real-atelier-exemple-2.jpg"
+      ],
+      "a_la_une": true,
+      "visible": true,
+      "lien": "/demos/atelier-exemple",
+      "lien_texte": "Essayer la démonstration",
+      "etiquette": "Démonstration"
+    },
+    {
+      "id": "fleuriste-exemple",
+      "nom": "Fleuriste de quartier",
+      "client": "Démonstration : commerce imaginaire",
+      "secteur": "commerces",
+      "lieu": "Paris",
+      "surface": "Site de commerce, commande à retirer",
+      "annee": "2026",
+      "mission": "Démonstration",
+      "accroche": "Les fleurs de la semaine, des bouquets à commander et un jour de retrait choisi dans les horaires de la boutique.",
+      "texte": "Une boutique de fleurs imaginaire, pour montrer un site de commerce : horaires du jour, fleurs de saison, bouquets à commander.\n\nLa fleuriste change elle-même ses horaires, la liste des fleurs et ses bouquets depuis la page de modification, et les commandes y arrivent.\n\nLes photos sont des photos d’illustration : elles ne montrent pas une vraie boutique.",
+      "interventions": [
+        "Horaires avec l’ouverture du jour",
+        "Fleurs de la semaine par saison",
+        "Commande de bouquets avec jour de retrait",
+        "Page de modification sur téléphone"
+      ],
+      "photos": [
+        "/assets/photos/real-fleuriste-exemple.jpg",
+        "/assets/photos/real-fleuriste-exemple-2.jpg"
+      ],
+      "a_la_une": true,
+      "visible": true,
+      "lien": "/demos/fleuriste-exemple",
+      "lien_texte": "Essayer la démonstration",
+      "etiquette": "Démonstration"
+    },
+    {
+      "id": "plombier-exemple",
+      "nom": "Plombier, dépannage et devis",
+      "client": "Démonstration : entreprise imaginaire",
+      "secteur": "artisans",
+      "lieu": "Paris",
+      "surface": "Site de dépannage, appel et devis",
+      "annee": "2026",
+      "mission": "Démonstration",
+      "accroche": "Le numéro à appeler en haut de chaque écran, « Dépannage ou devis » dès l’arrivée, et une demande de devis.",
+      "texte": "Une entreprise de plomberie imaginaire, pour montrer un site où le client veut d’abord joindre quelqu’un : téléphone cliquable, choix entre dépannage et devis, zone d’intervention et horaires.\n\nL’artisan change lui-même ses horaires, sa zone et ses interventions depuis la page de modification.\n\nLes photos sont des photos d’illustration : elles ne montrent pas une vraie entreprise.",
+      "interventions": [
+        "Téléphone cliquable sur chaque écran",
+        "« Dépannage ou devis » en haut de la page",
+        "Interventions et zone d’intervention",
+        "Demande de devis en ligne"
+      ],
+      "photos": [
+        "/assets/photos/real-plombier-exemple.jpg",
+        "/assets/photos/real-plombier-exemple-2.jpg"
+      ],
+      "a_la_une": true,
+      "visible": true,
+      "lien": "/demos/plombier-exemple",
+      "lien_texte": "Essayer la démonstration",
+      "etiquette": "Démonstration"
+    },
+    {
+      "id": "restaurant-exemple",
+      "nom": "Restaurant",
+      "client": "Démonstration : restaurant imaginaire",
+      "secteur": "commerces",
+      "lieu": "Paris",
+      "surface": "Site de restaurant, carte et réservation",
+      "annee": "2026",
+      "mission": "Démonstration",
+      "accroche": "La carte, une réservation en ligne avec le jour, l’heure et le nombre de couverts, et les horaires du service.",
+      "texte": "Un restaurant imaginaire, pour montrer un site où la carte compte autant que la réservation : plats par catégorie, réservation en ligne, horaires et adresse.\n\nLe restaurateur change lui-même la carte, ses horaires et ses textes depuis la page de modification, et les demandes de réservation y arrivent.\n\nLes photos sont des photos d’illustration : elles ne montrent pas un vrai restaurant.",
+      "interventions": [
+        "Carte par catégorie, prix à saisir par le restaurateur",
+        "Réservation avec jour, heure et nombre de couverts",
+        "Horaires avec l’ouverture du jour",
+        "Page de modification sur téléphone"
+      ],
+      "photos": [
+        "/assets/photos/real-restaurant-exemple.jpg",
+        "/assets/photos/real-restaurant-exemple-2.jpg"
+      ],
+      "a_la_une": true,
+      "visible": true,
+      "lien": "/demos/restaurant-exemple",
+      "lien_texte": "Essayer la démonstration",
+      "etiquette": "Démonstration"
+    },
+    {
       "id": "operia",
       "nom": "Opéria",
       "client": "Opéria, maître d’œuvre et contractant général",
       "secteur": "entreprises",
       "lieu": "Vertou (Loire-Atlantique)",
-      "surface": "Site d’entreprise et espace de modification",
+      "surface": "Site d’entreprise et page de modification",
       "annee": "2026",
       "mission": "Refonte du site, en cours de validation",
       "accroche": "La refonte du site d’un maître d’œuvre : trois métiers, des réalisations par secteur, et des demandes de projet qualifiées.",
-      "texte": "Opéria rénove et aménage des bureaux, des commerces et des locaux d’activité. Son nouveau site présente ses trois métiers, ses réalisations classées par secteur et sa méthode, avec un formulaire qui précise d’emblée le type de locaux et la surface.\n\nL’équipe ajoute elle-même ses chantiers et leurs photos depuis l’espace de modification.",
+      "texte": "Opéria rénove et aménage des bureaux, des commerces et des locaux d’activité. Son nouveau site présente ses trois métiers, ses réalisations classées par secteur et sa méthode, avec un formulaire qui précise d’emblée le type de locaux et la surface.\n\nL’équipe ajoute elle-même ses chantiers et leurs photos depuis la page de modification.",
       "interventions": [
         "Structure et textes repris de l’ancien site",
         "Pages métiers, réalisations et méthode",
         "Formulaire de demande de projet",
-        "Espace de modification",
+        "Page de modification",
         "Vidéo possible en fond de l’accueil"
       ],
       "photos": [
         "/assets/photos/real-operia.jpg",
         "/assets/photos/real-operia-2.jpg"
       ],
-      "a_la_une": true,
+      "a_la_une": false,
       "visible": true,
       "lien": "",
-      "lien_texte": "Voir le site"
-    },
-    {
-      "id": "atelier-exemple",
-      "nom": "Atelier d’ébénisterie",
-      "client": "Site d’exemple : atelier imaginaire",
-      "secteur": "artisans",
-      "lieu": "Paris",
-      "surface": "Site d’artisan, demande de devis et espace de modification",
-      "annee": "2026",
-      "mission": "Démonstration",
-      "accroche": "Un atelier, ses savoir-faire, ses horaires et une demande de devis que le client remplit depuis son téléphone.",
-      "texte": "Un atelier d’ébénisterie imaginaire, pour montrer un site d’artisan : ce que fait l’atelier, quand passer, et comment demander un devis.\n\nL’artisan change lui-même ses textes, ses horaires et ses travaux, et reçoit les demandes de devis dans son espace.",
-      "interventions": [
-        "Savoir-faire et travaux courants",
-        "Horaires avec l’ouverture du jour",
-        "Demande de devis en ligne",
-        "Espace de modification sur téléphone"
-      ],
-      "photos": [
-        "/assets/photos/real-atelier.jpg",
-        "/assets/photos/real-atelier-2.jpg"
-      ],
-      "a_la_une": true,
-      "visible": true,
-      "lien": "/demos/atelier-exemple",
-      "lien_texte": "Essayer la démonstration"
-    },
-    {
-      "id": "commerce-exemple",
-      "nom": "Fleuriste de quartier",
-      "client": "Site d’exemple : commerce imaginaire",
-      "secteur": "commerces",
-      "lieu": "Paris",
-      "surface": "Site de commerce, commande à retirer et espace boutique",
-      "annee": "2026",
-      "mission": "Démonstration",
-      "accroche": "Les fleurs de la semaine, des bouquets à commander et un jour de retrait choisi dans les horaires de la boutique.",
-      "texte": "Une boutique de fleurs imaginaire, pour montrer un site de commerce : horaires du jour, fleurs de saison, bouquets à commander.\n\nLa fleuriste change elle-même ses horaires, la liste des fleurs et ses bouquets, et les commandes arrivent dans son espace.",
-      "interventions": [
-        "Horaires avec l’ouverture du jour",
-        "Fleurs de la semaine par saison",
-        "Commande de bouquets avec jour de retrait",
-        "Espace boutique sur téléphone"
-      ],
-      "photos": [
-        "/assets/photos/real-commerce.jpg",
-        "/assets/photos/real-commerce-2.jpg"
-      ],
-      "a_la_une": true,
-      "visible": true,
-      "lien": "/demos/commerce-exemple",
-      "lien_texte": "Essayer la démonstration"
+      "lien_texte": "Voir le site",
+      "etiquette": ""
     }
   ],
   "presentation": {
     "titre": "À propos",
-    "texte": "Je suis Grégoire Muel, entrepreneur individuel installé à Auteuil, dans le 16e arrondissement de Paris. Je conçois, crée, refais et entretiens les sites des commerces, des artisans et des entreprises.\n\n## Ma façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Un espace de modification simple, pensé pour le téléphone.\n- Un seul interlocuteur, du premier échange à la mise en ligne, puis pour l’entretien.\n\nArtisan joaillier de formation, j’ai gardé l’habitude du travail précis et des finitions soignées.",
+    "texte": "Je suis Grégoire Muel, entrepreneur individuel installé à Auteuil, dans le 16e arrondissement de Paris. Je conçois, crée, refais et entretiens les sites des commerces, des artisans et des entreprises.\n\n## Ma façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, du premier échange à la mise en ligne, puis pour l’entretien.\n\nArtisan joaillier de formation, j’ai gardé l’habitude du travail précis et des finitions soignées.",
     "photo": "/assets/photos/intro.jpg"
   },
   "garanties": {
-    "titre": "Mes engagements",
+    "titre": "En résumé",
     "texte": "",
     "points": [
       "Une maquette gratuite à votre nom avant toute décision",
@@ -295,7 +352,7 @@
     "mediateur": "",
     "tva": "TVA non applicable, article 293 B du code général des impôts"
   },
-  "credits_photos": "Visuels : captures des sites réalisés par Grégoire Muel. Les sites d’exemple utilisent des photos d’illustration (Unsplash).",
+  "credits_photos": "Vignettes : captures d’écran des démonstrations. Photos d’illustration des démonstrations (Unsplash) : Sander Hallaste, Bailey Alexander, Craft Kitties, HENG YIN, Minh Đức (atelier) ; Vika Fleysher, Oxana Melis, Viktoriia Yatsentiuk, Roman Kraft (fleuriste) ; Timur Shakerzianov (plombier) ; Glenov Brankovic, Antonio Araujo (restaurant). Elles ne montrent pas de vrais clients.",
   "reglages": {
     "url": ""
   },
@@ -318,13 +375,13 @@
     "methode_titre": "De la maquette gratuite à la mise en ligne",
     "methode_titre_page": "Trois étapes, un seul interlocuteur",
     "page_exp_titre": "Ce que je crée pour vous",
-    "page_exp_description": "Sites vitrines, boutiques et sites d’entreprise avec espace de modification, à Paris et à distance : formules et prix de départ.",
+    "page_exp_description": "Sites vitrines, boutiques et sites d’entreprise avec une page pour tout modifier soi-même, à Paris et à distance : formules et prix de départ.",
     "lots_sur": "Compris",
     "lots_titre": "Dans chaque site",
     "page_real_titre": "Réalisations et démonstrations",
     "fiche_surface": "Type de site",
     "interventions": "Ce qui a été fait",
-    "garanties_sur": "Engagements",
+    "garanties_sur": "Garanties",
     "equipe_sur": "À propos",
     "equipe_titre": "Votre interlocuteur",
     "contact_titre": "Parlons de votre site",
@@ -341,11 +398,17 @@
     "mentions_siege": "Adresse",
     "mentions_immatriculation": "SIRET",
     "type_schema": "ProfessionalService",
-    "bandeau_maquette": "Version de travail non publiée : textes et prix à valider."
+    "bandeau_maquette": "Version de travail non publiée : textes et prix à valider.",
+    "nav_engagements": "Engagements",
+    "eng_sur": "Engagements",
+    "page_eng_titre": "Hébergement, données, sauvegardes : ce que je m’engage à faire",
+    "page_eng_chapo": "Les réponses aux questions qu’on me pose avant de signer. Tout est écrit ici, noir sur blanc.",
+    "eng_index": "Sur cette page",
+    "eng_lien": "Voir tous les engagements"
   },
   "abonnements": {
     "titre": "Un coup de main au mois, seulement si vous le souhaitez",
-    "intro": "Le site est à vous dès sa livraison : vous pouvez le gérer seul depuis l’espace de modification. Si vous préférez ne plus vous en occuper, choisissez une formule mensuelle, sans engagement de durée.",
+    "intro": "Le site est à vous dès sa livraison : vous pouvez le gérer seul depuis la page de modification. Si vous préférez ne plus vous en occuper, choisissez une formule mensuelle, sans engagement de durée.",
     "formules": [
       {
         "nom": "Sans abonnement",
@@ -353,7 +416,7 @@
         "periode": "par mois",
         "description": "Vous gérez votre site vous-même.",
         "points": [
-          "Espace de modification pour changer textes, horaires, prix et photos",
+          "Page de modification pour changer textes, horaires, prix et photos",
           "Aide pour la prise en main à la livraison",
           "Intervention ponctuelle sur devis"
         ],
@@ -388,5 +451,37 @@
       }
     ],
     "note": "Prix hors options, sans engagement de durée. Les formules s’arrêtent à tout moment ; le site, son contenu et son nom de domaine restent à vous."
-  }
+  },
+  "engagements": [
+    {
+      "titre": "Hébergement",
+      "texte": "Votre site est hébergé chez Cloudflare, une société américaine dont les serveurs sont répartis dans le monde : je ne peux pas garantir que vos données restent en Europe.\n\nAujourd’hui, l’hébergement de départ est gratuit chez Cloudflare. Seul le nom de domaine se paie, environ 10 € par an, et il est à votre nom. Si l’hébergement devenait payant, je vous le dirais avant toute facture.",
+      "points": []
+    },
+    {
+      "titre": "Données personnelles (RGPD)",
+      "texte": "Le site ne dépose aucun cookie de mesure d’audience ni de publicité.\n\nLes demandes envoyées par le formulaire (nom, téléphone, e-mail, message) servent uniquement à vous répondre. Elles sont effacées automatiquement après 180 jours. Pour le site d’un commerce ou d’une entreprise, ce sont les données de ses propres clients : elles lui appartiennent et je ne les utilise pas pour moi.\n\nVous pouvez demander l’accès, la correction ou la suppression de vos données en m’appelant ou en m’écrivant, et vous pouvez saisir la CNIL.",
+      "points": []
+    },
+    {
+      "titre": "Sauvegardes",
+      "texte": "Le contenu du site est enregistré chez l’hébergeur, et la page de modification garde la version précédente : un clic suffit pour revenir en arrière après une erreur.\n\nAvec une formule mensuelle, je fais des sauvegardes régulières du contenu (textes, réglages et photos) et je les garde de mon côté. Sans abonnement, je vous remets une copie complète à la livraison, puis sur simple demande.",
+      "points": []
+    },
+    {
+      "titre": "Délai de réponse",
+      "texte": "Une demande envoyée par le formulaire ou par téléphone reçoit une réponse sous 2 jours ouvrés, avec ou sans abonnement. La maquette gratuite est livrée en 48 h.\n\nUne modification qui relève de votre formule mensuelle est faite dans le même délai. Hors formule, je vous envoie un devis avant de commencer.",
+      "points": []
+    },
+    {
+      "titre": "Si vous arrêtez l’abonnement",
+      "texte": "Vous pouvez arrêter à tout moment : il n’y a pas de durée minimale.\n\nLe site reste en ligne, son contenu et son nom de domaine restent à vous, et vous gardez la page de modification. Ce qui s’arrête : les sauvegardes régulières, les modifications à ma charge et le suivi. Le nom de domaine, lui, se renouvelle alors à votre charge.\n\nSi vous voulez déménager le site ailleurs, je vous remets une copie du contenu et des photos.",
+      "points": []
+    },
+    {
+      "titre": "Mon accès à vos données",
+      "texte": "Pour créer et entretenir votre site, j’ai un accès technique à l’hébergement : je peux donc voir votre contenu et les demandes reçues.\n\nJe m’en sers uniquement pour créer, entretenir ou dépanner votre site, jamais pour autre chose, et je ne transmets rien à personne. Vous pouvez me demander à tout moment de changer le mot de passe de votre page de modification, et de fermer mon accès quand notre collaboration s’arrête.",
+      "points": []
+    }
+  ]
 }

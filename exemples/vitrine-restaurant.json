@@ -1,0 +1,316 @@
+{
+  "_schema": "site-boutique v2",
+  "metier": {
+    "type_schema": "Restaurant",
+    "titre_page": "restaurant",
+    "nav_boutique": "Le restaurant",
+    "produits": {
+      "nav": "La carte",
+      "rubrique": "La carte",
+      "singulier": "plat",
+      "pluriel": "plats",
+      "feminin": false,
+      "famille": "Service",
+      "familles": [
+        [
+          "Entrees",
+          "Entrées"
+        ],
+        [
+          "Plats",
+          "Plats"
+        ],
+        [
+          "Desserts",
+          "Desserts"
+        ]
+      ],
+      "autres": "Autres plats",
+      "origine": "Origine",
+      "exemple_precision": "",
+      "exemple_prix": ""
+    },
+    "offres": {
+      "nav": "Réserver",
+      "rubrique": "Réserver une table",
+      "singulier": "service",
+      "pluriel": "services",
+      "feminin": false,
+      "bouton": "Réserver une table"
+    },
+    "demande": {
+      "type": "retrait",
+      "nav": "Réserver une table",
+      "rubrique": "Réservations",
+      "quantite": "Nombre de couverts",
+      "unite": "couverts",
+      "par_unite": "",
+      "date": "Jour de la réservation",
+      "precisions": "Allergies, occasion, demande particulière",
+      "exemple": "Ex. : une table près de la fenêtre, un anniversaire",
+      "lien": "",
+      "lien_texte": "",
+      "qui": "le restaurant",
+      "etape_jour": "Indiquez le jour et l’heure de votre venue",
+      "jour_phrase": "Table le",
+      "sujet": "Réservation",
+      "sans_prix": ""
+    }
+  },
+  "theme": {
+    "couleur": "#7a1f2b",
+    "couleur_foncee": "#4d121b",
+    "couleur_pale": "#f4f0ef",
+    "accent": "#e6d3a3",
+    "polices": "table",
+    "gabarit": "carte",
+    "accueil": "sobre",
+    "titres": "simple",
+    "angles": "droits",
+    "offres_fond": "clair",
+    "ordre": [
+      "produits",
+      "offres",
+      "boutique",
+      "questions",
+      "presse"
+    ]
+  },
+  "boutique": {
+    "nom": "La Cuillère Haute",
+    "telephone": "01 00 00 00 00",
+    "adresse": "8, rue de l’Exemple",
+    "ville": "75009 Paris",
+    "quartier": "",
+    "acces": "",
+    "email": "",
+    "instagram": ""
+  },
+  "annonce": {
+    "afficher": false,
+    "texte": ""
+  },
+  "horaires": {
+    "lundi": [],
+    "mardi": [
+      [
+        "12:00",
+        "14:30"
+      ],
+      [
+        "19:00",
+        "22:30"
+      ]
+    ],
+    "mercredi": [
+      [
+        "12:00",
+        "14:30"
+      ],
+      [
+        "19:00",
+        "22:30"
+      ]
+    ],
+    "jeudi": [
+      [
+        "12:00",
+        "14:30"
+      ],
+      [
+        "19:00",
+        "22:30"
+      ]
+    ],
+    "vendredi": [
+      [
+        "12:00",
+        "14:30"
+      ],
+      [
+        "19:00",
+        "23:00"
+      ]
+    ],
+    "samedi": [
+      [
+        "19:00",
+        "23:00"
+      ]
+    ],
+    "dimanche": [
+      [
+        "12:00",
+        "15:00"
+      ]
+    ]
+  },
+  "horaires_note": "Le lundi, le restaurant est fermé.",
+  "sections": {
+    "boutique": true,
+    "produits": true,
+    "offres": true,
+    "presse": false,
+    "questions": true
+  },
+  "textes": {
+    "titre": "Une cuisine de saison, une table pour deux ou pour dix",
+    "intro": "Restaurant à Paris 9e. La carte change avec les arrivages ; la table se réserve en ligne, pour le déjeuner comme pour le dîner.",
+    "photo_accueil": "/photos/restaurant-glenov",
+    "boutique_titre": "Le restaurant",
+    "boutique_texte": "La Cuillère Haute est un restaurant imaginaire, inventé pour cette démonstration. Voici ce que voit un client : la carte, la façon de réserver, les horaires et l’adresse.\n\nLe restaurateur change lui-même la carte, ses horaires et ses textes depuis la page de modification, sur son téléphone.",
+    "boutique_photo_1": "/photos/restaurant-antonio",
+    "boutique_photo_2": "",
+    "produits_titre": "La carte",
+    "produits_intro": "Dans cette démonstration, la carte n’affiche pas de prix : le restaurateur les saisit lui-même depuis la page de modification.",
+    "produits_photo": "",
+    "offres_titre": "Réserver une table",
+    "offres_texte": "Trois façons de réserver. Le restaurant confirme chaque demande par téléphone.",
+    "offres_photo": "",
+    "description_google": "Démonstration : site d’un restaurant imaginaire, créé par Grégoire Muel pour montrer une carte, une réservation en ligne et des horaires."
+  },
+  "produits": [
+    {
+      "nom": "Velouté de potimarron",
+      "origine": "",
+      "famille": "Entrees",
+      "detail": "Éclats de noisette",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Poireaux vinaigrette",
+      "origine": "",
+      "famille": "Entrees",
+      "detail": "Œuf mollet, moutarde à l’ancienne",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Terrine de campagne",
+      "origine": "",
+      "famille": "Entrees",
+      "detail": "Pickles, pain grillé",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Joue de bœuf braisée",
+      "origine": "",
+      "famille": "Plats",
+      "detail": "Purée de céleri, jus réduit",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Cabillaud rôti",
+      "origine": "",
+      "famille": "Plats",
+      "detail": "Beurre blanc, légumes de saison",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Risotto aux champignons",
+      "origine": "",
+      "famille": "Plats",
+      "detail": "Parmesan, herbes fraîches",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Tarte fine aux pommes",
+      "origine": "",
+      "famille": "Desserts",
+      "detail": "Crème crue",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Riz au lait",
+      "origine": "",
+      "famille": "Desserts",
+      "detail": "Caramel au beurre salé",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Chocolat et noisette",
+      "origine": "",
+      "famille": "Desserts",
+      "detail": "Mousse, croustillant",
+      "prix": "",
+      "photo": ""
+    }
+  ],
+  "offres": [
+    {
+      "nom": "Déjeuner",
+      "description": "Une table pour le midi, du mardi au vendredi et le dimanche.",
+      "prix": "",
+      "prix_unite": ""
+    },
+    {
+      "nom": "Dîner",
+      "description": "Une table pour le soir, du mardi au samedi.",
+      "prix": "",
+      "prix_unite": ""
+    },
+    {
+      "nom": "Table de groupe",
+      "description": "Pour six personnes ou plus : le restaurant confirme par téléphone.",
+      "prix": "",
+      "prix_unite": ""
+    }
+  ],
+  "commandes": {
+    "actif": true,
+    "titre": "Réserver une table",
+    "intro": "Choisissez le service, le jour, l’heure et le nombre de couverts. Dans cette démonstration, rien n’est envoyé.",
+    "cle_web3forms": "",
+    "email": "",
+    "delai_heures": 2,
+    "quantite_min": 1,
+    "quantite_max": 12,
+    "paiement": "",
+    "confirmation": "Merci, votre demande est partie. Le restaurant vous rappelle pour confirmer la table."
+  },
+  "questions": [
+    {
+      "question": "Ce restaurant existe-t-il ?",
+      "reponse": "Non. C’est une démonstration créée par Grégoire Muel : le nom, l’adresse, le téléphone et les textes sont imaginaires, et les photos sont des photos d’illustration."
+    },
+    {
+      "question": "Que peut changer le professionnel lui-même ?",
+      "reponse": "Sa carte, ses horaires, ses fermetures, ses textes et ses photos. Il reçoit aussi les demandes de réservation."
+    },
+    {
+      "question": "Comment réserver une table ?",
+      "reponse": "Le client choisit le service, le jour, l’heure et le nombre de couverts ; la demande arrive sur la page de modification du restaurateur, qui confirme."
+    },
+    {
+      "question": "Comment arrivent les réservations, et y a-t-il une commission ?",
+      "reponse": "Chaque demande arrive sur la page de modification du restaurateur, et par e-mail s’il le souhaite. Le site ne prélève aucune commission sur les réservations."
+    }
+  ],
+  "presse": [],
+  "avis": {
+    "note": "",
+    "nombre": "",
+    "date": "",
+    "lien": ""
+  },
+  "mentions": {
+    "raison_sociale": "",
+    "siret": "",
+    "directeur_publication": "",
+    "email_contact": ""
+  },
+  "credits_photos": "Photos d’illustration : Glenov Brankovic, Antonio Araujo (Unsplash). Elles ne montrent pas ce restaurant, qui n’existe pas.",
+  "reglages": {
+    "geo": [],
+    "url": "",
+    "bandeau": "Démonstration : restaurant imaginaire, créé par Grégoire Muel. Aucun lien avec un établissement réel ; photos d’illustration.",
+    "illustration": true
+  }
+}

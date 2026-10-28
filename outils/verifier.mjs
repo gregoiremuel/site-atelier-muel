@@ -30,7 +30,7 @@ const ELEMENTS = {
   references: ['nom', 'logo'],
 };
 /* Clés facultatives (ajoutées au moteur après Opéria : un contenu sans elles reste valide) */
-const FACULTATIVES = { '': ['libelles', 'abonnements'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte'], mentions: ['tva'], metiers: ['prix'], realisations: ['lien', 'lien_texte'] };
+const FACULTATIVES = { '': ['libelles', 'abonnements', 'engagements'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte'], mentions: ['tva'], metiers: ['prix'], realisations: ['lien', 'lien_texte', 'etiquette'] };
 const INTERDITS = [
   [/\bbienvenue\b/i, 'Bienvenue'], [/\bdécouvr(ez|ir)\b/i, 'Découvrez'], [/n['’]hésitez pas/i, 'N’hésitez pas'], [/au c(œ|oe)ur d/i, 'au cœur de'],
   [/\bvéritable/i, 'véritable'], [/\bincontournable/i, 'incontournable'], [/\bpassion/i, 'passion'], [/savoir-faire unique/i, 'savoir-faire unique'],
@@ -145,6 +145,17 @@ export function verifier(C) {
   C.equipe.forEach((p, i) => { if (vide(p.nom)) E(`equipe[${i}].nom est vide.`); photoOk(`equipe[${i}].photo`, p.photo); });
   C.references.forEach((r, i) => { if (vide(r.nom)) E(`references[${i}].nom est vide.`); photoOk(`references[${i}].logo`, r.logo); });
   listeTextes(C.garanties.points, 'garanties.points');
+  /* Page « Engagements » (facultative) : blocs { titre, texte, points } */
+  const ENG = Array.isArray(C.engagements) ? C.engagements : [];
+  if ('engagements' in C && !Array.isArray(C.engagements)) E('« engagements » doit être une liste.');
+  ENG.forEach((b, i) => {
+    if (!b || typeof b !== 'object') { E(`engagements[${i}] doit être un objet { titre, texte, points }.`); return; }
+    Object.keys(b).filter((k) => !['titre', 'texte', 'points'].includes(k)).forEach((k) => E(`Clé inconnue : engagements[${i}].${k}`));
+    if (vide(b.titre)) E(`engagements[${i}].titre est vide.`);
+    if (!estTexte(b.texte)) E(`engagements[${i}].texte doit être un texte.`);
+    if ('points' in b) listeTextes(b.points, `engagements[${i}].points`);
+  });
+  if (ENG.length && !C.libelles) A('Page Engagements sans « libelles » : le menu garde le mot « Engagements ».');
   ['chiffres', 'equipe', 'references'].forEach((k) => { if (typeof C.affichage[k] !== 'boolean') E(`affichage.${k} doit valoir true ou false.`); });
   [['accueil.photo', C.accueil.photo], ['accueil.photo_intro', C.accueil.photo_intro], ['accueil.photo_appel', C.accueil.photo_appel], ['presentation.photo', C.presentation.photo]].forEach(([k, v]) => { if (photoOk(k, v) === 'essai') essaisAutres++; });
   [['agence.logo', G.logo], ['agence.nom_image', G.nom_image], ['agence.nom_image_blanc', G.nom_image_blanc]].forEach(([k, v]) => photoOk(k, v));
@@ -163,7 +174,7 @@ export function verifier(C) {
   listeTextes(K.types, 'contact.types');
   if (K.cle_web3forms && !UUID.test(K.cle_web3forms)) E('contact.cle_web3forms : format de clé invalide.');
   if (K.email && !EMAIL.test(K.email)) E('contact.email n’est pas une adresse valide.');
-  if (!K.cle_web3forms) afaire.push('Clé Web3Forms vide : les demandes arriveront dans l’espace de modification, pas encore par e-mail.');
+  if (!K.cle_web3forms) afaire.push('Clé Web3Forms vide : les demandes arriveront dans la page de modification, pas encore par e-mail.');
 
   /* Mentions */
   const Mn = C.mentions;
@@ -173,6 +184,7 @@ export function verifier(C) {
   /* Style des textes */
   const textes = [['accueil.sur_titre', C.accueil.sur_titre], ['accueil.titre', C.accueil.titre], ['accueil.texte', C.accueil.texte], ...(C.accueil.reperes || []).map((v, i) => [`accueil.reperes[${i}]`, v]), ['accueil.intro_titre', C.accueil.intro_titre], ['accueil.intro_texte', C.accueil.intro_texte],
     ['accueil.appel_titre', C.accueil.appel_titre], ['accueil.appel_texte', C.accueil.appel_texte], ['annonce.texte', C.annonce.texte], ['contact.confirmation', K.confirmation],
+    ...ENG.flatMap((b, i) => [[`engagements[${i}].titre`, b && b.titre], [`engagements[${i}].texte`, b && b.texte], ...((b && b.points) || []).map((v, j) => [`engagements[${i}].points[${j}]`, v])]),
     ['presentation.texte', C.presentation.texte], ['garanties.texte', C.garanties.texte], ...C.garanties.points.map((v, i) => [`garanties.points[${i}]`, v]),
     ...C.metiers.flatMap((m, i) => [[`metiers[${i}].accroche`, m.accroche], [`metiers[${i}].texte`, m.texte], ...m.points.map((v, j) => [`metiers[${i}].points[${j}]`, v])]),
     ...C.realisations.flatMap((x, i) => [[`realisations[${i}].accroche`, x.accroche], [`realisations[${i}].texte`, x.texte], [`realisations[${i}].mission`, x.mission], ...(x.interventions || []).map((v, j) => [`realisations[${i}].interventions[${j}]`, v])]),

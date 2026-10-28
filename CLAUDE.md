@@ -3,7 +3,7 @@
 Site de Grégoire Muel EI pour son activité de création et refonte de sites (commerces, artisans, entreprises). Le nom « Atelier Muel » est réservé à sa future joaillerie : il n'apparaît pas sur ce site. Le dépôt et le projet Cloudflare gardent le nom technique `site-atelier-muel`. Moteur « agence » de la méthode de Greg (dépôt `gregoiremuel/kit-sites-boutiques`, `METHODE.md`).
 
 - Lis `LISEZMOI.md` avant toute tâche : contenu, ce qui reste à valider, mise en ligne, démonstrations.
-- Le contenu de départ est `contenu-initial.json` ; une fois en ligne, il vit dans l'espace de modification (KV) et se modifie depuis `/admin`.
+- Le contenu de départ est `contenu-initial.json` ; une fois en ligne, il vit dans la mémoire du site (Cloudflare KV) et se modifie depuis la page de modification (`/admin`).
 - Avant de livrer ou de déployer : `npm run verifier` sans erreur, `npm test` tout « ok », `npm run apercu`, démo essayée.
 - Règles : ne rien inventer (tous les prix, 590 € / 1 290 € / 1 900 € et abonnements 19 € / 49 €, sont des propositions à valider) ; Opéria cité seulement avec leur accord ; la Fromagerie La Fontaine n'apparaît jamais, ni sous son nom ni en démonstration (pas signée) ; rien de la Maison Tcheskiss ; aucune démonstration de joaillerie (ce métier est réservé à Atelier Muel) ; aucune photo de banque d'images présentée comme un travail réel ; mentions légales à faire relire ; aucun identifiant ni secret dans le dépôt (Secrets Cloudflare).
 - Toute amélioration du moteur se reporte dans `modeles/agence-operia` du kit (et dans `site-operia` si utile), avec `npm run verifier` et `npm test` relancés.

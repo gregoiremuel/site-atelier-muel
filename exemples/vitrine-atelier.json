@@ -2,7 +2,7 @@
   "_schema": "site-boutique v2",
   "metier": {
     "type_schema": "LocalBusiness",
-    "titre_page": "ébénisterie et restauration de meubles (site d’exemple)",
+    "titre_page": "ébénisterie et restauration de meubles",
     "nav_boutique": "L’atelier",
     "produits": {
       "nav": "Savoir-faire",
@@ -36,26 +36,29 @@
       "precisions": "Décrivez le meuble et le travail à faire",
       "exemple": "Ex. : table de ferme à décaper et à reteinter, un pied à réparer",
       "lien": "",
-      "lien_texte": ""
+      "lien_texte": "",
+      "qui": "l’atelier",
+      "etape_jour": "Indiquez la date qui vous arrange"
     }
   },
   "theme": {
     "couleur": "#6b4a2e",
-    "couleur_foncee": "#4a321e",
-    "couleur_pale": "#f5f0ea",
+    "couleur_foncee": "#3f2a1a",
+    "couleur_pale": "#efece7",
     "accent": "#e9cd8a",
-    "polices": "atelier",
+    "polices": "etabli",
     "accueil": "sobre",
     "titres": "filet",
     "angles": "droits",
     "offres_fond": "clair",
     "ordre": [
       "boutique",
-      "offres",
       "produits",
+      "offres",
       "questions",
       "presse"
-    ]
+    ],
+    "gabarit": "atelier"
   },
   "boutique": {
     "nom": "Atelier du Merrain",
@@ -63,7 +66,7 @@
     "adresse": "1, rue de l’Exemple",
     "ville": "75011 Paris",
     "quartier": "",
-    "acces": "",
+    "acces": "Visite de l’atelier sur rendez-vous",
     "email": "",
     "instagram": ""
   },
@@ -135,19 +138,19 @@
   },
   "textes": {
     "titre": "Meubles restaurés, meubles sur mesure",
-    "intro": "Site d’exemple : cet atelier n’existe pas. Touchez « Essayer l’espace de modification » en haut de l’écran, puis changez ce texte, un horaire ou un tarif.",
-    "photo_accueil": "",
+    "intro": "Atelier d’ébénisterie à Paris 11e : restauration de meubles anciens, meubles sur mesure, réparation de chaises et de fauteuils. Chaque demande reçoit un devis écrit avant le début des travaux.",
+    "photo_accueil": "/photos/atelier-sander",
     "boutique_titre": "L’atelier",
-    "boutique_texte": "Un atelier imaginaire, pour montrer ce que voit un client : qui travaille, ce qui est proposé, quand passer et comment demander un devis.\n\nDans l’espace de modification, l’artisan change lui-même ces textes, ses photos, ses travaux et ses horaires, depuis son téléphone.",
-    "boutique_photo_1": "",
-    "boutique_photo_2": "",
+    "boutique_texte": "Atelier du Merrain est une entreprise imaginaire, inventée pour cette démonstration. Voici ce que voit un client : qui travaille, ce qui est proposé, quand passer et comment demander un devis.\n\nL’artisan change lui-même ces textes, ses photos, ses travaux et ses horaires depuis la page de modification, sur son téléphone.",
+    "boutique_photo_1": "/photos/atelier-bailey",
+    "boutique_photo_2": "/photos/atelier-craft",
     "produits_titre": "Ce que fait l’atelier",
-    "produits_intro": "La liste se met à jour depuis l’espace de modification : un savoir-faire s’ajoute, un autre se retire, en quelques secondes.",
-    "produits_photo": "",
+    "produits_intro": "Quatre types de travaux, chacun avec son délai indicatif. La liste se change en quelques secondes depuis la page de modification.",
+    "produits_photo": "/photos/atelier-heng",
     "offres_titre": "Travaux courants",
-    "offres_texte": "Trois exemples de demandes que l’atelier reçoit. L’artisan change cette liste quand il veut.",
-    "offres_photo": "",
-    "description_google": "Site d’exemple d’un atelier d’ébénisterie imaginaire, créé par Grégoire Muel pour montrer un site d’artisan avec demande de devis et espace de modification."
+    "offres_texte": "Trois demandes que l’atelier reçoit souvent. Pour chacune, le devis est écrit avant tout travail.",
+    "offres_photo": "/photos/atelier-minh",
+    "description_google": "Démonstration : site d’un atelier d’ébénisterie imaginaire, créé par Grégoire Muel pour montrer un site d’artisan avec demande de devis."
   },
   "produits": [
     {
@@ -206,7 +209,7 @@
   "commandes": {
     "actif": true,
     "titre": "Demander un devis",
-    "intro": "Décrivez le meuble et le travail à faire. Dans ce site d’exemple, rien n’est envoyé.",
+    "intro": "Décrivez le meuble et le travail à faire. Dans cette démonstration, rien n’est envoyé.",
     "cle_web3forms": "",
     "email": "",
     "delai_heures": 48,
@@ -217,16 +220,16 @@
   },
   "questions": [
     {
-      "question": "Ce site est-il celui d’un vrai atelier ?",
-      "reponse": "Non, c’est un site d’exemple créé par Grégoire Muel. Les noms, l’adresse et le téléphone sont imaginaires."
+      "question": "Cet atelier existe-t-il ?",
+      "reponse": "Non. C’est une démonstration créée par Grégoire Muel : le nom, l’adresse, le téléphone et les textes sont imaginaires, et les photos sont des photos d’illustration."
     },
     {
-      "question": "Que peut changer l’artisan lui-même ?",
-      "reponse": "Ses horaires, ses fermetures, ses textes, ses photos, ses travaux et ses tarifs, et il reçoit les demandes de devis."
+      "question": "Que peut changer le professionnel lui-même ?",
+      "reponse": "Ses horaires, ses fermetures, ses textes, ses photos, ses travaux et ses tarifs. Il reçoit aussi les demandes de devis."
     },
     {
       "question": "Comment demander un devis ?",
-      "reponse": "Le client décrit le meuble et le travail, la demande arrive dans l’espace de l’artisan, qui répond et envoie son devis."
+      "reponse": "Le client décrit le meuble et le travail à faire, la demande arrive sur la page de modification de l’artisan, qui répond et envoie son devis."
     }
   ],
   "presse": [],
@@ -242,9 +245,11 @@
     "directeur_publication": "",
     "email_contact": ""
   },
-  "credits_photos": "",
+  "credits_photos": "Photos d’illustration : Sander Hallaste, Bailey Alexander, Craft Kitties, HENG YIN, Minh Đức (Unsplash). Elles ne montrent pas cet atelier, qui n’existe pas.",
   "reglages": {
     "geo": [],
-    "url": ""
+    "url": "",
+    "bandeau": "Démonstration : atelier d’ébénisterie imaginaire, créé par Grégoire Muel. Aucun lien avec une entreprise réelle ; photos d’illustration.",
+    "illustration": true
   }
 }

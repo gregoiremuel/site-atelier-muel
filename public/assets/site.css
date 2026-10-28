@@ -8,7 +8,9 @@ a{color:inherit}
 h1,h2,h3{font-family:var(--titres);font-weight:400;line-height:1.08;letter-spacing:-.01em;margin:0;text-wrap:balance}
 p{margin:0}
 ul,ol{margin:0;padding:0;list-style:none}
-:focus-visible{outline:2px solid var(--or);outline-offset:3px}
+/* Anneau de focus à deux tons : un trait foncé et un liseré blanc, lisibles sur fond clair comme sur fond sombre */
+:focus-visible{outline:3px solid var(--encre);outline-offset:3px;box-shadow:0 0 0 3px #fff}
+.sombre :focus-visible,.appel :focus-visible,.pied :focus-visible,.hero :focus-visible,.volet :focus-visible,.tete-sombre :focus-visible{outline-color:#fff;box-shadow:none}
 .skip{position:absolute;left:-9999px;top:8px;background:var(--encre);color:#fff;padding:10px 14px;z-index:100}
 .skip:focus{left:8px}
 .wrap{width:100%;max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
@@ -148,6 +150,7 @@ video.hero-media{animation:none}
 .sans-photo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--gris);font-size:.875rem}
 .illus{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.9);color:var(--encre);font-size:.75rem;font-weight:500;padding:4px 9px;border-radius:2px;pointer-events:none}
 @media (min-width:700px){.cartes{grid-template-columns:repeat(2,1fr)}}
+.etiq{position:absolute;left:0;top:0;z-index:2;background:var(--encre);color:#fff;font:600 .8125rem/1 var(--texte);padding:8px 12px}
 @media (min-width:1100px){
   .cartes{grid-template-columns:repeat(3,1fr)}
   .cartes-une .carte-grande{grid-column:span 2;grid-row:span 2}
@@ -155,6 +158,7 @@ video.hero-media{animation:none}
   .cartes-une .carte-grande a{height:100%}
   .cartes-une .carte-grande .carte-nom{font-size:1.875rem}
 }
+@media (min-width:700px){.cartes-quatre{grid-template-columns:repeat(2,1fr)}}
 .filtres{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
 .filtres a{padding:9px 16px;border:1px solid var(--trait);border-radius:2px;text-decoration:none;font-size:.875rem;font-weight:500;color:var(--gris);background:#fff}
 .filtres a:hover{border-color:var(--marine);color:var(--marine)}
@@ -275,7 +279,7 @@ video.hero-media{animation:none}
 .saisie{width:100%;min-height:52px;padding:13px 14px;border:1px solid #cfcabd;background:#fff;color:var(--encre);font:inherit;border-radius:2px;appearance:none}
 textarea.saisie{min-height:150px;resize:vertical;line-height:1.5}
 select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris) 50%),linear-gradient(135deg,var(--gris) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat;padding-right:40px}
-.saisie:focus{outline:none;border-color:var(--marine);box-shadow:0 0 0 3px color-mix(in srgb,var(--or) 45%,transparent)}
+.saisie:focus{outline:2px solid var(--encre);outline-offset:1px;border-color:var(--marine);box-shadow:0 0 0 3px color-mix(in srgb,var(--or) 45%,transparent)}
 .demande .btn{margin-top:26px}
 .note{font-size:.875rem;color:var(--gris);margin-top:16px}
 .demande-erreur{margin-top:18px;color:#a3261b;font-weight:500}
@@ -462,3 +466,16 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .anime .g-studio .rev .sur::before,.anime .g-studio .tete-page > .sur.rev::before{width:10px;transition:none}
 .anime .g-studio .rev.vu .sur::before,.anime .g-studio .tete-page > .sur.rev.vu::before{width:10px}
 @media (max-width:700px){.g-studio .sombre,.g-studio .appel,.g-studio .pied{border-radius:20px}}
+
+/* Page Engagements : sommaire à gauche, blocs à droite */
+.eng-grille{display:grid;gap:36px}
+.eng-index ol{list-style:none;margin:12px 0 0;padding:0;display:grid}
+.eng-index a{display:block;padding:11px 0;color:var(--encre);text-decoration:none;font-weight:500;border-bottom:1px solid var(--trait)}
+.eng-index a:hover{text-decoration:underline;text-underline-offset:4px}
+.eng-blocs{display:grid;gap:clamp(36px,5vw,56px);max-width:760px}
+.eng-bloc{display:grid;gap:12px;padding-top:24px;border-top:2px solid var(--encre);scroll-margin-top:96px}
+.eng-num{font:500 .9375rem/1 var(--texte);color:var(--gris)}
+.eng-bloc h2{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.15}
+.eng-bloc .prose p{max-width:62ch}
+@media (min-width:900px){.eng-grille{grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:72px;align-items:start}.eng-index{position:sticky;top:104px}}
+.eng-lien{margin-top:24px}

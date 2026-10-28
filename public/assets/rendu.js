@@ -1,6 +1,6 @@
 /*
   Moteur de rendu « agence » : toutes les pages du site à partir du contenu (un seul objet JSON).
-  Utilisé par le serveur (src/worker.js), par l'aperçu de l'espace de modification et par outils/apercu.mjs.
+  Utilisé par le serveur (src/worker.js), par l'aperçu de la page de modification et par outils/apercu.mjs.
 */
 import { cssPolices } from './polices.js';
 
@@ -12,7 +12,7 @@ const num = (i) => String(i + 1).padStart(2, '0');
 /* Libellés du site : ceux d'Opéria par défaut ; chaque site peut les changer dans « libelles » (contenu).
    Un champ de formulaire dont le libellé est vide ("") disparaît. */
 export const LIBELLES = {
-  nav_expertises: 'Expertises', nav_realisations: 'Réalisations', nav_agence: 'L’agence',
+  nav_expertises: 'Expertises', nav_realisations: 'Réalisations', nav_agence: 'L’agence', nav_engagements: 'Engagements',
   bouton_principal: 'Parler de votre projet', bouton_appel: 'Décrire mon projet', bouton_realisations: 'Voir les réalisations',
   appel_titre: 'Parlons de votre projet', intro_lien: 'L’agence',
   exp_sur: 'Expertises', exp_titre: 'Trois métiers, un seul interlocuteur', exp_lien: 'En détail',
@@ -24,7 +24,7 @@ export const LIBELLES = {
   lots_sur: 'Tous corps d’état', lots_titre: 'Les travaux que nous coordonnons',
   page_real_titre: 'Des locaux transformés',
   fiche_client: 'Client', fiche_lieu: 'Lieu', fiche_surface: 'Surface', fiche_mission: 'Mission', fiche_annee: 'Année', fiche_secteur: 'Secteur', interventions: 'Interventions',
-  garanties_sur: 'Garanties', garanties_titre: 'Nos engagements', equipe_sur: 'L’équipe', equipe_titre: 'Vos interlocuteurs',
+  garanties_sur: 'Garanties', garanties_titre: 'Nos engagements', eng_sur: 'Engagements', page_eng_titre: 'Hébergement, données, sauvegardes', page_eng_chapo: '', eng_index: 'Sur cette page', eng_lien: 'Voir tous les engagements', equipe_sur: 'L’équipe', equipe_titre: 'Vos interlocuteurs',
   contact_titre: 'Parlons de votre projet', contact_chapo: 'Quelques lignes sur vos locaux, vos délais et votre budget suffisent pour commencer.',
   form_societe: 'Société', form_type: 'Type de locaux', form_surface: 'Surface approximative', form_surface_exemple: 'Ex. : 300 m²', form_ville: 'Ville du projet',
   form_message: 'Votre projet', form_message_exemple: 'Rénovation, aménagement, déménagement, délais souhaités…', form_envoyer: 'Envoyer la demande',
@@ -35,7 +35,7 @@ export const LIBELLES = {
 /* Valeur d'un libellé : le texte du site s'il est rempli, sinon celui par défaut ; vide("") accepté pour les champs du formulaire */
 export const libelle = (C, k) => { const v = (C && C.libelles && typeof C.libelles === 'object') ? C.libelles[k] : undefined; if (typeof v !== 'string') return LIBELLES[k]; return v.trim() || (/^form_(societe|type|surface|ville)$/.test(k) ? '' : LIBELLES[k]); };
 
-/* Libellés des lignes d'une demande de contact (récapitulatif, espace de modification) */
+/* Libellés des lignes d'une demande de contact (récapitulatif, page de modification) */
 export const libellesDemande = (C) => ({ societe: libelle(C, 'form_societe') || 'Société', type: libelle(C, 'form_type') || 'Type de locaux', surface: libelle(C, 'fiche_surface'), ville: libelle(C, 'form_ville') || 'Ville du projet', message: 'Projet' });
 
 /* Données utiles, nettoyées */
@@ -52,13 +52,15 @@ export function donnees(C) {
   const references = A.references === false ? [] : liste('references').filter((r) => r && r.nom);
   const chiffres = A.chiffres === false ? [] : liste('chiffres').filter((c) => c && c.valeur && c.libelle);
   const lots = liste('lots').filter((l) => typeof l === 'string' && l.trim());
+  /* Page « Engagements » (clé facultative « engagements ») : une liste de blocs { titre, texte, points } */
+  const engagements = liste('engagements').filter((e) => e && e.titre).map((e, i) => ({ ...e, id: slug(e.titre) || 'engagement-' + (i + 1), points: (Array.isArray(e.points) ? e.points : []).filter(Boolean) }));
   const secteur = (id) => secteurs.find((s) => s.id === id) || null;
   const secteursUtiles = secteurs.filter((s) => realisations.some((x) => x.secteur === s.id));
   /* Abonnement mensuel facultatif (clé facultative « abonnements ») */
   const AB = C.abonnements && typeof C.abonnements === 'object' ? C.abonnements : null;
   const formules = AB && Array.isArray(AB.formules) ? AB.formules.filter((f) => f && f.nom).map((f) => ({ ...f, points: (Array.isArray(f.points) ? f.points : []).filter(Boolean) })) : [];
   const abonnements = formules.length ? { titre: AB.titre || '', intro: AB.intro || '', note: AB.note || '', formules } : null;
-  return { secteurs, secteursUtiles, realisations, metiers, etapes, equipe, references, chiffres, lots, secteur, abonnements };
+  return { secteurs, secteursUtiles, realisations, metiers, etapes, equipe, references, chiffres, lots, secteur, abonnements, engagements };
 }
 
 function src(p, largeur) {
@@ -69,7 +71,7 @@ function src(p, largeur) {
   return '';
 }
 const essai = (p) => /^https:\/\/images\.unsplash\.com\//.test(String(p || ''));
-/* Vidéo de fond (accueil) : fichier envoyé depuis l'espace de modification, lien https .mp4/.webm, ou fichier du site */
+/* Vidéo de fond (accueil) : fichier envoyé depuis la page de modification, lien https .mp4/.webm, ou fichier du site */
 export const videoSrc = (v) => { v = String(v || '').trim(); return /^(https:\/\/\S+\.(mp4|webm)(\?\S*)?|\/videos\/[a-z0-9-]+|\/assets\/\S+\.(mp4|webm)|data:video\/(mp4|webm);base64,\S+)$/i.test(v) ? v : ''; };
 const ICO_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg>';
 function videoFond(v, poster, cls) {
@@ -128,7 +130,7 @@ function appel(C) {
   </section>`;
 }
 
-/* o = { maquette, urlPolice, css | cssHref, js | jsHref, lienAdmin, apiContact, apercu, calme (aperçu de l'espace de modification : sans animations) } */
+/* o = { maquette, urlPolice, css | cssHref, js | jsHref, lienAdmin, apiContact, apercu, calme (aperçu de la page de modification : sans animations) } */
 function document_(C, o, page) {
   const G = C.agence || {}, T = C.theme || {}, K = C.contact || {};
   const nom = G.nom || 'Agence';
@@ -137,7 +139,8 @@ function document_(C, o, page) {
   const style = o.css != null ? `<style>\n${o.css}\n${theme}\n</style>` : `<link rel="stylesheet" href="${o.cssHref || '/assets/site.css'}">\n<style>${theme}</style>`;
   const marque = src(G.nom_image, 600) ? `<img src="${esc(src(G.nom_image, 600))}" alt="${esc(nom)}">` : esc(nom);
   const marqueClaire = src(G.nom_image_blanc, 600) ? `<img src="${esc(src(G.nom_image_blanc, 600))}" alt="${esc(nom)}">` : esc(nom);
-  const nav = [['/expertises', libelle(C, 'nav_expertises')], ['/realisations', libelle(C, 'nav_realisations')], ['/agence', libelle(C, 'nav_agence')]].map(([h, t]) => [h, esc(t)]);
+  const avecEngagements = Array.isArray(C.engagements) && C.engagements.some((e) => e && e.titre);
+  const nav = [['/expertises', libelle(C, 'nav_expertises')], ['/realisations', libelle(C, 'nav_realisations')], ['/agence', libelle(C, 'nav_agence')], ...(avecEngagements ? [['/engagements', libelle(C, 'nav_engagements')]] : [])].map(([h, t]) => [h, esc(t)]);
   const actif = (h) => (page.rubrique === h ? ' aria-current="page"' : '');
   const reseaux = [['linkedin', 'LinkedIn'], ['instagram', 'Instagram']].filter(([k]) => /^https:\/\//.test(G[k] || ''));
   const AG = {
@@ -168,8 +171,8 @@ ${style}
 </head>
 <body class="${page.classe || ''}${gabarit === 'studio' ? ' g-studio' : ''}${o.calme ? ' calme' : ''}">
 <a class="skip" href="#contenu">Aller au contenu</a>
-${o.maquette ? `<div class="maquette" role="note">${esc(libelle(C, 'bandeau_maquette') || `Proposition de site pour ${nom}, préparée par Grégoire Muel. Version de travail non publiée : textes et photos à valider.`)}</div>` : ''}
-${C.annonce && C.annonce.afficher && C.annonce.texte ? `<div class="annonce" role="status">${esc(C.annonce.texte)}</div>` : ''}
+${o.maquette ? `<aside class="maquette" aria-label="Information sur ce site">${esc(libelle(C, 'bandeau_maquette') || `Proposition de site pour ${nom}, préparée par Grégoire Muel. Version de travail non publiée : textes et photos à valider.`)}</aside>` : ''}
+${C.annonce && C.annonce.afficher && C.annonce.texte ? `<aside class="annonce" aria-label="Annonce">${esc(C.annonce.texte)}</aside>` : ''}
 <header class="tete">
   <div class="tete-in">
     <a class="marque" href="/" aria-label="${esc(nom)}, accueil">${marque}</a>
@@ -207,7 +210,7 @@ ${page.corps}
     <div class="legal">
       <a href="/mentions-legales">Mentions légales</a>
       <a href="/confidentialite">Confidentialité</a>
-      ${o.lienAdmin ? `<a href="${o.lienAdmin}">Espace de modification</a>` : ''}
+      ${o.lienAdmin ? `<a href="${o.lienAdmin}">Page de modification</a>` : ''}
       <span>© ${new Date().getFullYear()} ${esc(nom)}</span>
       ${C.credits_photos ? `<span class="credits">${esc(C.credits_photos)}</span>` : ''}
     </div>
@@ -222,8 +225,10 @@ ${scripts}
 
 /* ---------- Morceaux ---------- */
 const meta = (x) => [x.lieu, x.surface].filter(Boolean).join(' · ');
+/* Étiquette facultative sur la vignette (ex. « Démonstration ») */
+const etiquette = (x) => (x.etiquette ? `<span class="etiq">${esc(x.etiquette)}</span>` : '');
 const carte = (D, x, grande) => `<li class="carte${grande ? ' carte-grande' : ''}"><a href="/realisations/${esc(x.id)}">
-      <span class="carte-img">${x.photos[0] ? img(x.photos[0], grande ? 1600 : 1000, 'carte-photo', false, '') + illus(x.photos[0]) : '<span class="sans-photo">Photos à venir</span>'}</span>
+      <span class="carte-img">${x.photos[0] ? img(x.photos[0], grande ? 1600 : 1000, 'carte-photo', false, '') + illus(x.photos[0]) : '<span class="sans-photo">Photos à venir</span>'}${etiquette(x)}</span>
       <span class="carte-txt"><span class="carte-sec">${esc((D.secteur(x.secteur) || {}).nom || '')}</span><span class="carte-nom">${esc(x.nom)}</span>${meta(x) ? `<span class="carte-meta">${esc(meta(x))}</span>` : ''}</span>
     </a></li>`;
 const titreSection = (sur, titre, id) => `<p class="sur">${esc(sur)}</p><h2${id ? ` id="${id}"` : ''}>${esc(titre)}</h2>`;
@@ -260,9 +265,9 @@ const garHero = (C) => (Array.isArray((C.accueil || {}).reperes) ? C.accueil.rep
 function accueil(C, D) {
   const A = C.accueil || {}, G = C.agence || {};
   const video = A.fond_video !== false ? videoSrc(A.video) : '';
-  /* Grille de l'accueil : 6 projets (un grand et cinq) ou 3, pour qu'aucune case ne reste vide */
+  /* Grille de l'accueil : 6 projets (un grand et cinq), 4 (deux par deux) ou 3, pour qu'aucune case ne reste vide */
   const une = D.realisations.filter((x) => x.a_la_une), base = une.length >= 3 ? une : D.realisations;
-  const choix = base.slice(0, base.length >= 6 ? 6 : Math.min(3, base.length));
+  const choix = base.slice(0, base.length >= 6 ? 6 : base.length >= 4 ? 4 : Math.min(3, base.length));
   const essais = D.realisations.filter((x) => x.lien);
   return {
     classe: 'p-accueil', image: A.photo, rubrique: '/',
@@ -316,7 +321,7 @@ function accueil(C, D) {
   <section class="sec" aria-labelledby="t-real">
     <div class="wrap">
       <div class="sec-tete sec-tete-ligne"><div>${titreSection(libelle(C, 'real_sur'), libelle(C, 'real_titre'), 't-real')}</div><a class="lien" href="/realisations">${esc(libelle(C, 'real_tout'))} ${ico.fleche}</a></div>
-      <ul class="cartes cartes-une">
+      <ul class="cartes cartes-une${choix.length === 4 ? ' cartes-quatre' : ''}">
         ${choix.map((x, i) => carte(D, x, i === 0 && choix.length === 6)).join('\n        ')}
       </ul>
     </div>
@@ -413,7 +418,7 @@ function pageRealisation(C, D, id) {
     classe: 'p-realisation', titre: x.nom, rubrique: '/realisations', image: p0, description: x.accroche || `${x.nom} : ${meta(x)}`,
     corps: `
   <section class="real-tete">
-    <div class="real-fig">${p0 ? img(p0, 2200, 'real-img', true, x.nom) + illus(p0) : '<span class="sans-photo">Photos à venir</span>'}</div>
+    <div class="real-fig">${p0 ? img(p0, 2200, 'real-img', true, x.nom) + illus(p0) : '<span class="sans-photo">Photos à venir</span>'}${etiquette(x)}</div>
     <div class="wrap real-titre">
       <nav class="fil" aria-label="Fil d’Ariane"><a href="/realisations">${esc(libelle(C, 'nav_realisations'))}</a>${s ? ` <span aria-hidden="true">/</span> <a href="/realisations?secteur=${esc(s.id)}">${esc(s.nom)}</a>` : ''}</nav>
       <h1>${esc(x.nom)}</h1>
@@ -463,7 +468,7 @@ function pageAgence(C, D) {
   <section class="sec sombre" aria-labelledby="t-eng">
     <div class="wrap engagements">
       <div>${titreSection(libelle(C, 'garanties_sur'), Gr.titre || libelle(C, 'garanties_titre'), 't-eng')}${Gr.texte ? `<p class="chapo">${esc(Gr.texte)}</p>` : ''}</div>
-      ${listeCoches(gpts)}
+      <div>${listeCoches(gpts)}${D.engagements.length ? `<p class="eng-lien"><a class="lien" href="/engagements">${esc(libelle(C, 'eng_lien'))} ${ico.fleche}</a></p>` : ''}</div>
     </div>
   </section>` : ''}
   ${D.equipe.length ? `
@@ -530,6 +535,29 @@ function pageContact(C, D) {
   };
 }
 
+function pageEngagements(C, D) {
+  const G = C.agence || {};
+  const chapo = libelle(C, 'page_eng_chapo');
+  return {
+    classe: 'p-engagements', titre: libelle(C, 'nav_engagements'), rubrique: '/engagements', description: chapo || `Hébergement, données personnelles, sauvegardes, délais de réponse : les engagements de ${G.nom || 'l’agence'}.`,
+    corps: `
+  <section class="tete-page wrap">
+    <p class="sur">${esc(libelle(C, 'eng_sur'))}</p>
+    <h1>${esc(libelle(C, 'page_eng_titre'))}</h1>
+    ${chapo ? `<p class="chapo">${esc(chapo)}</p>` : ''}
+  </section>
+  <section class="sec sec-serre">
+    <div class="wrap eng-grille">
+      <nav class="eng-index" aria-label="${esc(libelle(C, 'eng_index'))}"><p class="sur">${esc(libelle(C, 'eng_index'))}</p><ol>${D.engagements.map((b) => `<li><a href="#${esc(b.id)}">${esc(b.titre)}</a></li>`).join('')}</ol></nav>
+      <div class="eng-blocs">
+        ${D.engagements.map((b, i) => `<section class="eng-bloc" id="${esc(b.id)}" aria-labelledby="t-${esc(b.id)}"><span class="eng-num" aria-hidden="true">${num(i)}</span><h2 id="t-${esc(b.id)}">${esc(b.titre)}</h2>${b.texte ? `<div class="prose">${texteRiche(b.texte)}</div>` : ''}${listeCoches(b.points)}</section>`).join('\n        ')}
+      </div>
+    </div>
+  </section>
+  ${appel(C)}`,
+  };
+}
+
 function pageMentions(C) {
   const M = C.mentions || {}, G = C.agence || {};
   const k = (v) => (v ? esc(v) : '<em>à compléter</em>');
@@ -559,7 +587,7 @@ function pageConfidentialite(C) {
     <h2>Ce que le site enregistre</h2>
     <p>Le site ne dépose aucun cookie de mesure d’audience ni de publicité.</p>
     <h2>Les demandes de contact</h2>
-    <p>Quand vous envoyez une demande, les informations du formulaire sont transmises à ${esc(G.nom || 'l’agence')}${K.cle_web3forms ? ', par e-mail via le service Web3Forms' : ''}. Elles servent uniquement à répondre à votre demande et sont conservées 180 jours au plus dans l’espace de gestion du site, sauf si un contrat est conclu.</p>
+    <p>Quand vous envoyez une demande, les informations du formulaire sont transmises à ${esc(G.nom || 'l’agence')}${K.cle_web3forms ? ', par e-mail via le service Web3Forms' : ''}. Elles servent uniquement à répondre à votre demande et sont conservées 180 jours au plus dans la page de modification du site, sauf si un contrat est conclu.</p>
     <h2>Vos droits</h2>
     <p>Vous pouvez demander l’accès, la correction ou la suppression de vos données${G.email ? ` en écrivant à <a href="mailto:${esc(G.email)}">${esc(G.email)}</a>` : ''}, et saisir la CNIL.</p>
   </div></section>`,
@@ -579,7 +607,7 @@ function page404() {
 export function routes(C) {
   const D = donnees(C);
   return ['/', '/expertises', '/realisations', ...(D.secteursUtiles.length > 1 ? D.secteursUtiles.map((s) => '/realisations?secteur=' + s.id) : []),
-    ...D.realisations.map((x) => '/realisations/' + x.id), '/agence', '/contact', '/mentions-legales', '/confidentialite'];
+    ...D.realisations.map((x) => '/realisations/' + x.id), '/agence', ...(D.engagements.length ? ['/engagements'] : []), '/contact', '/mentions-legales', '/confidentialite'];
 }
 
 /* Rend une adresse : { statut, html } */
@@ -595,6 +623,7 @@ export function rendrePage(C, chemin, o = {}) {
   else if (p === '/realisations') page = pageRealisations(C, D, D.secteur(secQ) ? secQ : '');
   else if ((m = p.match(/^\/realisations\/([a-z0-9-]+)$/))) page = pageRealisation(C, D, m[1]);
   else if (p === '/agence') page = pageAgence(C, D);
+  else if (p === '/engagements' && D.engagements.length) page = pageEngagements(C, D);
   else if (p === '/contact') page = pageContact(C, D);
   else if (p === '/mentions-legales') page = pageMentions(C);
   else if (p === '/confidentialite') page = pageConfidentialite(C);

@@ -1,7 +1,7 @@
 /*
   Serveur du site de l'agence (Cloudflare Worker).
   - Toutes les pages sont rendues à chaque visite depuis le contenu enregistré (KV « CONTENU »).
-  - /admin : l'espace de modification (fichiers statiques dans public/admin), protégé par mot de passe.
+  - /admin : la page de modification (fichiers statiques dans public/admin), protégé par mot de passe.
   - /api/… : lecture et enregistrement du contenu, envoi de photos, demandes de contact reçues.
   Secrets à définir : ADMIN_HASH (npm run mot-de-passe), SESSION_SECRET (texte aléatoire).
   Variable : MAQUETTE = "oui" tant que le site n'est pas validé (bandeau + formulaire en démonstration).
@@ -70,10 +70,10 @@ async function cookieSession(env) {
   return `${COOKIE}=${exp}.${await signer(env, 'boutique.' + exp)}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${DUREE_SESSION}`;
 }
 
-/* ---------- Vérification du contenu envoyé par l'espace boutique ---------- */
+/* ---------- Vérification du contenu envoyé par la page de modification ---------- */
 const CLES_OBJETS = ['agence', 'annonce', 'accueil', 'presentation', 'garanties', 'affichage', 'contact', 'mentions'];
-const CLES_LISTES = ['chiffres', 'metiers', 'etapes', 'secteurs', 'realisations', 'equipe', 'references'];
-/* Réglés par Grégoire, jamais modifiables depuis l'espace de modification */
+const CLES_LISTES = ['chiffres', 'metiers', 'etapes', 'secteurs', 'realisations', 'equipe', 'references', 'engagements'];
+/* Réglés par Grégoire, jamais modifiables depuis la page de modification */
 const CLES_FIXES = ['_schema', 'theme', 'reglages'];
 const STATUTS = ['nouvelle', 'rappelee', 'devis', 'signee', 'classee'];
 function nettoyer(c, actuel) {
@@ -106,7 +106,7 @@ export default {
         const corps = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes(C).filter((r) => !r.includes('?')).map((r) => `<url><loc>${base}${r}</loc></url>`).join('')}</urlset>`;
         return new Response(corps, { headers: { 'Content-Type': 'application/xml; charset=utf-8' } });
       }
-      /* Vidéos envoyées depuis l'espace de modification : lecture par morceaux (Range), indispensable pour Safari */
+      /* Vidéos envoyées depuis la page de modification : lecture par morceaux (Range), indispensable pour Safari */
       if ((methode === 'GET' || methode === 'HEAD') && p.startsWith('/videos/')) {
         const id = p.slice(8);
         if (!/^[a-z0-9-]{6,40}$/.test(id)) return new Response('Introuvable', { status: 404 });
@@ -148,9 +148,9 @@ export default {
         return json({ ok: true });
       }
 
-      /* Espace de modification : connexion */
+      /* Page de modification : connexion */
       if (methode === 'POST' && p === '/api/connexion') {
-        if (!env.ADMIN_HASH || !env.SESSION_SECRET) return json({ ok: false, erreur: 'Espace de modification pas encore configuré : demandez à Grégoire.' }, 503);
+        if (!env.ADMIN_HASH || !env.SESSION_SECRET) return json({ ok: false, erreur: 'Page de modification pas encore configuré : demandez à Grégoire.' }, 503);
         const n = await essais(env, 'cnx:' + ip(req));
         if (n >= 8) return json({ ok: false, erreur: 'Trop d’essais. Réessayez dans un quart d’heure.' }, 429);
         const corps = await req.json().catch(() => ({}));

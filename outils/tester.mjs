@@ -1,6 +1,6 @@
 // Teste le vrai serveur sur cet ordinateur, sans rien mettre en ligne.
 // Usage : node outils/tester.mjs [fichier de contenu]   (par défaut : contenu-initial.json)
-// Lance « wrangler dev » avec un stockage vide et temporaire, un mot de passe de test et MAQUETTE = non.
+// Lance « wrangler dev » avec une mémoire vide et temporaire, un mot de passe de test et MAQUETTE = non.
 import { spawn, spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -20,18 +20,18 @@ const PORT = 8799, BASE = `http://127.0.0.1:${PORT}`;
 const MDP = 'test-' + randomBytes(6).toString('hex');
 const sel = randomBytes(16);
 const HASH = `pbkdf2$10000$${sel.toString('base64')}$${pbkdf2Sync(MDP, sel, 10000, 32, 'sha256').toString('base64')}`;
-const stockage = mkdtempSync(join(tmpdir(), 'agence-test-'));
+const memoireTest = mkdtempSync(join(tmpdir(), 'agence-test-'));
 const wrangler = join(racine, 'node_modules', '.bin', 'wrangler');
 if (process.argv[2]) {
-  const r = spawnSync(wrangler, ['kv', 'key', 'put', 'contenu', '--path', fichier, '--binding', 'CONTENU', '--local', '--persist-to', stockage], { cwd: racine, encoding: 'utf8' });
+  const r = spawnSync(wrangler, ['kv', 'key', 'put', 'contenu', '--path', fichier, '--binding', 'CONTENU', '--local', '--persist-to', memoireTest], { cwd: racine, encoding: 'utf8' });
   if (r.status !== 0) { console.error('Impossible de déposer le contenu de test :\n' + r.stderr); process.exit(1); }
 }
-const serveur = spawn(wrangler, ['dev', '--port', String(PORT), '--ip', '127.0.0.1', '--persist-to', stockage, '--show-interactive-dev-session=false',
+const serveur = spawn(wrangler, ['dev', '--port', String(PORT), '--ip', '127.0.0.1', '--persist-to', memoireTest, '--show-interactive-dev-session=false',
   '--var', 'ADMIN_HASH:' + HASH, '--var', 'SESSION_SECRET:' + randomBytes(24).toString('hex'), '--var', 'MAQUETTE:non'],
 { cwd: racine, detached: true, stdio: ['ignore', 'pipe', 'pipe'] });
 let journal = '';
 serveur.stdout.on('data', (d) => { journal += d; }); serveur.stderr.on('data', (d) => { journal += d; });
-const arreter = () => { try { process.kill(-serveur.pid, 'SIGTERM'); } catch (e) { /* déjà arrêté */ } try { rmSync(stockage, { recursive: true, force: true }); } catch (e) { /* rien */ } };
+const arreter = () => { try { process.kill(-serveur.pid, 'SIGTERM'); } catch (e) { /* déjà arrêté */ } try { rmSync(memoireTest, { recursive: true, force: true }); } catch (e) { /* rien */ } };
 process.on('SIGINT', () => { arreter(); process.exit(130); });
 
 let ok = 0; const echecs = [];
@@ -68,9 +68,9 @@ async function tests() {
   for (const f of imagesSite) { r = await req(f); if (r.status === 200 && /^image\//.test(r.headers.get('content-type') || '')) imagesOk++; else console.log('    image en défaut : ' + f + ' ' + r.status); }
   verif(imagesOk === imagesSite.length, `Les ${imagesSite.length} images du site (dans /assets/) s’affichent`);
 
-  /* Espace de modification */
+  /* Page de modification */
   r = await req('/admin'); verif([301, 302, 307, 308].includes(r.status), '/admin redirige vers /admin/');
-  r = await req('/admin/'); verif(r.status === 200 && /no-store/.test(r.headers.get('cache-control') || '') && r.headers.get('x-frame-options') === 'DENY', 'Espace de modification : jamais en cache, pas dans un cadre');
+  r = await req('/admin/'); verif(r.status === 200 && /no-store/.test(r.headers.get('cache-control') || '') && r.headers.get('x-frame-options') === 'DENY', 'Page de modification : jamais en cache, pas dans un cadre');
   r = await req('/api/apparence'); let j = await r.json(); verif(j.ok && j.boutique.nom === C.agence.nom, 'Nom pour l’écran de connexion');
   r = await req('/api/contenu'); verif(r.status === 401, 'Contenu refusé sans connexion');
   r = await req('/api/connexion', { method: 'POST', ...corpsJson({ motdepasse: 'mauvais' }) }); verif(r.status === 401, 'Mauvais mot de passe refusé');
@@ -88,7 +88,7 @@ async function tests() {
   h = await (await req('/realisations/' + x0.id)).text();
   verif(h.includes('1 750 m²') && h.includes('Nouvelle réalisation en ligne'), 'La nouvelle surface et le message apparaissent sur le site');
   j = await (await req('/api/contenu')).json();
-  verif(j.contenu.theme.fond === base.theme.fond && j.contenu._schema === 'agence v1', 'Les couleurs du site ne peuvent pas être changées depuis l’espace de modification');
+  verif(j.contenu.theme.fond === base.theme.fond && j.contenu._schema === 'agence v1', 'Les couleurs du site ne peuvent pas être changées depuis la page de modification');
   verif(JSON.stringify(j.contenu.lots) === '["Peinture","Sols"]', 'Les listes de textes sont nettoyées par le serveur');
   const m2 = structuredClone(j.contenu); m2.realisations[0].visible = false;
   await req('/api/contenu', { method: 'PUT', ...corpsJson(m2) });
@@ -96,6 +96,14 @@ async function tests() {
   const m3 = structuredClone(j.contenu); m3.affichage.references = false;
   await req('/api/contenu', { method: 'PUT', ...corpsJson(m3) });
   h = await (await req('/agence')).text(); verif(!h.includes('class="refs"'), 'Interrupteur : références masquées');
+  if ((C.engagements || []).length) {
+    const m4 = structuredClone(j.contenu); m4.engagements = [];
+    await req('/api/contenu', { method: 'PUT', ...corpsJson(m4) });
+    r = await req('/engagements'); verif(r.status === 404, 'Sans bloc d’engagements, la page Engagements n’existe pas');
+    await req('/api/contenu', { method: 'PUT', ...corpsJson(j.contenu) });
+    r = await req('/engagements'); h = await r.text();
+    verif(r.status === 200 && h.includes('id="' + 'hebergement' + '"') && h.includes('href="/engagements"'), 'Page Engagements : blocs et lien dans le menu');
+  }
   await req('/api/contenu', { method: 'PUT', ...corpsJson(j.contenu) });
 
   /* Photo */
@@ -122,7 +130,7 @@ async function tests() {
   r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson({ ...client, telephone: '12' }) }); verif(r.status === 400, 'Demande sans téléphone refusée');
   j = await (await req('/api/demandes')).json();
   const dem = (j.demandes || []).find((c) => c.nom === 'Client Test');
-  verif(dem && dem.statut === 'nouvelle' && dem.societe === 'Test SAS' && dem.lignes.some(([k, v]) => k === 'Surface' && v === '300 m²'), 'La demande arrive complète dans l’espace de modification');
+  verif(dem && dem.statut === 'nouvelle' && dem.societe === 'Test SAS' && dem.lignes.some(([k, v]) => k === 'Surface' && v === '300 m²'), 'La demande arrive complète dans la page de modification');
   if (dem) {
     for (const s of ['rappelee', 'devis', 'signee', 'classee']) { r = await req('/api/demandes/' + dem.id, { method: 'PATCH', ...corpsJson({ statut: s }) }); verif(r.status === 200, 'Statut « ' + s + ' »'); }
     r = await req('/api/demandes/' + dem.id, { method: 'PATCH', ...corpsJson({ statut: 'nimportequoi' }) }); verif(r.status === 400, 'Statut inconnu refusé');

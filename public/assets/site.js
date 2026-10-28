@@ -23,7 +23,7 @@
   /* Photos manquantes : on les cache */
   $$('img').forEach(function (im) { im.addEventListener('error', function () { im.style.visibility = 'hidden'; }); });
 
-  /* Aperçu (espace de modification, démonstration) : les liens internes changent la page affichée par le parent */
+  /* Aperçu (page de modification, démonstration) : les liens internes changent la page affichée par le parent */
   if (A.apercu) {
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href]');
@@ -35,7 +35,7 @@
   }
 
   /* Mouvement : apparitions au défilement, chiffres qui défilent, en-tête qui s'affine. Rien si le visiteur demande moins d'animations,
-     ni dans l'aperçu de l'espace de modification (classe « calme »). */
+     ni dans l'aperçu de la page de modification (classe « calme »). */
   (function () {
     var calme = document.body.classList.contains('calme') || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     var tete = document.querySelector('.tete');
@@ -86,7 +86,7 @@
     setTimeout(function () { els.forEach(function (el) { if (!el.classList.contains('vu')) { var r = el.getBoundingClientRect(); if (r.top < innerHeight) montrer(el); } }); }, 2500);
   })();
 
-  /* Liens vers une rubrique de la page (#produits…) : dans un aperçu (démonstration, espace de modification),
+  /* Liens vers une rubrique de la page (#produits…) : dans un aperçu (démonstration, page de modification),
      la page est affichée dans un cadre et le navigateur comprendrait le lien comme une autre page.
      On fait alors défiler nous-mêmes jusqu'à la rubrique. Sur le site en ligne, le navigateur s'en charge. */
   if (location.protocol === 'about:') {

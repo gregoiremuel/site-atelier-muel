@@ -1,10 +1,10 @@
 {
-  // Site de Grégoire Muel EI (sites internet) : Cloudflare Worker + stockage KV. Le nom technique « site-atelier-muel » reste celui du projet Cloudflare.
+  // Site de Grégoire Muel EI (sites internet) : Cloudflare Worker + mémoire du site (KV). Le nom technique « site-atelier-muel » reste celui du projet Cloudflare.
   "name": "site-atelier-muel",
   "main": "src/worker.js",
   "compatibility_date": "2026-09-01",
   "assets": { "directory": "./public", "binding": "ASSETS" },
-  // Stockage du contenu : créé tout seul au premier déploiement (wrangler 4.45 ou plus), puis toujours le même.
+  // Mémoire du site (le contenu) : créée toute seule au premier déploiement (wrangler 4.45 ou plus), puis toujours la même.
   "kv_namespaces": [{ "binding": "CONTENU" }],
   // "oui" tant que les textes et les prix ne sont pas validés : bandeau, non indexé, demandes en démonstration.
   "vars": { "MAQUETTE": "oui" }

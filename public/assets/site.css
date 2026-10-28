@@ -504,7 +504,6 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .faq summary::after{content:"+";font-weight:400;font-size:1.25rem;line-height:1.2;color:var(--gris)}
 .faq details[open] summary::after{content:"\2212"}
 .faq p{padding:0 22px 20px;color:var(--gris);max-width:62ch}
-.p-metier .metier-grille:not(:has(.metier-fig)){grid-template-columns:1fr}
 .p-metier .tete-page .metier-prix{margin:0 0 22px}
 @media (min-width:800px){.pied-cols:has(> :nth-child(4)){grid-template-columns:repeat(4,1fr)}}
 @media (min-width:900px){
@@ -514,3 +513,371 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
   .abo-grille:has(> :nth-child(4)){grid-template-columns:repeat(2,1fr)}
 }
 @media (min-width:1200px){.abo-grille:has(> :nth-child(4)){grid-template-columns:repeat(4,1fr)}}
+
+/* Gabarit « studio » : l'anneau de focus de l'accueil doit rester lisible sur le papier clair (le blanc de la règle générale ne se voit pas) */
+.g-studio .hero :focus-visible{outline-color:var(--encre);box-shadow:0 0 0 3px #fff}
+.essai-vue{display:none}
+.prix-v::after{content:"\00a0"}
+
+/* ====== Gabarit « édition » (theme.gabarit = "edition") ======
+   Une page tenue comme un document imprimé : papier blanc, encre, un seul bleu (le bleu de travail) rare et franc, angles droits, filets fins,
+   titres en Besley, texte en Schibsted Grotesk. Les chiffres et les prix sont composés comme dans un tarif. Aucun dégradé, aucune pastille, aucune capitale espacée. */
+.g-edition{--r:0px;--gris:#3f444b;--bleu:var(--marine);--gut:clamp(20px,4vw,56px);--fil:1px solid var(--trait);--filfort:1px solid var(--encre);font-size:1.0625rem;line-height:1.62;font-feature-settings:"kern","liga"}
+.g-edition [id]{scroll-margin-top:96px}
+.g-edition h1,.g-edition h2,.g-edition h3{font-family:var(--titres);font-weight:500;line-height:1.04;letter-spacing:-.02em;text-wrap:balance;color:var(--encre)}
+.g-edition h3{font-weight:600;letter-spacing:-.012em}
+.g-edition ::selection{background:var(--bleu);color:#fff}
+.g-edition .wrap{max-width:1320px}
+.g-edition a{text-underline-offset:.2em}
+
+/* Bandeaux */
+.g-edition .maquette{background:var(--or);color:var(--encre);font-size:.875rem}
+.g-edition .annonce{background:var(--encre)}
+
+/* En-tête : un nom, quelques mots, un filet */
+.g-edition .tete{background:var(--fond);-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:var(--fil)}
+.g-edition .tete.defile{box-shadow:none;border-bottom-color:var(--encre)}
+.g-edition .tete-in{height:72px}
+.g-edition .marque{font-family:var(--titres);font-weight:600;font-size:1.5rem;letter-spacing:-.025em;color:var(--encre)}
+.g-edition .nav{gap:30px}
+.g-edition .nav a{font-weight:500;font-size:1rem}
+.g-edition .nav a:not(.btn)::after{background:var(--bleu);height:2px;bottom:-1px}
+.g-edition .nav .btn{margin-left:6px}
+.g-edition .menu-btn{border:1px solid var(--encre);border-radius:0}
+.g-edition .volet{background:var(--bleu)}
+.g-edition .volet li a{font-family:var(--titres);font-weight:500;font-size:2.25rem;letter-spacing:-.02em;border-bottom:1px solid rgba(255,255,255,.28)}
+.g-edition .volet-tel{color:#fff;font-weight:600}
+
+/* Boutons et liens */
+.g-edition .btn{border-radius:0;min-height:54px;padding:0 26px;background:var(--encre);border:1px solid var(--encre);color:#fff;font:600 1rem/1 var(--texte);letter-spacing:0;box-shadow:none}
+.g-edition .btn:hover{background:var(--bleu);border-color:var(--bleu);color:#fff;box-shadow:none}
+.g-edition .btn-petit{min-height:44px;padding:0 20px;font-size:.9375rem}
+.g-edition .btn-or{background:var(--bleu);border-color:var(--bleu);color:#fff}
+.g-edition .btn-or:hover{background:var(--encre);border-color:var(--encre);color:#fff}
+.g-edition .btn-ligne{background:transparent;color:var(--encre);border-color:var(--encre)}
+.g-edition .btn-ligne:hover{background:var(--encre);border-color:var(--encre);color:#fff}
+.g-edition .btn-ligne-clair{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.g-edition .btn-ligne-clair:hover{background:#fff;color:var(--encre);border-color:#fff}
+.g-edition .nav .btn{color:#fff}
+.g-edition .actions{gap:12px;margin-top:36px}
+.g-edition .lien{font-weight:600;border-bottom:0;background:none;color:var(--encre);padding-bottom:0;text-decoration:underline;text-decoration-color:var(--bleu);text-decoration-thickness:2px;text-underline-offset:.3em}
+.g-edition .lien:hover{background:none;text-decoration-color:var(--encre)}
+.g-edition .sur{display:block;margin-bottom:14px;font:600 .9375rem/1.3 var(--texte);letter-spacing:0;text-transform:none;color:var(--bleu)}
+.g-edition .sur::before{display:none}
+.g-edition .sombre .sur,.g-edition .appel .sur{color:var(--or)}
+.g-edition .chapo{font-size:clamp(1.125rem,1.5vw,1.3125rem);line-height:1.5;color:var(--gris);max-width:46ch}
+.g-edition .prose p,.g-edition .prose ul{color:var(--gris)}
+.g-edition .prose a{color:var(--bleu);text-decoration-thickness:1px}
+.g-edition .prose-grande p:first-child{font-family:var(--titres);font-weight:500;font-size:clamp(1.5rem,2.4vw,2.125rem);line-height:1.25;letter-spacing:-.015em;color:var(--encre)}
+.g-edition .prose-grande p{font-size:1.0625rem;color:var(--gris)}
+.g-edition .coches li{border-top:var(--fil);padding:12px 0}
+.g-edition .coches li:last-child{border-bottom:var(--fil)}
+.g-edition .coches svg{color:var(--bleu);stroke-width:2}
+
+/* Sections : des filets, pas de cartes */
+.g-edition .sec{padding:clamp(56px,7.5vw,104px) 0}
+.g-edition .sec:not(.sombre):not(.clair):not(.appel) + .sec:not(.sombre):not(.clair):not(.appel){padding-top:clamp(16px,2.5vw,36px)}
+.g-edition .sec-serre{padding:clamp(36px,5vw,64px) 0}
+.g-edition .clair{background:var(--fond);border-top:var(--filfort)}
+.g-edition .sombre{background:var(--encre);color:#fff}
+.g-edition .sombre h2,.g-edition .sombre h3{color:#fff}
+.g-edition .sombre .chapo,.g-edition .sombre p{color:rgba(255,255,255,.78)}
+.g-edition .sec-tete{margin-bottom:clamp(32px,4vw,56px)}
+.g-edition .sec-tete .sur{display:none}
+.g-edition .sec-tete h2{font-size:clamp(1.875rem,3.4vw,3rem);max-width:20ch}
+@media (min-width:1000px){
+  .g-edition .sec > .wrap:has(> .sec-tete):not(:has(.abo-grille,.cmp,.metiers,.cartes,.essai-grille)){display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);column-gap:clamp(40px,6vw,96px);align-items:start}
+  .g-edition .sec > .wrap:has(> .sec-tete):not(:has(.abo-grille,.cmp,.metiers,.cartes,.essai-grille)) > .sec-tete{grid-column:1;grid-row:1 / span 6;position:sticky;top:110px;margin:0}
+  .g-edition .sec > .wrap:has(> .sec-tete):not(:has(.abo-grille,.cmp,.metiers,.cartes,.essai-grille)) > :not(.sec-tete){grid-column:2}
+}
+.g-edition .tete-page{padding-top:clamp(56px,8vw,112px);padding-bottom:clamp(16px,3vw,40px)}
+.g-edition .tete-page h1{font-size:clamp(2.5rem,6vw,5rem);max-width:15ch;letter-spacing:-.028em;line-height:.98;margin-bottom:24px}
+
+/* Accueil : le texte, le tarif en trois chiffres, et quatre sites côte à côte */
+.g-edition .hero{display:grid;grid-template-columns:minmax(0,1fr);gap:28px clamp(40px,6vw,96px);align-items:start;min-height:0;color:var(--encre);background:var(--fond);isolation:auto;overflow:visible;padding:clamp(36px,6vw,88px) max(var(--gut),calc((100% - 1320px) / 2 + var(--gut))) clamp(40px,6vw,80px)}
+.g-edition .hero::after{display:none}
+.g-edition .hero-txt{display:contents}
+.g-edition .hero h1{grid-column:1;color:var(--encre);font-size:clamp(2.875rem,6.4vw,5.5rem);line-height:.96;letter-spacing:-.03em;max-width:10ch;margin:0}
+.g-edition .hero-chapo{grid-column:1;margin:0;max-width:38ch;font-size:clamp(1.125rem,1.5vw,1.3125rem);line-height:1.5;color:var(--gris)}
+.g-edition .hero .actions{grid-column:1;margin:0}
+.g-edition .hero-media{position:static;inset:auto;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;z-index:0;animation:none;border:var(--fil);grid-column:1;max-height:78svh;justify-self:start}
+.g-edition .hero-gar{grid-column:1 / -1;display:grid;grid-template-columns:1fr;gap:0;margin:8px 0 0;padding:0;border-top:var(--filfort);max-width:none;color:var(--encre);font-size:1rem}
+.g-edition .hero-gar li{display:grid;gap:4px;padding:18px 0;border-bottom:var(--fil)}
+.g-edition .hero-gar li::before{display:none}
+.g-edition .hero-gar b{font-family:var(--titres);font-weight:500;font-size:clamp(2rem,4.4vw,3.5rem);line-height:1;letter-spacing:-.03em;font-variant-numeric:lining-nums}
+.g-edition .hero-gar span{color:var(--gris);font-size:1rem}
+@media (min-width:900px){
+  .g-edition .hero{grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-rows:auto auto auto auto}
+  .g-edition .hero h1{grid-row:1}
+  .g-edition .hero-chapo{grid-row:2}
+  .g-edition .hero .actions{grid-row:3}
+  .g-edition .hero-media{grid-column:2;grid-row:1 / span 3;justify-self:end;width:min(100%,520px);max-height:none}
+  .g-edition .hero-gar{grid-row:4;grid-template-columns:repeat(3,1fr)}
+  .g-edition .hero-gar li{padding:22px 28px 22px 0;border-bottom:0}
+  .g-edition .hero-gar li + li{padding-left:28px;border-left:var(--fil)}
+}
+
+/* Accueil : présentation, offres, démonstrations, méthode */
+.g-edition .intro-txt .sur{display:none}
+.g-edition .intro-txt h2{font-size:clamp(2rem,3.8vw,3.25rem);max-width:14ch}
+.g-edition .intro-fig::before{display:none}
+.g-edition .intro-img{aspect-ratio:4/5;border:var(--fil)}
+.g-edition .chiffres{border-top:var(--filfort);gap:0}
+.g-edition .chiffres li{border:0;border-left:var(--fil);padding:10px 28px}
+.g-edition .chiffres li:first-child{border-left:0;padding-left:0}
+.g-edition .chiffres b{font-weight:500;color:var(--encre);letter-spacing:-.03em}
+.g-edition .metiers{border-top:1px solid rgba(255,255,255,.28)}
+.g-edition .metiers li{border-bottom:1px solid rgba(255,255,255,.28)}
+.g-edition .metiers a{display:grid;grid-template-columns:minmax(0,1fr) 1.75rem;grid-template-areas:"titre fl" "texte fl" "prix fl";gap:6px 18px;padding:28px 0;align-items:start;min-height:0;transition:background .3s}
+.g-edition .metiers a:hover{background:rgba(255,255,255,.04)}
+.g-edition .metiers .metier-num{display:none}
+.g-edition .metiers h3{grid-area:titre;font-size:clamp(1.625rem,3vw,2.5rem);font-weight:500;letter-spacing:-.02em;line-height:1.05}
+.g-edition .metiers p{grid-area:texte;max-width:52ch;color:rgba(255,255,255,.72)}
+.g-edition .metiers .metier-prix{grid-area:prix;margin:10px 0 0;font:600 1rem/1.3 var(--texte);color:#fff}
+.g-edition .metiers .lien{grid-area:fl;justify-self:end;margin:0;font-size:0;text-decoration:none;color:#fff;align-self:center}
+.g-edition .metiers .lien svg{width:26px;height:26px;stroke-width:1.5}
+@media (min-width:900px){
+  .g-edition .metiers{grid-template-columns:1fr}
+  .g-edition .metiers li{border-left:0}
+  .g-edition .metiers a{grid-template-columns:3.5rem minmax(0,5fr) minmax(0,5fr) minmax(190px,3fr) 2rem;grid-template-areas:"num titre texte prix fl";gap:0 28px;padding:34px 0;align-items:baseline}
+  .g-edition .metiers li:first-child a{padding-left:0}
+  .g-edition .metiers a{padding-left:0;padding-right:0}
+  .g-edition .metiers .metier-prix{margin:0;text-align:right;font-family:var(--titres);font-weight:500;font-size:1.25rem}
+  .g-edition .metiers:has(> :nth-child(4)) a{padding-left:0;padding-right:0}
+}
+.g-edition .essai{border-bottom:0}
+.g-edition .essai-liens{border-top:var(--filfort)}
+.g-edition .essai-liens a{gap:24px;padding:22px 0}
+.g-edition .essai-vue{display:block;flex:none;width:clamp(96px,14vw,168px);aspect-ratio:8/5;overflow:hidden;border:var(--fil);background:#e4e3dc}
+.g-edition .essai-img{width:100%;height:100%;object-fit:cover;object-position:top}
+.g-edition .essai-corps{flex:1;min-width:0}
+.g-edition .essai-liens b{font-weight:500;font-size:clamp(1.25rem,2vw,1.625rem);letter-spacing:-.015em}
+.g-edition .essai-liens small{max-width:48ch}
+.g-edition .essai-act{color:var(--encre);font-weight:600;text-decoration:underline;text-decoration-color:var(--bleu);text-decoration-thickness:2px;text-underline-offset:.3em}
+.g-edition .essai-liens a:hover b{color:var(--bleu)}
+.g-edition .essai-liens li:hover{background:none}
+.g-edition .etapes{gap:clamp(28px,3vw,48px)}
+.g-edition .etapes>li{border-top:var(--filfort);padding-top:22px}
+.g-edition .etapes>li::before{display:none}
+.g-edition .etape-num{font-family:var(--titres);font-style:italic;font-weight:500;font-size:clamp(2.5rem,4vw,3.5rem);letter-spacing:-.02em;color:var(--bleu);margin-bottom:14px}
+.g-edition .etapes h3{font-size:clamp(1.375rem,2vw,1.75rem);font-weight:500;margin-bottom:12px}
+.g-edition .etapes ul li{color:var(--gris);border-bottom:var(--fil);padding:10px 0;font-size:1rem}
+.g-edition .refs{border-color:var(--trait)}
+
+/* Appel au contact : un aplat de bleu, sans photo, sans voile */
+.g-edition .appel{background:var(--bleu);color:#fff;margin:0;border-radius:0}
+.g-edition .appel::after{display:none}
+.g-edition .appel-in{align-items:flex-start;text-align:left;padding-top:clamp(72px,10vw,136px);padding-bottom:clamp(72px,10vw,136px)}
+.g-edition .appel h2{color:#fff;font-size:clamp(2.25rem,5vw,4.25rem);max-width:15ch;line-height:1}
+.g-edition .appel p{color:rgba(255,255,255,.86);max-width:56ch;font-size:1.1875rem}
+.g-edition .appel .actions{justify-content:flex-start}
+.g-edition .appel .btn{background:#fff;border-color:#fff;color:var(--encre)}
+.g-edition .appel .btn:hover{background:var(--encre);border-color:var(--encre);color:#fff}
+.g-edition .appel .btn-ligne-clair{background:transparent;color:#fff;border-color:rgba(255,255,255,.75)}
+.g-edition .appel .btn-ligne-clair:hover{background:#fff;color:var(--encre);border-color:#fff}
+.g-edition .hero :focus-visible{outline-color:var(--encre);box-shadow:0 0 0 3px #fff}
+
+/* Offres : des volets, le prix toujours visible */
+.g-edition .offres .wrap{max-width:1320px}
+.g-edition .offre{border-top:var(--filfort)}
+.g-edition .offre:last-child{border-bottom:var(--filfort)}
+.g-edition .offre summary{list-style:none;display:grid;grid-template-columns:minmax(0,1fr) 1.75rem;grid-template-areas:"tete plus" "prix plus";gap:10px 18px;align-items:start;padding:30px 0;cursor:pointer}
+.g-edition .offre summary::-webkit-details-marker{display:none}
+.g-edition .offre summary::after{content:"";grid-area:plus;width:18px;height:18px;margin-top:.55em;justify-self:end;background:linear-gradient(var(--encre),var(--encre)) center/100% 2px no-repeat,linear-gradient(var(--encre),var(--encre)) center/2px 100% no-repeat;transition:transform .3s}
+.g-edition .offre[open] summary::after{background:linear-gradient(var(--encre),var(--encre)) center/100% 2px no-repeat}
+.g-edition .offre summary:hover .offre-tete h2{color:var(--bleu)}
+.g-edition .offre .metier-num{display:none}
+.g-edition .offre-tete{grid-area:tete;display:block}
+.g-edition .offre-tete h2{font-size:clamp(1.75rem,3.4vw,2.875rem);line-height:1.04;transition:color .25s}
+.g-edition .offre-accroche{display:block;margin-top:10px;color:var(--gris);max-width:56ch}
+.g-edition .offre .metier-prix{grid-area:prix;margin:0;padding:0;border:0;font:600 1rem/1.3 var(--texte);color:var(--bleu);text-align:left}
+.g-edition .offre-corps{display:grid;gap:32px;padding:4px 0 44px}
+.g-edition .offre-corps .metier-fig{margin:0}
+.g-edition .offre-corps .metier-img{aspect-ratio:4/5;border:var(--fil)}
+.g-edition .offre .coches{max-width:none}
+@media (min-width:900px){
+  .g-edition .offre summary{grid-template-columns:3.5rem minmax(0,6fr) minmax(0,3fr) 2rem;grid-template-areas:"num tete prix plus";gap:0 28px;padding:38px 0;align-items:baseline}
+  .g-edition .offre .metier-prix{text-align:right;font-family:var(--titres);font-weight:500;font-size:1.25rem}
+  .g-edition .offre summary::after{align-self:center;margin-top:0}
+  .g-edition .offre-corps{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);padding:4px 2rem 56px calc(3.5rem + 28px);align-items:start}
+}
+
+/* Comparaison et tarifs : composés comme un tarif */
+.g-edition .cmp{border-top:var(--filfort);font-size:1rem}
+.g-edition .cmp th,.g-edition .cmp td{padding:20px 22px 20px 0;border-top:var(--fil)}
+.g-edition .cmp thead th{border-top:0;color:var(--encre);font:600 1rem/1.3 var(--texte);padding-bottom:16px}
+.g-edition .cmp thead th:last-child{color:var(--bleu);box-shadow:inset 0 3px 0 var(--bleu);padding-top:14px;padding-left:22px}
+.g-edition .cmp tbody th{font-family:var(--titres);font-weight:500;font-size:1.1875rem;letter-spacing:-.01em;width:25%}
+.g-edition .cmp td:last-child{background:color-mix(in srgb,var(--bleu) 6%,transparent);color:var(--encre);font-weight:500;padding-left:22px}
+@media (max-width:759px){
+  .g-edition .cmp tr{border:0;border-top:var(--filfort);background:transparent;margin-bottom:0;padding:18px 0}
+  .g-edition .cmp tbody th,.g-edition .cmp td{padding:2px 0 8px}
+  .g-edition .cmp td:last-child{background:none;padding-left:0;box-shadow:none;border-left:3px solid var(--bleu);padding-left:12px;margin-top:6px}
+  .g-edition .cmp td::before{font-size:.8125rem;font-weight:600;letter-spacing:0;text-transform:none;color:var(--gris)}
+}
+.g-edition .abo-grille{gap:0;border-top:var(--filfort)}
+.g-edition .abo-carte{background:transparent;border:0;border-radius:0;padding:28px 0 32px;border-bottom:var(--fil);gap:10px}
+.g-edition .abo-carte h3{font-size:1.5rem;font-weight:500}
+.g-edition .abo-prix{align-items:baseline;color:var(--gris)}
+.g-edition .abo-prix b{font-family:var(--titres);font-weight:500;font-size:clamp(2.75rem,4.4vw,3.75rem);letter-spacing:-.035em;color:var(--encre);font-variant-numeric:lining-nums}
+.g-edition .abo-desc{color:var(--gris);font-size:1rem;max-width:34ch}
+.g-edition .abo-carte .coches li{padding:9px 0;font-size:.9688rem}
+.g-edition .abo-reco{border:0;background:transparent;position:relative}
+.g-edition .abo-reco::before{content:"Ma recommandation";position:absolute;top:-1px;left:0;transform:translateY(-100%);font:600 .875rem/1 var(--texte);color:var(--bleu);padding:0 0 10px}
+.g-edition .abo-reco{box-shadow:inset 0 3px 0 var(--bleu)}
+@media (min-width:900px){
+  .g-edition .abo-grille{border-top:0}
+  .g-edition .abo-carte{border-top:var(--filfort);border-bottom:0;padding:24px 28px 8px 0}
+  .g-edition .abo-carte + .abo-carte{padding-left:28px;border-left:var(--fil)}
+  .g-edition .abo-reco{box-shadow:inset 0 3px 0 var(--bleu);border-top-color:transparent}
+}
+.g-edition .abo-note{max-width:64ch;color:var(--gris);font-size:.9375rem;margin-top:28px}
+
+/* Questions : un filet, une question, une réponse */
+.g-edition .faq{gap:0;max-width:none}
+.g-edition .faq details{border:0;border-top:var(--fil);background:transparent;border-radius:0}
+.g-edition .faq details:last-child{border-bottom:var(--fil)}
+.g-edition .faq summary{padding:22px 0;font-family:var(--titres);font-weight:500;font-size:clamp(1.1875rem,1.8vw,1.4375rem);letter-spacing:-.012em;line-height:1.25;align-items:baseline}
+.g-edition .faq summary:hover{color:var(--bleu)}
+.g-edition .faq summary::after{content:"+";font:400 1.75rem/1 var(--texte);color:var(--bleu)}
+.g-edition .faq details[open] summary::after{content:"\2212"}
+.g-edition .faq p{padding:0 0 24px;max-width:60ch;color:var(--gris)}
+
+/* Pages par métier et feuille de diagnostic */
+.g-edition .p-metier .metier-grille,.g-edition.p-metier .metier-grille{align-items:start}
+.g-edition .metier{padding:clamp(40px,6vw,88px) 0;border-top:0}
+.g-edition .metier-fig{margin:0}
+.g-edition .metier-img{aspect-ratio:4/5;border:var(--fil)}
+.g-edition .metier-txt h2{font-size:clamp(1.875rem,3.4vw,3rem)}
+.g-edition .metier-prix{font:600 1rem/1.3 var(--texte);color:var(--bleu)}
+.g-edition .tete-page .metier-prix{font-family:var(--titres);font-weight:500;font-size:clamp(1.5rem,2.4vw,2rem);color:var(--bleu);margin:0 0 6px;padding:0;border:0}
+.g-edition .metier-txt .metier-prix{border:0;padding:0;margin:0 0 20px}
+@media (min-width:900px){.g-edition .metier-grille{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(48px,7vw,112px)}}
+.feuille{margin:0}
+.feuille-page{background:#fff;border:1px solid #b9b9b0;padding:clamp(22px,3.4vw,40px)}
+.feuille-titre{font:500 clamp(1.375rem,2.2vw,1.75rem)/1.15 var(--titres);letter-spacing:-.015em}
+.feuille-sous{margin-top:6px;color:var(--gris);font-size:.9375rem}
+.feuille-tab{width:100%;border-collapse:collapse;margin-top:22px;font-size:.9375rem}
+.feuille-tab th,.feuille-tab td{text-align:left;vertical-align:top;padding:9px 12px 9px 0;border-top:1px solid var(--trait)}
+.feuille-tab th{font-weight:600;width:30%}
+.feuille-etat{white-space:nowrap;font-weight:600}
+.e-ok .feuille-etat{color:var(--gris);font-weight:500}
+.e-afaire .feuille-etat{color:var(--bleu)}
+.e-manque .feuille-etat{color:var(--encre);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.25em}
+.feuille-tab td:last-child{color:var(--gris)}
+.feuille-actions{margin-top:24px;font:600 .9375rem/1.3 var(--texte);color:var(--bleu)}
+.feuille ol{margin:10px 0 0;padding-left:1.4em;list-style:decimal}
+.feuille ol li{padding:5px 0 5px 4px}
+.feuille figcaption{margin-top:14px;color:var(--gris);font-size:.875rem;max-width:56ch}
+@media (max-width:520px){.feuille-tab th{width:auto}.feuille-tab tr{display:grid;grid-template-columns:1fr auto;column-gap:12px}.feuille-tab td:last-child{grid-column:1 / -1;padding-top:0;border-top:0}}
+.p-metier .metier-grille:not(:has(.metier-fig,.feuille)){grid-template-columns:1fr}
+
+/* Réalisations, fiches */
+.g-edition .carte-img{background:#e4e3dc;border:var(--fil)}
+.g-edition .carte a:hover .carte-photo{transform:scale(1.02)}
+.g-edition .carte-nom{font-weight:500;font-size:1.5rem;letter-spacing:-.015em}
+.g-edition .carte a:hover .carte-nom{text-decoration-color:var(--bleu);text-decoration-thickness:2px}
+.g-edition .etiq{background:var(--encre);color:#fff;font-weight:600}
+.g-edition .illus{background:#fff;color:var(--encre);border-radius:0;font-weight:600}
+.g-edition .real-fig,.g-edition .galerie li{background:#e4e3dc}
+.g-edition .real-titre h1{font-size:clamp(2.5rem,5.4vw,4.5rem);line-height:.98;letter-spacing:-.028em}
+.g-edition .fiche{border-top:var(--filfort)}
+.g-edition .fiche dt{font-weight:600;color:var(--bleu)}
+.g-edition .filtres a{border-radius:0;border:1px solid var(--encre);background:transparent;color:var(--encre);font-weight:600}
+.g-edition .filtres a:hover,.g-edition .filtres a[aria-current="page"]{background:var(--encre);border-color:var(--encre);color:#fff}
+.g-edition .suite a{font-weight:500}
+
+/* À propos, engagements */
+.g-edition .portrait{background:#e4e3dc;border:var(--fil)}
+.g-edition .portrait-vide{border-top:0;font-weight:500;color:var(--bleu);background:#e4e3dc}
+.g-edition .equipe b{font-weight:600}
+.g-edition .eng-bloc{border-top:var(--filfort)}
+.g-edition .eng-num{font:500 1.125rem/1 var(--titres);font-style:italic;color:var(--bleu)}
+.g-edition .eng-bloc h2{font-weight:500}
+.g-edition .eng-index a{border-bottom:var(--fil);font-weight:500}
+.g-edition .eng-index a:hover{color:var(--bleu)}
+
+/* Contact : un formulaire de papier */
+.g-edition .saisie{border-radius:0;border:1px solid var(--encre);background:#fff;min-height:54px}
+.g-edition .saisie:focus{outline:3px solid var(--bleu);outline-offset:0;border-color:var(--encre);box-shadow:none}
+.g-edition .champ label{font-weight:600}
+.g-edition .demande-ok{background:#fff;border:var(--fil);border-top:3px solid var(--bleu)}
+.g-edition .coord{background:transparent;color:var(--encre);padding:0;border-top:var(--filfort)}
+.g-edition .coord h2{font-size:1.75rem;padding-top:22px}
+.g-edition .coord li{border-top:var(--fil)}
+.g-edition .coord small{color:var(--bleu);font-weight:600}
+.g-edition .coord a{color:var(--encre);text-decoration-color:var(--bleu);text-decoration-thickness:2px}
+
+/* Pied de page : un bloc d'encre, sans angle arrondi */
+.g-edition .pied{background:var(--encre);margin:0;border-radius:0;padding:clamp(64px,8vw,104px) 0 36px}
+.g-edition .pied-marque{font-family:var(--titres);font-weight:600;letter-spacing:-.025em;font-size:2rem}
+.g-edition .pied h2{font:500 1.125rem/1.2 var(--titres);font-style:italic;color:rgba(255,255,255,.62);margin-bottom:14px;letter-spacing:0;text-transform:none}
+.g-edition .pied a:hover{text-decoration-color:var(--or)}
+
+/* Mouvement : plus discret */
+.g-edition .tete.defile .tete-in{height:64px}
+.anime .g-edition .rev,.g-edition.anime .rev,.anime.g-edition .rev{transform:translateY(14px);transition-duration:.7s}
+.anime .g-edition .rev.vu{transform:none}
+
+/* Prix composés (montant, précision) */
+.g-edition .prix-v::after{content:none}
+.g-edition .metier-prix .prix-v{display:block;font-family:var(--titres);font-weight:500;font-size:1.75rem;letter-spacing:-.02em;line-height:1.05;font-variant-numeric:lining-nums}
+.g-edition .metier-prix .prix-l{display:block;margin-top:5px;font:400 .9375rem/1.35 var(--texte)}
+.g-edition .metiers .metier-prix .prix-l{color:rgba(255,255,255,.7)}
+.g-edition .offre .metier-prix .prix-l{color:var(--gris)}
+@media (min-width:900px){.g-edition .metiers .metier-prix,.g-edition .offre .metier-prix{font-size:inherit}.g-edition .metiers .metier-prix .prix-v,.g-edition .offre .metier-prix .prix-v{font-size:1.875rem}}
+.g-edition .hero .btn-ligne-clair{background:transparent;color:var(--encre);border-color:var(--encre)}
+.g-edition .hero .btn-ligne-clair:hover{background:var(--encre);color:#fff;border-color:var(--encre)}
+
+.g-edition .offre-corps .metier-fig{max-width:360px}
+
+.g-edition .sec-tete .chapo{margin-top:20px}
+.g-edition .coches svg{display:none}
+.g-edition .coches li{display:block;padding:11px 0}
+.g-edition .tete-page .chapo{margin-top:22px}
+
+.g-edition .hero-media{order:5}
+.g-edition .hero-gar{order:6}
+@media (min-width:900px){.g-edition .hero-media,.g-edition .hero-gar{order:0}}
+
+.g-edition p,.g-edition li,.g-edition dd{text-wrap:pretty}
+
+/* Révision : accueil sans collage, offres sans numéros, bande des quatre sites */
+.g-edition .hero .btn-ligne-clair{border:0;background:none;min-height:0;padding:0 0 4px;text-decoration:underline;text-decoration-color:var(--bleu);text-decoration-thickness:2px;text-underline-offset:.3em;color:var(--encre)}
+.g-edition .hero .btn-ligne-clair:hover{background:none;color:var(--bleu)}
+.g-edition .essai-grille{grid-template-columns:1fr;gap:40px}
+.g-edition .essai-txt .prose{max-width:60ch}
+.g-edition .essai-liens{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 20px;border-top:0}
+.g-edition .essai-liens li{border:0}
+.g-edition .essai-liens a{display:flex;flex-direction:column;align-items:stretch;gap:14px;padding:0}
+.g-edition .essai-vue{width:100%;aspect-ratio:4/5}
+.g-edition .essai-img{object-position:top}
+.g-edition .essai-corps{display:block;flex:none}
+.g-edition .essai-liens b{font-size:1.375rem}
+.g-edition .essai-act{align-self:flex-start}
+@media (min-width:900px){
+  .g-edition .metiers a{grid-template-columns:minmax(0,5fr) minmax(0,5fr) minmax(200px,3fr) 2rem;grid-template-areas:"titre texte prix fl";gap:0 32px;padding:36px 0}
+  .g-edition .metiers .metier-prix{margin:0}
+  .g-edition .offre summary{grid-template-columns:minmax(0,6fr) minmax(0,3fr) 2rem;grid-template-areas:"tete prix plus";gap:0 32px;padding:38px 0;align-items:baseline}
+  .g-edition .offre-corps{padding:4px 2rem 56px 0;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .g-edition .hero:not(:has(.hero-media)){grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+  .g-edition .hero:not(:has(.hero-media)) .hero-gar{grid-column:2;grid-row:1 / span 3;grid-template-columns:1fr;align-self:center;margin:0}
+  .g-edition .hero:not(:has(.hero-media)) .hero-gar li{padding:22px 0;border-left:0;border-bottom:var(--fil)}
+  .g-edition .hero:not(:has(.hero-media)) .hero-gar li + li{padding-left:0}
+  .g-edition .hero:not(:has(.hero-media)) .hero-gar b{font-size:clamp(3rem,5.2vw,4.75rem)}
+}
+@media (min-width:1000px){.g-edition .essai-liens{grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}}
+
+.g-edition .essai-txt .sur{display:none}
+.g-edition .essai-txt h2{font-size:clamp(1.875rem,3.4vw,3rem);max-width:20ch}
+@media (min-width:900px){
+  .g-edition .appel-in{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);column-gap:clamp(40px,6vw,96px);row-gap:0;align-items:end}
+  .g-edition .appel h2{grid-column:1;grid-row:1 / span 2}
+  .g-edition .appel p{grid-column:2;grid-row:1;margin:0}
+  .g-edition .appel .actions{grid-column:2;grid-row:2;margin-top:28px}
+}
+.g-edition .essai-liens li{min-width:0}
+.g-edition .essai-act{white-space:normal;flex-wrap:wrap;font-size:.9375rem;line-height:1.3}
+@media (max-width:759px){.g-edition .cmp tbody th{width:auto}}
+.g-edition .essai-act{display:block}
+.g-edition .essai-act svg{display:inline-block;vertical-align:-4px;margin-left:6px}

@@ -569,7 +569,7 @@ function panneaux() {
       corps: () => [
         groupe('Métiers', 'Space planning, maîtrise d’œuvre…', [
           editeurListe('metiers', { titre: 'nom', sansTitre: 'Nouveau métier', photo: 'photo', vide: 'Aucun métier.', ajouter: 'Ajouter un métier', nouveau: { id: '', nom: '', accroche: '', prix: '', texte: '', points: [], photo: '' }, apres: () => assurerIds(E.C),
-            champs: [{ k: 'nom', l: 'Nom' }, { k: 'accroche', l: 'Accroche' }, { k: 'prix', l: 'Prix', ex: 'facultatif', ph: 'Ex. : À partir de 590 €' }, { k: 'texte', l: 'Texte', t: 'zone', lignes: 5 }, { k: 'points', l: 'Points clés', t: 'lignes' }, { k: 'photo', l: 'Photo', t: 'photo' }] }),
+            champs: [{ k: 'nom', l: 'Nom' }, { k: 'accroche', l: 'Accroche' }, { k: 'prix', l: 'Prix', ex: 'facultatif : « montant | précision » se compose sur deux lignes', ph: 'Ex. : 590 € | une fois, sans abonnement' }, { k: 'texte', l: 'Texte', t: 'zone', lignes: 5 }, { k: 'points', l: 'Points clés', t: 'lignes' }, { k: 'photo', l: 'Photo', t: 'photo' }] }),
         ], '/expertises'),
         groupe('Méthode', 'Les étapes d’un projet', [
           editeurListe('etapes', { titre: 'titre', sansTitre: 'Nouvelle étape', vide: 'Aucune étape.', ajouter: 'Ajouter une étape', nouveau: { titre: '', points: [] }, champs: [{ k: 'titre', l: 'Titre' }, { k: 'points', l: 'Détails', t: 'lignes' }] }),

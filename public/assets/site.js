@@ -20,6 +20,12 @@
     });
   })();
 
+  /* Volets des offres : l'adresse « #identifiant » ouvre le bon volet */
+  (function () {
+    var ouvrir = function () { var h = decodeURIComponent((location.hash || '').slice(1)); var d = h && document.getElementById(h); if (d && d.tagName === 'DETAILS') d.open = true; };
+    ouvrir(); window.addEventListener('hashchange', ouvrir);
+  })();
+
   /* Photos manquantes : on les cache */
   $$('img').forEach(function (im) { im.addEventListener('error', function () { im.style.visibility = 'hidden'; }); });
 

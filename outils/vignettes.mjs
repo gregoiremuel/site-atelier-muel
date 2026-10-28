@@ -92,6 +92,7 @@ try {
     await page.evaluate(() => { const m = document.querySelector('.maquette'); if (m) m.remove(); document.querySelectorAll('.bar').forEach((e) => e.remove()); });
     await page.screenshot({ path: join(tmp, 'tuile-' + id + '.png') });
     tuiles.push(join(tmp, 'tuile-' + id + '.png'));
+    convertir(join(tmp, 'tuile-' + id + '.png'), '-strip', '-interlace', 'JPEG', '-quality', '80', join(sortie, 'tuile-' + id + '.jpg')); console.log('public/assets/photos/tuile-' + id + '.jpg');
     /* offres : une partie plus bas dans la page */
     const cible = { 'plombier-exemple': ['produits', 'offre-vitrine'], 'fleuriste-exemple': ['offres', 'offre-catalogue'] }[id];
     if (cible) {
@@ -106,7 +107,7 @@ try {
     await ctx.close();
   }
   /* Accueil : les quatre démonstrations côte à côte, pour montrer que deux sites ne se ressemblent pas */
-  convertir(...tuiles, '-resize', '594x742!', '-bordercolor', '#f2f4f3', '-border', '3', '(', '-clone', '0,1', '+append', ')', '(', '-clone', '2,3', '+append', ')', '-delete', '0-3', '-append', '-resize', '1200x1500!', '-strip', '-interlace', 'JPEG', '-quality', '80', join(sortie, 'accueil.jpg'));
+  convertir(...tuiles, '-resize', '594x742!', '-bordercolor', '#f6f6f2', '-border', '3', '(', '-clone', '0,1', '+append', ')', '(', '-clone', '2,3', '+append', ')', '-delete', '0-3', '-append', '-resize', '1200x1500!', '-strip', '-interlace', 'JPEG', '-quality', '80', join(sortie, 'accueil.jpg'));
   console.log('public/assets/photos/accueil.jpg');
   /* « La main dessus » : la page de modification d'une démonstration, sur un téléphone */
   { const { ctx, page } = await mobile(pathToFileURL(join(racine, 'public', 'demos', 'restaurant-exemple.html')).href, 'intro', 844);

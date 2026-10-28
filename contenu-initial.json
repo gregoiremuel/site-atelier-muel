@@ -17,38 +17,39 @@
     "description_google": "Grégoire Muel crée et refait les sites des commerces, des artisans et des entreprises, et tient leur fiche Google : maquette gratuite en 48 h, à Paris 16e et à distance."
   },
   "theme": {
-    "fond": "#f2f4f3",
-    "encre": "#12181a",
-    "gris": "#4f5b5a",
-    "trait": "#d5dbd9",
-    "marine": "#12181a",
-    "or": "#ff5a36",
-    "gabarit": "studio"
+    "fond": "#f6f6f2",
+    "encre": "#101216",
+    "gris": "#4b5058",
+    "trait": "#d8d8d0",
+    "marine": "#1f48b8",
+    "or": "#b3c6ff",
+    "gabarit": "edition"
   },
   "annonce": {
     "afficher": false,
     "texte": ""
   },
   "accueil": {
-    "photo": "/assets/photos/accueil.jpg",
+    "photo": "",
     "video": "",
     "fond_video": false,
     "sur_titre": "",
     "titre": "Votre site, et je m’en occupe.",
     "texte": "Commerces, artisans, entreprises : je crée votre site, je le mets à jour quand vous me le demandez, et vous recevez les demandes de vos clients. Si vous préférez le faire vous-même, une page privée vous le permet depuis votre téléphone.",
     "reperes": [
-      "Je m’en occupe pour vous",
-      "590 € une fois, sans abonnement",
-      "Maquette gratuite en 48 h"
+      "590 € | une fois, sans abonnement obligatoire",
+      "48 h | pour votre maquette, gratuite",
+      "0 € | d’abonnement obligatoire"
     ],
     "intro_titre": "Je m’en occupe pour vous",
     "intro_texte": "Beaucoup de sites vieillissent parce que personne n’a le temps de les mettre à jour. Avec moi, vous avez le choix : vous m’envoyez vos changements (un horaire, un prix, une photo) et je les fais, c’est compris dans l’abonnement Sérénité ou Croissance, sur devis sinon. Ou vous les faites vous-même depuis une page privée, sur votre téléphone.\n\nLe site se paie une fois : 590 € pour un site vitrine, sans abonnement obligatoire.\n\nJe m’appelle Grégoire Muel et je travaille depuis Auteuil. Je prépare une maquette à votre nom, avec vos vraies informations ; vous décidez ensuite.",
     "photo_intro": "/assets/photos/intro.jpg",
-    "essai_titre": "Modifiez un site d’exemple",
+    "essai_titre": "Quatre sites, quatre identités",
     "essai_texte": "Ouvrez un site d’exemple, touchez « Essayer la page de modification », changez un horaire, un prix ou une photo, et regardez le site se mettre à jour.\n\nTout reste dans votre navigateur : rien n’est publié. Ces sites sont des démonstrations : les entreprises n’existent pas.",
     "appel_titre": "Une maquette de votre site, gratuite, en 48 h",
     "appel_texte": "Dites-moi qui vous êtes et ce que vous faites. Je vous prépare une maquette à votre nom ; si elle ne vous plaît pas, vous ne me devez rien. Vous avez déjà un site, ou seulement une fiche Google ? Je regarde votre fiche gratuitement et je vous dis en une page ce qui manque pour qu’on vous trouve.",
-    "photo_appel": ""
+    "photo_appel": "",
+    "cartes": false
   },
   "chiffres": [
     {
@@ -73,7 +74,7 @@
       "id": "site-vitrine",
       "nom": "Site vitrine",
       "accroche": "Pour un commerce ou un artisan : ce que vous faites, vos horaires, vos tarifs, et un bouton pour vous appeler.",
-      "prix": "590 € une fois, sans abonnement obligatoire",
+      "prix": "590 € | une fois, sans abonnement obligatoire",
       "texte": "Le site que vos clients consultent avant de passer vous voir. Il se lit d’abord sur téléphone : horaires du jour, itinéraire et appel en un geste.\n\nVous le tenez à jour vous-même, depuis votre téléphone, ou vous me confiez les changements (compris dans l’abonnement Sérénité, sur devis sinon).",
       "points": [
         "Maquette gratuite à votre nom en 48 h",
@@ -88,7 +89,7 @@
       "id": "boutique-catalogue",
       "nom": "Boutique et catalogue",
       "accroche": "Pour présenter vos pièces ou vos produits : collections, fiches détaillées, panier et demandes de commande.",
-      "prix": "À partir de 1 290 € une fois, abonnement facultatif",
+      "prix": "dès 1 290 € | une fois, abonnement facultatif",
       "texte": "Un catalogue à votre image, rangé par collections et par types, avec une fiche pour chaque pièce : photos, prix, matières, options.\n\nVos clients composent un panier et vous envoient une demande de commande ; vous confirmez avec eux. Pas de commission sur vos ventes.",
       "points": [
         "Collections, types et fiches de pièces",
@@ -103,7 +104,7 @@
       "id": "site-entreprise",
       "nom": "Site d’entreprise ou refonte",
       "accroche": "Pour une entreprise de services ou du bâtiment : vos métiers, vos réalisations, votre méthode, et des demandes de projet qualifiées.",
-      "prix": "À partir de 1 900 € une fois, abonnement facultatif",
+      "prix": "dès 1 900 € | une fois, abonnement facultatif",
       "texte": "Un site qui inspire confiance à un client qui ne vous connaît pas encore : vos expertises, des réalisations classées par secteur, votre façon de travailler, vos engagements.\n\nSi vous avez déjà un site, je reprends ce qui est bon et je refais le reste.",
       "points": [
         "Pages métiers, réalisations et méthode",
@@ -118,7 +119,7 @@
       "id": "visibilite-google",
       "nom": "Visibilité Google",
       "accroche": "Pour être trouvé sur Google Maps, avec ou sans site : votre fiche Google tenue à jour chaque mois.",
-      "prix": "39 € par mois, sans engagement de durée",
+      "prix": "39 € | par mois, sans engagement de durée",
       "texte": "Quand quelqu’un cherche « plombier près de moi » ou « fleuriste Paris 16 », la première chose qu’il voit est une fiche Google. Je la tiens à jour chaque mois : horaires, photos, un message publié, réponses aux avis préparées pour que vous les validiez.\n\nJe ne promets pas une place dans Google ni dans les réponses des assistants IA : personne ne peut la garantir. Je promets un travail fait chaque mois, et un rapport d’une page qui le montre.",
       "points": [
         "Mini-diagnostic gratuit de votre fiche, avant de décider",
@@ -212,7 +213,8 @@
       "visible": true,
       "lien": "/demos/atelier-exemple",
       "lien_texte": "Essayer la démonstration",
-      "etiquette": "Démonstration"
+      "etiquette": "Démonstration",
+      "apercu": "/assets/photos/tuile-atelier-exemple.jpg"
     },
     {
       "id": "fleuriste-exemple",
@@ -239,7 +241,8 @@
       "visible": true,
       "lien": "/demos/fleuriste-exemple",
       "lien_texte": "Essayer la démonstration",
-      "etiquette": "Démonstration"
+      "etiquette": "Démonstration",
+      "apercu": "/assets/photos/tuile-fleuriste-exemple.jpg"
     },
     {
       "id": "plombier-exemple",
@@ -266,7 +269,8 @@
       "visible": true,
       "lien": "/demos/plombier-exemple",
       "lien_texte": "Essayer la démonstration",
-      "etiquette": "Démonstration"
+      "etiquette": "Démonstration",
+      "apercu": "/assets/photos/tuile-plombier-exemple.jpg"
     },
     {
       "id": "restaurant-exemple",
@@ -293,7 +297,8 @@
       "visible": true,
       "lien": "/demos/restaurant-exemple",
       "lien_texte": "Essayer la démonstration",
-      "etiquette": "Démonstration"
+      "etiquette": "Démonstration",
+      "apercu": "/assets/photos/tuile-restaurant-exemple.jpg"
     },
     {
       "id": "operia",
@@ -327,7 +332,7 @@
   "presentation": {
     "titre": "À propos",
     "texte": "Je suis Grégoire Muel, entrepreneur individuel installé à Auteuil, dans le 16e arrondissement de Paris. Je conçois, crée, refais et entretiens les sites des commerces, des artisans et des entreprises.\n\n## Ma façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, du premier échange à la mise en ligne, puis pour l’entretien.\n\nArtisan joaillier de formation, j’ai gardé l’habitude du travail précis et des finitions soignées.",
-    "photo": "/assets/photos/intro.jpg"
+    "photo": ""
   },
   "garanties": {
     "titre": "En résumé",
@@ -350,7 +355,7 @@
   ],
   "references": [],
   "affichage": {
-    "chiffres": true,
+    "chiffres": false,
     "equipe": true,
     "references": false
   },
@@ -797,7 +802,81 @@
         }
       ],
       "liste": false,
-      "visible": true
+      "visible": true,
+      "exemple": {
+        "titre": "Mini-diagnostic de votre fiche Google",
+        "commerce": "Le Pétale Sauvage, fleuriste imaginaire",
+        "date": "29 octobre 2026",
+        "lignes": [
+          {
+            "point": "Nom",
+            "etat": "ok",
+            "note": "Le nom réel du commerce, sans mot ajouté"
+          },
+          {
+            "point": "Catégories",
+            "etat": "afaire",
+            "note": "Une seule catégorie : en ajouter deux ou trois"
+          },
+          {
+            "point": "Adresse et zone",
+            "etat": "ok",
+            "note": "Exactes"
+          },
+          {
+            "point": "Téléphone",
+            "etat": "ok",
+            "note": "Le bon numéro"
+          },
+          {
+            "point": "Horaires",
+            "etat": "afaire",
+            "note": "Jours fériés et congés absents"
+          },
+          {
+            "point": "Site",
+            "etat": "manque",
+            "note": "Aucun lien sur la fiche"
+          },
+          {
+            "point": "Description",
+            "etat": "manque",
+            "note": "Champ vide"
+          },
+          {
+            "point": "Photos",
+            "etat": "afaire",
+            "note": "Trois photos, la dernière date de plus de deux ans"
+          },
+          {
+            "point": "Produits",
+            "etat": "manque",
+            "note": "Aucun produit listé"
+          },
+          {
+            "point": "Messages",
+            "etat": "manque",
+            "note": "Aucun message publié depuis un an"
+          },
+          {
+            "point": "Avis",
+            "etat": "afaire",
+            "note": "Quatre avis sur trente et un sans réponse"
+          },
+          {
+            "point": "Cohérence",
+            "etat": "ok",
+            "note": "Mêmes horaires et même numéro partout"
+          }
+        ],
+        "actions": [
+          "Ajouter les jours fériés et les congés",
+          "Répondre aux quatre avis restés sans réponse",
+          "Ajouter cinq photos : la devanture, le comptoir, trois bouquets"
+        ],
+        "legende": "Exemple de page remise au commerçant. Commerce imaginaire, sans rapport avec un établissement réel."
+      },
+      "sur": "Offre"
     }
   ]
 }

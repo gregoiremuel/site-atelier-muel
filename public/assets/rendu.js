@@ -4,7 +4,9 @@
 */
 import { cssPolices } from './polices.js';
 
-export const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+/* Typographie française : espace insécable avant « : ; ! ? » et après « «», entre un nombre et son unité, dans les milliers (« 1 290 € ») */
+const typo = (t) => t.replace(/\s+([:;!?»])/g, '\u00a0$1').replace(/«\s+/g, '«\u00a0').replace(/(\d)\s+(€|%|h|min|km|m²)(?![\p{L}\d])/gu, '$1\u00a0$2').replace(/(\d)\s(\d{3})(?!\d)/g, '$1\u00a0$2');
+export const esc = (s) => typo(String(s == null ? '' : s)).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 export const slug = (s) => String(s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
 const hex = (c, d) => (/^#[0-9a-f]{6}$/i.test(String(c || '')) ? c : d);
 const num = (i) => String(i + 1).padStart(2, '0');
@@ -129,6 +131,8 @@ const ico = {
 };
 
 export const favicon = (C) => src((C.agence || {}).logo, 64) || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#262a59"/></svg>');
+/* Prix : « 590 € | une fois, sans abonnement » se compose en deux lignes (montant, précision) ; sans barre verticale, le texte reste tel quel */
+const prixHtml = (p) => { const [v, ...r] = String(p == null ? '' : p).split('|'); return r.length ? `<span class="prix-v">${esc(v.trim())}</span><span class="prix-l">${esc(r.join('|').trim())}</span>` : esc(p); };
 const telHref = (t) => 'tel:' + String(t || '').replace(/[^\d+]/g, '').replace(/^0/, '+33');
 
 /* Barre d'appel au contact, réutilisée en bas de plusieurs pages */
@@ -152,8 +156,8 @@ function appel(C) {
 function document_(C, o, page) {
   const G = C.agence || {}, T = C.theme || {}, K = C.contact || {};
   const nom = G.nom || 'Agence';
-  const gabarit = T.gabarit === 'studio' ? 'studio' : 'classique';
-  const theme = `${cssPolices(o.urlPolice || ((f) => '/fonts/' + f), gabarit === 'studio' ? 'studio' : 'agence')}\n:root{--fond:${hex(T.fond, '#f7f5f0')};--encre:${hex(T.encre, '#15172e')};--gris:${hex(T.gris, '#585b70')};--trait:${hex(T.trait, '#e2ded4')};--marine:${hex(T.marine, '#262a59')};--or:${hex(T.or, '#f8c151')}}`;
+  const gabarit = T.gabarit === 'edition' ? 'edition' : T.gabarit === 'studio' ? 'studio' : 'classique';
+  const theme = `${cssPolices(o.urlPolice || ((f) => '/fonts/' + f), gabarit === 'classique' ? 'agence' : gabarit)}\n:root{--fond:${hex(T.fond, '#f7f5f0')};--encre:${hex(T.encre, '#15172e')};--gris:${hex(T.gris, '#585b70')};--trait:${hex(T.trait, '#e2ded4')};--marine:${hex(T.marine, '#262a59')};--or:${hex(T.or, '#f8c151')}}`;
   const style = o.css != null ? `<style>\n${o.css}\n${theme}\n</style>` : `<link rel="stylesheet" href="${o.cssHref || '/assets/site.css'}">\n<style>${theme}</style>`;
   const marque = src(G.nom_image, 600) ? `<img src="${esc(src(G.nom_image, 600))}" alt="${esc(nom)}">` : esc(nom);
   const marqueClaire = src(G.nom_image_blanc, 600) ? `<img src="${esc(src(G.nom_image_blanc, 600))}" alt="${esc(nom)}">` : esc(nom);
@@ -187,7 +191,7 @@ ${page.image && src(page.image, 1200) ? `<meta property="og:image" content="${es
 <link rel="icon" href="${esc(favicon(C))}">
 ${style}
 </head>
-<body class="${page.classe || ''}${gabarit === 'studio' ? ' g-studio' : ''}${o.calme ? ' calme' : ''}">
+<body class="${page.classe || ''}${gabarit === 'studio' ? ' g-studio' : gabarit === 'edition' ? ' g-edition' : ''}${o.calme ? ' calme' : ''}">
 <a class="skip" href="#contenu">Aller au contenu</a>
 ${o.maquette ? `<aside class="maquette" aria-label="Information sur ce site">${esc(libelle(C, 'bandeau_maquette') || `Proposition de site pour ${nom}, préparée par Grégoire Muel. Version de travail non publiée : textes et photos à valider.`)}</aside>` : ''}
 ${C.annonce && C.annonce.afficher && C.annonce.texte ? `<aside class="annonce" aria-label="Annonce">${esc(C.annonce.texte)}</aside>` : ''}
@@ -290,6 +294,22 @@ const comparaisonHtml = (C, D) => {
     </div>
   </section>`;
 };
+/* Feuille d'exemple (clé « exemple » d'une page par métier) : le document remis au commerçant, pour un commerce imaginaire */
+const ETATS = { ok: 'En règle', afaire: 'À faire', manque: 'Manque' };
+function feuilleHtml(x) {
+  const E = x.exemple;
+  if (!E || typeof E !== 'object' || !Array.isArray(E.lignes) || !E.lignes.length) return '';
+  const actions = (Array.isArray(E.actions) ? E.actions : []).filter(Boolean);
+  return `<figure class="feuille">
+        <div class="feuille-page">
+          <p class="feuille-titre">${esc(E.titre || 'Mini-diagnostic de votre fiche Google')}</p>
+          <p class="feuille-sous">${esc([E.commerce, E.date].filter(Boolean).join(', '))}</p>
+          <table class="feuille-tab"><caption class="sr">Les points de la fiche, et leur état</caption><tbody>${E.lignes.filter((l) => l && l.point).map((l) => `<tr class="e-${esc(ETATS[l.etat] ? l.etat : 'afaire')}"><th scope="row">${esc(l.point)}</th><td class="feuille-etat">${esc(ETATS[l.etat] || ETATS.afaire)}</td><td>${esc(l.note || '')}</td></tr>`).join('')}</tbody></table>
+          ${actions.length ? `<p class="feuille-actions">À faire en premier</p><ol>${actions.map((a) => `<li>${esc(a)}</li>`).join('')}</ol>` : ''}
+        </div>
+        ${E.legende ? `<figcaption>${esc(E.legende)}</figcaption>` : ''}
+      </figure>`;
+}
 const pagesListeHtml = (C, D) => (D.pages.filter((x) => x.liste !== false).length ? `
   <section class="sec sec-serre" aria-labelledby="t-pages">
     <div class="wrap">
@@ -309,7 +329,7 @@ function accueil(C, D) {
   const video = A.fond_video !== false ? videoSrc(A.video) : '';
   /* Grille de l'accueil : 6 projets (un grand et cinq), 4 (deux par deux) ou 3, pour qu'aucune case ne reste vide */
   const une = D.realisations.filter((x) => x.a_la_une), base = une.length >= 3 ? une : D.realisations;
-  const choix = base.slice(0, base.length >= 6 ? 6 : base.length >= 4 ? 4 : Math.min(3, base.length));
+  const choix = A.cartes === false ? [] : base.slice(0, base.length >= 6 ? 6 : base.length >= 4 ? 4 : Math.min(3, base.length));
   const essais = D.realisations.filter((x) => x.lien);
   return {
     classe: 'p-accueil', image: A.photo, rubrique: '/',
@@ -327,7 +347,7 @@ function accueil(C, D) {
         <a class="btn btn-or" href="/contact">${esc(libelle(C, 'bouton_principal'))}</a>
         ${D.realisations.length ? `<a class="btn btn-ligne-clair" href="/realisations">${esc(libelle(C, 'bouton_realisations'))}</a>` : ''}
       </div>
-      ${garHero(C).length ? `<ul class="hero-gar">${garHero(C).map((g) => `<li>${esc(g)}</li>`).join('')}</ul>` : ''}
+      ${garHero(C).length ? `<ul class="hero-gar">${garHero(C).map((g) => { const [v, ...r] = g.split('|'); return r.length ? `<li><b>${esc(v.trim())}</b><span>${esc(r.join('|').trim())}</span></li>` : `<li>${esc(g)}</li>`; }).join('')}</ul>` : ''}
     </div>
   </section>
   ${A.intro_titre || A.intro_texte ? `
@@ -348,7 +368,7 @@ function accueil(C, D) {
     <div class="wrap">
       <div class="sec-tete">${titreSection(libelle(C, 'exp_sur'), libelle(C, 'exp_titre'), 't-exp')}</div>
       <ol class="metiers">
-        ${D.metiers.map((m, i) => `<li><a href="${/^\/[a-z0-9#-]+$/.test(m.lien || '') ? esc(m.lien) : '/expertises#' + esc(m.id)}"><span class="metier-num">${num(i)}</span><h3>${esc(m.nom)}</h3>${m.accroche ? `<p>${esc(m.accroche)}</p>` : ''}${m.prix ? `<p class="metier-prix">${esc(m.prix)}</p>` : ''}<span class="lien">${esc(libelle(C, 'exp_lien'))} ${ico.fleche}</span></a></li>`).join('\n        ')}
+        ${D.metiers.map((m, i) => `<li><a href="${/^\/[a-z0-9#-]+$/.test(m.lien || '') ? esc(m.lien) : '/expertises#' + esc(m.id)}"><span class="metier-num">${num(i)}</span><h3>${esc(m.nom)}</h3>${m.accroche ? `<p>${esc(m.accroche)}</p>` : ''}${m.prix ? `<p class="metier-prix">${prixHtml(m.prix)}</p>` : ''}<span class="lien">${esc(libelle(C, 'exp_lien'))} ${ico.fleche}</span></a></li>`).join('\n        ')}
       </ol>
     </div>
   </section>` : ''}
@@ -356,7 +376,7 @@ function accueil(C, D) {
   <section class="sec essai" aria-labelledby="t-essai">
     <div class="wrap essai-grille">
       <div class="essai-txt">${titreSection(libelle(C, 'essai_sur'), A.essai_titre, 't-essai')}${A.essai_texte ? `<div class="prose">${texteRiche(A.essai_texte)}</div>` : ''}</div>
-      <ul class="essai-liens">${essais.map((x) => `<li><a href="${esc(x.lien)}"${/^https?:/.test(x.lien) ? ' target="_blank" rel="noopener"' : ''} data-ouvrir><span><b>${esc(x.nom)}</b>${x.accroche ? `<small>${esc(x.accroche)}</small>` : ''}</span><span class="essai-act">${esc(x.lien_texte || 'Ouvrir')} ${ico.fleche}</span></a></li>`).join('')}</ul>
+      <ul class="essai-liens">${essais.map((x) => `<li><a href="${esc(x.lien)}"${/^https?:/.test(x.lien) ? ' target="_blank" rel="noopener"' : ''} data-ouvrir>${x.apercu || x.photos[0] ? `<span class="essai-vue">${img(x.apercu || x.photos[0], 900, 'essai-img', false, '')}</span>` : ''}<span class="essai-corps"><b>${esc(x.nom)}</b>${x.accroche ? `<small>${esc(x.accroche)}</small>` : ''}</span><span class="essai-act">${esc(x.lien_texte || 'Ouvrir')} ${ico.fleche}</span></a></li>`).join('')}</ul>
     </div>
   </section>` : ''}
   ${choix.length ? `
@@ -386,7 +406,22 @@ function accueil(C, D) {
   };
 }
 
+/* Gabarit « édition » : chaque offre est un volet (nom, accroche et prix toujours visibles ; le détail s'ouvre) */
+const offreVolet = (C, m, i, ouvert) => `
+      <details class="offre" id="${esc(m.id)}"${ouvert ? ' open' : ''}>
+        <summary><span class="metier-num">${num(i)}</span><span class="offre-tete"><h2>${esc(m.nom)}</h2>${m.accroche ? `<span class="offre-accroche">${esc(m.accroche)}</span>` : ''}</span>${m.prix ? `<span class="metier-prix">${prixHtml(m.prix)}</span>` : ''}</summary>
+        <div class="offre-corps">
+          ${src(m.photo, 1400) ? `<figure class="metier-fig">${img(m.photo, 1400, 'metier-img', false, '')}</figure>` : ''}
+          <div class="metier-txt">
+            ${m.texte ? `<div class="prose">${texteRiche(m.texte)}</div>` : ''}
+            ${listeCoches(m.points)}
+            ${/^\/[a-z0-9#-]+$/.test(m.lien || '') ? `<p class="actions"><a class="btn btn-ligne" href="${esc(m.lien)}">${esc(libelle(C, 'exp_lien'))} ${ico.fleche}</a></p>` : ''}
+          </div>
+        </div>
+      </details>`;
+
 function pageExpertises(C, D) {
+  const edition = (C.theme || {}).gabarit === 'edition';
   return {
     classe: 'p-expertises', titre: libelle(C, 'nav_expertises'), rubrique: '/expertises', image: (D.metiers[0] || {}).photo,
     description: libelle(C, 'page_exp_description') || `Space planning, maîtrise d'œuvre et contractant général : les métiers de ${(C.agence || {}).nom || 'l’agence'}.`,
@@ -396,7 +431,7 @@ function pageExpertises(C, D) {
     <h1>${esc(libelle(C, 'page_exp_titre'))}</h1>
     <p class="chapo">${esc((C.agence || {}).activite || '')}${(C.agence || {}).zone ? ', ' + esc(C.agence.zone) : ''}.</p>
   </section>
-  ${D.metiers.map((m, i) => `
+  ${edition ? `<section class="sec sec-serre offres" aria-label="${esc(libelle(C, 'page_exp_titre'))}"><div class="wrap">${D.metiers.map((m, i) => offreVolet(C, m, i, false)).join('')}</div></section>` : D.metiers.map((m, i) => `
   <section class="sec metier${i % 2 ? ' inverse' : ''}" id="${esc(m.id)}">
     <div class="wrap metier-grille">
       ${src(m.photo, 1400) ? `<figure class="metier-fig">${img(m.photo, 1400, 'metier-img', i === 0, '')}</figure>` : ''}
@@ -404,7 +439,7 @@ function pageExpertises(C, D) {
         <span class="metier-num">${num(i)}</span>
         <h2>${esc(m.nom)}</h2>
         ${m.accroche ? `<p class="chapo">${esc(m.accroche)}</p>` : ''}
-        ${m.prix ? `<p class="metier-prix">${esc(m.prix)}</p>` : ''}
+        ${m.prix ? `<p class="metier-prix">${prixHtml(m.prix)}</p>` : ''}
         ${m.texte ? `<div class="prose">${texteRiche(m.texte)}</div>` : ''}
         ${listeCoches(m.points)}
         ${/^\/[a-z0-9#-]+$/.test(m.lien || '') ? `<p class="actions"><a class="btn btn-ligne" href="${esc(m.lien)}">${esc(libelle(C, 'exp_lien'))} ${ico.fleche}</a></p>` : ''}
@@ -440,7 +475,7 @@ function pageMetier(C, D, id) {
     jsonld: x.questions.length ? { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: x.questions.map((q) => ({ '@type': 'Question', name: q.q, acceptedAnswer: { '@type': 'Answer', text: q.r } })) } : undefined,
     corps: `
   <section class="tete-page wrap">
-    <p class="sur">${esc(libelle(C, 'pages_sur'))}</p>
+    <p class="sur">${esc(x.sur || libelle(C, 'pages_sur'))}</p>
     <h1>${esc(x.titre || x.nom)}</h1>
     ${x.accroche ? `<p class="chapo">${esc(x.accroche)}</p>` : ''}
     ${x.prix ? `<p class="metier-prix">${esc(x.prix)}</p>` : ''}
@@ -448,7 +483,7 @@ function pageMetier(C, D, id) {
   </section>
   <section class="sec metier">
     <div class="wrap metier-grille">
-      ${src(x.photo, 1400) ? `<figure class="metier-fig">${img(x.photo, 1400, 'metier-img', true, '')}</figure>` : ''}
+      ${src(x.photo, 1400) ? `<figure class="metier-fig">${img(x.photo, 1400, 'metier-img', true, '')}</figure>` : feuilleHtml(x)}
       <div class="metier-txt">
         ${x.texte ? `<div class="prose">${texteRiche(x.texte)}</div>` : ''}
         ${listeCoches(x.points)}

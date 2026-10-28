@@ -30,7 +30,7 @@ const ELEMENTS = {
   references: ['nom', 'logo'],
 };
 /* Clés facultatives (ajoutées au moteur après Opéria : un contenu sans elles reste valide) */
-const FACULTATIVES = { '': ['libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte'], mentions: ['tva', 'nom_commercial'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette'] };
+const FACULTATIVES = { '': ['libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte', 'cartes'], mentions: ['tva', 'nom_commercial'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette', 'apercu'] };
 const INTERDITS = [
   [/\bbienvenue\b/i, 'Bienvenue'], [/\bdécouvr(ez|ir)\b/i, 'Découvrez'], [/n['’]hésitez pas/i, 'N’hésitez pas'], [/au c(œ|oe)ur d/i, 'au cœur de'],
   [/\bvéritable/i, 'véritable'], [/\bincontournable/i, 'incontournable'], [/\bpassion/i, 'passion'], [/savoir-faire unique/i, 'savoir-faire unique'],
@@ -89,7 +89,8 @@ export function verifier(C) {
       if (Array.isArray(AB.formules) && AB.formules.filter((f) => f && f.recommande).length > 1) A('abonnements : plus d’une formule recommandée.');
     }
   }
-  if (C.theme && 'gabarit' in C.theme && !['classique', 'studio'].includes(C.theme.gabarit)) E('theme.gabarit doit valoir "classique" ou "studio".');
+  if (C.theme && 'gabarit' in C.theme && !['classique', 'studio', 'edition'].includes(C.theme.gabarit)) E('theme.gabarit doit valoir "classique", "studio" ou "edition".');
+  if (C.accueil && 'cartes' in C.accueil && typeof C.accueil.cartes !== 'boolean') E('accueil.cartes doit valoir true ou false (false : pas de vignettes de réalisations sur l’accueil).');
   (Array.isArray(C.realisations) ? C.realisations : []).forEach((x, i) => { if (x && x.lien && !/^(\/[^\s<>"]*|https:\/\/[^\s<>"]+)$/.test(String(x.lien).trim())) E(`realisations[${i}].lien doit commencer par / ou https://`); });
   if (casse) return { erreurs, alertes, afaire };
   if (C._schema !== SCHEMA) E(`_schema doit valoir "${SCHEMA}".`);
@@ -128,7 +129,7 @@ export function verifier(C) {
   C.etapes.forEach((e, i) => { if (vide(e.titre)) E(`etapes[${i}].titre est vide.`); listeTextes(e.points, `etapes[${i}].points`); });
   listeTextes(C.lots, 'lots');
   listeTextes(C.accueil.reperes, 'accueil.reperes');
-  (C.accueil.reperes || []).forEach((v, i) => { if (estTexte(v) && v.length > 40) A(`accueil.reperes[${i}] : plus de 40 signes, trop long sous la grande photo.`); });
+  (C.accueil.reperes || []).forEach((v, i) => { if (estTexte(v) && v.length > (v.includes('|') ? 56 : 40)) A(`accueil.reperes[${i}] : plus de ${v.includes('|') ? 56 : 40} signes, trop long sous la grande photo.`); });
   C.chiffres.forEach((c, i) => { if (vide(c.valeur) || vide(c.libelle)) E(`chiffres[${i}] : chiffre ou texte vide.`); });
   if (C.chiffres.length > 4) A('Plus de 4 chiffres : la ligne sera chargée.');
   C.realisations.forEach((x, i) => {
@@ -137,6 +138,7 @@ export function verifier(C) {
     if (!x.secteur) A(`${n} : aucun secteur, elle n’apparaîtra dans aucun filtre.`);
     if (!Array.isArray(x.photos)) E(`${n} : photos doit être une liste.`);
     else { if (!x.photos.length && x.visible !== false) A(`${n} : aucune photo.`); let ill = false; x.photos.forEach((u, j) => { if (photoOk(`${n}.photos[${j}]`, u) === 'essai') ill = true; }); if (ill) essaisReal++; }
+    if (x.apercu) photoOk(`${n}.apercu`, x.apercu);
     listeTextes(x.interventions, `${n}.interventions`);
     ['a_la_une', 'visible'].forEach((k) => { if (typeof x[k] !== 'boolean') E(`${n}.${k} doit valoir true ou false.`); });
     if (x.annee && !/^(19|20)\d\d$/.test(x.annee)) E(`${n}.annee : quatre chiffres (ou vide).`);
@@ -169,16 +171,32 @@ export function verifier(C) {
   PAGES.forEach((x, i) => {
     const n = `pages_metier[${i}] (${(x && x.nom) || '?'})`;
     if (!x || typeof x !== 'object') { E(`pages_metier[${i}] doit être un objet.`); return; }
-    Object.keys(x).filter((k) => !['id', 'nom', 'titre', 'description', 'accroche', 'texte', 'prix', 'points', 'demo', 'demo_texte', 'bouton', 'photo', 'questions', 'visible', 'liste'].includes(k)).forEach((k) => E(`Clé inconnue : ${n}.${k}`));
+    Object.keys(x).filter((k) => !['id', 'nom', 'titre', 'description', 'accroche', 'texte', 'prix', 'points', 'demo', 'demo_texte', 'bouton', 'photo', 'questions', 'visible', 'liste', 'exemple', 'sur'].includes(k)).forEach((k) => E(`Clé inconnue : ${n}.${k}`));
     if (!/^[a-z0-9-]{3,60}$/.test(x.id || '')) E(`${n}.id doit être en minuscules, chiffres et tirets (3 à 60 signes).`);
     else if (ADRESSES_RESERVEES.includes(x.id) || idsPages.has(x.id)) E(`${n}.id « ${x.id} » est déjà pris par une autre adresse du site.`);
     idsPages.add(x.id);
     if (vide(x.nom)) E(`${n}.nom est vide.`);
-    ['titre', 'description', 'accroche', 'texte', 'prix', 'demo_texte', 'bouton'].forEach((k) => { if (k in x && !estTexte(x[k])) E(`${n}.${k} doit être un texte.`); });
+    ['titre', 'description', 'accroche', 'texte', 'prix', 'demo_texte', 'bouton', 'sur'].forEach((k) => { if (k in x && !estTexte(x[k])) E(`${n}.${k} doit être un texte.`); });
     if ('points' in x) listeTextes(x.points, `${n}.points`);
     if (x.demo && !/^(\/[^\s<>"]*|https:\/\/[^\s<>"]+)$/.test(String(x.demo).trim())) E(`${n}.demo doit commencer par / ou https://`);
     ['visible', 'liste'].forEach((k) => { if (k in x && typeof x[k] !== 'boolean') E(`${n}.${k} doit valoir true ou false.`); });
     if (x.photo && photoOk(`${n}.photo`, x.photo) === 'essai') essaisAutres++;
+    if ('exemple' in x) {
+      const X = x.exemple;
+      if (!X || typeof X !== 'object' || Array.isArray(X)) E(`${n}.exemple doit être un objet { titre, commerce, date, lignes, actions, legende }.`);
+      else {
+        Object.keys(X).filter((k) => !['titre', 'commerce', 'date', 'lignes', 'actions', 'legende'].includes(k)).forEach((k) => E(`Clé inconnue : ${n}.exemple.${k}`));
+        ['titre', 'commerce', 'date', 'legende'].forEach((k) => { if (k in X && !estTexte(X[k])) E(`${n}.exemple.${k} doit être un texte.`); });
+        if (!Array.isArray(X.lignes) || !X.lignes.length) E(`${n}.exemple.lignes doit être une liste d’au moins une ligne { point, etat, note }.`);
+        else X.lignes.forEach((l, j) => {
+          if (!l || typeof l !== 'object' || vide(l.point)) { E(`${n}.exemple.lignes[${j}] doit avoir un « point ».`); return; }
+          Object.keys(l).filter((k) => !['point', 'etat', 'note'].includes(k)).forEach((k) => E(`Clé inconnue : ${n}.exemple.lignes[${j}].${k}`));
+          if (!['ok', 'afaire', 'manque'].includes(l.etat)) E(`${n}.exemple.lignes[${j}].etat doit valoir "ok", "afaire" ou "manque".`);
+        });
+        if ('actions' in X) listeTextes(X.actions, `${n}.exemple.actions`);
+        if (!vide(X.commerce) && !/imaginaire|exemple/i.test(String(X.commerce) + String(X.legende || ''))) A(`${n}.exemple : dire clairement que le commerce est imaginaire (commerce ou légende).`);
+      }
+    }
     if (!Array.isArray(x.questions) || !x.questions.length) A(`${n} : aucune question (la page n’aura pas de FAQ).`);
     else x.questions.forEach((q, j) => {
       if (!q || typeof q !== 'object' || vide(q.q) || vide(q.r)) E(`${n}.questions[${j}] doit avoir une question « q » et une réponse « r ».`);
@@ -232,6 +250,7 @@ export function verifier(C) {
     ...C.realisations.flatMap((x, i) => [[`realisations[${i}].accroche`, x.accroche], [`realisations[${i}].texte`, x.texte], [`realisations[${i}].mission`, x.mission], ...(x.interventions || []).map((v, j) => [`realisations[${i}].interventions[${j}]`, v])]),
     ...C.chiffres.map((c, i) => [`chiffres[${i}].libelle`, c.libelle]),
     ...PAGES.flatMap((x, i) => (x && typeof x === 'object' ? [[`pages_metier[${i}].accroche`, x.accroche], [`pages_metier[${i}].texte`, x.texte], [`pages_metier[${i}].prix`, x.prix], ...((Array.isArray(x.points) ? x.points : []).map((v, j) => [`pages_metier[${i}].points[${j}]`, v])), ...((Array.isArray(x.questions) ? x.questions : []).flatMap((q, j) => (q ? [[`pages_metier[${i}].questions[${j}].q`, q.q], [`pages_metier[${i}].questions[${j}].r`, q.r]] : [])))] : [])),
+    ...PAGES.flatMap((x, i) => (x && x.exemple && typeof x.exemple === 'object' ? [...((Array.isArray(x.exemple.lignes) ? x.exemple.lignes : []).flatMap((l, j) => (l ? [[`pages_metier[${i}].exemple.lignes[${j}].note`, l.note]] : []))), ...((Array.isArray(x.exemple.actions) ? x.exemple.actions : []).map((v, j) => [`pages_metier[${i}].exemple.actions[${j}]`, v]))] : [])),
     ...(C.comparaison && typeof C.comparaison === 'object' ? [['comparaison.intro', C.comparaison.intro], ['comparaison.note', C.comparaison.note], ...((Array.isArray(C.comparaison.lignes) ? C.comparaison.lignes : []).flatMap((l, i) => (l ? [[`comparaison.lignes[${i}].a`, l.a], [`comparaison.lignes[${i}].b`, l.b]] : [])))] : []),
     ...(C.abonnements && typeof C.abonnements === 'object' ? [['abonnements.intro', C.abonnements.intro], ['abonnements.note', C.abonnements.note], ...((Array.isArray(C.abonnements.formules) ? C.abonnements.formules : []).flatMap((f, i) => (f ? [[`abonnements.formules[${i}].description`, f.description], ...((Array.isArray(f.points) ? f.points : []).map((v, j) => [`abonnements.formules[${i}].points[${j}]`, v]))] : [])))] : [])].filter(([, v]) => estTexte(v) && v.trim());
   textes.forEach(([c, v]) => {

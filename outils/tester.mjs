@@ -75,6 +75,16 @@ async function tests() {
     verif(verifier(mauvais).erreurs.some((e) => /déjà pris/.test(e)), 'Une page par métier ne peut pas prendre l’adresse d’une autre page');
   }
   if ((C.theme || {}).gabarit === 'studio') { r = await req('/'); const hs = await r.text(); verif(hs.includes('g-studio') && hs.includes('Bricolage Grotesque'), 'Gabarit « studio » : classe et polices du site'); r = await req('/fonts/bricolage-grotesque-latin-700-normal.woff2'); verif(r.status === 200, 'Police du gabarit « studio » servie'); }
+  if ((C.theme || {}).gabarit === 'edition') {
+    r = await req('/'); const he = await r.text();
+    verif(he.includes('g-edition') && he.includes('Besley') && he.includes('class="hero-gar"'), 'Gabarit « édition » : classe, polices et repères chiffrés');
+    r = await req('/fonts/besley-latin-500-normal.woff2'); verif(r.status === 200, 'Police du gabarit « édition » servie');
+    r = await req('/expertises'); const hv = await r.text();
+    verif((hv.match(/<details class="offre"/g) || []).length === C.metiers.length, 'Gabarit « édition » : chaque offre est un volet');
+    const pe = (C.pages_metier || []).find((x) => x.exemple);
+    if (pe) { r = await req('/' + pe.id); verif((await r.text()).includes('class="feuille"'), 'La feuille d’exemple du diagnostic s’affiche'); }
+    verif(he.includes('\u00a0:') || he.includes('\u00a0?') || he.includes('\u00a0€'), 'Typographie française : espaces insécables');
+  }
   r = await req('/robots.txt'); verif((await r.text()).includes('Sitemap:'), 'robots.txt avec plan du site');
   r = await req('/sitemap.xml'); h = await r.text(); verif(h.includes('/realisations/') && !h.includes('?secteur'), 'Plan du site avec les réalisations');
   for (const f of ['/assets/site.css', '/assets/site.js', '/assets/rendu.js', '/assets/polices.js', '/assets/admin.js', '/assets/admin.css', ...TOUS_FICHIERS_POLICES.map((f) => '/fonts/' + f)]) {
@@ -103,7 +113,7 @@ async function tests() {
   m.theme = { fond: '#ff00ff' }; m._schema = 'pirate'; m.lots = ['Peinture', 42, 'Sols'];
   r = await req('/api/contenu', { method: 'PUT', ...corpsJson(m) }); verif((await r.json()).ok, 'Enregistrement');
   h = await (await req('/realisations/' + x0.id)).text();
-  verif(h.includes('1 750 m²') && h.includes('Nouvelle réalisation en ligne'), 'La nouvelle surface et le message apparaissent sur le site');
+  verif(h.includes('1\u00a0750\u00a0m²') && h.includes('Nouvelle réalisation en ligne'), 'La nouvelle surface et le message apparaissent sur le site');
   j = await (await req('/api/contenu')).json();
   verif(j.contenu.theme.fond === base.theme.fond && j.contenu._schema === 'agence v1', 'Les couleurs du site ne peuvent pas être changées depuis la page de modification');
   verif(JSON.stringify(j.contenu.lots) === '["Peinture","Sols"]', 'Les listes de textes sont nettoyées par le serveur');

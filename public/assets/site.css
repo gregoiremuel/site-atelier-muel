@@ -957,3 +957,102 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition .agence-bande img{width:100%;aspect-ratio:21/9;object-fit:cover;object-position:50% 60%;border:var(--fil)}
 .g-edition .agence-bande{padding-top:0}
 .g-edition .agence-bande figure{margin:0}
+
+/* ====== Révision 4 : pages plus courtes (onglets, volets, bandes), portrait petit et haut ====== */
+/* Onglets de la page des offres */
+.g-edition .onglets-barre{background:var(--fond);border-bottom:var(--fil);position:sticky;top:72px;z-index:20}
+.g-edition .onglets-barre .wrap{display:flex;gap:clamp(18px,3vw,36px);overflow-x:auto;scrollbar-width:none}
+.g-edition .onglets-barre .wrap::-webkit-scrollbar{display:none}
+.g-edition .onglet{flex:none;background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;padding:16px 0 13px;font:600 1rem/1.2 var(--texte);color:var(--gris);cursor:pointer;white-space:nowrap}
+.g-edition .onglet:hover{color:var(--encre)}
+.g-edition .onglet[aria-selected="true"]{color:var(--encre);border-bottom-color:var(--bleu)}
+.g-edition .onglet-panneau[hidden]{display:none}
+.g-edition .onglet-panneau > .sec:first-child{padding-top:clamp(28px,4vw,48px)}
+/* Engagements : volets fermés */
+.g-edition .eng-vols{max-width:920px}
+.g-edition .eng-vol summary{grid-template-columns:minmax(0,1fr) 1.75rem;grid-template-areas:"tete plus";padding:24px 0}
+.g-edition .eng-vol .offre-tete h2{font-size:clamp(1.375rem,2.4vw,1.875rem)}
+.g-edition .eng-corps{grid-template-columns:minmax(0,1fr);padding:0 2rem 32px 0}
+@media (min-width:900px){.g-edition .eng-vol summary{grid-template-columns:minmax(0,1fr) 2rem;grid-template-areas:"tete plus";padding:28px 0}.g-edition .eng-corps{grid-template-columns:minmax(0,1fr);padding:0 2rem 36px 0}}
+/* Bandeau d'appel court des pages intérieures */
+.g-edition .appel-court .appel-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding-top:clamp(24px,3.5vw,36px);padding-bottom:clamp(24px,3.5vw,36px)}
+.g-edition .appel-court h2{font-size:clamp(1.375rem,2.6vw,1.875rem);max-width:none;line-height:1.1;margin:0}
+.g-edition .appel-court .actions{margin:0}
+/* Pied de page : crédits repliés */
+.g-edition .credits{flex-basis:100%}
+.g-edition .credits summary{cursor:pointer;font-size:.8125rem;color:rgba(255,255,255,.72);width:max-content}
+.g-edition .credits p{margin-top:8px;font-size:.8125rem;line-height:1.6;color:rgba(255,255,255,.72)}
+/* Accueil : premier écran compact avec le portrait */
+.g-edition .hero{padding-top:clamp(28px,4.5vw,56px);padding-bottom:clamp(24px,3vw,40px)}
+.g-edition .hero h1{font-size:clamp(2.5rem,5.6vw,4.75rem)}
+.g-edition .hero-media{width:min(100%,300px);justify-self:start;aspect-ratio:4/5;max-height:none;grid-column:1;object-position:50% 30%}
+@media (max-width:899px){
+  .g-edition .hero{grid-template-columns:minmax(0,1fr) 112px;gap:18px 18px;align-items:end}
+  .g-edition .hero h1,.g-edition .hero-chapo,.g-edition .hero .actions{grid-column:1 / -1}
+  .g-edition .hero-gar{grid-column:1;grid-template-columns:1fr;margin:0;border-top:0}
+  .g-edition .hero-gar li{padding:10px 0;border-bottom:var(--fil);border-top:0}
+  .g-edition .hero-gar li:first-child{border-top:var(--filfort)}
+  .g-edition .hero-gar b{font-size:clamp(1.75rem,8vw,2.25rem)}
+  .g-edition .hero-media{grid-column:2;width:112px;justify-self:end;align-self:start;order:7}
+  .g-edition .hero-gar{order:6}
+}
+@media (min-width:900px){
+  .g-edition .hero{grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-rows:auto auto auto auto}
+  .g-edition .hero-media{grid-column:2;grid-row:1 / span 4;justify-self:end;width:min(100%,300px);align-self:center}
+  .g-edition .hero-gar{grid-column:1;grid-row:4;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:6px;border-top:var(--filfort)}
+  .g-edition .hero-gar li{padding:18px 24px 18px 0;border-bottom:0}
+  .g-edition .hero-gar li + li{padding-left:24px;border-left:var(--fil)}
+  .g-edition .hero-gar b{font-size:clamp(2.25rem,3.6vw,3.25rem)}
+}
+.g-edition .hero + .sec{padding-top:clamp(32px,4vw,56px)}
+/* Accueil : « Je m'en occupe » plus court, photo plus petite */
+.g-edition .intro-img{height:clamp(190px,24vw,320px)}
+.g-edition .intro-txt h2{font-size:clamp(1.75rem,3.2vw,2.5rem)}
+.g-edition .sec{padding:clamp(40px,5.5vw,76px) 0}
+.g-edition .sec-tete{margin-bottom:clamp(20px,3vw,36px)}
+/* Accueil : les quatre offres en lignes serrées, sans texte sur téléphone */
+@media (max-width:759px){
+  .g-edition .metiers a{padding:16px 0}
+  .g-edition .metiers p:not(.metier-prix){display:none}
+  .g-edition .metiers h3{font-size:1.5rem}
+}
+/* Accueil : démonstrations en une ligne de quatre (bande qui défile sur téléphone) */
+.g-edition .essai-grille{grid-template-columns:minmax(0,1fr);gap:24px}
+.g-edition .essai-txt .prose{max-width:62ch}
+.g-edition .essai-liens{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;margin-right:calc(var(--gut) * -1);padding-right:var(--gut);scrollbar-width:thin}
+.g-edition .essai-liens li{flex:0 0 min(72%,280px);scroll-snap-align:start}
+.g-edition .essai-liens small{display:none}
+.g-edition .essai-vue{aspect-ratio:1/1}
+@media (min-width:760px){.g-edition .essai-liens{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;overflow:visible;margin-right:0;padding-right:0}.g-edition .essai-liens li{flex:none}}
+@media (min-width:1000px){.g-edition .essai-grille{grid-template-columns:minmax(0,1fr)}.g-edition .essai-liens{grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}}
+/* Trois étapes : une ligne chacune */
+.g-edition .etapes{gap:clamp(20px,2.4vw,36px)}
+.g-edition .etapes ul li{border-bottom:0;padding:6px 0;font-size:1rem}
+.g-edition .etape-num{display:none}
+/* Appel de l'accueil : moins haut */
+.g-edition .appel-in{padding-top:clamp(40px,6vw,76px);padding-bottom:clamp(40px,6vw,76px)}
+/* À propos : portrait petit, tout en haut, à côté du texte */
+.g-edition.p-agence .tete-page{padding-bottom:0}
+.g-edition.p-agence .tete-page h1{font-size:clamp(2.25rem,4.4vw,3.5rem);margin-bottom:8px}
+@media (min-width:760px){
+  .g-edition.p-agence .intro-grille{grid-template-columns:minmax(0,1fr) 250px;gap:clamp(32px,5vw,72px);align-items:start}
+}
+.g-edition.p-agence .intro-fig{max-width:250px;justify-self:start;order:-1}
+@media (min-width:760px){.g-edition.p-agence .intro-fig{justify-self:end;order:0}}
+.g-edition.p-agence .intro-img{height:auto;aspect-ratio:4/5;object-position:50% 30%}
+.g-edition .intro-fig figcaption{margin-top:12px;display:grid;gap:2px}
+.g-edition .intro-fig figcaption b{font:500 1.1875rem/1.2 var(--titres)}
+.g-edition .intro-fig figcaption span{color:var(--gris);font-size:.9375rem}
+.g-edition.p-agence .prose-grande p:first-child{font-size:clamp(1.25rem,2vw,1.625rem)}
+.g-edition .agence-bande img{aspect-ratio:16/5;object-position:50% 62%}
+@media (max-width:759px){.g-edition .agence-bande img{aspect-ratio:16/8}}
+/* Mobile : portrait de « À propos » plus petit, pied de page en deux colonnes */
+@media (max-width:759px){
+  .g-edition.p-agence .intro-fig{max-width:150px}
+  .g-edition .pied{padding:36px 0 24px}
+  .g-edition .pied-cols{display:grid;grid-template-columns:1fr 1fr;gap:22px 16px}
+  .g-edition .pied-haut{margin-bottom:18px}
+  .g-edition .pied-marque{font-size:1.5rem}
+}
+@media (min-width:900px){.g-edition .hero{padding-bottom:clamp(8px,1.5vw,20px)}.g-edition .hero + .sec{padding-top:clamp(20px,2.5vw,36px)}}
+@media (min-width:1000px){.g-edition.p-realisations .cartes{grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}}

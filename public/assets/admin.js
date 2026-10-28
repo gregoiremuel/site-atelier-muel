@@ -678,7 +678,7 @@ function panneaux() {
       id: 'comparaison', titre: 'Comparaison avec un constructeur en ligne', page: '/expertises', seulementSi: () => !!(E.C.comparaison && typeof E.C.comparaison === 'object'),
       resume: () => (((E.C.comparaison || {}).lignes || []).length + ' lignes'),
       corps: () => [
-        groupe('Présentation', 'Le tableau s’affiche sur la page des offres', [champ(E.C, { k: 'comparaison.titre', l: 'Titre' }), champ(E.C, { k: 'comparaison.intro', l: 'Texte', t: 'zone', lignes: 4 }), champ(E.C, { k: 'comparaison.note', l: 'Petite note sous le tableau', t: 'zone', lignes: 3 })], '/expertises'),
+        groupe('Présentation', 'Le tableau s’affiche sur la page des offres, dans l’onglet « Comparer »', [champ(E.C, { k: 'comparaison.actif', l: 'Afficher la comparaison sur le site', t: 'case' }), champ(E.C, { k: 'comparaison.titre', l: 'Titre' }), champ(E.C, { k: 'comparaison.intro', l: 'Texte', t: 'zone', lignes: 4 }), champ(E.C, { k: 'comparaison.note', l: 'Petite note sous le tableau', t: 'zone', lignes: 3 })], '/expertises'),
         groupe('Lignes', 'Critère, colonne A, colonne B', [
           editeurListe('comparaison.lignes', { titre: 'critere', sansTitre: 'Nouvelle ligne', vide: 'Aucune ligne.', ajouter: 'Ajouter une ligne', nouveau: { critere: '', a: '', b: '' }, champs: [{ k: 'critere', l: 'Critère' }, { k: 'a', l: 'Constructeur en ligne', t: 'zone', lignes: 3 }, { k: 'b', l: 'Mon offre', t: 'zone', lignes: 3 }] }),
         ], '/expertises'),

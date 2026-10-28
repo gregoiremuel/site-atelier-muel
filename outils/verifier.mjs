@@ -152,8 +152,9 @@ export function verifier(C) {
     const K = C.comparaison;
     if (!K || typeof K !== 'object' || Array.isArray(K)) E('« comparaison » doit être un objet (colonnes, lignes, titre, intro, note).');
     else {
-      Object.keys(K).filter((k) => !['sur', 'titre', 'intro', 'colonnes', 'lignes', 'note'].includes(k)).forEach((k) => E(`Clé inconnue : comparaison.${k}`));
+      Object.keys(K).filter((k) => !['sur', 'titre', 'intro', 'colonnes', 'lignes', 'note', 'actif'].includes(k)).forEach((k) => E(`Clé inconnue : comparaison.${k}`));
       ['sur', 'titre', 'intro', 'note'].forEach((k) => { if (k in K && !estTexte(K[k])) E(`comparaison.${k} doit être un texte.`); });
+      if ('actif' in K && typeof K.actif !== 'boolean') E('comparaison.actif doit valoir true ou false.');
       if (!Array.isArray(K.colonnes) || K.colonnes.length !== 2 || K.colonnes.some((c) => vide(c))) E('comparaison.colonnes doit contenir exactement deux noms de colonne.');
       if (!Array.isArray(K.lignes) || !K.lignes.length) E('comparaison.lignes doit être une liste d’au moins une ligne.');
       else K.lignes.forEach((l, i) => {

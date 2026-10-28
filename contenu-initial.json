@@ -30,7 +30,7 @@
     "texte": ""
   },
   "accueil": {
-    "photo": "",
+    "photo": "/assets/photos/gregoire-portrait.jpg",
     "video": "",
     "fond_video": false,
     "sur_titre": "",
@@ -41,12 +41,12 @@
       "48 h | pour votre maquette, gratuite"
     ],
     "intro_titre": "Je m’en occupe pour vous",
-    "intro_texte": "Beaucoup de sites vieillissent parce que personne n’a le temps de les mettre à jour. Avec moi, vous avez le choix : vous m’envoyez vos changements (un horaire, un prix, une photo) et je les fais, c’est compris dans l’abonnement Sérénité ou Croissance, sur devis sinon. Ou vous les faites vous-même depuis une page privée, sur votre téléphone.\n\nJe m’appelle Grégoire Muel et je travaille depuis Auteuil. Je prépare une maquette à votre nom, avec vos vraies informations ; vous décidez ensuite.",
+    "intro_texte": "Je crée votre site et je le tiens à jour : vous m’envoyez un horaire, un prix, une photo, et je m’en occupe (abonnement Sérénité ou Croissance). Ou vous modifiez tout vous-même, depuis votre téléphone.",
     "photo_intro": "/assets/photos/travail-clavier.jpg",
-    "essai_titre": "Quatre sites, quatre identités",
-    "essai_texte": "Ouvrez un site d’exemple, touchez « Essayer la page de modification », changez un horaire, un prix ou une photo, et regardez le site se mettre à jour.\n\nTout reste dans votre navigateur : rien n’est publié. Ces sites sont des démonstrations : les entreprises n’existent pas.",
+    "essai_titre": "Quatre sites d’exemple",
+    "essai_texte": "Ouvrez-en un, touchez « Essayer la page de modification », changez un horaire ou une photo : rien n’est publié. Les entreprises n’existent pas.",
     "appel_titre": "Une maquette de votre site, gratuite, en 48 h",
-    "appel_texte": "Dites-moi qui vous êtes et ce que vous faites. Je vous prépare une maquette à votre nom ; si elle ne vous plaît pas, vous ne me devez rien. Vous avez déjà un site, ou seulement une fiche Google ? Je regarde votre fiche gratuitement et je vous dis en une page ce qui manque pour qu’on vous trouve.",
+    "appel_texte": "Dites-moi qui vous êtes et ce que vous faites : je prépare une maquette à votre nom. Elle ne vous plaît pas, vous ne me devez rien.",
     "photo_appel": "",
     "cartes": false
   },
@@ -136,25 +136,19 @@
     {
       "titre": "Une maquette gratuite en 48 h",
       "points": [
-        "On échange quelques minutes, chez vous ou par téléphone",
-        "Je prépare une maquette à votre nom, avec vos vraies informations",
-        "Elle ne vous plaît pas : vous ne me devez rien"
+        "On échange quelques minutes, puis je prépare la maquette à votre nom. Elle ne vous plaît pas : vous ne me devez rien."
       ]
     },
     {
       "titre": "Votre site, à votre image",
       "points": [
-        "Je prends les photos de la boutique (site vitrine)",
-        "Nous relisons les textes ensemble",
-        "J’ajuste jusqu’à ce que le site vous ressemble"
+        "Photos, textes, couleurs : nous ajustons ensemble jusqu’à ce qu’il vous ressemble."
       ]
     },
     {
       "titre": "En ligne, et vous êtes autonome",
       "points": [
-        "Le site est mis en ligne à votre nom",
-        "Quinze minutes de prise en main, sur votre téléphone",
-        "Ensuite, vous modifiez seul ou vous me confiez les changements"
+        "Mise en ligne à votre nom, puis quinze minutes de prise en main sur votre téléphone."
       ]
     }
   ],
@@ -330,7 +324,7 @@
   ],
   "presentation": {
     "titre": "À propos",
-    "texte": "Je suis Grégoire Muel, entrepreneur individuel installé à Auteuil, dans le 16e arrondissement de Paris. Je conçois, crée, refais et entretiens les sites des commerces, des artisans et des entreprises.\n\n## Ma façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, du premier échange à la mise en ligne, puis pour l’entretien.\n\nArtisan joaillier de formation, j’ai gardé l’habitude du travail précis et des finitions soignées.",
+    "texte": "Je suis Grégoire Muel, entrepreneur individuel installé à Auteuil, dans le 16e arrondissement de Paris. Je conçois, crée, refais et entretiens les sites des commerces, des artisans et des entreprises.\n\n## Ma façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, du premier échange à la mise en ligne, puis pour l’entretien.",
     "photo": "/assets/photos/gregoire-portrait.jpg",
     "photo_2": "/assets/photos/paris-16e-cafe.jpg"
   },
@@ -356,7 +350,7 @@
   "references": [],
   "affichage": {
     "chiffres": false,
-    "equipe": true,
+    "equipe": false,
     "references": false
   },
   "contact": {
@@ -572,7 +566,8 @@
         "b": "Le site reste en ligne ; son contenu et son nom de domaine restent à vous"
       }
     ],
-    "note": "Tarifs des constructeurs en ligne : abonnement annuel, TTC, relevés en octobre 2026 sur un comparatif public. Ils changent : vérifiez-les sur le site du constructeur. Ce tableau ne compte pas votre temps, ni le mien."
+    "note": "Tarifs des constructeurs en ligne : abonnement annuel, TTC, relevés en octobre 2026 sur un comparatif public. Ils changent : vérifiez-les sur le site du constructeur. Ce tableau ne compte pas votre temps, ni le mien.",
+    "actif": false
   },
   "pages_metier": [
     {

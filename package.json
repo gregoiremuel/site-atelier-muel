@@ -17,7 +17,8 @@
     "mobiles": "node outils/mobiles.mjs",
     "look-ia": "node outils/look-ia.mjs",
     "referencement": "node outils/referencement.mjs",
-    "rendu": "node outils/rendu.mjs"
+    "rendu": "node outils/rendu.mjs",
+    "dimensions": "node outils/dimensions.mjs"
   },
   "devDependencies": {
     "axe-core": "^4.14.0",

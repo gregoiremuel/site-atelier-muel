@@ -90,6 +90,8 @@ function src(p, largeur) {
   if (/^(https:\/\/|data:image\/|\/photos\/|\/assets\/)/i.test(p)) return p;
   return '';
 }
+/*DIM-DEBUT*/const DIM = {"/assets/photos/accueil.jpg":[1200,1500],"/assets/photos/gregoire-portrait.jpg":[800,1000],"/assets/photos/intro.jpg":[1200,1500],"/assets/photos/mobile-atelier.jpg":[520,1126],"/assets/photos/mobile-fleuriste.jpg":[520,1126],"/assets/photos/mobile-plombier.jpg":[520,1126],"/assets/photos/mobile-restaurant.jpg":[520,1126],"/assets/photos/offre-catalogue.jpg":[1200,1500],"/assets/photos/offre-entreprise.jpg":[1200,1500],"/assets/photos/offre-vitrine.jpg":[1200,1500],"/assets/photos/paris-16e-cafe.jpg":[1600,1066],"/assets/photos/real-atelier-exemple-2.jpg":[1600,1000],"/assets/photos/real-atelier-exemple.jpg":[1600,1000],"/assets/photos/real-fleuriste-exemple-2.jpg":[1600,1000],"/assets/photos/real-fleuriste-exemple.jpg":[1600,1000],"/assets/photos/real-operia-2.jpg":[1600,1000],"/assets/photos/real-operia.jpg":[1600,1000],"/assets/photos/real-plombier-exemple-2.jpg":[1600,1000],"/assets/photos/real-plombier-exemple.jpg":[1600,1000],"/assets/photos/real-restaurant-exemple-2.jpg":[1600,1000],"/assets/photos/real-restaurant-exemple.jpg":[1600,1000],"/assets/photos/travail-clavier.jpg":[1200,800],"/assets/photos/tuile-atelier-exemple.jpg":[780,974],"/assets/photos/tuile-fleuriste-exemple.jpg":[780,974],"/assets/photos/tuile-plombier-exemple.jpg":[780,974],"/assets/photos/tuile-restaurant-exemple.jpg":[780,974]};/*DIM-FIN*/
+const dimAttr = (u) => { const d = DIM[u]; return d ? ` width="${d[0]}" height="${d[1]}"` : ''; };
 const essai = (p) => /^https:\/\/images\.unsplash\.com\//.test(String(p || ''));
 /* Vidéo de fond (accueil) : fichier envoyé depuis la page de modification, lien https .mp4/.webm, ou fichier du site */
 export const videoSrc = (v) => { v = String(v || '').trim(); return /^(https:\/\/\S+\.(mp4|webm)(\?\S*)?|\/videos\/[a-z0-9-]+|\/assets\/\S+\.(mp4|webm)|data:video\/(mp4|webm);base64,\S+)$/i.test(v) ? v : ''; };
@@ -102,7 +104,7 @@ function videoFond(v, poster, cls) {
 }
 function img(p, largeur, cls, prio, alt) {
   const s = src(p, largeur);
-  return s ? `<img class="${cls}" src="${esc(s)}" alt="${esc(alt || '')}" ${prio ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">` : '';
+  return s ? `<img class="${cls}" src="${esc(s)}"${dimAttr(s)} alt="${esc(alt || '')}" ${prio ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">` : '';
 }
 /* Une photo de réalisation qui n'est pas encore celle du chantier le dit */
 const illus = (p) => (essai(p) ? '<span class="illus">Photo d’illustration</span>' : '');
@@ -171,7 +173,9 @@ function document_(C, o, page) {
   const nom = G.nom || 'Agence';
   const gabarit = T.gabarit === 'edition' ? 'edition' : T.gabarit === 'studio' ? 'studio' : 'classique';
   const theme = `${cssPolices(o.urlPolice || ((f) => '/fonts/' + f), gabarit === 'classique' ? 'agence' : gabarit)}\n:root{--fond:${hex(T.fond, '#f4f6f8')};--encre:${hex(T.encre, '#15172e')};--gris:${hex(T.gris, '#585b70')};--trait:${hex(T.trait, '#e2ded4')};--marine:${hex(T.marine, '#262a59')};--or:${hex(T.or, '#f8c151')}}`;
-  const style = o.css != null ? `<style>\n${o.css}\n${theme}\n</style>` : `<link rel="stylesheet" href="${o.cssHref || '/assets/site.css'}">\n<style>${theme}</style>`;
+  /* Polices du gabarit édition chargées d'avance : moins de décalage quand elles remplacent la police de secours */
+  const precharge = gabarit === 'edition' && !o.urlPolice ? ['besley-latin-500-normal.woff2', 'schibsted-grotesk-latin-400-normal.woff2'].map((f) => `<link rel="preload" as="font" type="font/woff2" href="/fonts/${f}" crossorigin>`).join('\n') + '\n' : '';
+  const style = precharge + (o.css != null ? `<style>\n${o.css}\n${theme}\n</style>` : `<link rel="stylesheet" href="${o.cssHref || '/assets/site.css'}">\n<style>${theme}</style>`);
   const marque = src(G.nom_image, 600) ? `<img src="${esc(src(G.nom_image, 600))}" alt="${esc(nom)}">` : esc(nom);
   const marqueClaire = src(G.nom_image_blanc, 600) ? `<img src="${esc(src(G.nom_image_blanc, 600))}" alt="${esc(nom)}">` : esc(nom);
   const avecEngagements = Array.isArray(C.engagements) && C.engagements.some((e) => e && e.titre);

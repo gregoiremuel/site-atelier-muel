@@ -17,10 +17,10 @@
     "description_google": "Création et refonte de sites pour commerces, artisans et entreprises à Paris 16e et partout en France : maquette gratuite en 48 h, site dès 590 € une fois."
   },
   "theme": {
-    "fond": "#f6f6f2",
+    "fond": "#f4f6f8",
     "encre": "#101216",
     "gris": "#4b5058",
-    "trait": "#d8d8d0",
+    "trait": "#d6dce3",
     "marine": "#22364f",
     "or": "#d9dee6",
     "gabarit": "edition"

@@ -170,7 +170,7 @@ function document_(C, o, page) {
   const G = C.agence || {}, T = C.theme || {}, K = C.contact || {};
   const nom = G.nom || 'Agence';
   const gabarit = T.gabarit === 'edition' ? 'edition' : T.gabarit === 'studio' ? 'studio' : 'classique';
-  const theme = `${cssPolices(o.urlPolice || ((f) => '/fonts/' + f), gabarit === 'classique' ? 'agence' : gabarit)}\n:root{--fond:${hex(T.fond, '#f7f5f0')};--encre:${hex(T.encre, '#15172e')};--gris:${hex(T.gris, '#585b70')};--trait:${hex(T.trait, '#e2ded4')};--marine:${hex(T.marine, '#262a59')};--or:${hex(T.or, '#f8c151')}}`;
+  const theme = `${cssPolices(o.urlPolice || ((f) => '/fonts/' + f), gabarit === 'classique' ? 'agence' : gabarit)}\n:root{--fond:${hex(T.fond, '#f4f6f8')};--encre:${hex(T.encre, '#15172e')};--gris:${hex(T.gris, '#585b70')};--trait:${hex(T.trait, '#e2ded4')};--marine:${hex(T.marine, '#262a59')};--or:${hex(T.or, '#f8c151')}}`;
   const style = o.css != null ? `<style>\n${o.css}\n${theme}\n</style>` : `<link rel="stylesheet" href="${o.cssHref || '/assets/site.css'}">\n<style>${theme}</style>`;
   const marque = src(G.nom_image, 600) ? `<img src="${esc(src(G.nom_image, 600))}" alt="${esc(nom)}">` : esc(nom);
   const marqueClaire = src(G.nom_image_blanc, 600) ? `<img src="${esc(src(G.nom_image_blanc, 600))}" alt="${esc(nom)}">` : esc(nom);
@@ -201,7 +201,7 @@ ${!o.maquette && page.chemin && /^https:\/\//.test((C.reglages || {}).url || '')
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:type" content="website">
 ${page.image && src(page.image, 1200) ? `<meta property="og:image" content="${esc(src(page.image, 1200))}">` : ''}
-<meta name="theme-color" content="${hex(T.fond, '#f7f5f0')}">
+<meta name="theme-color" content="${hex(T.fond, '#f4f6f8')}">
 <link rel="icon" href="${esc(favicon(C))}">
 ${style}
 </head>

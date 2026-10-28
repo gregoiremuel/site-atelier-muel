@@ -64,6 +64,12 @@ const vraiApi = {
     if (!j.ok) throw new Error(j.erreur || 'Demandes indisponibles.');
     return j.demandes;
   },
+  async audience(jours) {
+    const r = await fetch('/api/audience?jours=' + jours);
+    const j = await r.json().catch(() => ({}));
+    if (!j.ok) throw new Error(j.erreur || 'Visites indisponibles.');
+    return j;
+  },
   async statut(id, statut) {
     const r = await fetch('/api/demandes/' + id, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ statut }) });
     const j = await r.json().catch(() => ({}));
@@ -135,6 +141,11 @@ const demoApi = {
       ex('ex1', 3, 'nouvelle', 'Exemple : Claire Martin', [['Société', 'Exemple SAS'], ['E-mail', 'exemple@exemple.fr'], ['Téléphone', '06 00 00 00 01'], ['Type de locaux', 'Bureaux'], ['Surface', '400 m²'], ['Ville du projet', 'Nantes'], ['Projet', 'Exemple : aménagement d’un plateau de bureaux avant notre emménagement.']]),
       ex('ex2', 50, 'devis', 'Exemple : Paul Durand', [['E-mail', 'exemple@exemple.fr'], ['Téléphone', '06 00 00 00 02'], ['Type de locaux', 'Commerce ou restaurant'], ['Ville du projet', 'Saint-Nazaire'], ['Projet', 'Exemple : rénovation d’une cellule commerciale.']]),
     ]);
+  },
+  async audience(jours) {
+    const base = Date.parse(new Date().toISOString().slice(0, 10) + 'T12:00:00Z');
+    const mod = [7, 12, 9, 15, 11, 6, 4];
+    return { ok: true, plafond: 800, sauvegarde: null, jours: Array.from({ length: jours }, (_, i) => { const t = mod[i % 7] + (i % 3); return { jour: new Date(base - (jours - 1 - i) * 86400e3).toISOString().slice(0, 10), t, p: { '/': Math.ceil(t * 0.6), '/expertises': Math.floor(t * 0.25), '/contact': Math.floor(t * 0.15) }, s: { g: Math.floor(t * 0.4), d: Math.floor(t * 0.2), a: Math.floor(t * 0.1), i: Math.floor(t * 0.3) } }; }) };
   },
   async statut(id, statut) { const l = await demoApi.demandes(); l.forEach((c) => { if (c.id === id) c.statut = statut; }); memo.ecrire('demandes', l); },
 };
@@ -374,7 +385,7 @@ function contraste(a, b) {
 
 /* Identifiants des pièces, collections et types : tirés du nom à la création, puis fixes */
 function assurerIds(C) {
-  ['realisations', 'metiers', 'secteurs'].forEach((k) => {
+  ['realisations', 'metiers', 'secteurs', 'pages_metier'].forEach((k) => {
     const L = C[k] || [], pris = new Set(L.map((x) => x.id).filter(Boolean));
     L.forEach((x) => { if (!x.id && x.nom) { let b = slug(x.nom) || k, id = b, n = 2; while (pris.has(id)) id = b + '-' + n++; x.id = id; pris.add(id); } });
   });
@@ -409,6 +420,32 @@ function listeCommandes() {
   charger();
   return el('div', { class: 'pan-corps', style: 'padding:0' },
     el('div', { style: 'display:flex;justify-content:space-between;align-items:center;gap:8px' }, el('h3', { text: 'Demandes reçues', style: 'font-size:1.125rem' }), el('button', { type: 'button', class: 'btn discret petit', text: 'Actualiser', onclick: charger })),
+    boite);
+}
+
+/* ---------- Visites (pages vues comptées par le serveur, sans cookie) ---------- */
+function blocVisites() {
+  const boite = el('div', { class: 'visites' }, el('p', { class: 'aide', text: 'Chargement des visites…' }));
+  const charger = async (jours) => {
+    try {
+      const d = await api.audience(jours);
+      const J = d.jours || [], total = J.reduce((n, x) => n + (x.t || 0), 0);
+      const pages = {}, src = { g: 0, d: 0, a: 0, i: 0 };
+      J.forEach((x) => { Object.entries(x.p || {}).forEach(([k, v]) => { pages[k] = (pages[k] || 0) + v; }); Object.entries(x.s || {}).forEach(([k, v]) => { src[k] = (src[k] || 0) + v; }); });
+      const top = Object.entries(pages).sort((a, b) => b[1] - a[1]).slice(0, 8);
+      const entrees = src.g + src.d + src.a;
+      const max = Math.max(1, ...J.map((x) => x.t || 0));
+      boite.replaceChildren(
+        el('p', { class: 'aide', text: total + ' page' + (total > 1 ? 's' : '') + ' vue' + (total > 1 ? 's' : '') + ' sur ' + jours + ' jours' + (entrees ? ' · ' + entrees + ' arrivée' + (entrees > 1 ? 's' : '') + ' : ' + src.g + ' par un moteur de recherche, ' + src.a + ' par un autre site, ' + src.d + ' en tapant l’adresse ou par un favori' : '') + '.' }),
+        el('div', { class: 'barres', role: 'img', 'aria-label': 'Pages vues par jour sur ' + jours + ' jours', style: 'display:flex;align-items:flex-end;gap:2px;height:64px;margin:8px 0' }, J.map((x) => el('span', { title: x.jour + ' : ' + (x.t || 0), style: 'flex:1;min-width:2px;background:currentColor;opacity:.55;border-radius:2px 2px 0 0;height:' + Math.max(2, Math.round(((x.t || 0) / max) * 64)) + 'px' }))),
+        top.length ? el('ol', { class: 'aide', style: 'padding-left:1.2em;list-style:decimal' }, top.map(([k, v]) => el('li', { text: k + ' : ' + v }))) : el('p', { class: 'vide', text: 'Aucune visite comptée pour l’instant (le comptage démarre quand le site est ouvert au public).' }),
+        d.sauvegarde ? el('p', { class: 'aide', text: 'Dernière copie de sauvegarde : ' + new Date(d.sauvegarde.quand).toLocaleString('fr-FR', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }) + (d.sauvegarde.kv ? ' (7 dernières nuits gardées)' : '') + (d.sauvegarde.r2 ? (d.sauvegarde.r2.erreur ? ' · copie externe en erreur : ' + d.sauvegarde.r2.erreur : ' · copie externe faite') : '') + '.' }) : el('p', { class: 'aide', text: 'Pas encore de copie de sauvegarde enregistrée : la première se fait la nuit qui suit la mise en ligne.' }));
+    } catch (x) { boite.replaceChildren(el('p', { class: 'erreur', text: x.message })); }
+  };
+  charger(30);
+  return el('div', { class: 'pan-corps', style: 'padding:0' },
+    el('p', { class: 'aide', text: 'Le site compte les pages vues sans cookie, sans adresse IP et sans identifier personne. Les chiffres sont un ordre de grandeur : quelques visites très rapprochées peuvent ne pas être comptées.' }),
+    el('div', { style: 'display:flex;gap:8px;flex-wrap:wrap' }, [7, 30, 90].map((n) => el('button', { type: 'button', class: 'btn sec petit', text: n + ' jours', onclick: () => charger(n) }))),
     boite);
 }
 
@@ -589,6 +626,40 @@ function panneaux() {
         el('p', { class: 'aide', text: 'Les mots du menu, des titres de rubrique et du formulaire. Laissez vide pour garder le texte grisé. Pour un champ du formulaire, effacez son nom pour le retirer.' }),
         ...LIBELLES_GROUPES.map(([titre, cles]) => groupe(titre, '', el('div', { class: 'grille' }, cles.map((k) => champ(E.C, { k: 'libelles.' + k, l: LIBELLES_NOMS[k] || k, ph: LIBELLES[k] }))))),
       ],
+    },
+    {
+      id: 'pages', titre: 'Pages par métier', page: '/', seulementSi: () => Array.isArray(E.C.pages_metier),
+      resume: () => ((E.C.pages_metier || []).filter((x) => x.visible !== false).map((x) => x.nom).filter(Boolean).join(', ') || 'Aucune page'),
+      corps: () => [
+        el('p', { class: 'aide', text: 'Une page par métier (restaurant, plombier…), avec sa démonstration, ses questions et son prix de départ. L’adresse de la page est « /identifiant ». Les questions et réponses de chaque page se modifient avec Claude, pour garder une forme régulière.' }),
+        editeurListe('pages_metier', {
+          titre: 'nom', sansTitre: 'Nouvelle page', photo: 'photo', sous: (x) => [x.id ? '/' + x.id : '', x.prix, x.visible === false ? 'masquée' : ''].filter(Boolean).join(' · '),
+          vide: 'Aucune page par métier.', ajouter: 'Ajouter une page', nouveau: { id: '', nom: '', titre: '', description: '', accroche: '', texte: '', prix: '', points: [], demo: '', demo_texte: '', bouton: '', photo: '', questions: [], liste: true, visible: true },
+          ouvert: (x) => { if (x.id) montrer('/' + x.id); }, apres: (x) => { assurerIds(E.C); if (x.id && E.page !== '/' + x.id) montrer('/' + x.id); },
+          champs: [
+            { k: 'nom', l: 'Nom (menu et liens)' }, { k: 'id', l: 'Adresse de la page', ex: 'minuscules et tirets, 3 signes au moins, ex. site-restaurant', ph: 'site-restaurant' },
+            { k: 'titre', l: 'Titre de la page' }, { k: 'accroche', l: 'Phrase d’accroche', t: 'zone', lignes: 3 }, { k: 'prix', l: 'Prix de départ', ph: 'Ex. : À partir de 590 €, une fois' },
+            { k: 'texte', l: 'Texte', t: 'zone', lignes: 7 }, { k: 'points', l: 'Ce qui est compris', t: 'lignes' }, { k: 'photo', l: 'Photo', t: 'photo' },
+            { k: 'demo', l: 'Lien de la démonstration', ex: 'facultatif', ph: '/demos/restaurant-exemple' }, { k: 'demo_texte', l: 'Texte du bouton de la démonstration', ph: 'Essayer la démonstration' }, { k: 'bouton', l: 'Texte du bouton « contact »', ph: 'Demander ma maquette gratuite' },
+            { k: 'description', l: 'Description pour Google', t: 'zone', lignes: 3 }, { k: 'liste', l: 'Dans le pied de page et la liste « par métier »', t: 'case' }, { k: 'visible', l: 'Afficher sur le site', t: 'case' },
+          ],
+        }),
+      ],
+    },
+    {
+      id: 'comparaison', titre: 'Comparaison avec un constructeur en ligne', page: '/expertises', seulementSi: () => !!(E.C.comparaison && typeof E.C.comparaison === 'object'),
+      resume: () => (((E.C.comparaison || {}).lignes || []).length + ' lignes'),
+      corps: () => [
+        groupe('Présentation', 'Le tableau s’affiche sur la page des offres', [champ(E.C, { k: 'comparaison.titre', l: 'Titre' }), champ(E.C, { k: 'comparaison.intro', l: 'Texte', t: 'zone', lignes: 4 }), champ(E.C, { k: 'comparaison.note', l: 'Petite note sous le tableau', t: 'zone', lignes: 3 })], '/expertises'),
+        groupe('Lignes', 'Critère, colonne A, colonne B', [
+          editeurListe('comparaison.lignes', { titre: 'critere', sansTitre: 'Nouvelle ligne', vide: 'Aucune ligne.', ajouter: 'Ajouter une ligne', nouveau: { critere: '', a: '', b: '' }, champs: [{ k: 'critere', l: 'Critère' }, { k: 'a', l: 'Constructeur en ligne', t: 'zone', lignes: 3 }, { k: 'b', l: 'Mon offre', t: 'zone', lignes: 3 }] }),
+        ], '/expertises'),
+      ],
+    },
+    {
+      id: 'visites', titre: 'Visites du site', page: '/',
+      resume: () => 'Pages vues, sans cookie',
+      corps: () => [blocVisites()],
     },
     {
       id: 'infos', titre: 'Coordonnées, logo et mentions', page: '/contact',

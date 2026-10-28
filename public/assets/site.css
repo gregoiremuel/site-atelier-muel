@@ -479,3 +479,38 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .eng-bloc .prose p{max-width:62ch}
 @media (min-width:900px){.eng-grille{grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:72px;align-items:start}.eng-index{position:sticky;top:104px}}
 .eng-lien{margin-top:24px}
+
+/* Comparaison, questions fréquentes, pages par métier, quatre offres */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cmp{width:100%;border-collapse:collapse;margin-top:8px;font-size:.9688rem}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:16px 18px;border-top:1px solid var(--trait)}
+.cmp thead th{font-weight:700;border-top:0;padding-bottom:12px;color:var(--marine)}
+.cmp tbody th{font-weight:600;width:24%;color:var(--encre)}
+.cmp td{color:var(--gris)}
+.cmp td:last-child{color:var(--encre);background:#fff;font-weight:500}
+@media (max-width:759px){
+  .cmp thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .cmp,.cmp tbody,.cmp tr,.cmp th,.cmp td{display:block;width:auto}
+  .cmp tr{border:1px solid var(--trait);border-radius:var(--r,2px);margin-bottom:14px;background:#fff;overflow:hidden}
+  .cmp tbody th{padding:14px 16px 6px;border-top:0;width:auto}
+  .cmp td{padding:6px 16px 12px;border-top:0}
+  .cmp td::before{content:attr(data-label);display:block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gris);margin-bottom:2px}
+  .cmp td:last-child{background:transparent}
+}
+.faq{display:grid;gap:10px;max-width:820px}
+.faq details{border:1px solid var(--trait);background:#fff;border-radius:var(--r,2px)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 22px;font-weight:600;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:400;font-size:1.25rem;line-height:1.2;color:var(--gris)}
+.faq details[open] summary::after{content:"\2212"}
+.faq p{padding:0 22px 20px;color:var(--gris);max-width:62ch}
+.p-metier .metier-grille:not(:has(.metier-fig)){grid-template-columns:1fr}
+.p-metier .tete-page .metier-prix{margin:0 0 22px}
+@media (min-width:800px){.pied-cols:has(> :nth-child(4)){grid-template-columns:repeat(4,1fr)}}
+@media (min-width:900px){
+  .metiers:has(> :nth-child(4)){grid-template-columns:repeat(4,1fr)}
+  .metiers:has(> :nth-child(4)) a{padding-left:24px;padding-right:24px}
+  .metiers:has(> :nth-child(4)) li:first-child a{padding-left:0}
+  .abo-grille:has(> :nth-child(4)){grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:1200px){.abo-grille:has(> :nth-child(4)){grid-template-columns:repeat(4,1fr)}}

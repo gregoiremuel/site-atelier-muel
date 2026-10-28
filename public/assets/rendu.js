@@ -31,6 +31,8 @@ export const LIBELLES = {
   pied_trouver: 'Nous trouver', pied_joindre: 'Nous joindre',
   mentions_immatriculation: 'RCS', mentions_siege: 'Siège',
   type_schema: 'GeneralContractor', bandeau_maquette: '',
+  pages_sur: 'Par métier', pages_titre: 'Un site pensé pour votre métier', page_demo: 'Essayer la démonstration', page_maquette: 'Demander ma maquette gratuite', faq_sur: 'Questions', faq_titre: 'Les questions qu’on me pose', pied_metiers: 'Par métier',
+  comparaison_sur: 'Comparer', comparaison_titre: 'Un constructeur en ligne ou moi ?',
 };
 /* Valeur d'un libellé : le texte du site s'il est rempli, sinon celui par défaut ; vide("") accepté pour les champs du formulaire */
 export const libelle = (C, k) => { const v = (C && C.libelles && typeof C.libelles === 'object') ? C.libelles[k] : undefined; if (typeof v !== 'string') return LIBELLES[k]; return v.trim() || (/^form_(societe|type|surface|ville)$/.test(k) ? '' : LIBELLES[k]); };
@@ -60,7 +62,23 @@ export function donnees(C) {
   const AB = C.abonnements && typeof C.abonnements === 'object' ? C.abonnements : null;
   const formules = AB && Array.isArray(AB.formules) ? AB.formules.filter((f) => f && f.nom).map((f) => ({ ...f, points: (Array.isArray(f.points) ? f.points : []).filter(Boolean) })) : [];
   const abonnements = formules.length ? { titre: AB.titre || '', intro: AB.intro || '', note: AB.note || '', formules } : null;
-  return { secteurs, secteursUtiles, realisations, metiers, etapes, equipe, references, chiffres, lots, secteur, abonnements, engagements };
+  /* Pages par métier (clé facultative « pages_metier ») : une adresse /id par métier, avec sa démonstration, ses questions et son prix de départ */
+  const pages = pagesMetier(C);
+  /* Comparaison avec un constructeur en ligne (clé facultative « comparaison ») */
+  const CP = C.comparaison && typeof C.comparaison === 'object' && !Array.isArray(C.comparaison) ? C.comparaison : null;
+  const lignesCp = CP && Array.isArray(CP.lignes) ? CP.lignes.filter((l) => l && l.critere && l.a && l.b) : [];
+  const colsCp = CP && Array.isArray(CP.colonnes) && CP.colonnes.length === 2 && CP.colonnes.every((c) => typeof c === 'string' && c.trim()) ? CP.colonnes : null;
+  const comparaison = CP && lignesCp.length && colsCp ? { sur: CP.sur || '', titre: CP.titre || '', intro: CP.intro || '', note: CP.note || '', colonnes: colsCp, lignes: lignesCp } : null;
+  return { secteurs, secteursUtiles, realisations, metiers, etapes, equipe, references, chiffres, lots, secteur, abonnements, engagements, pages, comparaison };
+}
+
+/* Adresses qu'une page par métier ne peut pas prendre */
+export const ADRESSES_RESERVEES = ['expertises', 'realisations', 'agence', 'engagements', 'contact', 'mentions-legales', 'confidentialite', 'admin', 'api', 'assets', 'fonts', 'photos', 'videos', 'demos'];
+export function pagesMetier(C) {
+  const liste = Array.isArray(C && C.pages_metier) ? C.pages_metier : [];
+  return liste.filter((x) => x && typeof x === 'object' && /^[a-z0-9-]{3,60}$/.test(x.id || '') && !ADRESSES_RESERVEES.includes(x.id) && x.nom && x.visible !== false)
+    .map((x) => ({ ...x, points: (Array.isArray(x.points) ? x.points : []).filter(Boolean), questions: (Array.isArray(x.questions) ? x.questions : []).filter((q) => q && q.q && q.r),
+      demo: /^(\/[^\s<>"]*|https:\/\/[^\s<>"]+)$/.test(String(x.demo || '').trim()) ? String(x.demo).trim() : '' }));
 }
 
 function src(p, largeur) {
@@ -198,6 +216,7 @@ ${page.corps}
     </div>
     <div class="pied-cols">
       <div><h2>Le site</h2><ul>${nav.map(([h, t]) => `<li><a href="${h}">${t}</a></li>`).join('')}<li><a href="/contact">Contact</a></li></ul></div>
+      ${pagesMetier(C).filter((x) => x.liste !== false).length ? `<div><h2>${esc(libelle(C, 'pied_metiers'))}</h2><ul>${pagesMetier(C).filter((x) => x.liste !== false).map((x) => `<li><a href="/${esc(x.id)}">${esc(x.nom)}</a></li>`).join('')}</ul></div>` : ''}
       <div><h2>${esc(libelle(C, 'pied_trouver'))}</h2><ul>
         ${G.adresse ? `<li>${esc(G.adresse)}<br>${esc([G.code_postal, G.ville].filter(Boolean).join(' '))}</li>` : (G.ville ? `<li>${esc(G.ville)}</li>` : '')}
       </ul></div>
@@ -255,6 +274,29 @@ const abonnementsHtml = (D) => {
     </div>
   </section>`;
 };
+const comparaisonHtml = (C, D) => {
+  const K = D.comparaison;
+  if (!K) return '';
+  const [c1, c2] = K.colonnes;
+  return `
+  <section class="sec" id="comparaison" aria-labelledby="t-cmp">
+    <div class="wrap">
+      <div class="sec-tete">${titreSection(K.sur || libelle(C, 'comparaison_sur'), K.titre || libelle(C, 'comparaison_titre'), 't-cmp')}${K.intro ? `<p class="chapo">${esc(K.intro)}</p>` : ''}</div>
+      <table class="cmp">
+        <thead><tr><th scope="col"><span class="sr">Critère</span></th><th scope="col">${esc(c1)}</th><th scope="col">${esc(c2)}</th></tr></thead>
+        <tbody>${K.lignes.map((l) => `<tr><th scope="row">${esc(l.critere)}</th><td data-label="${esc(c1)}">${esc(l.a)}</td><td data-label="${esc(c2)}">${esc(l.b)}</td></tr>`).join('')}</tbody>
+      </table>
+      ${K.note ? `<p class="abo-note">${esc(K.note)}</p>` : ''}
+    </div>
+  </section>`;
+};
+const pagesListeHtml = (C, D) => (D.pages.filter((x) => x.liste !== false).length ? `
+  <section class="sec sec-serre" aria-labelledby="t-pages">
+    <div class="wrap">
+      <div class="sec-tete">${titreSection(libelle(C, 'pages_sur'), libelle(C, 'pages_titre'), 't-pages')}</div>
+      <nav class="filtres" aria-label="${esc(libelle(C, 'pages_sur'))}">${D.pages.filter((x) => x.liste !== false).map((x) => `<a href="/${esc(x.id)}">${esc(x.nom)}</a>`).join('')}</nav>
+    </div>
+  </section>` : '');
 const referencesHtml = (D) => `<ul class="refs">${D.references.map((r) => `<li>${src(r.logo, 400) ? `<img src="${esc(src(r.logo, 400))}" alt="${esc(r.nom)}" loading="lazy">` : `<span>${esc(r.nom)}</span>`}</li>`).join('')}</ul>`;
 const initiales = (n) => String(n || '').split(/[\s-]+/).filter(Boolean).map((m) => m[0]).slice(0, 2).join('').toUpperCase();
 
@@ -306,7 +348,7 @@ function accueil(C, D) {
     <div class="wrap">
       <div class="sec-tete">${titreSection(libelle(C, 'exp_sur'), libelle(C, 'exp_titre'), 't-exp')}</div>
       <ol class="metiers">
-        ${D.metiers.map((m, i) => `<li><a href="/expertises#${esc(m.id)}"><span class="metier-num">${num(i)}</span><h3>${esc(m.nom)}</h3>${m.accroche ? `<p>${esc(m.accroche)}</p>` : ''}${m.prix ? `<p class="metier-prix">${esc(m.prix)}</p>` : ''}<span class="lien">${esc(libelle(C, 'exp_lien'))} ${ico.fleche}</span></a></li>`).join('\n        ')}
+        ${D.metiers.map((m, i) => `<li><a href="${/^\/[a-z0-9#-]+$/.test(m.lien || '') ? esc(m.lien) : '/expertises#' + esc(m.id)}"><span class="metier-num">${num(i)}</span><h3>${esc(m.nom)}</h3>${m.accroche ? `<p>${esc(m.accroche)}</p>` : ''}${m.prix ? `<p class="metier-prix">${esc(m.prix)}</p>` : ''}<span class="lien">${esc(libelle(C, 'exp_lien'))} ${ico.fleche}</span></a></li>`).join('\n        ')}
       </ol>
     </div>
   </section>` : ''}
@@ -365,10 +407,13 @@ function pageExpertises(C, D) {
         ${m.prix ? `<p class="metier-prix">${esc(m.prix)}</p>` : ''}
         ${m.texte ? `<div class="prose">${texteRiche(m.texte)}</div>` : ''}
         ${listeCoches(m.points)}
+        ${/^\/[a-z0-9#-]+$/.test(m.lien || '') ? `<p class="actions"><a class="btn btn-ligne" href="${esc(m.lien)}">${esc(libelle(C, 'exp_lien'))} ${ico.fleche}</a></p>` : ''}
       </div>
     </div>
   </section>`).join('')}
+  ${comparaisonHtml(C, D)}
   ${abonnementsHtml(D)}
+  ${pagesListeHtml(C, D)}
   ${D.etapes.length ? `
   <section class="sec clair" aria-labelledby="t-met">
     <div class="wrap">
@@ -381,6 +426,40 @@ function pageExpertises(C, D) {
     <div class="wrap">
       <div class="sec-tete">${titreSection(libelle(C, 'lots_sur'), libelle(C, 'lots_titre'), 't-lots')}</div>
       <ul class="lots">${D.lots.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>
+    </div>
+  </section>` : ''}
+  ${appel(C)}`,
+  };
+}
+
+function pageMetier(C, D, id) {
+  const x = D.pages.find((p) => p.id === id);
+  if (!x) return null;
+  return {
+    classe: 'p-metier', titre: x.titre || x.nom, rubrique: '/' + x.id, image: x.photo, description: x.description || x.accroche || '',
+    jsonld: x.questions.length ? { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: x.questions.map((q) => ({ '@type': 'Question', name: q.q, acceptedAnswer: { '@type': 'Answer', text: q.r } })) } : undefined,
+    corps: `
+  <section class="tete-page wrap">
+    <p class="sur">${esc(libelle(C, 'pages_sur'))}</p>
+    <h1>${esc(x.titre || x.nom)}</h1>
+    ${x.accroche ? `<p class="chapo">${esc(x.accroche)}</p>` : ''}
+    ${x.prix ? `<p class="metier-prix">${esc(x.prix)}</p>` : ''}
+    <p class="actions">${x.demo ? `<a class="btn" href="${esc(x.demo)}"${/^https?:/.test(x.demo) ? ' target="_blank" rel="noopener"' : ''} data-ouvrir>${esc(x.demo_texte || libelle(C, 'page_demo'))} ${ico.fleche}</a>` : ''}<a class="btn btn-ligne" href="/contact">${esc(x.bouton || libelle(C, 'page_maquette'))}</a></p>
+  </section>
+  <section class="sec metier">
+    <div class="wrap metier-grille">
+      ${src(x.photo, 1400) ? `<figure class="metier-fig">${img(x.photo, 1400, 'metier-img', true, '')}</figure>` : ''}
+      <div class="metier-txt">
+        ${x.texte ? `<div class="prose">${texteRiche(x.texte)}</div>` : ''}
+        ${listeCoches(x.points)}
+      </div>
+    </div>
+  </section>
+  ${x.questions.length ? `
+  <section class="sec clair" aria-labelledby="t-faq">
+    <div class="wrap">
+      <div class="sec-tete">${titreSection(libelle(C, 'faq_sur'), libelle(C, 'faq_titre'), 't-faq')}</div>
+      <div class="faq">${x.questions.map((q) => `<details><summary>${esc(q.q)}</summary><p>${esc(q.r)}</p></details>`).join('')}</div>
     </div>
   </section>` : ''}
   ${appel(C)}`,
@@ -567,7 +646,7 @@ function pageMentions(C) {
   <section class="tete-page wrap"><h1>Mentions légales</h1></section>
   <section class="sec sec-serre"><div class="wrap prose">
     <h2>Éditeur du site</h2>
-    <p>${k(M.raison_sociale)}${M.forme ? ', ' + esc(M.forme) : ''}<br>${esc(libelle(C, 'mentions_siege'))} : ${k(M.adresse)}<br>${esc(libelle(C, 'mentions_immatriculation'))} : ${k(M.rcs)}${M.tva ? '<br>' + esc(M.tva) : ''}<br>Directeur de la publication : ${k(M.directeur_publication)}<br>Contact : ${k(M.email || G.email)}${G.telephone ? ', ' + esc(G.telephone) : ''}</p>
+    <p>${k(M.raison_sociale)}${M.forme ? ', ' + esc(M.forme) : ''}${M.nom_commercial ? '<br>Nom commercial : ' + esc(M.nom_commercial) : ''}<br>${esc(libelle(C, 'mentions_siege'))} : ${k(M.adresse)}<br>${esc(libelle(C, 'mentions_immatriculation'))} : ${k(M.rcs)}${M.tva ? '<br>' + esc(M.tva) : ''}<br>Directeur de la publication : ${k(M.directeur_publication)}<br>Contact : ${k(M.email || G.email)}${G.telephone ? ', ' + esc(G.telephone) : ''}</p>
     <h2>Hébergement</h2>
     <p>Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, États-Unis.</p>
     ${M.mediateur ? `<h2>Médiation de la consommation</h2><p>${esc(M.mediateur)}</p>` : ''}
@@ -585,7 +664,9 @@ function pageConfidentialite(C) {
   <section class="tete-page wrap"><h1>Confidentialité</h1></section>
   <section class="sec sec-serre"><div class="wrap prose">
     <h2>Ce que le site enregistre</h2>
-    <p>Le site ne dépose aucun cookie de mesure d’audience ni de publicité.</p>
+    <p>Le site ne dépose aucun cookie, ni de mesure d’audience ni de publicité.</p>
+    <h2>La mesure des visites</h2>
+    <p>Le site compte les pages vues, jour par jour : combien de visites, quelles pages, et d’où l’on vient (moteur de recherche, autre site, adresse tapée). Il n’enregistre ni adresse IP, ni identifiant, et ne dépose rien dans votre navigateur : un visiteur ne peut pas être reconnu d’un jour à l’autre. Ces totaux ne servent qu’à savoir ce qui est utile.</p>
     <h2>Les demandes de contact</h2>
     <p>Quand vous envoyez une demande, les informations du formulaire sont transmises à ${esc(G.nom || 'l’agence')}${K.cle_web3forms ? ', par e-mail via le service Web3Forms' : ''}. Elles servent uniquement à répondre à votre demande et sont conservées 180 jours au plus dans la page de modification du site, sauf si un contrat est conclu.</p>
     <h2>Vos droits</h2>
@@ -607,7 +688,7 @@ function page404() {
 export function routes(C) {
   const D = donnees(C);
   return ['/', '/expertises', '/realisations', ...(D.secteursUtiles.length > 1 ? D.secteursUtiles.map((s) => '/realisations?secteur=' + s.id) : []),
-    ...D.realisations.map((x) => '/realisations/' + x.id), '/agence', ...(D.engagements.length ? ['/engagements'] : []), '/contact', '/mentions-legales', '/confidentialite'];
+    ...D.realisations.map((x) => '/realisations/' + x.id), '/agence', ...(D.engagements.length ? ['/engagements'] : []), '/contact', '/mentions-legales', '/confidentialite', ...D.pages.map((x) => '/' + x.id)];
 }
 
 /* Rend une adresse : { statut, html } */
@@ -627,6 +708,7 @@ export function rendrePage(C, chemin, o = {}) {
   else if (p === '/contact') page = pageContact(C, D);
   else if (p === '/mentions-legales') page = pageMentions(C);
   else if (p === '/confidentialite') page = pageConfidentialite(C);
+  else if ((m = p.match(/^\/([a-z0-9-]{3,60})$/))) page = pageMetier(C, D, m[1]);
   const statut = page ? 200 : 404;
   return { statut, html: document_(C, o, page || page404()) };
 }

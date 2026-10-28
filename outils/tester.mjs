@@ -2,13 +2,13 @@
 // Usage : node outils/tester.mjs [fichier de contenu]   (par défaut : contenu-initial.json)
 // Lance « wrangler dev » avec une mémoire vide et temporaire, un mot de passe de test et MAQUETTE = non.
 import { spawn, spawnSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { pbkdf2Sync, randomBytes } from 'node:crypto';
 import { verifier } from './verifier.mjs';
-import { routes } from '../public/assets/rendu.js';
+import { routes, libellesDemande } from '../public/assets/rendu.js';
 import { TOUS_FICHIERS_POLICES } from '../public/assets/polices.js';
 
 const racine = fileURLToPath(new URL('..', import.meta.url));
@@ -22,16 +22,22 @@ const sel = randomBytes(16);
 const HASH = `pbkdf2$10000$${sel.toString('base64')}$${pbkdf2Sync(MDP, sel, 10000, 32, 'sha256').toString('base64')}`;
 const memoireTest = mkdtempSync(join(tmpdir(), 'agence-test-'));
 const wrangler = join(racine, 'node_modules', '.bin', 'wrangler');
+/* Configuration de test : celle du site, plus un stockage R2 « SAUVEGARDE » local pour essayer la copie nocturne (la vraie configuration n'est pas modifiée) */
+const configTest = join(racine, '.wrangler-test.json');
+const cfg = JSON.parse(readFileSync(join(racine, 'wrangler.jsonc'), 'utf8').split('\n').filter((l) => !l.trim().startsWith('//')).join('\n'));
+cfg.r2_buckets = [{ binding: 'SAUVEGARDE', bucket_name: 'sauvegarde-test' }];
+delete cfg.routes;
+writeFileSync(configTest, JSON.stringify(cfg, null, 2));
 if (process.argv[2]) {
-  const r = spawnSync(wrangler, ['kv', 'key', 'put', 'contenu', '--path', fichier, '--binding', 'CONTENU', '--local', '--persist-to', memoireTest], { cwd: racine, encoding: 'utf8' });
+  const r = spawnSync(wrangler, ['kv', 'key', 'put', 'contenu', '--path', fichier, '--binding', 'CONTENU', '--local', '--persist-to', memoireTest, '-c', configTest], { cwd: racine, encoding: 'utf8' });
   if (r.status !== 0) { console.error('Impossible de déposer le contenu de test :\n' + r.stderr); process.exit(1); }
 }
-const serveur = spawn(wrangler, ['dev', '--port', String(PORT), '--ip', '127.0.0.1', '--persist-to', memoireTest, '--show-interactive-dev-session=false',
+const serveur = spawn(wrangler, ['dev', '-c', configTest, '--test-scheduled', '--port', String(PORT), '--ip', '127.0.0.1', '--persist-to', memoireTest, '--show-interactive-dev-session=false',
   '--var', 'ADMIN_HASH:' + HASH, '--var', 'SESSION_SECRET:' + randomBytes(24).toString('hex'), '--var', 'MAQUETTE:non'],
 { cwd: racine, detached: true, stdio: ['ignore', 'pipe', 'pipe'] });
 let journal = '';
 serveur.stdout.on('data', (d) => { journal += d; }); serveur.stderr.on('data', (d) => { journal += d; });
-const arreter = () => { try { process.kill(-serveur.pid, 'SIGTERM'); } catch (e) { /* déjà arrêté */ } try { rmSync(memoireTest, { recursive: true, force: true }); } catch (e) { /* rien */ } };
+const arreter = () => { try { process.kill(-serveur.pid, 'SIGTERM'); } catch (e) { /* déjà arrêté */ } try { rmSync(memoireTest, { recursive: true, force: true }); rmSync(configTest, { force: true }); } catch (e) { /* rien */ } };
 process.on('SIGINT', () => { arreter(); process.exit(130); });
 
 let ok = 0; const echecs = [];
@@ -57,6 +63,17 @@ async function tests() {
   r = await req('/'); let h = await r.text();
   verif(!h.includes('class="maquette"') && !h.includes('noindex'), 'Pas de bandeau de proposition quand MAQUETTE = non');
   if (C.abonnements) { r = await req('/expertises'); const hx = await r.text(); verif(hx.includes('class="abo-grille"') && C.abonnements.formules.every((f) => hx.includes(f.nom)), 'Les formules d’abonnement s’affichent sur la page des offres'); }
+  if ((C.comparaison || {}).lignes) { r = await req('/expertises'); const hc = await r.text(); verif(hc.includes('class="cmp"') && C.comparaison.lignes.every((l) => hc.includes(l.critere.replace(/&/g, '&amp;'))), 'Le tableau de comparaison s’affiche sur la page des offres'); }
+  if ((C.pages_metier || []).length) {
+    const P = C.pages_metier.filter((x) => x.visible !== false);
+    let ok0 = 0;
+    for (const x of P) { r = await req('/' + x.id); const hp = await r.text(); if (r.status === 200 && hp.includes('<h1>') && hp.includes('FAQPage') && (!x.demo || hp.includes(x.demo))) ok0++; else console.log('    page métier en défaut : /' + x.id + ' ' + r.status); }
+    verif(ok0 === P.length, `Les ${P.length} pages par métier s’affichent (questions pour Google et démonstration)`);
+    h = await (await req('/')).text(); verif(P.every((x) => h.includes('href="/' + x.id + '"')), 'Le pied de page renvoie vers chaque page par métier');
+    h = await (await req('/sitemap.xml')).text(); verif(P.every((x) => h.includes('/' + x.id + '</loc>')), 'Le plan du site contient les pages par métier');
+    const mauvais = structuredClone(C); mauvais.pages_metier[0].id = 'contact';
+    verif(verifier(mauvais).erreurs.some((e) => /déjà pris/.test(e)), 'Une page par métier ne peut pas prendre l’adresse d’une autre page');
+  }
   if ((C.theme || {}).gabarit === 'studio') { r = await req('/'); const hs = await r.text(); verif(hs.includes('g-studio') && hs.includes('Bricolage Grotesque'), 'Gabarit « studio » : classe et polices du site'); r = await req('/fonts/bricolage-grotesque-latin-700-normal.woff2'); verif(r.status === 200, 'Police du gabarit « studio » servie'); }
   r = await req('/robots.txt'); verif((await r.text()).includes('Sitemap:'), 'robots.txt avec plan du site');
   r = await req('/sitemap.xml'); h = await r.text(); verif(h.includes('/realisations/') && !h.includes('?secteur'), 'Plan du site avec les réalisations');
@@ -90,6 +107,16 @@ async function tests() {
   j = await (await req('/api/contenu')).json();
   verif(j.contenu.theme.fond === base.theme.fond && j.contenu._schema === 'agence v1', 'Les couleurs du site ne peuvent pas être changées depuis la page de modification');
   verif(JSON.stringify(j.contenu.lots) === '["Peinture","Sols"]', 'Les listes de textes sont nettoyées par le serveur');
+  verif(!C.abonnements || (j.contenu.abonnements && j.contenu.abonnements.formules.length === C.abonnements.formules.length), 'Après un enregistrement, les formules d’abonnement sont conservées');
+  verif(!C.libelles || (j.contenu.libelles && j.contenu.libelles.nav_expertises === C.libelles.nav_expertises), 'Après un enregistrement, les libellés sont conservés');
+  verif(!(C.comparaison) || (j.contenu.comparaison && j.contenu.comparaison.lignes.length === C.comparaison.lignes.length), 'Après un enregistrement, la comparaison est conservée');
+  verif(!(C.pages_metier || []).length || (j.contenu.pages_metier || []).length === C.pages_metier.length, 'Après un enregistrement, les pages par métier sont conservées');
+  if ((C.pages_metier || []).length) {
+    const mp = structuredClone(j.contenu); mp.pages_metier[0].visible = false;
+    await req('/api/contenu', { method: 'PUT', ...corpsJson(mp) });
+    r = await req('/' + mp.pages_metier[0].id); verif(r.status === 404, 'Page par métier masquée : son adresse n’existe plus');
+    await req('/api/contenu', { method: 'PUT', ...corpsJson(j.contenu) });
+  }
   const m2 = structuredClone(j.contenu); m2.realisations[0].visible = false;
   await req('/api/contenu', { method: 'PUT', ...corpsJson(m2) });
   r = await req('/realisations/' + x0.id); verif(r.status === 404, 'Réalisation masquée : sa page n’existe plus');
@@ -123,6 +150,32 @@ async function tests() {
   }
   r = await req('/api/video', { method: 'POST', headers: { 'Content-Type': 'video/quicktime' }, body: fauxMp4 }); verif(r.status === 415, 'Vidéo .mov refusée (format non lu partout)');
 
+  /* Mesure d'audience sans cookie : les visiteurs sont comptés, pas les robots ni les outils */
+  const pause = (ms) => new Promise((ok) => setTimeout(ok, ms));
+  const ua = { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) Chrome/130.0 Safari/537.36' };
+  const avant = (await (await req('/api/audience?jours=1')).json()).jours[0];
+  r = await req('/', { cookie: false, headers: { ...ua, Referer: 'https://www.google.fr/' } }); h = await r.text();
+  verif(!/set-cookie/i.test([...r.headers.keys()].join(',')), 'Une visite ne dépose aucun cookie');
+  await req('/expertises', { cookie: false, headers: ua });
+  await req('/', { cookie: false, headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1)' } });
+  await req('/nexistepas', { cookie: false, headers: ua });
+  await pause(1500);
+  const apres = (await (await req('/api/audience?jours=1')).json()).jours[0];
+  verif(apres.t - avant.t === 2 && (apres.s.g || 0) - (avant.s.g || 0) === 1 && (apres.s.d || 0) - (avant.s.d || 0) === 1 && (apres.p['/'] || 0) - (avant.p['/'] || 0) === 1, 'Deux visites comptées (un robot et une page introuvable ne le sont pas), avec leur provenance');
+  verif(!JSON.stringify(apres).match(/\d+\.\d+\.\d+\.\d+|Mozilla/), 'Les totaux ne contiennent ni adresse IP ni navigateur');
+  r = await req('/api/audience'); verif(r.status === 200 && (await r.json()).jours.length === 30, 'La page de modification lit les 30 derniers jours');
+  r = await req('/api/audience', { cookie: false }); verif(r.status === 401, 'Les visites ne sont lisibles que connecté');
+
+  /* Sauvegarde nocturne (déclenchée à la main) : copie dans la mémoire du site et dans le stockage R2 d'essai */
+  r = await req('/__scheduled?cron=*'); await pause(1500);
+  let etat = (await (await req('/api/audience?jours=1')).json()).sauvegarde;
+  if (!etat) { r = await req('/cdn-cgi/handler/scheduled'); await pause(1500); etat = (await (await req('/api/audience?jours=1')).json()).sauvegarde; }
+  verif(etat && etat.kv && etat.r2 && etat.r2.contenu && !etat.r2.erreur, 'La sauvegarde nocturne copie le contenu (mémoire du site et stockage externe)');
+  verif(etat && etat.r2 && etat.r2.fichiers >= 2, 'La sauvegarde copie les photos et vidéos envoyées (' + (etat && etat.r2 ? etat.r2.fichiers : 0) + ' fichier(s))');
+  await req('/__scheduled?cron=*'); await pause(1500);
+  etat = (await (await req('/api/audience?jours=1')).json()).sauvegarde;
+  verif(etat && etat.r2 && etat.r2.fichiers === 0 && !etat.r2.erreur, 'Une deuxième nuit ne recopie pas les fichiers déjà copiés');
+
   /* Demande de contact d'un visiteur */
   const client = { nom: 'Client Test', societe: 'Test SAS', email: 'client@exemple.fr', telephone: '06 12 34 56 78', type: 'Bureaux', surface: '300 m²', ville: 'Nantes', message: 'Essai' };
   r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson(client) }); verif(r.status === 200, 'Un visiteur envoie une demande');
@@ -130,7 +183,7 @@ async function tests() {
   r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson({ ...client, telephone: '12' }) }); verif(r.status === 400, 'Demande sans téléphone refusée');
   j = await (await req('/api/demandes')).json();
   const dem = (j.demandes || []).find((c) => c.nom === 'Client Test');
-  verif(dem && dem.statut === 'nouvelle' && dem.societe === 'Test SAS' && dem.lignes.some(([k, v]) => k === 'Surface' && v === '300 m²'), 'La demande arrive complète dans la page de modification');
+  verif(dem && dem.statut === 'nouvelle' && dem.societe === 'Test SAS' && dem.lignes.some(([k, v]) => k === libellesDemande(C).surface && v === '300 m²'), 'La demande arrive complète dans la page de modification');
   if (dem) {
     for (const s of ['rappelee', 'devis', 'signee', 'classee']) { r = await req('/api/demandes/' + dem.id, { method: 'PATCH', ...corpsJson({ statut: s }) }); verif(r.status === 200, 'Statut « ' + s + ' »'); }
     r = await req('/api/demandes/' + dem.id, { method: 'PATCH', ...corpsJson({ statut: 'nimportequoi' }) }); verif(r.status === 400, 'Statut inconnu refusé');

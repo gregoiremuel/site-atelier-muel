@@ -4,7 +4,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { rendrePage, routes, LIBELLES } from '../public/assets/rendu.js';
+import { rendrePage, routes, LIBELLES, ADRESSES_RESERVEES } from '../public/assets/rendu.js';
 
 export const SCHEMA = 'agence v1';
 const FORME = {
@@ -30,7 +30,7 @@ const ELEMENTS = {
   references: ['nom', 'logo'],
 };
 /* Clés facultatives (ajoutées au moteur après Opéria : un contenu sans elles reste valide) */
-const FACULTATIVES = { '': ['libelles', 'abonnements', 'engagements'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte'], mentions: ['tva'], metiers: ['prix'], realisations: ['lien', 'lien_texte', 'etiquette'] };
+const FACULTATIVES = { '': ['libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte'], mentions: ['tva', 'nom_commercial'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette'] };
 const INTERDITS = [
   [/\bbienvenue\b/i, 'Bienvenue'], [/\bdécouvr(ez|ir)\b/i, 'Découvrez'], [/n['’]hésitez pas/i, 'N’hésitez pas'], [/au c(œ|oe)ur d/i, 'au cœur de'],
   [/\bvéritable/i, 'véritable'], [/\bincontournable/i, 'incontournable'], [/\bpassion/i, 'passion'], [/savoir-faire unique/i, 'savoir-faire unique'],
@@ -145,6 +145,47 @@ export function verifier(C) {
   C.equipe.forEach((p, i) => { if (vide(p.nom)) E(`equipe[${i}].nom est vide.`); photoOk(`equipe[${i}].photo`, p.photo); });
   C.references.forEach((r, i) => { if (vide(r.nom)) E(`references[${i}].nom est vide.`); photoOk(`references[${i}].logo`, r.logo); });
   listeTextes(C.garanties.points, 'garanties.points');
+  /* Comparaison avec un constructeur en ligne (facultative) */
+  if ('comparaison' in C) {
+    const K = C.comparaison;
+    if (!K || typeof K !== 'object' || Array.isArray(K)) E('« comparaison » doit être un objet (colonnes, lignes, titre, intro, note).');
+    else {
+      Object.keys(K).filter((k) => !['sur', 'titre', 'intro', 'colonnes', 'lignes', 'note'].includes(k)).forEach((k) => E(`Clé inconnue : comparaison.${k}`));
+      ['sur', 'titre', 'intro', 'note'].forEach((k) => { if (k in K && !estTexte(K[k])) E(`comparaison.${k} doit être un texte.`); });
+      if (!Array.isArray(K.colonnes) || K.colonnes.length !== 2 || K.colonnes.some((c) => vide(c))) E('comparaison.colonnes doit contenir exactement deux noms de colonne.');
+      if (!Array.isArray(K.lignes) || !K.lignes.length) E('comparaison.lignes doit être une liste d’au moins une ligne.');
+      else K.lignes.forEach((l, i) => {
+        if (!l || typeof l !== 'object') { E(`comparaison.lignes[${i}] doit être un objet { critere, a, b }.`); return; }
+        Object.keys(l).filter((k) => !['critere', 'a', 'b'].includes(k)).forEach((k) => E(`Clé inconnue : comparaison.lignes[${i}].${k}`));
+        ['critere', 'a', 'b'].forEach((k) => { if (vide(l[k])) E(`comparaison.lignes[${i}].${k} est vide.`); });
+      });
+      afaire.push('Comparaison : relire les tarifs publics du constructeur cité et noter la date du relevé avant l’ouverture.');
+    }
+  }
+  /* Pages par métier (facultatives) : une adresse /id chacune */
+  const PAGES = Array.isArray(C.pages_metier) ? C.pages_metier : [];
+  if ('pages_metier' in C && !Array.isArray(C.pages_metier)) E('« pages_metier » doit être une liste.');
+  const idsPages = new Set();
+  PAGES.forEach((x, i) => {
+    const n = `pages_metier[${i}] (${(x && x.nom) || '?'})`;
+    if (!x || typeof x !== 'object') { E(`pages_metier[${i}] doit être un objet.`); return; }
+    Object.keys(x).filter((k) => !['id', 'nom', 'titre', 'description', 'accroche', 'texte', 'prix', 'points', 'demo', 'demo_texte', 'bouton', 'photo', 'questions', 'visible', 'liste'].includes(k)).forEach((k) => E(`Clé inconnue : ${n}.${k}`));
+    if (!/^[a-z0-9-]{3,60}$/.test(x.id || '')) E(`${n}.id doit être en minuscules, chiffres et tirets (3 à 60 signes).`);
+    else if (ADRESSES_RESERVEES.includes(x.id) || idsPages.has(x.id)) E(`${n}.id « ${x.id} » est déjà pris par une autre adresse du site.`);
+    idsPages.add(x.id);
+    if (vide(x.nom)) E(`${n}.nom est vide.`);
+    ['titre', 'description', 'accroche', 'texte', 'prix', 'demo_texte', 'bouton'].forEach((k) => { if (k in x && !estTexte(x[k])) E(`${n}.${k} doit être un texte.`); });
+    if ('points' in x) listeTextes(x.points, `${n}.points`);
+    if (x.demo && !/^(\/[^\s<>"]*|https:\/\/[^\s<>"]+)$/.test(String(x.demo).trim())) E(`${n}.demo doit commencer par / ou https://`);
+    ['visible', 'liste'].forEach((k) => { if (k in x && typeof x[k] !== 'boolean') E(`${n}.${k} doit valoir true ou false.`); });
+    if (x.photo && photoOk(`${n}.photo`, x.photo) === 'essai') essaisAutres++;
+    if (!Array.isArray(x.questions) || !x.questions.length) A(`${n} : aucune question (la page n’aura pas de FAQ).`);
+    else x.questions.forEach((q, j) => {
+      if (!q || typeof q !== 'object' || vide(q.q) || vide(q.r)) E(`${n}.questions[${j}] doit avoir une question « q » et une réponse « r ».`);
+      else Object.keys(q).filter((k) => !['q', 'r'].includes(k)).forEach((k) => E(`Clé inconnue : ${n}.questions[${j}].${k}`));
+    });
+  });
+  C.metiers.forEach((m, i) => { if (m.lien && !/^\/[a-z0-9#-]+$/.test(m.lien)) E(`metiers[${i}].lien doit être une adresse du site (ex. /visibilite-google).`); else if (m.lien && !idsPages.has(m.lien.slice(1)) && !ADRESSES_RESERVEES.includes(m.lien.slice(1))) A(`metiers[${i}].lien « ${m.lien} » ne correspond à aucune page.`); });
   /* Page « Engagements » (facultative) : blocs { titre, texte, points } */
   const ENG = Array.isArray(C.engagements) ? C.engagements : [];
   if ('engagements' in C && !Array.isArray(C.engagements)) E('« engagements » doit être une liste.');
@@ -180,6 +221,7 @@ export function verifier(C) {
   const Mn = C.mentions;
   const manque = ['raison_sociale', 'rcs', 'adresse', 'directeur_publication'].filter((k) => vide(Mn[k]));
   if (manque.length) afaire.push('Mentions légales à compléter : ' + manque.join(', ') + '.');
+  if (!vide(Mn.nom_commercial)) afaire.push(`Nom commercial « ${Mn.nom_commercial} » : vérifier qu’il est bien celui du registre (RNE) avant l’ouverture, sinon faire la modification sur le Guichet unique.`);
 
   /* Style des textes */
   const textes = [['accueil.sur_titre', C.accueil.sur_titre], ['accueil.titre', C.accueil.titre], ['accueil.texte', C.accueil.texte], ...(C.accueil.reperes || []).map((v, i) => [`accueil.reperes[${i}]`, v]), ['accueil.intro_titre', C.accueil.intro_titre], ['accueil.intro_texte', C.accueil.intro_texte],
@@ -188,7 +230,10 @@ export function verifier(C) {
     ['presentation.texte', C.presentation.texte], ['garanties.texte', C.garanties.texte], ...C.garanties.points.map((v, i) => [`garanties.points[${i}]`, v]),
     ...C.metiers.flatMap((m, i) => [[`metiers[${i}].accroche`, m.accroche], [`metiers[${i}].texte`, m.texte], ...m.points.map((v, j) => [`metiers[${i}].points[${j}]`, v])]),
     ...C.realisations.flatMap((x, i) => [[`realisations[${i}].accroche`, x.accroche], [`realisations[${i}].texte`, x.texte], [`realisations[${i}].mission`, x.mission], ...(x.interventions || []).map((v, j) => [`realisations[${i}].interventions[${j}]`, v])]),
-    ...C.chiffres.map((c, i) => [`chiffres[${i}].libelle`, c.libelle])].filter(([, v]) => estTexte(v) && v.trim());
+    ...C.chiffres.map((c, i) => [`chiffres[${i}].libelle`, c.libelle]),
+    ...PAGES.flatMap((x, i) => (x && typeof x === 'object' ? [[`pages_metier[${i}].accroche`, x.accroche], [`pages_metier[${i}].texte`, x.texte], [`pages_metier[${i}].prix`, x.prix], ...((Array.isArray(x.points) ? x.points : []).map((v, j) => [`pages_metier[${i}].points[${j}]`, v])), ...((Array.isArray(x.questions) ? x.questions : []).flatMap((q, j) => (q ? [[`pages_metier[${i}].questions[${j}].q`, q.q], [`pages_metier[${i}].questions[${j}].r`, q.r]] : [])))] : [])),
+    ...(C.comparaison && typeof C.comparaison === 'object' ? [['comparaison.intro', C.comparaison.intro], ['comparaison.note', C.comparaison.note], ...((Array.isArray(C.comparaison.lignes) ? C.comparaison.lignes : []).flatMap((l, i) => (l ? [[`comparaison.lignes[${i}].a`, l.a], [`comparaison.lignes[${i}].b`, l.b]] : [])))] : []),
+    ...(C.abonnements && typeof C.abonnements === 'object' ? [['abonnements.intro', C.abonnements.intro], ['abonnements.note', C.abonnements.note], ...((Array.isArray(C.abonnements.formules) ? C.abonnements.formules : []).flatMap((f, i) => (f ? [[`abonnements.formules[${i}].description`, f.description], ...((Array.isArray(f.points) ? f.points : []).map((v, j) => [`abonnements.formules[${i}].points[${j}]`, v]))] : [])))] : [])].filter(([, v]) => estTexte(v) && v.trim());
   textes.forEach(([c, v]) => {
     if (v.includes('!')) E(`${c} : point d’exclamation.`);
     if (/\p{Extended_Pictographic}/u.test(v)) E(`${c} : emoji.`);

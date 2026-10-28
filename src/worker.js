@@ -73,6 +73,9 @@ async function cookieSession(env) {
 /* ---------- Vérification du contenu envoyé par la page de modification ---------- */
 const CLES_OBJETS = ['agence', 'annonce', 'accueil', 'presentation', 'garanties', 'affichage', 'contact', 'mentions'];
 const CLES_LISTES = ['chiffres', 'metiers', 'etapes', 'secteurs', 'realisations', 'equipe', 'references', 'engagements'];
+/* Clés facultatives : gardées telles qu'elles sont enregistrées quand le contenu envoyé ne les a pas, sinon remplacées (sans elles, un contenu enregistré perdrait ses formules d'abonnement et ses libellés) */
+const OBJETS_FACULTATIFS = ['abonnements', 'libelles', 'comparaison'];
+const LISTES_FACULTATIVES = ['pages_metier'];
 /* Réglés par Grégoire, jamais modifiables depuis la page de modification */
 const CLES_FIXES = ['_schema', 'theme', 'reglages'];
 const STATUTS = ['nouvelle', 'rappelee', 'devis', 'signee', 'classee'];
@@ -81,15 +84,87 @@ function nettoyer(c, actuel) {
   const out = {};
   CLES_OBJETS.forEach((k) => { out[k] = c[k] && typeof c[k] === 'object' && !Array.isArray(c[k]) ? c[k] : (actuel[k] || {}); });
   CLES_LISTES.forEach((k) => { out[k] = Array.isArray(c[k]) ? c[k].filter((x) => x && typeof x === 'object').slice(0, 200) : (actuel[k] || []); });
+  OBJETS_FACULTATIFS.forEach((k) => {
+    if (c[k] && typeof c[k] === 'object' && !Array.isArray(c[k])) out[k] = c[k]; else if (actuel[k]) out[k] = actuel[k];
+  });
+  LISTES_FACULTATIVES.forEach((k) => {
+    if (Array.isArray(c[k])) out[k] = c[k].filter((x) => x && typeof x === 'object').slice(0, 40); else if (actuel[k]) out[k] = actuel[k];
+  });
   out.lots = Array.isArray(c.lots) ? c.lots.filter((x) => typeof x === 'string').map((x) => x.slice(0, 200)).slice(0, 60) : (actuel.lots || []);
   out.credits_photos = String(c.credits_photos || '').slice(0, 800);
   CLES_FIXES.forEach((k) => { out[k] = actuel[k] || {}; });
   return out;
 }
 
+/* ---------- Mesure d'audience sans cookie ---------- */
+/* Pages vues comptées par jour dans un seul enregistrement : aucun cookie, aucune adresse IP, aucun identifiant de visiteur n'est gardé. */
+const ROBOTS = /bot|crawl|spider|slurp|preview|headless|monitor|lighthouse|pingdom|uptime|curl|wget|python|java|go-http|node|undici|axios/i;
+const PLAFOND_VUES_JOUR = 800; /* la mémoire gratuite accepte 1 000 écritures par jour : on s'arrête avant */
+const jourParis = (d) => (d || new Date()).toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' });
+async function compterVue(env, req, chemin) {
+  if (ROBOTS.test(req.headers.get('User-Agent') || 'robot') || (req.headers.get('Sec-Purpose') || '').includes('prefetch')) return;
+  const cle = 'vue:' + jourParis();
+  const j = (await env.CONTENU.get(cle, { type: 'json' })) || { t: 0, p: {}, s: { g: 0, d: 0, a: 0, i: 0 } };
+  if (j.t >= PLAFOND_VUES_JOUR) return;
+  j.t++;
+  const page = j.p[chemin] != null || Object.keys(j.p).length < 40 ? chemin : '(autres)';
+  j.p[page] = (j.p[page] || 0) + 1;
+  /* Provenance : moteur de recherche (g), lien d'un autre site (a), adresse tapée (d), navigation dans le site (i) */
+  let h = '';
+  try { h = new URL(req.headers.get('Referer') || '').hostname; } catch (e) { /* pas de provenance */ }
+  const s = !h ? 'd' : h === new URL(req.url).hostname ? 'i' : /(^|\.)(google|bing|duckduckgo|qwant|ecosia|yahoo)\./.test(h) ? 'g' : 'a';
+  j.s[s] = (j.s[s] || 0) + 1;
+  await env.CONTENU.put(cle, JSON.stringify(j), { expirationTtl: 400 * 24 * 3600 });
+}
+/* Les n derniers jours (le plus ancien d'abord), en jours civils de Paris */
+function derniersJours(n) {
+  const base = Date.parse(jourParis() + 'T12:00:00Z');
+  return Array.from({ length: n }, (_, i) => new Date(base - (n - 1 - i) * 86400e3).toISOString().slice(0, 10));
+}
+
+/* ---------- Sauvegarde nocturne ---------- */
+/* Chaque nuit : une copie du contenu gardée 7 nuits dans la mémoire du site. Si un stockage R2 « SAUVEGARDE » est relié (wrangler.jsonc), le contenu y est aussi copié (30 jours),
+   avec les photos et vidéos (une seule fois chacune, 30 fichiers par nuit au plus). */
+const NUITS_GARDEES = 7, FICHIERS_PAR_NUIT = 30;
+async function sauvegarder(env) {
+  const jour = jourParis();
+  const etat = { jour, quand: new Date().toISOString(), kv: false, r2: null };
+  const c = await env.CONTENU.get('contenu');
+  if (c) { await env.CONTENU.put('sauvegarde:' + jour, c, { expirationTtl: (NUITS_GARDEES + 1) * 86400 }); etat.kv = true; }
+  if (env.SAUVEGARDE) {
+    const r2 = { contenu: false, fichiers: 0, restants: 0 };
+    try {
+      await env.SAUVEGARDE.put('contenu/' + jour + '.json', c || JSON.stringify(initial), { httpMetadata: { contentType: 'application/json' } });
+      r2.contenu = true;
+      for (const prefixe of ['photo:', 'video:']) {
+        let curseur;
+        do {
+          const l = await env.CONTENU.list({ prefix: prefixe, cursor: curseur, limit: 200 });
+          for (const k of l.keys) {
+            const nom = 'medias/' + k.name.replace(':', '/');
+            if (await env.SAUVEGARDE.head(nom)) continue;
+            if (r2.fichiers >= FICHIERS_PAR_NUIT) { r2.restants++; continue; }
+            const { value, metadata } = await env.CONTENU.getWithMetadata(k.name, { type: 'arrayBuffer' });
+            if (!value) continue;
+            await env.SAUVEGARDE.put(nom, value, { httpMetadata: { contentType: (metadata && metadata.type) || 'application/octet-stream' } });
+            r2.fichiers++;
+          }
+          curseur = l.list_complete ? undefined : l.cursor;
+        } while (curseur);
+      }
+      const limite30 = derniersJours(31)[0];
+      const anciens = (await env.SAUVEGARDE.list({ prefix: 'contenu/' })).objects.filter((o) => o.key.slice(8, 18) < limite30).map((o) => o.key);
+      if (anciens.length) await env.SAUVEGARDE.delete(anciens);
+    } catch (e) { r2.erreur = String((e && e.message) || e).slice(0, 200); }
+    etat.r2 = r2;
+  }
+  await env.CONTENU.put('etat:sauvegarde', JSON.stringify(etat));
+}
+
 /* ---------- Routes ---------- */
 export default {
-  async fetch(req, env) {
+  async scheduled(event, env, ctx) { ctx.waitUntil(sauvegarder(env)); },
+  async fetch(req, env, ctx) {
     const url = new URL(req.url);
     const p = url.pathname;
     const methode = req.method;
@@ -210,6 +285,12 @@ export default {
           await env.CONTENU.put('video:' + id, buf, { metadata: { type } });
           return json({ ok: true, url: '/videos/' + id });
         }
+        if (methode === 'GET' && p === '/api/audience') {
+          const n = Math.min(90, Math.max(1, parseInt(url.searchParams.get('jours') || '30', 10) || 30));
+          const jours = derniersJours(n);
+          const vues = await Promise.all(jours.map((j) => env.CONTENU.get('vue:' + j, { type: 'json' })));
+          return json({ ok: true, jours: jours.map((jour, i) => ({ jour, ...(vues[i] || { t: 0, p: {}, s: {} }) })), plafond: PLAFOND_VUES_JOUR, sauvegarde: await env.CONTENU.get('etat:sauvegarde', { type: 'json' }) });
+        }
         if (methode === 'GET' && p === '/api/demandes') {
           const liste = await env.CONTENU.list({ prefix: 'demande:', limit: 60 });
           const dems = (await Promise.all(liste.keys.map((k) => env.CONTENU.get(k.name, { type: 'json' })))).filter(Boolean);
@@ -236,6 +317,7 @@ export default {
       if (methode === 'GET' || methode === 'HEAD') {
         const C = await lireContenu(env);
         const { statut, html: page } = rendrePage(C, p + url.search, { maquette: estMaquette(env), lienAdmin: '/admin/', apiContact: '/api/contact' });
+        if (statut === 200 && methode === 'GET' && !estMaquette(env)) ctx.waitUntil(compterVue(env, req, p.replace(/\/+$/, '').slice(0, 80) || '/').catch(() => {}));
         return html(page, statut);
       }
       return new Response('Méthode non permise', { status: 405 });

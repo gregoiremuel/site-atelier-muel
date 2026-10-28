@@ -1098,20 +1098,16 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition{--sable:#ebe5d6;--trame:radial-gradient(rgba(34,54,79,.34) 1.1px,transparent 1.2px) 0 0/14px 14px}
 .g-edition main{counter-reset:rub}
 .g-edition .sec-tete{counter-increment:rub}
-.g-edition .sec-tete::before{content:counter(rub,decimal-leading-zero);display:block;margin-bottom:14px;font:600 .8125rem/1 var(--texte);letter-spacing:.14em;color:var(--bleu)}
-.g-edition .sec-tete::after{content:"";display:block;width:36px;height:3px;margin-top:18px;background:var(--bleu)}
+.g-edition .sec-tete::before{display:none;content:counter(rub,decimal-leading-zero);display:block;margin-bottom:14px;font:600 .8125rem/1 var(--texte);letter-spacing:.14em;color:var(--bleu)}
+.g-edition .sec-tete::after{display:none;content:"";display:block;width:36px;height:3px;margin-top:18px;background:var(--bleu)}
 .g-edition .sec-tete-ligne::after{display:none}
 .g-edition .clair{background:var(--sable)}
-.g-edition .btn-or{box-shadow:4px 4px 0 var(--encre);transition:transform .12s,box-shadow .12s,background .12s}
-.g-edition .btn-or:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--encre)}
-.g-edition .btn-or:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--encre)}
-@media (prefers-reduced-motion:reduce){.g-edition .btn-or{transition:none}}
 
 /* Composition de l'accueil */
 .g-edition .hero-compo{position:relative;grid-column:1;width:100%;max-width:520px;aspect-ratio:1/1.02;justify-self:center;margin-top:12px;isolation:isolate}
 .g-edition .compo-trame{position:absolute;right:-6%;top:-3%;width:46%;height:42%;background:var(--trame);z-index:0}
 .g-edition .compo-aplat{position:absolute;left:0;bottom:0;width:62%;height:56%;background:var(--bleu);z-index:0}
-.g-edition .compo-vue{position:absolute;display:block;background:#fff;border:1px solid var(--encre);box-shadow:6px 6px 0 var(--encre);overflow:hidden;z-index:1}
+.g-edition .compo-vue{position:absolute;display:block;background:#fff;border:1px solid var(--trait);box-shadow:0 10px 26px rgba(16,18,22,.16);overflow:hidden;z-index:1}
 .g-edition .compo-vue img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
 .g-edition .compo-v1{left:12%;top:2%;width:46%;height:56%}
 .g-edition .compo-v2{right:2%;top:14%;width:40%;height:50%;z-index:2}
@@ -1125,24 +1121,6 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
   .g-edition .hero:has(.hero-compo) .hero-gar li + li{padding-left:24px;border-left:var(--fil)}
 }
 @media (max-width:899px){.g-edition .hero-compo{max-width:420px;order:5}}
-
-/* Têtes de page : trame de points et deux formes, sans texte */
-@media (min-width:1000px){
-  .g-edition .tete-page{position:relative}
-  .g-edition .tete-page::after{content:"";position:absolute;right:var(--gut);top:clamp(28px,4vw,56px);width:210px;height:150px;pointer-events:none;background:
-    linear-gradient(var(--bleu),var(--bleu)) 62px 0/84px 84px no-repeat,
-    radial-gradient(rgba(34,54,79,.34) 1.1px,transparent 1.2px) 0 40px/14px 14px,
-    linear-gradient(var(--sable),var(--sable)) 118px 52px/92px 98px no-repeat;opacity:.95}
-  .g-edition.p-contact .tete-page::after,.g-edition.p-engagements .tete-page::after{background:
-    radial-gradient(circle at 60% 40%,var(--bleu) 0 42px,transparent 43px),
-    radial-gradient(rgba(34,54,79,.34) 1.1px,transparent 1.2px) 0 0/14px 14px,
-    linear-gradient(var(--sable),var(--sable)) 100px 60px/100px 80px no-repeat}
-  .g-edition.p-metier .tete-page::after{background:
-    linear-gradient(135deg,transparent 49%,var(--bleu) 50%) 40px 0/110px 110px no-repeat,
-    radial-gradient(rgba(34,54,79,.34) 1.1px,transparent 1.2px) 0 50px/14px 14px,
-    linear-gradient(var(--sable),var(--sable)) 110px 40px/90px 100px no-repeat}
-  .g-edition.p-texte .tete-page::after{display:none}
-}
 
 /* Pictogrammes des offres de l'accueil (traits fins, dessinés ici) */
 .g-edition .metiers li a{position:relative}

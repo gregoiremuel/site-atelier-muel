@@ -344,7 +344,6 @@ const compoHero = (essais) => {
   return `<div class="hero-compo" role="group" aria-label="Aperçus de sites d’exemple">
       <span class="compo-trame" aria-hidden="true"></span><span class="compo-aplat" aria-hidden="true"></span>
       ${vues.map((v, i) => `<span class="compo-vue compo-v${i + 1}">${img(v, 700, 'compo-img', i === 0, '')}</span>`).join('')}
-      <svg class="compo-sceau" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="sceau-c" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1 -88 0"/></defs><circle cx="60" cy="60" r="58" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="60" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="1"/><text font-size="9.5" letter-spacing="2.2" fill="currentColor" font-weight="600"><textPath href="#sceau-c">SITES D’EXEMPLE · SITES D’EXEMPLE ·</textPath></text><path d="M45 62l10 10 20-24" fill="none" stroke="currentColor" stroke-width="3"/></svg>
     </div>`;
 };
 

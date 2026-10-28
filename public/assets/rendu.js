@@ -24,7 +24,7 @@ export const LIBELLES = {
   refs_sur: 'Références', refs_titre: 'Ils nous ont confié leurs locaux',
   page_exp_titre: 'Concevoir, coordonner, livrer', page_exp_description: '',
   lots_sur: 'Tous corps d’état', lots_titre: 'Les travaux que nous coordonnons',
-  page_real_titre: 'Des locaux transformés',
+  page_real_titre: 'Des locaux transformés', page_real_chapo: '',
   fiche_client: 'Client', fiche_lieu: 'Lieu', fiche_surface: 'Surface', fiche_mission: 'Mission', fiche_annee: 'Année', fiche_secteur: 'Secteur', interventions: 'Interventions',
   garanties_sur: 'Garanties', garanties_titre: 'Nos engagements', eng_sur: 'Engagements', page_eng_titre: 'Hébergement, données, sauvegardes', page_eng_chapo: '', eng_index: 'Sur cette page', eng_lien: 'Voir tous les engagements', equipe_sur: 'L’équipe', equipe_titre: 'Vos interlocuteurs',
   contact_titre: 'Parlons de votre projet', contact_chapo: 'Quelques lignes sur vos locaux, vos délais et votre budget suffisent pour commencer.',
@@ -565,6 +565,7 @@ function pageRealisations(C, D, secteurId) {
   <section class="tete-page wrap">
     <p class="sur">${esc(libelle(C, 'real_sur'))}</p>
     <h1>${esc(libelle(C, 'page_real_titre'))}</h1>
+    ${libelle(C, 'page_real_chapo') ? `<p class="chapo">${esc(libelle(C, 'page_real_chapo'))}</p>` : ''}
     ${D.secteursUtiles.length > 1 ? `<nav class="filtres" aria-label="Filtrer par secteur"><a href="/realisations"${!s ? ' aria-current="page"' : ''}>Tout</a>${D.secteursUtiles.map((x) => `<a href="/realisations?secteur=${esc(x.id)}"${s && s.id === x.id ? ' aria-current="page"' : ''}>${esc(x.nom)}</a>`).join('')}</nav>` : ''}
   </section>
   <section class="sec sec-serre">

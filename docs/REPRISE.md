@@ -22,6 +22,8 @@
 
 **Skills « founder »** : les scripts du dépôt MIT n'ont **pas** été exécutés (le système de permissions l'a refusé). J'ai écrit un petit script équivalent (`docs/validation-2026-10-28/panel_greg.py`) ; voir `RESULTATS.md`. Ne pas insister pour les installer sans accord explicite de Greg.
 
+**Design (révision 3, 28/10/2026).** Un seul univers visuel (papier, encre, un bleu), noir réservé au pied de page, offres en volets, démonstrations 2×2 coupées sur un bloc entier (`outils/vignettes.mjs`), capture de la page de modification lisible. Trois tours de critiques extérieures (directeur artistique 7,3 puis 6,5 sur 10 ; détecteur de look IA 22 % puis 30 % ; commerçante 7 sur 10, prendrait contact). Verdict : propre et cohérent, **pas encore une identité** ; l'écart vient surtout de l'absence de photos de Greg et d'un vrai client : `docs/PHOTOS-A-FOURNIR.md`.
+
 ## Décisions de Greg : prises par défaut le 28/10/2026
 Nom commercial « Grégoire Muel » ; domaines `gregoiremuel.fr` et `ateliermuel.fr` ; prix 590 € une fois, 1 290 €, 1 900 €, Sérénité 19 €, Croissance 49 € (1 heure), Visibilité Google 39 € ; métiers : restaurants, artisans du bâtiment, fleuristes, commerces de bouche (Paris 16e, Boulogne, Paris 15e) ; aucun pilote connu ; Opéria non cité ; salarié en parallèle (joaillerie) ; 18 à 25 ans ; pas de second compte bancaire (Crédit Agricole) ; franchise de TVA non confirmée.
 

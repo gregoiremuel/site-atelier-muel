@@ -90,7 +90,21 @@ try {
   for (const [contenu, id] of sites) {
     const { ctx, page } = await mobile(pathToFileURL(join(tmp, 'moteur-' + id + '.html')).href, id, 487);
     await page.evaluate(() => { const m = document.querySelector('.maquette'); if (m) m.remove(); document.querySelectorAll('.bar').forEach((e) => e.remove()); });
+    /* Coupe propre : la capture s'arrête à la fin du dernier bloc entièrement visible (titre, paragraphe, image, bouton), le reste prend la couleur de fond de la page */
+    const coupe = await page.evaluate(() => {
+      let bas = 0;
+      for (const e of document.querySelectorAll('body *')) {
+        const r = e.getBoundingClientRect(), cs = getComputedStyle(e);
+        if (!r.height || r.height < 8 || cs.position === 'fixed' || cs.position === 'sticky' || cs.visibility === 'hidden') continue;
+        if (!e.matches('h1,h2,h3,p,img,a.btn,a[class*=btn],button,figure,picture,ul,ol,li,header,nav')) continue;
+        if (r.bottom <= window.innerHeight - 6 && r.bottom > bas) bas = r.bottom;
+      }
+      return { bas: Math.max(300, Math.ceil(bas + 18)), fond: getComputedStyle(document.body).backgroundColor };
+    });
     await page.screenshot({ path: join(tmp, 'tuile-' + id + '.png') });
+    const [, rr, gg, bb] = (coupe.fond.match(/\d+/g) || []).length >= 3 ? ['', ...coupe.fond.match(/\d+/g)] : ['', 255, 255, 255];
+    const fondHex = '#' + [rr, gg, bb].map((v) => Number(v).toString(16).padStart(2, '0')).join('');
+    convertir(join(tmp, 'tuile-' + id + '.png'), '-crop', `780x${Math.min(974, coupe.bas * 2)}+0+0`, '+repage', '-background', fondHex, '-gravity', 'north', '-extent', '780x974', join(tmp, 'tuile-' + id + '.png'));
     tuiles.push(join(tmp, 'tuile-' + id + '.png'));
     convertir(join(tmp, 'tuile-' + id + '.png'), '-strip', '-interlace', 'JPEG', '-quality', '80', join(sortie, 'tuile-' + id + '.jpg')); console.log('public/assets/photos/tuile-' + id + '.jpg');
     /* offres : une partie plus bas dans la page */

@@ -219,7 +219,7 @@ export default {
         if (estMaquette(env)) return json({ ok: false, erreur: 'Site en démonstration : la demande n’a pas été envoyée.' }, 403);
         const Cc = await lireContenu(env);
         if ((Cc.contact || {}).actif === false) return json({ ok: false, erreur: 'Le formulaire est fermé.' }, 403);
-        if (!(await limite(env, 'dem:' + ip(req), 6, 600))) return json({ ok: false, erreur: 'Trop de demandes, réessayez dans quelques minutes.' }, 429);
+        if (!(await limite(env, 'dem:' + ip(req), 10, 600))) return json({ ok: false, erreur: 'Trop de demandes, réessayez dans quelques minutes.' }, 429);
         const corps = await req.json().catch(() => null);
         const t2 = (v, n) => String(v == null ? '' : v).trim().slice(0, n);
         if (!corps || !t2(corps.nom, 120) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t2(corps.email, 200)) || String(corps.telephone || '').replace(/\D/g, '').length < 6) return json({ ok: false, erreur: 'Demande incomplète.' }, 400);

@@ -202,6 +202,17 @@ async function tests() {
   await req('/api/contenu', { method: 'PUT', ...corpsJson(ferme) });
   r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson(client) }); verif(r.status === 403, 'Formulaire fermé : demandes refusées par le serveur');
 
+  /* Changer le mot de passe depuis la page de modification */
+  const NOUVEAU = 'nouvelle-phrase-secrete-42';
+  r = await req('/api/mot-de-passe', { method: 'POST', ...corpsJson({ actuel: 'faux-mot-de-passe', nouveau: NOUVEAU }) }); verif(r.status === 403, 'Changement de mot de passe refusé si le mot de passe actuel est faux');
+  r = await req('/api/mot-de-passe', { method: 'POST', ...corpsJson({ actuel: MDP, nouveau: 'court' }) }); verif(r.status === 400, 'Nouveau mot de passe de moins de 12 caractères refusé');
+  r = await req('/api/mot-de-passe', { method: 'POST', ...corpsJson({ actuel: MDP, nouveau: MDP }) }); verif(r.status === 400, 'Nouveau mot de passe identique à l’ancien refusé');
+  r = await req('/api/mot-de-passe', { method: 'POST', cookie: false, ...corpsJson({ actuel: MDP, nouveau: NOUVEAU }) }); verif(r.status === 401, 'Changement de mot de passe refusé sans connexion');
+  r = await req('/api/mot-de-passe', { method: 'POST', ...corpsJson({ actuel: MDP, nouveau: NOUVEAU }) }); verif(r.status === 200, 'Mot de passe changé');
+  r = await req('/api/connexion', { method: 'POST', cookie: false, ...corpsJson({ motdepasse: NOUVEAU }) }); verif(r.status === 200 && /session|boutique|=/.test(r.headers.get('set-cookie') || ''), 'Connexion avec le nouveau mot de passe');
+  r = await req('/api/connexion', { method: 'POST', cookie: false, ...corpsJson({ motdepasse: MDP }) }); verif(r.status === 401, 'L’ancien mot de passe ne marche plus');
+  r = await req('/api/contenu'); verif(r.status === 200, 'La session en cours reste ouverte après le changement');
+
   /* Retour en arrière, déconnexion, limites */
   r = await req('/api/annuler', { method: 'POST' }); j = await r.json(); verif(j.ok && j.contenu.contact.actif !== false, 'Revenir en arrière rétablit la version précédente');
   r = await req('/api/deconnexion', { method: 'POST' }); verif(/Max-Age=0/.test(r.headers.get('set-cookie') || ''), 'Déconnexion');

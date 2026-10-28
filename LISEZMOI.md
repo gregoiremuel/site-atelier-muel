@@ -69,7 +69,7 @@ Photos : 1200 px de large, JPEG qualité 78, sans métadonnées (GPS comprises),
 | `npm run verifier` | Contrôle le contenu et liste ce qui reste à faire. |
 | `npm test` | Lance le vrai serveur sur l'ordinateur et le teste de bout en bout. |
 | `npm run apercu` | Fabrique `demonstration.html` (le site et son page de modification, en un fichier). |
-| `npm run mot-de-passe` | Crée le mot de passe de la page de modification et son empreinte. |
+| `npm run mot-de-passe` | Crée le mot de passe de départ de la page de modification et son empreinte (Secret `ADMIN_HASH`). |
 | `npm run accessibilite` | Audit d'accessibilité : axe-core (WCAG 2.2 AA) sur chaque page, en bureau, mobile et « moins d'animations », puis parcours au clavier (demande Playwright). |
 | `npm run demos` | Refait les quatre démonstrations avec le moteur vitrine du kit. |
 | `npm run vignettes` | Refait les vignettes et visuels à partir des démonstrations (et d'Opéria si `../site-operia` est là). |
@@ -85,3 +85,9 @@ Photos : 1200 px de large, JPEG qualité 78, sans métadonnées (GPS comprises),
 | `public/fonts/` | Polices (Bricolage Grotesque, DM Sans pour ce site ; Playfair et Manrope pour le gabarit classique) |
 | `public/assets/gregoire-muel-monogramme.svg` | Icône d'onglet (GM) |
 | `src/worker.js`, `public/assets/*`, `outils/` | Le moteur agence (voir le kit) |
+
+
+## Changer le mot de passe de la page de modification
+- **Depuis la page de modification** : rubrique « Mot de passe » (mot de passe actuel, nouveau de 12 caractères au moins, confirmation). Le serveur enregistre une empreinte (jamais le mot de passe) dans la mémoire du site, clé `admin:hash`, qui **l'emporte sur le Secret `ADMIN_HASH`**. La session ouverte reste valable. Après 8 essais ratés en 15 minutes, le changement est bloqué.
+- **Mot de passe oublié** : supprimer la clé pour revenir au mot de passe du Secret `ADMIN_HASH` : `npx wrangler kv key delete admin:hash --binding CONTENU --remote` (syntaxe à vérifier avec `npx wrangler kv key --help` selon la version de wrangler), ou donner un nouveau `ADMIN_HASH` (`npm run mot-de-passe`) puis supprimer la clé.
+- Dans la démonstration, la rubrique répond qu'elle n'est pas disponible.

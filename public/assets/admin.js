@@ -64,6 +64,11 @@ const vraiApi = {
     if (!j.ok) throw new Error(j.erreur || 'Demandes indisponibles.');
     return j.demandes;
   },
+  async motDePasse(actuel, nouveau) {
+    const r = await fetch('/api/mot-de-passe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ actuel, nouveau }) });
+    const j = await r.json().catch(() => ({}));
+    if (!j.ok) throw new Error(j.erreur || 'Changement impossible.');
+  },
   async audience(jours) {
     const r = await fetch('/api/audience?jours=' + jours);
     const j = await r.json().catch(() => ({}));
@@ -142,6 +147,7 @@ const demoApi = {
       ex('ex2', 50, 'devis', 'Exemple : Paul Durand', [['E-mail', 'exemple@exemple.fr'], ['Téléphone', '06 00 00 00 02'], ['Type de locaux', 'Commerce ou restaurant'], ['Ville du projet', 'Saint-Nazaire'], ['Projet', 'Exemple : rénovation d’une cellule commerciale.']]),
     ]);
   },
+  async motDePasse() { throw new Error('Indisponible dans la démonstration : le vrai site a son propre mot de passe.'); },
   async audience(jours) {
     const base = Date.parse(new Date().toISOString().slice(0, 10) + 'T12:00:00Z');
     const mod = [7, 12, 9, 15, 11, 6, 4];
@@ -450,6 +456,27 @@ function blocVisites() {
     boite);
 }
 
+/* ---------- Mot de passe : changé ici, gardé par le serveur (empreinte, jamais le mot de passe) ---------- */
+function blocMotDePasse() {
+  const champMdp = (id, libelle, auto) => { const i = el('input', { id, type: 'password', autocomplete: auto, class: 'saisie' }); return [i, el('div', { class: 'champ' }, el('label', { for: id, text: libelle }), i)]; };
+  const [a, ba] = champMdp('mdp-actuel', 'Mot de passe actuel', 'current-password');
+  const [n, bn] = champMdp('mdp-nouveau', 'Nouveau mot de passe (12 caractères au moins)', 'new-password');
+  const [c, bc] = champMdp('mdp-confirme', 'Nouveau mot de passe, une seconde fois', 'new-password');
+  const msg = el('p', { class: 'aide', role: 'status', 'aria-live': 'polite' });
+  const dire = (texte, erreur) => { msg.textContent = texte; msg.className = erreur ? 'erreur' : 'aide'; msg.setAttribute('role', erreur ? 'alert' : 'status'); };
+  const bouton = el('button', { type: 'button', class: 'btn', text: 'Changer le mot de passe', onclick: async () => {
+    if (n.value.length < 12) return dire('Le nouveau mot de passe doit faire 12 caractères au moins (une phrase, par exemple).', true);
+    if (n.value !== c.value) return dire('Les deux nouveaux mots de passe ne sont pas identiques.', true);
+    bouton.disabled = true; dire('Changement en cours…');
+    try { await api.motDePasse(a.value, n.value); a.value = n.value = c.value = ''; dire('Mot de passe changé. Gardez-le dans un gestionnaire de mots de passe : il ne peut pas être relu.'); }
+    catch (x) { dire(x.message, true); }
+    bouton.disabled = false;
+  } });
+  return el('div', { class: 'pan-corps', style: 'padding:0' },
+    el('p', { class: 'aide', text: 'Choisissez une phrase longue et unique, que vous n’utilisez nulle part ailleurs. Vous restez connecté ; les autres appareils devront utiliser le nouveau mot de passe à leur prochaine connexion. Si vous l’oubliez, Grégoire peut le réinitialiser.' }),
+    ba, bn, bc, el('div', { class: 'actions' }, bouton), msg);
+}
+
 /* ---------- Rubriques ---------- */
 const montrer = (chemin) => { if (E.page !== chemin) { E.page = chemin; rendreApercu(true); } };
 /* Libellés modifiables, rangés pour la page de modification */
@@ -661,6 +688,11 @@ function panneaux() {
       id: 'visites', titre: 'Visites du site', page: '/',
       resume: () => 'Pages vues, sans cookie',
       corps: () => [blocVisites()],
+    },
+    {
+      id: 'motdepasse', titre: 'Mot de passe', page: '/',
+      resume: () => 'Changer le mot de passe de cette page',
+      corps: () => [blocMotDePasse()],
     },
     {
       id: 'infos', titre: 'Coordonnées, logo et mentions', page: '/contact',

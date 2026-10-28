@@ -39,7 +39,7 @@
     "reperes": [
       "590 € | une fois, sans abonnement obligatoire",
       "48 h | pour une maquette gratuite",
-      "1 nom de domaine | à vous, toujours",
+      "1 domaine | à vous, toujours",
       "0 cookie | de suivi, ni publicité"
     ],
     "intro_titre": "",
@@ -202,7 +202,8 @@
       ],
       "photos": [
         "/assets/photos/real-atelier-exemple.jpg",
-        "/assets/photos/real-atelier-exemple-2.jpg"
+        "/assets/photos/real-atelier-exemple-2.jpg",
+        "/assets/photos/mobile-atelier.jpg"
       ],
       "a_la_une": true,
       "visible": true,
@@ -230,7 +231,8 @@
       ],
       "photos": [
         "/assets/photos/real-fleuriste-exemple.jpg",
-        "/assets/photos/real-fleuriste-exemple-2.jpg"
+        "/assets/photos/real-fleuriste-exemple-2.jpg",
+        "/assets/photos/mobile-fleuriste.jpg"
       ],
       "a_la_une": true,
       "visible": true,
@@ -258,7 +260,8 @@
       ],
       "photos": [
         "/assets/photos/real-plombier-exemple.jpg",
-        "/assets/photos/real-plombier-exemple-2.jpg"
+        "/assets/photos/real-plombier-exemple-2.jpg",
+        "/assets/photos/mobile-plombier.jpg"
       ],
       "a_la_une": true,
       "visible": true,
@@ -286,7 +289,8 @@
       ],
       "photos": [
         "/assets/photos/real-restaurant-exemple.jpg",
-        "/assets/photos/real-restaurant-exemple-2.jpg"
+        "/assets/photos/real-restaurant-exemple-2.jpg",
+        "/assets/photos/mobile-restaurant.jpg"
       ],
       "a_la_une": true,
       "visible": true,
@@ -328,7 +332,7 @@
     "titre": "À propos",
     "texte": "Nous concevons, refaisons et entretenons les sites des commerces, des artisans et des entreprises, depuis Auteuil (Paris 16e). Grégoire Muel, entrepreneur individuel, est votre interlocuteur.\n\n## Notre façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, de la maquette à la mise en ligne, puis pour l’entretien.",
     "photo": "/assets/photos/gregoire-portrait.jpg",
-    "photo_2": "/assets/photos/paris-16e-cafe.jpg"
+    "photo_2": ""
   },
   "garanties": {
     "titre": "Nos engagements en bref",

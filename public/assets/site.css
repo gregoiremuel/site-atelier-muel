@@ -1093,3 +1093,60 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition .tete-page{padding-top:clamp(28px,4vw,56px)}
 .g-edition.p-agence .tete-page .sur{display:none}
 .g-edition .tete-page h1{max-width:22ch}
+
+/* ====== Édition : compléments de composition (trame, aplats, sceau, pictogrammes, numérotation) ====== */
+.g-edition{--sable:#ebe5d6;--trame:radial-gradient(rgba(34,54,79,.34) 1.1px,transparent 1.2px) 0 0/14px 14px}
+.g-edition main{counter-reset:rub}
+.g-edition .sec-tete{counter-increment:rub}
+.g-edition .sec-tete::before{display:none;content:counter(rub,decimal-leading-zero);display:block;margin-bottom:14px;font:600 .8125rem/1 var(--texte);letter-spacing:.14em;color:var(--bleu)}
+.g-edition .sec-tete::after{display:none;content:"";display:block;width:36px;height:3px;margin-top:18px;background:var(--bleu)}
+.g-edition .sec-tete-ligne::after{display:none}
+.g-edition .clair{background:var(--sable)}
+
+/* Composition de l'accueil : appareils sur un fond uni */
+.g-edition .hero-compo{--noir:#12161c;position:relative;grid-column:1;width:100%;max-width:560px;aspect-ratio:1/.98;justify-self:center;margin-top:12px;background:#dde4ea;overflow:hidden;isolation:isolate}
+.g-edition .compo-ordi{position:absolute;left:7%;top:9%;width:86%;display:block}
+.g-edition .compo-ecran{display:block;aspect-ratio:16/10;background:var(--noir);border:7px solid var(--noir);border-bottom-width:9px;border-radius:8px 8px 2px 2px;overflow:hidden;box-shadow:0 14px 30px rgba(16,28,44,.22)}
+.g-edition .compo-socle{display:block;height:9px;margin:0 -4%;background:linear-gradient(#c9d0d8,#aeb7c1);border-radius:0 0 12px 12px}
+.g-edition .compo-tel{position:absolute;display:block;width:27%;aspect-ratio:9/19;background:var(--noir);border:6px solid var(--noir);border-radius:20px;overflow:hidden;box-shadow:0 16px 30px rgba(16,28,44,.3)}
+.g-edition .compo-t1{left:13%;bottom:5%;z-index:2}
+.g-edition .compo-t2{right:11%;bottom:8%;z-index:3}
+.g-edition .compo-tel::before{content:"";position:absolute;left:50%;top:5px;width:30%;height:5px;margin-left:-15%;border-radius:3px;background:var(--noir);z-index:2}
+.g-edition .compo-ecran img,.g-edition .compo-tel img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+@media (min-width:900px){
+  .g-edition .hero:has(.hero-compo){grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-rows:auto auto auto auto}
+  .g-edition .hero:has(.hero-compo) .hero-compo{grid-column:2;grid-row:1 / span 3;margin:0;justify-self:end}
+  .g-edition .hero:has(.hero-compo) .hero-gar{grid-column:1 / -1;grid-row:4;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:20px}
+  .g-edition .hero:has(.hero-compo) .hero-gar li{padding:22px 24px 22px 0;border-bottom:0}
+  .g-edition .hero:has(.hero-compo) .hero-gar li + li{padding-left:24px;border-left:var(--fil)}
+}
+@media (max-width:899px){.g-edition .hero-compo{max-width:460px;order:5}}
+.g-edition .hero:has(.hero-compo){overflow-x:clip}
+
+/* Pictogrammes des offres de l'accueil (traits fins, dessinés ici) */
+.g-edition .metiers li a{position:relative}
+.g-edition .metiers li:nth-child(-n+4) h3{display:flex;align-items:center;gap:16px}
+.g-edition .metiers li:nth-child(-n+4) h3::before{content:"";flex:none;width:34px;height:34px;background:var(--bleu);-webkit-mask:var(--pic) center/contain no-repeat;mask:var(--pic) center/contain no-repeat}
+.g-edition .metiers li:nth-child(1){--pic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23000' stroke-width='1.6'%3E%3Crect x='3' y='5' width='26' height='22'/%3E%3Cpath d='M3 11h26M7 8h2M11 8h2M8 16h10M8 20h16'/%3E%3C/svg%3E")}
+.g-edition .metiers li:nth-child(2){--pic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23000' stroke-width='1.6'%3E%3Cpath d='M5 10h22l-2 18H7z'/%3E%3Cpath d='M11 10V8a5 5 0 0 1 10 0v2'/%3E%3C/svg%3E")}
+.g-edition .metiers li:nth-child(3){--pic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23000' stroke-width='1.6'%3E%3Cpath d='M5 28V8h13v20M18 14h9v14M3 28h26M9 13h5M9 18h5M9 23h5M22 19h2M22 24h2'/%3E%3C/svg%3E")}
+.g-edition .metiers li:nth-child(4){--pic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23000' stroke-width='1.6'%3E%3Cpath d='M16 29S6 19 6 12a10 10 0 0 1 20 0c0 7-10 17-10 17z'/%3E%3Ccircle cx='16' cy='12' r='3.5'/%3E%3C/svg%3E")}
+/* Corps de texte minimal de 14 px : pied de page, crédits, libellés des coordonnées */
+.g-edition .legal,.g-edition .legal a,.g-edition .legal span,.g-edition .credits,.g-edition .credits summary,.g-edition .credits p,.g-edition .coord dt,.g-edition .coord h3,.g-edition .coord .sur,.g-edition .coord small{font-size:.875rem}
+.g-edition .legal{gap:8px 22px;line-height:1.5}
+.g-edition .hero-gar b{font-size:clamp(1.875rem,3.6vw,3rem)}
+/* Échelle typographique resserrée : titres de pages plafonnés, texte courant plus sombre, pied de page lisible */
+.g-edition{--gris:#363c44}
+.g-edition .tete-page h1{font-size:clamp(2.25rem,5vw,4.25rem);line-height:1.02}
+.g-edition.p-agence .tete-page h1{font-size:clamp(2.25rem,4.4vw,3.5rem)}
+.g-edition .hero h1{font-size:clamp(2.5rem,5.4vw,4.75rem);line-height:1.02;letter-spacing:-.025em}
+.g-edition .sec-tete h2{font-size:clamp(1.875rem,3.2vw,2.5rem)}
+.g-edition .pied h2{font:600 .8125rem/1.2 var(--texte);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.78)}
+.g-edition .pied li a{display:inline-block;padding-block:3px}
+.g-edition .cartes .carte h3,.g-edition .cartes li h3{min-height:2.1em}
+@media (max-width:599px){
+  .g-edition .actions{flex-direction:column;align-items:stretch}
+  .g-edition .actions .btn{width:100%;justify-content:center}
+  .g-edition .hero .actions .btn-ligne-clair{align-self:flex-start;width:auto}
+  .g-edition .hero h1{font-size:2.25rem;line-height:1.06}
+}

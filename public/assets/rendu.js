@@ -337,6 +337,16 @@ const initiales = (n) => String(n || '').split(/[\s-]+/).filter(Boolean).map((m)
 /* Repères de confiance sous la grande photo (courts : trois ou quatre) */
 const garHero = (C) => (Array.isArray((C.accueil || {}).reperes) ? C.accueil.reperes : []).filter((x) => typeof x === 'string' && x.trim()).slice(0, 4);
 
+/* Composition de l'accueil sans grande photo : un ordinateur et deux téléphones montrant des sites d'exemple (captures des démonstrations), sur un fond uni. Aucun faux client. */
+const compoHero = (essais) => {
+  const bureau = (essais[0] || {}).photos && essais[0].photos[0], tels = essais.slice(1, 3).map((x) => (x.photos || [])[2] || x.apercu).filter(Boolean);
+  if (!bureau || tels.length < 2) return '';
+  return `<div class="hero-compo" role="group" aria-label="Aperçus de sites d’exemple sur ordinateur et sur téléphone">
+      <span class="compo-ordi"><span class="compo-ecran">${img(bureau, 1000, 'compo-img', true, '')}</span><span class="compo-socle"></span></span>
+      ${tels.map((v, i) => `<span class="compo-tel compo-t${i + 1}">${img(v, 500, 'compo-img', false, '')}</span>`).join('')}
+    </div>`;
+};
+
 /* ---------- Pages ---------- */
 function accueil(C, D) {
   const A = C.accueil || {}, G = C.agence || {};
@@ -352,7 +362,7 @@ function accueil(C, D) {
       areaServed: G.zone || undefined, ...((C.reglages || {}).url ? { url: C.reglages.url } : {}), sameAs: ['linkedin', 'instagram'].map((k) => G[k]).filter((u) => /^https:\/\//.test(u || '')) },
     corps: `
   <section class="hero">
-    ${video ? videoFond(video, src(A.photo, 2200), 'hero-media') : img(A.photo, 2400, 'hero-media', true, '')}
+    ${video ? videoFond(video, src(A.photo, 2200), 'hero-media') : src(A.photo, 2400) ? img(A.photo, 2400, 'hero-media', true, '') : compoHero(essais)}
     <div class="hero-txt wrap">
       ${A.sur_titre ? `<p class="sur sur-clair">${esc(A.sur_titre)}</p>` : ''}
       <h1>${esc(A.titre || G.nom)}</h1>

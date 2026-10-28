@@ -4,6 +4,8 @@
 
 ## Contrôlé par `npm run rendu` (serveur local lancé, adresse en argument)
 - Texte visible : jamais sous 14 px ; corps de page 16 px ; titre de l'accueil au plus 56 px, titres de pages au plus 48 px, titres de rubrique au plus 32 px.
+- Mobile (moins de 500 px) : titre de page 30 px au plus, rubriques et sous-titres 24 px au plus (téléphone de Greg : titres jugés trop gros à 24-36 px, 28/10/2026) ; menu 22 px.
+- Blocs en rangée (cartes, offres, démonstrations) : leurs liens d'action sont à la même hauteur.
 - Aucun débordement horizontal à 390 px.
 - Contenu visible dès le chargement (pas de fondu au défilement, pas de compteur animé).
 - Aucun surtitre (« eyebrow ») visible hors pied de page.

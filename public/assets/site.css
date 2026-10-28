@@ -1176,3 +1176,40 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition .etiq,.g-edition .carte-sec,.g-edition .pied h2{font-size:.875rem}
 .g-edition .hero:has(.hero-compo){row-gap:16px}
 :where(img[width][height]){height:auto}
+
+/* ====== Échelle mobile et alignements (retour de Greg sur téléphone, 28/10/2026) ====== */
+.g-edition .essai-corps b,.g-edition .carte-nom{min-height:2.5em}
+.g-edition .essai-liens small{min-height:0}
+@media (min-width:641px){
+  .g-edition .hero h1,.g-edition .hero:has(.hero-compo) h1,.g-edition .hero:not(:has(.hero-media)) h1{font-size:clamp(2.25rem,4.2vw,3.25rem)}
+  .g-edition .tete-page h1{font-size:clamp(2rem,3.4vw,2.75rem)}
+  .g-edition .sec h2,.g-edition .sec-tete h2{font-size:clamp(1.5rem,2.2vw,1.75rem)}
+}
+@media (max-width:640px){
+  .g-edition .hero h1,.g-edition .hero:has(.hero-compo) h1,.g-edition .hero:not(:has(.hero-media)) h1{font-size:1.75rem;line-height:1.12;max-width:none}
+  .g-edition .tete-page h1,.g-edition.p-agence .tete-page h1{font-size:1.625rem;line-height:1.14;margin-bottom:12px}
+  .g-edition .sec h2,.g-edition .sec-tete h2,.g-edition .appel h2{font-size:1.25rem;line-height:1.2}
+  .g-edition h3,.g-edition .metiers li h3{font-size:1.0625rem;line-height:1.25}
+  .g-edition .metier-prix .prix-v,.g-edition .prix-v{display:inline;font-size:1.125rem;line-height:1.2}
+  .g-edition .metiers .metier-prix,.g-edition .offre .metier-prix{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px;font-size:.875rem}
+  .g-edition .metiers li:nth-child(-n+4) h3::before{width:26px;height:26px}
+  .g-edition .metiers li a{padding-block:14px}
+  .g-edition .abo-prix b{font-size:1.75rem}
+  .g-edition .hero-gar b{font-size:1.25rem}
+  .g-edition .essai-liens b,.g-edition .carte-nom,.g-edition .carte b{font-size:1.0625rem}
+  .g-edition .volet li a{font-size:1.375rem;padding:10px 0}
+  .g-edition .prose-grande p:first-child{font-size:1.0625rem;line-height:1.4}
+  .g-edition .marque,.g-edition .pied-marque{font-size:1.25rem}
+  .g-edition .sec{padding:28px 0}
+  .g-edition .sec-tete{margin-bottom:16px}
+  .g-edition .chapo,.g-edition .hero-chapo{font-size:1rem}
+}
+@media (max-width:640px){
+  body.g-edition main h3{font-size:1.0625rem;line-height:1.25}
+  body.g-edition .hero-gar li b{font-size:1.25rem}
+}
+@media (max-width:640px){
+  .g-edition .metiers .metier-prix,.g-edition .offre .metier-prix{flex-direction:column;align-items:flex-start;gap:2px}
+}
+/* Les captures de démonstration sont coupées en bas : fondu léger plutôt qu'une coupure nette dans le texte */
+.g-edition .essai-vue,.g-edition .carte-photo{-webkit-mask-image:linear-gradient(#000 84%,transparent);mask-image:linear-gradient(#000 84%,transparent)}

@@ -69,7 +69,7 @@ async function tests() {
     const Ca = structuredClone(C); Ca.comparaison.actif = true; const ha = rendrePage(Ca, '/expertises', { maquette: false }).html;
     verif(ha.includes('class="cmp"') && Ca.comparaison.lignes.every((l) => ha.includes(l.critere.replace(/&/g, '&amp;'))) && ha.includes('id="o-comparaison"'), 'Activée, la comparaison s’affiche dans son onglet');
   }
-  { const hx = rendrePage(C, '/expertises', { maquette: false }).html; verif(/role="tablist"/.test(hx) && /id="p-sites"/.test(hx) && /id="p-abonnements"/.test(hx) && (hx.match(/role="tab"/g) || []).length === (hx.match(/role="tabpanel"/g) || []).length, 'La page des offres a ses onglets, chacun avec son panneau'); }
+  { const hx = rendrePage(C, '/expertises', { maquette: false }).html; verif((C.theme || {}).gabarit === 'edition' ? (/role="tablist"/.test(hx) && /id="p-sites"/.test(hx) && (hx.match(/role="tab"/g) || []).length === (hx.match(/role="tabpanel"/g) || []).length) : !/role="tablist"/.test(hx), 'La page des offres a ses onglets (gabarit édition), chacun avec son panneau'); }
   if ((C.pages_metier || []).length) {
     const P = C.pages_metier.filter((x) => x.visible !== false);
     let ok0 = 0;

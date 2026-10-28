@@ -99,7 +99,8 @@ export function verifier(C) {
   const G = C.agence, T = C.theme;
   if (vide(G.nom)) E('agence.nom est vide.');
   if (G.email && !EMAIL.test(G.email)) E('agence.email n’est pas une adresse valide.');
-  if (G.telephone && String(G.telephone).replace(/\D/g, '').length < 10) E('agence.telephone : numéro incomplet.');
+  if (vide(G.telephone)) E('agence.telephone est vide : le site affiche ce numéro partout.');
+  else if (String(G.telephone).replace(/\D/g, '').length < 10) E('agence.telephone : numéro incomplet.');
   ['instagram', 'linkedin'].forEach((k) => { if (G[k] && !URL_HTTPS.test(G[k])) E(`agence.${k} doit être un lien https://`); });
   ['fond', 'encre', 'gris', 'trait', 'marine', 'or'].forEach((k) => { if (!HEX.test(T[k] || '')) E(`theme.${k} doit être une couleur #rrggbb.`); });
   if ([T.fond, T.encre, T.gris, T.marine, T.or].every((c) => HEX.test(c || ''))) {
@@ -280,7 +281,7 @@ export function verifier(C) {
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const fichier = resolve(process.argv[2] || fileURLToPath(new URL('../contenu-initial.json', import.meta.url)));
   let C;
-  try { C = JSON.parse(readFileSync(fichier, 'utf8')); } catch (e) { console.error(`\nERREUR : ${fichier} n’est pas un JSON valide.\n  ${e.message}\n`); process.exit(1); }
+  try { C = JSON.parse(readFileSync(fichier, 'utf8')); } catch (e) { console.error(`\nERREUR : ${fichier} n’est pas un JSON valide.\n  ${String(e.message).replace(/^Expected /, 'Attendu : ').replace(/ in JSON at position (\d+) \(line (\d+) column (\d+)\)/, ' à la ligne $2, colonne $3 (caractère $1)')}\n`); process.exit(1); }
   const { erreurs, alertes, afaire } = verifier(C);
   console.log(`\nVérification de ${fichier}${C.agence && C.agence.nom ? ' (' + C.agence.nom + ')' : ''}\n`);
   erreurs.forEach((m) => console.log('  ERREUR   ' + m));

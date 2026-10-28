@@ -46,7 +46,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .haut-titre{margin-right:auto;min-width:0;overflow:hidden}
 .haut-titre b{display:block;font:600 1.25rem/1.15 var(--titres);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .haut-titre span{display:block;font-size:.875rem;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.haut .btn{border-color:rgba(255,255,255,.7);background:transparent;color:#fff;min-height:38px;padding:0 12px;font-size:.9375rem}
+.haut .btn{border-color:rgba(255,255,255,.7);background:transparent;color:#fff;min-height:44px;padding:0 12px;font-size:.9375rem}
 .haut .btn:hover{background:rgba(255,255,255,.14)}
 .bandeau{background:var(--paille);color:var(--encre);text-align:center;font-size:.9375rem;padding:8px 16px}
 

@@ -183,7 +183,7 @@ function document_(C, o, page) {
   const actif = (h) => (page.rubrique === h ? ' aria-current="page"' : '');
   const reseaux = [['linkedin', 'LinkedIn'], ['instagram', 'Instagram']].filter(([k]) => /^https:\/\//.test(G[k] || ''));
   const AG = {
-    nom, api: o.apiContact || '', maquette: !!o.maquette, apercu: !!o.apercu, cle: K.cle_web3forms || '', email: K.email || G.email || '',
+    nom, tel: G.telephone || '', api: o.apiContact || '', maquette: !!o.maquette, apercu: !!o.apercu, cle: K.cle_web3forms || '', email: K.email || G.email || '',
     actif: K.actif !== false, confirmation: String(K.confirmation || 'Merci, votre demande est bien partie.'),
     lib: libellesDemande(C),
   };

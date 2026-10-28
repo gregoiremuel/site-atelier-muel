@@ -1,5 +1,7 @@
 # Photos et informations à fournir par Greg
 
+**État au 28/10/2026** : ton portrait est posé sur « À propos » (photo de vacances, falaise et sac à dos : elle fonctionne, un portrait sur fond neutre serait meilleur). Une photo libre de mains sur un clavier (Unsplash, Christin Hume) illustre « Je m'en occupe pour vous », et une photo libre d'une rue parisienne (Unsplash, Shalev Cohen) sert de bandeau sur « À propos » : ce ne sont ni tes mains ni forcément Auteuil, elles sont créditées en pied de page comme photos d'illustration. Le logo, un vrai client et la confirmation de l'adresse restent à fournir. Le tableau ci-dessous garde la liste complète.
+
 Le design fonctionne **avec et sans** ces photos : tant qu'elles manquent, les emplacements affichent tes initiales ou restent masqués (aucune photo de banque d'images n'est présentée comme ton travail). Mais c'est ce qui sépare un site propre d'un site qui te ressemble. Rien n'est à envoyer en urgence : le site n'est pas en ligne.
 
 ## Photos (dans l'ordre d'utilité)
@@ -21,7 +23,7 @@ Le design fonctionne **avec et sans** ces photos : tant qu'elles manquent, les e
 
 ## Informations à confirmer
 
-- Ton **téléphone** `07 80 00 81 37` est bien celui à afficher ? (un critique extérieur l'a pris pour un faux numéro : il est réel, mais confirme.)
+- Téléphone `07 80 00 81 37` : confirmé réel par Greg le 28/10/2026.
 - **Adresse** : « Paris 16e » seulement (c'est ce qui est affiché) ou une adresse complète ?
 - **Nom commercial** « Grégoire Muel » : à faire inscrire au Guichet unique avant l'ouverture.
 - Des **horaires d'appel** à afficher, si tu en veux (à vérifier dans `contact` de `contenu-initial.json` ce qui est affiché aujourd'hui).

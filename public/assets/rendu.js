@@ -578,6 +578,7 @@ function pageAgence(C, D) {
       ${src(P.photo, 1200) ? `<figure class="intro-fig">${img(P.photo, 1200, 'intro-img', true, '')}</figure>` : ''}
     </div>
   </section>
+  ${src(P.photo_2, 1600) ? `<section class="sec sec-serre agence-bande"><div class="wrap"><figure>${img(P.photo_2, 1600, 'bande-img', false, '')}</figure></div></section>` : ''}
   ${Gr.titre || gpts.length ? `
   <section class="sec sombre" aria-labelledby="t-eng">
     <div class="wrap engagements">

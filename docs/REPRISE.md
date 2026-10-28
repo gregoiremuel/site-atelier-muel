@@ -24,6 +24,8 @@
 
 **Design (révision 3, 28/10/2026).** Un seul univers visuel (papier, encre, un bleu), noir réservé au pied de page, offres en volets, démonstrations 2×2 coupées sur un bloc entier (`outils/vignettes.mjs`), capture de la page de modification lisible. Trois tours de critiques extérieures (directeur artistique 7,3 puis 6,5 sur 10 ; détecteur de look IA 22 % puis 30 % ; commerçante 7 sur 10, prendrait contact). Verdict : propre et cohérent, **pas encore une identité** ; l'écart vient surtout de l'absence de photos de Greg et d'un vrai client : `docs/PHOTOS-A-FOURNIR.md`.
 
+**Photos et démonstrations (28/10/2026, suite).** Greg a fourni son portrait (posé sur « À propos »), confirmé le téléphone, demandé des photos libres pour le clavier et la rue (posées, créditées) et jugé que les démos atelier, fleuriste et plombier faisaient « IA » : leurs en-têtes sont refaits comme de vrais sites (grande photo, angles droits, un appel clair), dans le moteur vitrine du kit. Nouveau champ de contenu `presentation.photo_2` (bandeau large sous le texte de « À propos »).
+
 ## Décisions de Greg : prises par défaut le 28/10/2026
 Nom commercial « Grégoire Muel » ; domaines `gregoiremuel.fr` et `ateliermuel.fr` ; prix 590 € une fois, 1 290 €, 1 900 €, Sérénité 19 €, Croissance 49 € (1 heure), Visibilité Google 39 € ; métiers : restaurants, artisans du bâtiment, fleuristes, commerces de bouche (Paris 16e, Boulogne, Paris 15e) ; aucun pilote connu ; Opéria non cité ; salarié en parallèle (joaillerie) ; 18 à 25 ans ; pas de second compte bancaire (Crédit Agricole) ; franchise de TVA non confirmée.
 

@@ -581,7 +581,7 @@ function panneaux() {
       id: 'agence', titre: 'L’agence, l’équipe, les références', page: '/agence',
       resume: () => [(E.C.equipe || []).length + ' personnes', (E.C.references || []).length + ' références'].join(', '),
       corps: () => [
-        groupe('Présentation', '', [champ(E.C, { k: 'presentation.titre', l: 'Titre' }), champ(E.C, { k: 'presentation.texte', l: 'Texte', t: 'zone', lignes: 8 }), champ(E.C, { k: 'presentation.photo', l: 'Photo', t: 'photo' })], '/agence'),
+        groupe('Présentation', '', [champ(E.C, { k: 'presentation.titre', l: 'Titre' }), champ(E.C, { k: 'presentation.texte', l: 'Texte', t: 'zone', lignes: 8 }), champ(E.C, { k: 'presentation.photo', l: 'Photo (portrait)', t: 'photo' }), champ(E.C, { k: 'presentation.photo_2', l: 'Photo large (sous le texte)', t: 'photo' })], '/agence'),
         groupe('Garanties', 'Les points résumés sous « À propos »', [champ(E.C, { k: 'garanties.titre', l: 'Titre' }), champ(E.C, { k: 'garanties.texte', l: 'Texte', t: 'zone' }), champ(E.C, { k: 'garanties.points', l: 'Points', t: 'lignes' })], '/agence'),
         groupe('Équipe', 'Noms, rôles et portraits', [
           champ(E.C, { k: 'affichage.equipe', l: 'Afficher l’équipe', t: 'case' }),

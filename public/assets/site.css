@@ -950,3 +950,10 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 
 .g-edition .pied .credits{font-size:.8125rem;line-height:1.65;color:rgba(255,255,255,.72)}
 .g-edition .essai-vue .essai-img{object-position:top}
+
+/* Photos de la présentation : portrait en 4/5, photo large en bandeau ; la photo de l'accueil est cadrée au centre */
+.g-edition .intro-img{object-position:50% 55%;-webkit-mask-image:none;mask-image:none;border-bottom:var(--fil)}
+.g-edition.p-agence .intro-img,.g-edition .p-agence .intro-img{height:auto;aspect-ratio:4/5;object-position:50% 20%}
+.g-edition .agence-bande img{width:100%;aspect-ratio:21/9;object-fit:cover;object-position:50% 60%;border:var(--fil)}
+.g-edition .agence-bande{padding-top:0}
+.g-edition .agence-bande figure{margin:0}

@@ -42,7 +42,7 @@
     ],
     "intro_titre": "Je m’en occupe pour vous",
     "intro_texte": "Beaucoup de sites vieillissent parce que personne n’a le temps de les mettre à jour. Avec moi, vous avez le choix : vous m’envoyez vos changements (un horaire, un prix, une photo) et je les fais, c’est compris dans l’abonnement Sérénité ou Croissance, sur devis sinon. Ou vous les faites vous-même depuis une page privée, sur votre téléphone.\n\nJe m’appelle Grégoire Muel et je travaille depuis Auteuil. Je prépare une maquette à votre nom, avec vos vraies informations ; vous décidez ensuite.",
-    "photo_intro": "/assets/photos/intro.jpg",
+    "photo_intro": "/assets/photos/travail-clavier.jpg",
     "essai_titre": "Quatre sites, quatre identités",
     "essai_texte": "Ouvrez un site d’exemple, touchez « Essayer la page de modification », changez un horaire, un prix ou une photo, et regardez le site se mettre à jour.\n\nTout reste dans votre navigateur : rien n’est publié. Ces sites sont des démonstrations : les entreprises n’existent pas.",
     "appel_titre": "Une maquette de votre site, gratuite, en 48 h",
@@ -331,7 +331,8 @@
   "presentation": {
     "titre": "À propos",
     "texte": "Je suis Grégoire Muel, entrepreneur individuel installé à Auteuil, dans le 16e arrondissement de Paris. Je conçois, crée, refais et entretiens les sites des commerces, des artisans et des entreprises.\n\n## Ma façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, du premier échange à la mise en ligne, puis pour l’entretien.\n\nArtisan joaillier de formation, j’ai gardé l’habitude du travail précis et des finitions soignées.",
-    "photo": ""
+    "photo": "/assets/photos/gregoire-portrait.jpg",
+    "photo_2": "/assets/photos/paris-16e-cafe.jpg"
   },
   "garanties": {
     "titre": "En résumé",
@@ -385,7 +386,7 @@
     "tva": "TVA non applicable, article 293 B du code général des impôts",
     "nom_commercial": "Grégoire Muel"
   },
-  "credits_photos": "Vignettes : captures d’écran des démonstrations. Photos d’illustration des démonstrations (Unsplash) : Sander Hallaste, Bailey Alexander, Craft Kitties, HENG YIN, Minh Đức (atelier) ; Vika Fleysher, Oxana Melis, Viktoriia Yatsentiuk, Roman Kraft (fleuriste) ; Timur Shakerzianov (plombier) ; Glenov Brankovic, Antonio Araujo (restaurant). Elles ne montrent pas de vrais clients.",
+  "credits_photos": "Vignettes : captures d’écran des démonstrations. Photos d’illustration des démonstrations (Unsplash) : Sander Hallaste, Bailey Alexander, Craft Kitties, HENG YIN, Minh Đức (atelier) ; Vika Fleysher, Oxana Melis, Viktoriia Yatsentiuk, Roman Kraft (fleuriste) ; Timur Shakerzianov (plombier) ; Glenov Brankovic, Antonio Araujo (restaurant). Photos d’illustration du site (Unsplash) : le poste de travail (Christin Hume) et la rue parisienne (Shalev Cohen) ne montrent ni l’auteur ni un client. Les démonstrations ne montrent pas de vrais clients.",
   "reglages": {
     "url": ""
   },

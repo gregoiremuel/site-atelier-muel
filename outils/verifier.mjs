@@ -13,7 +13,7 @@ const FORME = {
   theme: ['fond', 'encre', 'gris', 'trait', 'marine', 'or'],
   annonce: ['afficher', 'texte'],
   accueil: ['photo', 'video', 'fond_video', 'sur_titre', 'titre', 'texte', 'reperes', 'intro_titre', 'intro_texte', 'photo_intro', 'appel_titre', 'appel_texte', 'photo_appel'],
-  presentation: ['titre', 'texte', 'photo'],
+  presentation: ['titre', 'texte', 'photo', 'photo_2'],
   garanties: ['titre', 'texte', 'points'],
   affichage: ['chiffres', 'equipe', 'references'],
   contact: ['actif', 'delai_reponse', 'types', 'cle_web3forms', 'email', 'confirmation'],
@@ -216,7 +216,7 @@ export function verifier(C) {
   });
   if (ENG.length && !C.libelles) A('Page Engagements sans « libelles » : le menu garde le mot « Engagements ».');
   ['chiffres', 'equipe', 'references'].forEach((k) => { if (typeof C.affichage[k] !== 'boolean') E(`affichage.${k} doit valoir true ou false.`); });
-  [['accueil.photo', C.accueil.photo], ['accueil.photo_intro', C.accueil.photo_intro], ['accueil.photo_appel', C.accueil.photo_appel], ['presentation.photo', C.presentation.photo]].forEach(([k, v]) => { if (photoOk(k, v) === 'essai') essaisAutres++; });
+  [['accueil.photo', C.accueil.photo], ['accueil.photo_intro', C.accueil.photo_intro], ['accueil.photo_appel', C.accueil.photo_appel], ['presentation.photo', C.presentation.photo], ['presentation.photo_2', C.presentation.photo_2]].forEach(([k, v]) => { if (photoOk(k, v) === 'essai') essaisAutres++; });
   [['agence.logo', G.logo], ['agence.nom_image', G.nom_image], ['agence.nom_image_blanc', G.nom_image_blanc]].forEach(([k, v]) => photoOk(k, v));
   if (C.accueil.video && !/^(https:\/\/\S+\.(mp4|webm)(\?\S*)?|\/videos\/[a-z0-9-]+|\/assets\/\S+\.(mp4|webm)|data:video\/(mp4|webm);base64,\S+)$/i.test(C.accueil.video)) E('accueil.video : un fichier envoyé, ou un lien https se terminant par .mp4 ou .webm.');
   else if (/^\/assets\//.test(C.accueil.video || '') && !existsSync(fileURLToPath(new URL('../public' + C.accueil.video, import.meta.url)))) E(`accueil.video : le fichier public${C.accueil.video} n’existe pas.`);

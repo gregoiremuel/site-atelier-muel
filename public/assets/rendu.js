@@ -238,7 +238,7 @@ const abonnementsHtml = (D) => {
       <div class="sec-tete">${titreSection('Abonnement facultatif', A.titre || 'Un coup de main au mois, si vous le souhaitez', 't-abo')}${A.intro ? `<p class="chapo">${esc(A.intro)}</p>` : ''}</div>
       <ul class="abo-grille">
         ${A.formules.map((f) => `<li class="abo-carte${f.recommande ? ' abo-reco' : ''}">
-          ${f.recommande ? '<span class="abo-badge">Recommandée</span>' : ''}
+          
           <h3>${esc(f.nom)}</h3>
           <p class="abo-prix"><b>${esc(f.prix || '')}</b>${f.periode ? ` <span>${esc(f.periode)}</span>` : ''}</p>
           ${f.description ? `<p class="abo-desc">${esc(f.description)}</p>` : ''}

@@ -33,14 +33,10 @@
     "photo": "/assets/photos/accueil.jpg",
     "video": "",
     "fond_video": false,
-    "sur_titre": "Création de sites · Paris 16e",
-    "titre": "Des sites à votre nom, que vous modifiez vous-même.",
+    "sur_titre": "",
+    "titre": "Votre site, et la main dessus.",
     "texte": "Commerces, artisans, entreprises : je crée votre site, puis vous changez vos horaires, vos prix et vos photos depuis votre téléphone, et vous recevez les demandes de vos clients.",
-    "reperes": [
-      "Maquette gratuite en 48 h",
-      "Rien à payer si elle ne vous plaît pas",
-      "Un seul interlocuteur"
-    ],
+    "reperes": [],
     "intro_titre": "Un site, et la main dessus",
     "intro_texte": "Beaucoup de sites vieillissent parce que personne ne peut les mettre à jour sans appeler quelqu’un. Chaque site que je crée vient avec un espace de modification : une page privée où vous changez vous-même vos horaires, vos tarifs, vos photos et vos textes, et où arrivent les demandes de vos clients.\n\nJe m’appelle Grégoire Muel et je travaille depuis Auteuil. Je prépare une maquette à votre nom, avec vos vraies informations ; vous décidez ensuite.",
     "photo_intro": "/assets/photos/intro.jpg",

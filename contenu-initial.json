@@ -38,11 +38,10 @@
     "texte": "Commerces, artisans, entreprises : je crée votre site, je le mets à jour quand vous me le demandez, et vous recevez les demandes de vos clients. Si vous préférez le faire vous-même, une page privée vous le permet depuis votre téléphone.",
     "reperes": [
       "590 € | une fois, sans abonnement obligatoire",
-      "48 h | pour votre maquette, gratuite",
-      "0 € | d’abonnement obligatoire"
+      "48 h | pour votre maquette, gratuite"
     ],
     "intro_titre": "Je m’en occupe pour vous",
-    "intro_texte": "Beaucoup de sites vieillissent parce que personne n’a le temps de les mettre à jour. Avec moi, vous avez le choix : vous m’envoyez vos changements (un horaire, un prix, une photo) et je les fais, c’est compris dans l’abonnement Sérénité ou Croissance, sur devis sinon. Ou vous les faites vous-même depuis une page privée, sur votre téléphone.\n\nLe site se paie une fois : 590 € pour un site vitrine, sans abonnement obligatoire.\n\nJe m’appelle Grégoire Muel et je travaille depuis Auteuil. Je prépare une maquette à votre nom, avec vos vraies informations ; vous décidez ensuite.",
+    "intro_texte": "Beaucoup de sites vieillissent parce que personne n’a le temps de les mettre à jour. Avec moi, vous avez le choix : vous m’envoyez vos changements (un horaire, un prix, une photo) et je les fais, c’est compris dans l’abonnement Sérénité ou Croissance, sur devis sinon. Ou vous les faites vous-même depuis une page privée, sur votre téléphone.\n\nJe m’appelle Grégoire Muel et je travaille depuis Auteuil. Je prépare une maquette à votre nom, avec vos vraies informations ; vous décidez ensuite.",
     "photo_intro": "/assets/photos/intro.jpg",
     "essai_titre": "Quatre sites, quatre identités",
     "essai_texte": "Ouvrez un site d’exemple, touchez « Essayer la page de modification », changez un horaire, un prix ou une photo, et regardez le site se mettre à jour.\n\nTout reste dans votre navigateur : rien n’est publié. Ces sites sont des démonstrations : les entreprises n’existent pas.",
@@ -535,7 +534,7 @@
   "comparaison": {
     "sur": "Prix clair",
     "titre": "Un constructeur en ligne, ou moi ?",
-    "intro": "Un constructeur en ligne comme Wix est un bon choix si vous voulez tout faire vous-même et que vous avez le temps. Voici, sans détour, ce qui change.",
+    "intro": "Un constructeur en ligne comme Wix est un bon choix si vous voulez tout faire vous-même et que vous avez le temps. Voici ce qui change.",
     "colonnes": [
       "Un constructeur en ligne (type Wix)",
       "Grégoire Muel"

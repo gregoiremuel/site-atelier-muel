@@ -156,7 +156,7 @@ details.item>summary span.s{display:block;color:var(--gris);font-size:.9375rem;o
 .barre-enr .etat.modifie{color:#7a5a00}
 .barre-enr .etat.ok{color:var(--ok)}
 .toast{position:fixed;left:50%;top:calc(76px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:70;background:var(--encre);color:#fff;border-radius:8px;padding:10px 16px;font-size:.9375rem;max-width:calc(100vw - 32px)}
-@media (max-width:600px){.barre-enr .etat{flex-basis:100%;font-size:.875rem}.barre-enr .in .btn{flex:1 1 0;padding:4px 6px;min-width:0;white-space:normal;line-height:1.15;font-size:.9375rem;text-align:center}.haut-in .btn{padding:0 8px;font-size:.8125rem;min-height:36px}.haut-titre b{font-size:1.0625rem}.haut-titre span{font-size:.8125rem}}
+@media (max-width:600px){.barre-enr .etat{flex-basis:100%;font-size:.875rem}.barre-enr .in .btn{flex:1 1 0;padding:4px 6px;min-width:0;white-space:normal;line-height:1.15;font-size:.9375rem;text-align:center}.haut-in .btn{padding:0 8px;font-size:.8125rem;min-height:36px}.haut-titre b{font-size:1.0625rem;white-space:normal;line-height:1.1}.haut-titre span{font-size:.8125rem}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
 /* Maison : couleurs de collection, plusieurs photos */

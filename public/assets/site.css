@@ -881,3 +881,71 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 @media (max-width:759px){.g-edition .cmp tbody th{width:auto}}
 .g-edition .essai-act{display:block}
 .g-edition .essai-act svg{display:inline-block;vertical-align:-4px;margin-left:6px}
+
+/* Révision 3 : un seul univers (papier, encre, bleu), le noir réservé au pied de page ; trait signature : le filet bleu */
+.g-edition .hero{padding-bottom:clamp(8px,2vw,24px)}
+.g-edition .hero + .sec{padding-top:clamp(40px,5vw,72px)}
+.g-edition .sec-tete h2::before,.g-edition .intro-txt h2::before,.g-edition .essai-txt h2::before{content:"";display:block;width:44px;height:4px;background:var(--bleu);margin-bottom:24px}
+.g-edition .intro-txt h2,.g-edition .essai-txt h2,.g-edition .sec-tete h2{font-size:clamp(1.875rem,3.4vw,2.75rem);max-width:16ch}
+.g-edition .etape-num{display:none}
+.g-edition .etapes>li{border-top:var(--filfort);padding-top:22px}
+.g-edition .etapes>li{position:relative}
+.g-edition .etapes>li::before{display:block;content:"";position:absolute;top:-1px;left:0;width:44px;height:4px;background:var(--bleu)}
+.g-edition .sombre{background:#fff;color:var(--encre);border-top:var(--filfort);border-bottom:var(--filfort)}
+.g-edition .sombre h2,.g-edition .sombre h3{color:var(--encre)}
+.g-edition .sombre .chapo,.g-edition .sombre p{color:var(--gris)}
+.g-edition .sombre .sur{color:var(--bleu)}
+.g-edition .metiers{border-top:var(--filfort)}
+.g-edition .metiers li{border-bottom:var(--fil)}
+.g-edition .metiers li:last-child{border-bottom:var(--filfort)}
+.g-edition .metiers a{color:var(--encre)}
+.g-edition .metiers a:hover{background:none}
+.g-edition .metiers a:hover h3{color:var(--bleu)}
+.g-edition .metiers p{color:var(--gris)}
+.g-edition .metiers .metier-prix{color:var(--bleu)}
+.g-edition .metiers .metier-prix .prix-l{color:var(--gris)}
+.g-edition .metiers .lien{color:var(--encre)}
+.g-edition .appel{background:var(--fond);color:var(--encre);border-top:4px solid var(--bleu)}
+.g-edition .appel h2{color:var(--encre)}
+.g-edition .appel p{color:var(--gris)}
+.g-edition .appel .sur{color:var(--bleu)}
+.g-edition .appel .btn{background:var(--bleu);border-color:var(--bleu);color:#fff}
+.g-edition .appel .btn:hover{background:var(--encre);border-color:var(--encre);color:#fff}
+.g-edition .appel .btn-ligne-clair{background:transparent;color:var(--encre);border-color:var(--encre)}
+.g-edition .appel .btn-ligne-clair:hover{background:var(--encre);color:#fff;border-color:var(--encre)}
+.g-edition .appel-in{padding-top:clamp(56px,8vw,104px);padding-bottom:clamp(56px,8vw,104px)}
+.g-edition .appel h2{font-size:clamp(2rem,4.2vw,3.5rem)}
+
+/* La capture de la page de modification : hauteur fixe, filet, fondu */
+.g-edition .intro-fig{position:relative;align-self:start}
+.g-edition .intro-img{aspect-ratio:auto;height:440px;width:100%;object-fit:cover;object-position:top;-webkit-mask-image:linear-gradient(#000 calc(100% - 64px),transparent);mask-image:linear-gradient(#000 calc(100% - 64px),transparent);border:var(--fil);border-bottom:0}
+
+/* Démonstrations : quatre captures en deux colonnes, assez grandes pour être lues */
+.g-edition .essai-vue{aspect-ratio:5/4;-webkit-mask-image:linear-gradient(#000 calc(100% - 40px),transparent);mask-image:linear-gradient(#000 calc(100% - 40px),transparent);border-bottom:0}
+.g-edition .essai-liens{grid-template-columns:minmax(0,1fr)}
+.g-edition .essai-liens b{font-size:1.5rem}
+.g-edition .essai-liens small{font-size:1rem}
+@media (min-width:620px){.g-edition .essai-liens{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 28px}}
+@media (min-width:1000px){
+  .g-edition .essai-grille{grid-template-columns:minmax(0,4fr) minmax(0,8fr);column-gap:clamp(40px,6vw,96px);align-items:start}
+  .g-edition .essai-liens{grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 32px}
+}
+.g-edition .pied h2{font-size:1.125rem}
+
+/* Révision 3 (suite) : À propos sans portrait, équipe, captures des pages par métier */
+.g-edition .tete-page + .sec-serre{padding-top:clamp(8px,1.5vw,20px)}
+@media (min-width:1000px){
+  .g-edition .intro-grille:not(:has(.intro-fig)) .prose-grande{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);column-gap:clamp(40px,6vw,96px);align-items:start}
+  .g-edition .intro-grille:not(:has(.intro-fig)) .prose-grande > :first-child{grid-column:1;grid-row:1 / span 8}
+  .g-edition .intro-grille:not(:has(.intro-fig)) .prose-grande > :not(:first-child){grid-column:2}
+}
+.g-edition .portrait-vide{display:none}
+.g-edition .equipe b{font-family:var(--titres);font-weight:500;font-size:1.5rem;letter-spacing:-.015em}
+.g-edition .tete-page .metier-prix{margin:20px 0 0}
+.g-edition .metier-img{-webkit-mask-image:linear-gradient(#000 calc(100% - 56px),transparent);mask-image:linear-gradient(#000 calc(100% - 56px),transparent);border-bottom:0}
+.g-edition .intro-grille:not(:has(.intro-fig)){grid-template-columns:minmax(0,1fr)}
+.g-edition .equipe{display:block}
+.g-edition .equipe li{max-width:none}
+.g-edition .equipe b{display:block}
+.g-edition .intro-grille:not(:has(.intro-fig)) .prose-grande{max-width:none;width:100%}
+.g-edition .intro-grille:not(:has(.intro-fig)) .prose-grande > :first-child{max-width:20ch}

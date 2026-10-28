@@ -1,0 +1,13 @@
+{
+  // Site d’Atelier Muel (Grégoire Muel EI) : Cloudflare Worker + stockage KV.
+  "name": "site-atelier-muel",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-09-01",
+  "assets": { "directory": "./public", "binding": "ASSETS" },
+  // Stockage du contenu : créé tout seul au premier déploiement (wrangler 4.45 ou plus), puis toujours le même.
+  "kv_namespaces": [{ "binding": "CONTENU" }],
+  // "oui" tant que les textes et les prix ne sont pas validés : bandeau, non indexé, demandes en démonstration.
+  "vars": { "MAQUETTE": "oui" }
+  // Après l'achat du domaine (zone ajoutée sur Cloudflare) :
+  // "routes": [{ "pattern": "nomdedomaine.fr", "custom_domain": true }]
+}

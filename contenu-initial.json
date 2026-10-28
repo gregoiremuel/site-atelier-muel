@@ -1,0 +1,351 @@
+{
+  "_schema": "agence v1",
+  "agence": {
+    "nom": "Atelier Muel",
+    "logo": "/assets/atelier-muel-monogramme.svg",
+    "nom_image": "",
+    "nom_image_blanc": "",
+    "activite": "Création et refonte de sites internet",
+    "zone": "Paris et alentours, et à distance partout en France",
+    "adresse": "",
+    "code_postal": "75016",
+    "ville": "Paris 16e",
+    "telephone": "",
+    "email": "",
+    "linkedin": "",
+    "instagram": "",
+    "description_google": "Atelier Muel crée et refait les sites des commerces, des artisans et des entreprises, à Paris 16e et à distance : maquette gratuite en 48 h, et un espace de modification pour tout changer soi-même."
+  },
+  "theme": {
+    "fond": "#f5f3ee",
+    "encre": "#121614",
+    "gris": "#545a56",
+    "trait": "#e1ddd4",
+    "marine": "#18231f",
+    "or": "#cfa86a"
+  },
+  "annonce": {
+    "afficher": false,
+    "texte": ""
+  },
+  "accueil": {
+    "photo": "/assets/photos/accueil.jpg",
+    "video": "",
+    "fond_video": false,
+    "sur_titre": "Création de sites · Paris 16e",
+    "titre": "Des sites à votre nom, que vous modifiez vous-même.",
+    "texte": "Commerces, artisans, entreprises : je crée votre site, puis vous changez vos horaires, vos prix et vos photos depuis votre téléphone, et vous recevez les demandes de vos clients.",
+    "reperes": [
+      "Maquette gratuite en 48 h",
+      "Rien à payer si elle ne vous plaît pas",
+      "Un seul interlocuteur"
+    ],
+    "intro_titre": "Un site, et la main dessus",
+    "intro_texte": "Beaucoup de sites vieillissent parce que personne ne peut les mettre à jour sans appeler quelqu’un. Chaque site que je crée vient avec un espace de modification : une page privée où vous changez vous-même vos horaires, vos tarifs, vos photos et vos textes, et où arrivent les demandes de vos clients.\n\nJe m’appelle Grégoire Muel et je travaille depuis Auteuil. Je prépare une maquette à votre nom, avec vos vraies informations ; vous décidez ensuite.",
+    "photo_intro": "/assets/photos/intro.jpg",
+    "essai_titre": "Essayez l’espace de modification",
+    "essai_texte": "Ouvrez un site d’exemple, touchez « Essayer l’espace », changez un horaire, un prix ou une photo, et regardez le site se mettre à jour.\n\nTout reste dans votre navigateur : rien n’est publié.",
+    "appel_titre": "Une maquette de votre site, gratuite, en 48 h",
+    "appel_texte": "Dites-moi qui vous êtes et ce que vous faites. Je vous prépare une maquette à votre nom ; si elle ne vous plaît pas, vous ne me devez rien.",
+    "photo_appel": ""
+  },
+  "chiffres": [
+    {
+      "valeur": "48 h",
+      "libelle": "pour recevoir votre maquette, gratuite"
+    },
+    {
+      "valeur": "15 min",
+      "libelle": "pour apprendre à modifier votre site"
+    },
+    {
+      "valeur": "1",
+      "libelle": "seul interlocuteur, du premier échange à la mise en ligne"
+    }
+  ],
+  "metiers": [
+    {
+      "id": "site-vitrine",
+      "nom": "Site vitrine",
+      "accroche": "Pour un commerce ou un artisan : ce que vous faites, vos horaires, vos tarifs, et un bouton pour vous appeler.",
+      "prix": "À partir de 590 €, puis 29 € par mois",
+      "texte": "Le site que vos clients consultent avant de passer vous voir. Il se lit d’abord sur téléphone : horaires du jour, itinéraire et appel en un geste.\n\nVous le tenez à jour vous-même, depuis votre téléphone, sans rien installer.",
+      "points": [
+        "Maquette gratuite à votre nom en 48 h",
+        "Photos de la boutique comprises",
+        "Horaires, tarifs, photos et textes modifiables par vous",
+        "Demandes de vos clients (commandes, réservations, devis) reçues dans votre espace",
+        "Nom de domaine à votre nom"
+      ],
+      "photo": "/assets/photos/offre-vitrine.jpg"
+    },
+    {
+      "id": "boutique-catalogue",
+      "nom": "Boutique et catalogue",
+      "accroche": "Pour présenter vos pièces ou vos produits : collections, fiches détaillées, panier et demandes de commande.",
+      "prix": "À partir de 1 290 €, puis 29 € par mois",
+      "texte": "Un catalogue à votre image, rangé par collections et par types, avec une fiche pour chaque pièce : photos, prix, matières, options.\n\nVos clients composent un panier et vous envoient une demande de commande ; vous confirmez avec eux. Pas de commission sur vos ventes.",
+      "points": [
+        "Collections, types et fiches de pièces",
+        "Panier et demande de commande",
+        "Ajout d’une pièce en quelques minutes depuis votre téléphone",
+        "Pièces vendues ou masquées en un geste",
+        "Pages d’information : entretien, tailles, livraison"
+      ],
+      "photo": "/assets/photos/offre-catalogue.jpg"
+    },
+    {
+      "id": "site-entreprise",
+      "nom": "Site d’entreprise ou refonte",
+      "accroche": "Pour une entreprise de services ou du bâtiment : vos métiers, vos réalisations, votre méthode, et des demandes de projet qualifiées.",
+      "prix": "À partir de 1 900 €, puis 29 € par mois",
+      "texte": "Un site qui inspire confiance à un client qui ne vous connaît pas encore : vos expertises, des réalisations classées par secteur, votre façon de travailler, vos engagements.\n\nSi vous avez déjà un site, je reprends ce qui est bon et je refais le reste.",
+      "points": [
+        "Pages métiers, réalisations et méthode",
+        "Réalisations ajoutées par vous, avec leurs photos",
+        "Formulaire de demande de projet",
+        "Vidéo en fond de l’accueil, si vous le souhaitez",
+        "Reprise des contenus de l’ancien site"
+      ],
+      "photo": "/assets/photos/offre-entreprise.jpg"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Une maquette gratuite en 48 h",
+      "points": [
+        "On échange quelques minutes, chez vous ou par téléphone",
+        "Je prépare une maquette à votre nom, avec vos vraies informations",
+        "Elle ne vous plaît pas : vous ne me devez rien"
+      ]
+    },
+    {
+      "titre": "Votre site, à votre image",
+      "points": [
+        "Je prends les photos de la boutique (site vitrine)",
+        "Nous relisons les textes ensemble",
+        "J’ajuste jusqu’à ce que le site vous ressemble"
+      ]
+    },
+    {
+      "titre": "En ligne, et vous êtes autonome",
+      "points": [
+        "Le site est mis en ligne à votre nom",
+        "Quinze minutes de prise en main, sur votre téléphone",
+        "Ensuite, vous modifiez seul ; je reste joignable"
+      ]
+    }
+  ],
+  "lots": [
+    "Lecture sur téléphone, tablette et ordinateur",
+    "Espace de modification protégé par mot de passe",
+    "Retour à la version précédente en un geste",
+    "Formulaire de demande ou de commande",
+    "Titres et descriptions pour Google",
+    "Pages mentions légales et confidentialité préparées",
+    "Aucun cookie publicitaire ni de mesure d’audience",
+    "Hébergement rapide",
+    "Nom de domaine en .fr à votre nom",
+    "Vidéo en fond de l’accueil (facultatif)",
+    "Prise en main de quinze minutes",
+    "Une démonstration à essayer avant de décider"
+  ],
+  "secteurs": [
+    {
+      "id": "commerces",
+      "nom": "Commerces"
+    },
+    {
+      "id": "boutiques",
+      "nom": "Boutiques et créateurs"
+    },
+    {
+      "id": "entreprises",
+      "nom": "Entreprises et bâtiment"
+    }
+  ],
+  "realisations": [
+    {
+      "id": "operia",
+      "nom": "Opéria",
+      "client": "Opéria, maître d’œuvre et contractant général",
+      "secteur": "entreprises",
+      "lieu": "Vertou (Loire-Atlantique)",
+      "surface": "Site d’entreprise et espace de modification",
+      "annee": "2026",
+      "mission": "Refonte du site, en cours de validation",
+      "accroche": "La refonte du site d’un maître d’œuvre : trois métiers, des réalisations par secteur, et des demandes de projet qualifiées.",
+      "texte": "Opéria rénove et aménage des bureaux, des commerces et des locaux d’activité. Son nouveau site présente ses trois métiers, ses réalisations classées par secteur et sa méthode, avec un formulaire qui précise d’emblée le type de locaux et la surface.\n\nL’équipe ajoute elle-même ses chantiers et leurs photos depuis l’espace de modification.",
+      "interventions": [
+        "Structure et textes repris de l’ancien site",
+        "Pages métiers, réalisations et méthode",
+        "Formulaire de demande de projet",
+        "Espace de modification",
+        "Vidéo possible en fond de l’accueil"
+      ],
+      "photos": [
+        "/assets/photos/real-operia.jpg",
+        "/assets/photos/real-operia-2.jpg"
+      ],
+      "a_la_une": true,
+      "visible": true,
+      "lien": "",
+      "lien_texte": "Voir le site"
+    },
+    {
+      "id": "fromagerie-exemple",
+      "nom": "Fromagerie de quartier",
+      "client": "Site d’exemple, d’après une maquette préparée pour une fromagerie du 16e",
+      "secteur": "commerces",
+      "lieu": "Paris 16e",
+      "surface": "Site vitrine et espace boutique",
+      "annee": "2026",
+      "mission": "Maquette",
+      "accroche": "Horaires du jour, fromages du moment, plateaux à commander : tout ce qu’un client cherche avant de passer.",
+      "texte": "Ce site d’exemple reprend la maquette préparée pour une fromagerie du quartier, avec un nom et des coordonnées imaginaires.\n\nLe commerçant change lui-même ses horaires et ses fermetures, la liste des fromages, ses plateaux et ses photos ; les commandes de plateaux arrivent dans son espace.",
+      "interventions": [
+        "Horaires avec l’ouverture du jour",
+        "Liste des produits par famille",
+        "Commande de plateaux avec jour de retrait",
+        "Questions pratiques",
+        "Espace boutique sur téléphone"
+      ],
+      "photos": [
+        "/assets/photos/real-fromagerie.jpg",
+        "/assets/photos/real-fromagerie-2.jpg"
+      ],
+      "a_la_une": true,
+      "visible": true,
+      "lien": "/demos/fromagerie-exemple",
+      "lien_texte": "Essayer la démonstration"
+    },
+    {
+      "id": "joaillerie-exemple",
+      "nom": "Joaillerie et catalogue",
+      "client": "Site d’exemple : maison imaginaire",
+      "secteur": "boutiques",
+      "lieu": "Paris",
+      "surface": "Catalogue, panier et espace de modification",
+      "annee": "2026",
+      "mission": "Démonstration",
+      "accroche": "Des collections, une fiche par pièce, un panier et des demandes de commande.",
+      "texte": "Une maison de joaillerie imaginaire, pour montrer un catalogue complet. Chaque collection a sa couleur, chaque pièce sa fiche, avec photos, prix et options.\n\nLe client compose un panier et envoie une demande ; la maison la reçoit dans son espace et confirme.",
+      "interventions": [
+        "Collections et types de pièces",
+        "Fiches avec galerie et options",
+        "Panier et demande de commande",
+        "Pages entretien, tailles et livraison",
+        "Espace de modification sur téléphone"
+      ],
+      "photos": [
+        "/assets/photos/real-joaillerie.jpg",
+        "/assets/photos/real-joaillerie-2.jpg"
+      ],
+      "a_la_une": true,
+      "visible": true,
+      "lien": "/demos/joaillerie-exemple",
+      "lien_texte": "Essayer la démonstration"
+    }
+  ],
+  "presentation": {
+    "titre": "L’atelier",
+    "texte": "Atelier Muel, c’est moi : Grégoire Muel, entrepreneur individuel installé à Auteuil, dans le 16e arrondissement de Paris. Je conçois, crée, refais et entretiens les sites des commerces, des artisans et des entreprises.\n\n## Ma façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Un espace de modification simple, pensé pour le téléphone.\n- Un seul interlocuteur, du premier échange à la mise en ligne, puis pour l’entretien.\n\nArtisan joaillier de formation, j’ai gardé l’habitude du travail précis et des finitions soignées.",
+    "photo": "/assets/photos/intro.jpg"
+  },
+  "garanties": {
+    "titre": "Mes engagements",
+    "texte": "",
+    "points": [
+      "Une maquette gratuite à votre nom avant toute décision",
+      "Rien à payer si la maquette ne vous plaît pas",
+      "Le nom de domaine et vos contenus restent à vous",
+      "Un site rapide, sans publicité ni cookie de suivi",
+      "Le prix annoncé avant de commencer"
+    ]
+  },
+  "equipe": [
+    {
+      "nom": "Grégoire Muel",
+      "role": "Conception, réalisation et suivi",
+      "photo": ""
+    }
+  ],
+  "references": [],
+  "affichage": {
+    "chiffres": true,
+    "equipe": true,
+    "references": false
+  },
+  "contact": {
+    "actif": true,
+    "delai_reponse": "",
+    "types": [
+      "Créer un site",
+      "Refaire mon site",
+      "Boutique ou catalogue en ligne",
+      "Modifier ou entretenir un site",
+      "Autre demande"
+    ],
+    "cle_web3forms": "",
+    "email": "",
+    "confirmation": "Merci, votre demande est bien partie. Je vous recontacte pour en parler."
+  },
+  "mentions": {
+    "raison_sociale": "Grégoire Muel EI, nom commercial Atelier Muel",
+    "forme": "entrepreneur individuel",
+    "rcs": "131 703 951 00015 (Registre national des entreprises)",
+    "adresse": "36 rue Chardon-Lagache, 75016 Paris",
+    "directeur_publication": "Grégoire Muel",
+    "email": "",
+    "mediateur": "",
+    "tva": "TVA non applicable, article 293 B du code général des impôts"
+  },
+  "credits_photos": "Visuels : captures des sites réalisés par Atelier Muel. Les sites d’exemple utilisent des photos d’illustration (Unsplash).",
+  "reglages": {
+    "url": ""
+  },
+  "libelles": {
+    "nav_expertises": "Offres",
+    "nav_realisations": "Réalisations",
+    "nav_agence": "L’atelier",
+    "bouton_principal": "Recevoir ma maquette gratuite",
+    "bouton_realisations": "Voir les réalisations",
+    "bouton_appel": "Demander ma maquette",
+    "intro_lien": "L’atelier",
+    "exp_sur": "Offres",
+    "exp_titre": "Trois formules, un seul interlocuteur",
+    "exp_lien": "Le détail",
+    "essai_sur": "À essayer",
+    "real_sur": "Réalisations",
+    "real_titre": "Des sites faits pour servir",
+    "real_tout": "Toutes les réalisations",
+    "methode_sur": "Méthode",
+    "methode_titre": "De la maquette gratuite à la mise en ligne",
+    "methode_titre_page": "Trois étapes, un seul interlocuteur",
+    "page_exp_titre": "Ce que je crée pour vous",
+    "page_exp_description": "Sites vitrines, boutiques et sites d’entreprise avec espace de modification, à Paris et à distance : formules et prix de départ.",
+    "lots_sur": "Compris",
+    "lots_titre": "Dans chaque site",
+    "page_real_titre": "Réalisations et démonstrations",
+    "fiche_surface": "Type de site",
+    "interventions": "Ce qui a été fait",
+    "garanties_sur": "Engagements",
+    "equipe_sur": "L’atelier",
+    "equipe_titre": "Votre interlocuteur",
+    "contact_titre": "Parlons de votre site",
+    "contact_chapo": "Quelques lignes sur votre activité et sur ce que vous attendez de votre site suffisent pour commencer.",
+    "form_societe": "Commerce ou entreprise",
+    "form_type": "Votre demande",
+    "form_surface": "",
+    "form_ville": "Ville",
+    "form_message": "Votre projet",
+    "form_message_exemple": "Votre activité, votre site actuel s’il existe, ce que vous voulez y montrer…",
+    "form_envoyer": "Envoyer la demande",
+    "pied_trouver": "Adresse",
+    "pied_joindre": "Contact",
+    "mentions_siege": "Adresse",
+    "mentions_immatriculation": "SIRET",
+    "type_schema": "ProfessionalService",
+    "bandeau_maquette": "Version de travail non publiée : textes et prix à valider."
+  }
+}

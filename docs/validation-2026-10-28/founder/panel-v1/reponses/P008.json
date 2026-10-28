@@ -1,0 +1,14 @@
+{
+  "id": "P008",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "besoin",
+  "raison": "Ma fiche Google me suffit pour l'instant et je ne vois pas en quoi un site me ferait gagner des clients. Dépenser 590 € sans savoir si ça rapporte, ce n'est pas pour moi.",
+  "objection": "Qu'est-ce que ce site m'apporte en plus de ma fiche Google, et qui me garantit que des gens vont me trouver grâce à lui ? Les démonstrations sont des entreprises imaginaires, donc je n'ai aucune preuve que ça marche.",
+  "ce_qui_me_ferait_changer_davis": "Voir une fleuriste réelle de mon quartier qui a des clients grâce à son site, avec des chiffres.",
+  "prix_trop_bas": 200,
+  "prix_bonne_affaire": 300,
+  "prix_cher": 400,
+  "prix_trop_cher": 600
+}

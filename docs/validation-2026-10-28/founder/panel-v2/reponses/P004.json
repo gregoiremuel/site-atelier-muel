@@ -1,0 +1,14 @@
+{
+  "id": "P004",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je ne connais pas ce monsieur et je n'ai pas le temps de m'occuper d'un site ce mois-ci, entre les devis et la compta le soir. Les démos sont des entreprises inventées et il n'a aucun client à me montrer, donc je ne sais pas ce que je paie.",
+  "objection": "Qui est-ce, et est-ce qu'un site va me ramener un seul client ? Il ne promet rien sur Google et je n'ai aucun exemple de commerce réel.",
+  "ce_qui_me_ferait_changer_davis": "Voir un boulanger ou un caviste du quartier, comme moi, qui dit avoir eu plus d'appels ou de passages grâce à sa fiche ou à son site après un mois.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 290,
+  "prix_cher": 400,
+  "prix_trop_cher": 500
+}

@@ -1,0 +1,14 @@
+{
+  "id": "P019",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je ne vois pas ce que ça me rapporte concrètement : on me montre des entreprises imaginaires, pas de vrais clients. Avant de mettre 590 € là-dedans, je demande à mon confrère ce qu'il en pense, et je ne décide pas seul cette semaine.",
+  "objection": "Il n'y a aucun client à montrer, seulement des démonstrations d'entreprises imaginaires : je ne sais pas si un site me ramènera un seul client.",
+  "ce_qui_me_ferait_changer_davis": "Voir un site fait pour un commerçant de bouche de mon quartier, avec des clients réels qui disent ce que ça leur a apporté, et que mon confrère me confirme que ça marche.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 300,
+  "prix_cher": 450,
+  "prix_trop_cher": 700
+}

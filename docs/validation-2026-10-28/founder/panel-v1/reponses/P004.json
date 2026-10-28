@@ -1,0 +1,14 @@
+{
+  "id": "P004",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je ne vois pas à quoi ça me servirait aujourd'hui : mes clients viennent par le bouche-à-oreille et ma fiche Google marche déjà. Et je ne connais pas ce monsieur, il n'a pas encore de clients à montrer, seulement des démos d'entreprises imaginaires.",
+  "objection": "Qui me dit que ça ramène du monde ? Il ne promet même pas de place dans Google, et je n'ai aucune preuve que ses sites ont déjà rapporté quelque chose à quelqu'un.",
+  "ce_qui_me_ferait_changer_davis": "Un commerçant de mon quartier, de ma sorte, qui me dise que son site lui a amené des clients, et que je puisse lui parler moi-même.",
+  "prix_trop_bas": 200,
+  "prix_bonne_affaire": 350,
+  "prix_cher": 700,
+  "prix_trop_cher": 900
+}

@@ -1,0 +1,226 @@
+{
+  "n": 20,
+  "graine": 20261028,
+  "cartes": [
+    {
+      "id": "P001",
+      "nom": "Nadia",
+      "age": 33,
+      "segment": "Fleuriste",
+      "revenu": 34000,
+      "comportement": "Bricoleur",
+      "comportement_detail": "Aime faire lui-même ce qu'il peut faire sur son téléphone.",
+      "habitude": "tu réponds au téléphone pendant que tu travailles",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P002",
+      "nom": "Maya",
+      "age": 41,
+      "segment": "Commerçant de bouche (boulanger, primeur, caviste, traiteur)",
+      "revenu": 37000,
+      "comportement": "Prudent",
+      "comportement_detail": "Demande l'avis d'un confrère ou d'un voisin avant d'acheter quoi que ce soit.",
+      "habitude": "tu réponds au téléphone pendant que tu travailles",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P003",
+      "nom": "Lucas",
+      "age": 30,
+      "segment": "Artisan du bâtiment ou du dépannage (plombier, électricien)",
+      "revenu": 55000,
+      "comportement": "Bricoleur",
+      "comportement_detail": "Aime faire lui-même ce qu'il peut faire sur son téléphone.",
+      "habitude": "tu es plus souvent sur Google Maps ou sur les réseaux que sur un site",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P004",
+      "nom": "Priya",
+      "age": 56,
+      "segment": "Commerçant de bouche (boulanger, primeur, caviste, traiteur)",
+      "revenu": 44000,
+      "comportement": "Débordé",
+      "comportement_detail": "Décide vite, entre deux clients, sans lire de longs textes.",
+      "habitude": "tu fais tes devis et ta comptabilité le soir",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P005",
+      "nom": "Zoé",
+      "age": 64,
+      "segment": "Fleuriste",
+      "revenu": 26000,
+      "comportement": "Compare",
+      "comportement_detail": "Regarde plusieurs solutions et plusieurs prix avant de répondre.",
+      "habitude": "tu fais tes devis et ta comptabilité le soir",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P006",
+      "nom": "Sofia",
+      "age": 52,
+      "segment": "Artisan du bâtiment ou du dépannage (plombier, électricien)",
+      "revenu": 48000,
+      "comportement": "Compare",
+      "comportement_detail": "Regarde plusieurs solutions et plusieurs prix avant de répondre.",
+      "habitude": "tu réponds au téléphone pendant que tu travailles",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P007",
+      "nom": "Emma",
+      "age": 52,
+      "segment": "Fleuriste",
+      "revenu": 37000,
+      "comportement": "Bricoleur",
+      "comportement_detail": "Aime faire lui-même ce qu'il peut faire sur son téléphone.",
+      "habitude": "tu es plus souvent sur Google Maps ou sur les réseaux que sur un site",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P008",
+      "nom": "Chloé",
+      "age": 37,
+      "segment": "Fleuriste",
+      "revenu": 27000,
+      "comportement": "Compare",
+      "comportement_detail": "Regarde plusieurs solutions et plusieurs prix avant de répondre.",
+      "habitude": "tu réponds au téléphone pendant que tu travailles",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P009",
+      "nom": "Noé",
+      "age": 36,
+      "segment": "Restaurateur ou gérant de bistrot",
+      "revenu": 41000,
+      "comportement": "Aime déléguer",
+      "comportement_detail": "Préfère payer quelqu'un pour s'occuper de ce qui n'est pas son métier.",
+      "habitude": "tu réponds au téléphone pendant que tu travailles",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P010",
+      "nom": "Aïcha",
+      "age": 43,
+      "segment": "Commerçant de bouche (boulanger, primeur, caviste, traiteur)",
+      "revenu": 46000,
+      "comportement": "Aime déléguer",
+      "comportement_detail": "Préfère payer quelqu'un pour s'occuper de ce qui n'est pas son métier.",
+      "habitude": "tu es plus souvent sur Google Maps ou sur les réseaux que sur un site",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P011",
+      "nom": "Caleb",
+      "age": 55,
+      "segment": "Restaurateur ou gérant de bistrot",
+      "revenu": 33000,
+      "comportement": "Prudent",
+      "comportement_detail": "Demande l'avis d'un confrère ou d'un voisin avant d'acheter quoi que ce soit.",
+      "habitude": "tu es plus souvent sur Google Maps ou sur les réseaux que sur un site",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P012",
+      "nom": "Hana",
+      "age": 38,
+      "segment": "Restaurateur ou gérant de bistrot",
+      "revenu": 49000,
+      "comportement": "Débordé",
+      "comportement_detail": "Décide vite, entre deux clients, sans lire de longs textes.",
+      "habitude": "tu es plus souvent sur Google Maps ou sur les réseaux que sur un site",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P013",
+      "nom": "Jordan",
+      "age": 43,
+      "segment": "Restaurateur ou gérant de bistrot",
+      "revenu": 51000,
+      "comportement": "Débordé",
+      "comportement_detail": "Décide vite, entre deux clients, sans lire de longs textes.",
+      "habitude": "tu réponds au téléphone pendant que tu travailles",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P014",
+      "nom": "Jonas",
+      "age": 37,
+      "segment": "Artisan du bâtiment ou du dépannage (plombier, électricien)",
+      "revenu": 57000,
+      "comportement": "Prudent",
+      "comportement_detail": "Demande l'avis d'un confrère ou d'un voisin avant d'acheter quoi que ce soit.",
+      "habitude": "tu fais tes devis et ta comptabilité le soir",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P015",
+      "nom": "Marcus",
+      "age": 54,
+      "segment": "Artisan du bâtiment ou du dépannage (plombier, électricien)",
+      "revenu": 31000,
+      "comportement": "Débordé",
+      "comportement_detail": "Décide vite, entre deux clients, sans lire de longs textes.",
+      "habitude": "tu réponds au téléphone pendant que tu travailles",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P016",
+      "nom": "Théo",
+      "age": 35,
+      "segment": "Commerçant de bouche (boulanger, primeur, caviste, traiteur)",
+      "revenu": 30000,
+      "comportement": "Aime déléguer",
+      "comportement_detail": "Préfère payer quelqu'un pour s'occuper de ce qui n'est pas son métier.",
+      "habitude": "tu fais tes devis et ta comptabilité le soir",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P017",
+      "nom": "Olivier",
+      "age": 31,
+      "segment": "Artisan du bâtiment ou du dépannage (plombier, électricien)",
+      "revenu": 54000,
+      "comportement": "Bricoleur",
+      "comportement_detail": "Aime faire lui-même ce qu'il peut faire sur son téléphone.",
+      "habitude": "tu fais tes devis et ta comptabilité le soir",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P018",
+      "nom": "Fatima",
+      "age": 36,
+      "segment": "Restaurateur ou gérant de bistrot",
+      "revenu": 28000,
+      "comportement": "Compare",
+      "comportement_detail": "Regarde plusieurs solutions et plusieurs prix avant de répondre.",
+      "habitude": "tu fais tes devis et ta comptabilité le soir",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P019",
+      "nom": "Ravi",
+      "age": 60,
+      "segment": "Commerçant de bouche (boulanger, primeur, caviste, traiteur)",
+      "revenu": 45000,
+      "comportement": "Prudent",
+      "comportement_detail": "Demande l'avis d'un confrère ou d'un voisin avant d'acheter quoi que ce soit.",
+      "habitude": "tu fais tes devis et ta comptabilité le soir",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    },
+    {
+      "id": "P020",
+      "nom": "Mei",
+      "age": 64,
+      "segment": "Commerçant de bouche (boulanger, primeur, caviste, traiteur)",
+      "revenu": 40000,
+      "comportement": "Aime déléguer",
+      "comportement_detail": "Préfère payer quelqu'un pour s'occuper de ce qui n'est pas son métier.",
+      "habitude": "tu réponds au téléphone pendant que tu travailles",
+      "objection": "Aucun doute précis en tête : tu regardes simplement ce qu'on te propose."
+    }
+  ]
+}

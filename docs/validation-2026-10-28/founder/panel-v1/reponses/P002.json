@@ -1,0 +1,14 @@
+{
+  "id": "P002",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je n'ai pas de raison de dépenser maintenant. Je ne connais pas ce monsieur, il n'a aucun client à me montrer, et ses démos sont des entreprises imaginaires. Je regarderais la maquette gratuite, mais je demanderais d'abord à un confrère qui a déjà un site.",
+  "objection": "Qui est-il vraiment, et est-ce que ça m'amènera un seul client ? Il dit lui-même qu'il ne promet pas de place dans Google.",
+  "ce_qui_me_ferait_changer_davis": "Un confrère de mon quartier qui a un site fait par lui et qui me dit que ça lui a rapporté des clients.",
+  "prix_trop_bas": 200,
+  "prix_bonne_affaire": 350,
+  "prix_cher": 500,
+  "prix_trop_cher": 750
+}

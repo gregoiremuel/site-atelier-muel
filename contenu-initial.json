@@ -438,13 +438,13 @@
   },
   "abonnements": {
     "titre": "Un coup de main au mois, seulement si vous le souhaitez",
-    "intro": "Le site est à vous dès sa livraison : vous pouvez le gérer seul depuis la page de modification. Si vous préférez que je m’en occupe, choisissez une formule mensuelle, sans engagement de durée.",
+    "intro": "Le site est à vous dès sa livraison : vous pouvez le gérer seul depuis la page de modification. Si vous préférez que je m’en occupe, choisissez une formule mensuelle, sans engagement de durée. Pas sûr de votre choix ? Commencez sans abonnement : vous pourrez en prendre un plus tard, à tout moment.",
     "formules": [
       {
         "nom": "Sans abonnement",
         "prix": "0 €",
         "periode": "par mois",
-        "description": "Vous gérez votre site vous-même.",
+        "description": "Vous gérez votre site vous-même, quand vous voulez.",
         "points": [
           "Page de modification pour changer textes, horaires, prix et photos",
           "Aide pour la prise en main à la livraison",
@@ -456,9 +456,9 @@
         "nom": "Sérénité",
         "prix": "19 €",
         "periode": "par mois",
-        "description": "Vous n’avez plus à penser à la technique, et je fais vos petits changements.",
+        "description": "Pour ceux qui veulent que je fasse leurs petits changements : horaires, prix, photos.",
         "points": [
-          "Hébergement et nom de domaine renouvelé",
+          "Votre site reste en ligne, et l’adresse du site (nom de domaine) est renouvelée",
           "Copie de sauvegarde du contenu, plus une copie complète chaque mois",
           "Petites modifications à ma charge : jusqu’à 30 minutes par mois",
           "Réponse sous 2 jours ouvrés"
@@ -469,7 +469,7 @@
         "nom": "Croissance",
         "prix": "49 €",
         "periode": "par mois",
-        "description": "Pour que le site amène des clients, pas seulement des visites.",
+        "description": "Pour que le site amène des clients, pas seulement des visites : plus de temps, et des chiffres.",
         "points": [
           "Tout ce que comprend Sérénité",
           "Jusqu’à 1 heure de modifications par mois",
@@ -482,7 +482,7 @@
         "nom": "Visibilité Google",
         "prix": "39 €",
         "periode": "par mois",
-        "description": "Pour être trouvé sur Google Maps, avec ou sans site.",
+        "description": "Pour être trouvé sur Google Maps, avec ou sans site : je tiens votre fiche à jour.",
         "points": [
           "Mini-diagnostic gratuit pour commencer",
           "Fiche à jour : horaires, photos, congés",
@@ -493,7 +493,7 @@
         "recommande": false
       }
     ],
-    "note": "Prix hors options, sans engagement de durée. Les formules s’arrêtent à tout moment ; le site, son contenu et son nom de domaine restent à vous. Je ne promets pas de place dans Google : je promets un travail fait chaque mois."
+    "note": "Ce que ça coûte la première année, site vitrine compris et nom de domaine inclus : environ 600 € sans abonnement, environ 830 € avec Sérénité, environ 1 190 € avec Croissance. Visibilité Google seule : 468 € par an. Sans engagement de durée : les formules s’arrêtent à tout moment ; le site, son contenu et son nom de domaine restent à vous. Je ne promets pas de place dans Google : je promets un travail fait chaque mois."
   },
   "engagements": [
     {

@@ -1,0 +1,14 @@
+{
+  "id": "P009",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je regarde, je ne sors pas d'argent. Les démos sont des entreprises imaginaires et il n'a encore aucun client à montrer, donc je ne sais pas si un site me ramènera quelqu'un. Je prends le diagnostic gratuit et la maquette, et je paierai seulement si la maquette me convainc.",
+  "objection": "Je n'ai aucune preuve que ça rapporte des clients à un restaurant comme le mien. Payer 590 € pour un site sans savoir ce qu'il m'apporte, à côté d'un service qui me prend déjà du temps, ça me retient.",
+  "ce_qui_me_ferait_changer_davis": "Deux ou trois restaurateurs du quartier qui ont déjà des clients grâce à leur site, que je peux appeler moi-même.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 290,
+  "prix_cher": 590,
+  "prix_trop_cher": 800
+}

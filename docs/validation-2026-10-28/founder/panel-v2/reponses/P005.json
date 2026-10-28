@@ -1,0 +1,14 @@
+{
+  "id": "P005",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "besoin",
+  "raison": "Ma fiche Google marche déjà et les clients me trouvent avec. Je ne vois pas ce qu'un site m'apporterait en plus, et je n'ai pas le temps de le faire vivre le soir après mes devis.",
+  "objection": "Je n'ai aucune preuve qu'un site me ramènera des clients. Les démonstrations sont des entreprises imaginaires et il n'a pas encore de clients à montrer, donc je paierais 590 € pour une promesse.",
+  "ce_qui_me_ferait_changer_davis": "Un fleuriste du quartier, avec son nom, qui dit que son site lui a ramené des clients.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 250,
+  "prix_cher": 400,
+  "prix_trop_cher": 500
+}

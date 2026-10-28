@@ -1,0 +1,14 @@
+{
+  "id": "P003",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "besoin",
+  "raison": "Mes clients me trouvent sur Google Maps et par le bouche-à-oreille, et je peux déjà mettre à jour ma fiche moi-même sur mon téléphone. Un site à 590 € ne me rapporte rien de visible pour l'instant.",
+  "objection": "Je ne vois pas ce que le site m'apporte en plus de ma fiche Google que je gère déjà, et rien ne garantit que je serai mieux placé.",
+  "ce_qui_me_ferait_changer_davis": "Voir un vrai plombier ou électricien dont le site lui a fait gagner des clients, avec des chiffres.",
+  "prix_trop_bas": 80,
+  "prix_bonne_affaire": 150,
+  "prix_cher": 250,
+  "prix_trop_cher": 350
+}

@@ -1,0 +1,14 @@
+{
+  "id": "P010",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je ne connais ni Grégoire ni aucun commerce qui aurait déjà un site de lui, et ses démonstrations sont des entreprises imaginaires. Le diagnostic gratuit et la maquette, je les prends bien volontiers, mais je ne sors pas 590 € sur une promesse.",
+  "objection": "Un site ne me ramènera pas forcément de clients : je suis déjà sur Google Maps et sur les réseaux, et il ne promet aucune place dans Google. Je ne vois pas ce que le site change concrètement pour mon chiffre.",
+  "ce_qui_me_ferait_changer_davis": "Deux ou trois commerçants du quartier, réels, que je pourrais appeler et qui disent avoir reçu des clients grâce à leur site.",
+  "prix_trop_bas": 250,
+  "prix_bonne_affaire": 350,
+  "prix_cher": 450,
+  "prix_trop_cher": 500
+}

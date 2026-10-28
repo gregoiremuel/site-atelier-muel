@@ -1,0 +1,14 @@
+{
+  "id": "P013",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je n'ai aucun client à qui parler de ce site et on ne me montre aucun vrai commerce qui l'a pris. Je ne vois pas ce que 590 euros changent concrètement pour mon chiffre.",
+  "objection": "Qu'est-ce que ça me rapporte réellement en clients ? Il ne promet pas de place dans Google et ses démos sont des entreprises imaginaires.",
+  "ce_qui_me_ferait_changer_davis": "Voir un vrai restaurateur ou artisan de mon quartier qui a pris le site et me dire ce qui a changé sur ses réservations ou ses appels.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 300,
+  "prix_cher": 700,
+  "prix_trop_cher": 900
+}

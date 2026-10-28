@@ -1,0 +1,14 @@
+{
+  "id": "P002",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Le diagnostic gratuit et la maquette gratuite, je veux bien regarder, ça ne me coûte rien. Mais je ne vois pas de clients derrière ce monsieur, ses démos sont des entreprises imaginaires, et je ne dépense pas 590 € sans en parler à un confrère d'abord.",
+  "objection": "Il n'a encore aucun client à me montrer, donc je ne peux pas vérifier ce que son site donne. Et il ne promet pas de place dans Google, alors je paierais pour du travail sans savoir si ça ramène du monde dans ma boutique.",
+  "ce_qui_me_ferait_changer_davis": "Qu'un confrère du quartier, déjà client, me dise que son site lui a amené des clients et qu'il a tenu ce qu'il promettait.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 290,
+  "prix_cher": 450,
+  "prix_trop_cher": 700
+}

@@ -1,0 +1,14 @@
+{
+  "id": "P012",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "besoin",
+  "raison": "Ma fiche Google me ramène déjà les clients de quartier et je n'ai pas le temps de m'occuper d'un site en plus. Je ne vois pas ce qu'un site de 590 € changerait concrètement pour mon bistrot cette semaine.",
+  "objection": "Est-ce que ça rapporte vraiment des clients, et qui le tiendra à jour quand je n'aurai pas une minute ? Il n'a aucun client à me montrer, seulement des entreprises imaginaires.",
+  "ce_qui_me_ferait_changer_davis": "Un restaurateur de mon quartier, que je connais, qui me montre que son site lui a fait gagner des réservations.",
+  "prix_trop_bas": 200,
+  "prix_bonne_affaire": 350,
+  "prix_cher": 700,
+  "prix_trop_cher": 900
+}

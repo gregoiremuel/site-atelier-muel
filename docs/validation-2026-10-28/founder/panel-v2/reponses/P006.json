@@ -1,0 +1,14 @@
+{
+  "id": "P006",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Mes clients m'appellent déjà grâce au bouche-à-oreille et à ma fiche Google. Je ne vois pas ce que 590 € de plus me rapporteraient, et « travail fait chaque mois » ne me dit pas combien d'appels j'aurai en plus.",
+  "objection": "Est-ce que ça m'amène vraiment des clients, ou est-ce qu'on me vend un beau site que personne ne regardera ?",
+  "ce_qui_me_ferait_changer_davis": "Voir un artisan du quartier dire, chiffres à l'appui, que le site ou la fiche lui a fait gagner des appels.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 300,
+  "prix_cher": 500,
+  "prix_trop_cher": 700
+}

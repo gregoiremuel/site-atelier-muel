@@ -1,0 +1,14 @@
+{
+  "id": "P009",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Le site à 590 €, je veux bien le principe, mais je n'ai aucune raison de croire que ça me ramène des clients. Il n'a pas encore de clients à montrer et ses démos sont des entreprises inventées. Je ne mets pas 590 € là-dedans sur la base d'une maquette.",
+  "objection": "Je ne sais pas si un site change quoi que ce soit pour un bistrot qui a déjà sa fiche Google. Et je n'ai aucune preuve que ce type a déjà fait marcher quelqu'un.",
+  "ce_qui_me_ferait_changer_davis": "Qu'il me donne deux ou trois clients réels, avec leur accord, que je peux appeler pour savoir ce que ça leur a apporté.",
+  "prix_trop_bas": 200,
+  "prix_bonne_affaire": 350,
+  "prix_cher": 500,
+  "prix_trop_cher": 800
+}

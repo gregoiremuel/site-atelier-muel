@@ -1,0 +1,14 @@
+{
+  "id": "P006",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je n'ai pas de site et ma fiche Google me suffit pour l'instant, les appels viennent surtout du bouche-à-oreille. Je ne vois pas ce que 590 € me rapporteraient sans aucune preuve que ça amène des clients.",
+  "objection": "Il n'a pas encore de clients à montrer et ses démonstrations sont des entreprises imaginaires. Je ne sais pas si un site fait venir des appels pour un plombier, et il ne promet rien côté Google.",
+  "ce_qui_me_ferait_changer_davis": "Voir un vrai plombier ou électricien de ma taille qui a un site de ce prix et qui me dit que ça lui amène des appels.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 300,
+  "prix_cher": 700,
+  "prix_trop_cher": 1000
+}

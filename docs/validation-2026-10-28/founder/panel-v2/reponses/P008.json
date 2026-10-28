@@ -1,0 +1,14 @@
+{
+  "id": "P008",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je regarde, mais je n'ai pas de raison d'acheter ce mois-ci : je ne connais ni Grégoire Muel ni aucun site qu'il a fait, et ses démos sont des entreprises imaginaires. Le diagnostic gratuit de la fiche Google, je le prends, il ne coûte rien.",
+  "objection": "Je n'ai aucune preuve que ça marche : pas de client à montrer, pas de témoignage, et 590 € pour un site que je n'ai jamais vu, sur mon salaire, c'est beaucoup.",
+  "ce_qui_me_ferait_changer_davis": "Voir un vrai site fait pour un fleuriste du quartier, avec un commerçant qui dit qu'il est content et que les clients ont appelé.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 290,
+  "prix_cher": 450,
+  "prix_trop_cher": 700
+}

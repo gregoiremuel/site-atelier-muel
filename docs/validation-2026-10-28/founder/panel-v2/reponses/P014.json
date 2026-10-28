@@ -1,0 +1,14 @@
+{
+  "id": "P014",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je regarde la maquette gratuite et le diagnostic, mais je ne vois pas encore ce qu'un site me rapporte en plus de ma fiche Google. Personne ne m'a montré de résultat, et les démos sont des entreprises imaginaires.",
+  "objection": "Qui me garantit que ça me ramène des appels ? Il n'a encore aucun client à montrer, et je n'ai pas le temps de payer pour voir.",
+  "ce_qui_me_ferait_changer_davis": "Un confrère du coin qui a pris le site et qui me dit que ça lui ramène des appels.",
+  "prix_trop_bas": 200,
+  "prix_bonne_affaire": 350,
+  "prix_cher": 500,
+  "prix_trop_cher": 650
+}

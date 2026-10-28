@@ -34,15 +34,17 @@
     "video": "",
     "fond_video": false,
     "sur_titre": "",
-    "titre": "Votre site, entretenu pour vous.",
+    "titre": "Un site à votre nom, créé et tenu à jour.",
     "texte": "Nous créons le site de votre commerce, de votre atelier ou de votre entreprise, nous le tenons à jour, et vous recevez les demandes de vos clients. Vous préférez le modifier vous-même ? Une page privée le permet, depuis votre téléphone.",
     "reperes": [
       "590 € | une fois, sans abonnement obligatoire",
-      "48 h | pour votre maquette, gratuite"
+      "48 h | pour une maquette gratuite",
+      "1 nom de domaine | à vous, toujours",
+      "0 cookie | de suivi, ni publicité"
     ],
-    "intro_titre": "Un site toujours à jour",
-    "intro_texte": "Un horaire, un prix, une photo à changer : vous nous l’envoyez, nous nous en occupons (abonnement Sérénité ou Croissance). Ou vous modifiez tout vous-même, depuis votre téléphone.",
-    "photo_intro": "/assets/photos/travail-clavier.jpg",
+    "intro_titre": "",
+    "intro_texte": "",
+    "photo_intro": "",
     "essai_titre": "Quatre sites d’exemple",
     "essai_texte": "Ouvrez-en un, touchez « Essayer la page de modification », changez un horaire ou une photo : rien n’est publié. Les entreprises n’existent pas.",
     "appel_titre": "Une maquette de votre site, gratuite, en 48 h",
@@ -324,12 +326,12 @@
   ],
   "presentation": {
     "titre": "À propos",
-    "texte": "Grégoire Muel, entrepreneur individuel installé à Auteuil (Paris 16e), conçoit, refait et entretient les sites des commerces, des artisans et des entreprises.\n\n## Notre façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, de la maquette à la mise en ligne, puis pour l’entretien.",
+    "texte": "Nous concevons, refaisons et entretenons les sites des commerces, des artisans et des entreprises, depuis Auteuil (Paris 16e). Grégoire Muel, entrepreneur individuel, est votre interlocuteur.\n\n## Notre façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, de la maquette à la mise en ligne, puis pour l’entretien.",
     "photo": "/assets/photos/gregoire-portrait.jpg",
     "photo_2": "/assets/photos/paris-16e-cafe.jpg"
   },
   "garanties": {
-    "titre": "En résumé",
+    "titre": "Nos engagements en bref",
     "texte": "",
     "points": [
       "Une maquette gratuite à votre nom avant toute décision",
@@ -393,7 +395,7 @@
     "bouton_appel": "Demander ma maquette",
     "intro_lien": "À propos",
     "exp_sur": "Offres",
-    "exp_titre": "Sites et visibilité, un seul interlocuteur",
+    "exp_titre": "Quatre offres, prix affichés",
     "exp_lien": "Le détail",
     "essai_sur": "À essayer",
     "real_sur": "Réalisations",
@@ -429,11 +431,11 @@
     "bandeau_maquette": "Version de travail non publiée : textes et prix à valider.",
     "nav_engagements": "Engagements",
     "eng_sur": "Engagements",
-    "page_eng_titre": "Hébergement, données, sauvegardes : ce que nous nous engageons à faire",
+    "page_eng_titre": "Hébergement, données, sauvegardes : nos engagements",
     "page_eng_chapo": "Les réponses aux questions qu’on nous pose avant de signer. Tout est écrit ici, noir sur blanc.",
     "eng_index": "Sur cette page",
     "eng_lien": "Voir tous les engagements",
-    "pages_titre": "Un site pensé pour votre métier"
+    "pages_titre": "Par métier"
   },
   "abonnements": {
     "titre": "Un coup de main au mois, seulement si vous le souhaitez",

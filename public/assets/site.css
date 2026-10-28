@@ -1074,3 +1074,22 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition.p-agence .intro-fig figcaption b{font-size:1.375rem}
 @media (min-width:760px){.g-edition.p-agence .intro-grille{grid-template-columns:minmax(0,1fr)}.g-edition.p-agence .intro-fig{justify-self:start}.g-edition.p-agence .prose-grande{max-width:62ch}}
 @media (max-width:759px){.g-edition.p-agence .intro-img{width:88px;height:88px}}
+
+/* ====== Révision 6 : premier écran en pleine largeur avec quatre repères, pages intérieures moins vides ====== */
+.g-edition .hero:not(:has(.hero-media)){grid-template-columns:minmax(0,1fr)}
+.g-edition .hero:not(:has(.hero-media)) h1{max-width:18ch;font-size:clamp(2.5rem,5.6vw,4.75rem)}
+.g-edition .hero:not(:has(.hero-media)) .hero-chapo{max-width:58ch}
+.g-edition .hero:not(:has(.hero-media)) .hero-gar{grid-column:1;grid-row:auto;margin-top:12px;border-top:var(--filfort);grid-template-columns:repeat(2,minmax(0,1fr))}
+.g-edition .hero:not(:has(.hero-media)) .hero-gar li{padding:16px 16px 16px 0;border-bottom:var(--fil)}
+.g-edition .hero:not(:has(.hero-media)) .hero-gar li:nth-child(even){padding-left:16px;border-left:var(--fil)}
+.g-edition .hero:not(:has(.hero-media)) .hero-gar b{font-size:clamp(1.5rem,3.4vw,2.5rem)}
+@media (min-width:900px){
+  .g-edition .hero:not(:has(.hero-media)){grid-template-columns:minmax(0,1fr)}
+  .g-edition .hero:not(:has(.hero-media)) .hero-gar{grid-template-columns:repeat(4,minmax(0,1fr));grid-column:1;grid-row:auto;align-self:start;margin:12px 0 0}
+  .g-edition .hero:not(:has(.hero-media)) .hero-gar li{padding:18px 20px 18px 0;border-bottom:0;border-left:0}
+  .g-edition .hero:not(:has(.hero-media)) .hero-gar li + li{padding-left:20px;border-left:var(--fil)}
+  .g-edition .hero:not(:has(.hero-media)) .hero-gar li:nth-child(even){padding-left:20px}
+}
+.g-edition .tete-page{padding-top:clamp(28px,4vw,56px)}
+.g-edition.p-agence .tete-page .sur{display:none}
+.g-edition .tete-page h1{max-width:22ch}

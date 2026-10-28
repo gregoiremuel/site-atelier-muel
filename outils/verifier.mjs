@@ -30,7 +30,7 @@ const ELEMENTS = {
   references: ['nom', 'logo'],
 };
 /* Clés facultatives (ajoutées au moteur après Opéria : un contenu sans elles reste valide) */
-const FACULTATIVES = { '': ['libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte', 'cartes'], mentions: ['tva', 'nom_commercial'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette', 'apercu'] };
+const FACULTATIVES = { '': ['libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier'], reglages: ['image_partage'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte', 'cartes'], mentions: ['tva', 'nom_commercial'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette', 'apercu'] };
 const INTERDITS = [
   [/\bbienvenue\b/i, 'Bienvenue'], [/\bdécouvr(ez|ir)\b/i, 'Découvrez'], [/n['’]hésitez pas/i, 'N’hésitez pas'], [/au c(œ|oe)ur d/i, 'au cœur de'],
   [/\bvéritable/i, 'véritable'], [/\bincontournable/i, 'incontournable'], [/\bpassion/i, 'passion'], [/savoir-faire unique/i, 'savoir-faire unique'],
@@ -91,7 +91,7 @@ export function verifier(C) {
   }
   if (C.theme && 'gabarit' in C.theme && !['classique', 'studio', 'edition'].includes(C.theme.gabarit)) E('theme.gabarit doit valoir "classique", "studio" ou "edition".');
   if (C.accueil && 'cartes' in C.accueil && typeof C.accueil.cartes !== 'boolean') E('accueil.cartes doit valoir true ou false (false : pas de vignettes de réalisations sur l’accueil).');
-  (Array.isArray(C.realisations) ? C.realisations : []).forEach((x, i) => { if (x && x.lien && !/^(\/[^\s<>"]*|https:\/\/[^\s<>"]+)$/.test(String(x.lien).trim())) E(`realisations[${i}].lien doit commencer par / ou https://`); });
+  (Array.isArray(C.realisations) ? C.realisations : []).forEach((x, i) => { if (x && x.lien && !/^(\/[^\s<>"]*|https:\/\/[^\s<>"]+)$/.test(String(x.lien).trim())) E(`realisations[${i}] (${x.id || x.nom || '?'}).lien doit commencer par / ou https://`); });
   if (casse) return { erreurs, alertes, afaire };
   if (C._schema !== SCHEMA) E(`_schema doit valoir "${SCHEMA}".`);
 
@@ -205,6 +205,7 @@ export function verifier(C) {
       else Object.keys(q).filter((k) => !['q', 'r'].includes(k)).forEach((k) => E(`Clé inconnue : ${n}.questions[${j}].${k}`));
     });
   });
+  C.metiers.forEach((m, i) => { if (!m.prix || !String(m.prix).trim()) A(`metiers[${i}] (${m.id || m.nom || '?'}) : pas de prix, la page n’affichera aucun tarif.`); });
   C.metiers.forEach((m, i) => { if (m.lien && !/^\/[a-z0-9#-]+$/.test(m.lien)) E(`metiers[${i}].lien doit être une adresse du site (ex. /visibilite-google).`); else if (m.lien && !idsPages.has(m.lien.slice(1)) && !ADRESSES_RESERVEES.includes(m.lien.slice(1))) A(`metiers[${i}].lien « ${m.lien} » ne correspond à aucune page.`); });
   /* Page « Engagements » (facultative) : blocs { titre, texte, points } */
   const ENG = Array.isArray(C.engagements) ? C.engagements : [];
@@ -283,6 +284,10 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   let C;
   try { C = JSON.parse(readFileSync(fichier, 'utf8')); } catch (e) { console.error(`\nERREUR : ${fichier} n’est pas un JSON valide.\n  ${String(e.message).replace(/^Expected /, 'Attendu : ').replace(/ in JSON at position (\d+) \(line (\d+) column (\d+)\)/, ' à la ligne $2, colonne $3 (caractère $1)')}\n`); process.exit(1); }
   const { erreurs, alertes, afaire } = verifier(C);
+  try {
+    const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')), lisez = readFileSync(new URL('../LISEZMOI.md', import.meta.url), 'utf8');
+    Object.keys(pkg.scripts || {}).forEach((nom) => { if (!lisez.includes('npm run ' + nom) && !(nom === 'test' && lisez.includes('npm test'))) alertes.push(`LISEZMOI.md ne cite pas la commande « npm run ${nom} » (package.json).`); });
+  } catch (e) { /* pas de LISEZMOI ou de package.json : rien à comparer */ }
   console.log(`\nVérification de ${fichier}${C.agence && C.agence.nom ? ' (' + C.agence.nom + ')' : ''}\n`);
   erreurs.forEach((m) => console.log('  ERREUR   ' + m));
   alertes.forEach((m) => console.log('  ALERTE   ' + m));

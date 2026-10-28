@@ -10,6 +10,7 @@ import { createRequire } from 'node:module';
 import { rendrePage, routes } from '../public/assets/rendu.js';
 
 const racine = fileURLToPath(new URL('..', import.meta.url));
+console.log('Audit d’accessibilité : environ 2 min 30, une ligne par page et par mode (bureau, mobile, moins d’animations, clavier).');
 const require = createRequire(import.meta.url);
 let chromium, axeSource;
 try { ({ chromium } = require('playwright')); } catch (e) { console.error('Playwright introuvable : « npm i -D playwright » puis « npx playwright install chromium ».'); process.exit(1); }

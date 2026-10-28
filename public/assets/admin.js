@@ -816,6 +816,7 @@ function dessinerEditeur() {
     }));
 }
 
+/* Aperçu : « allow-same-origin » est gardé exprès. Le contenu de l'iframe est fabriqué par ce même code à partir du contenu du propriétaire (échappé), et la page parente a besoin d'en lire le défilement pour le conserver après chaque modification. Le navigateur affiche un avertissement console : c'est attendu. */
 function ecranPrincipal() {
   racine.replaceChildren();
   const nom = E.C.agence.nom || 'Votre site';

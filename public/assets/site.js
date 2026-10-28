@@ -111,7 +111,7 @@
     };
     var montrer = function (el) {
       el.classList.add('vu');
-      if (el.matches('.chiffres li')) { var b = el.querySelector('b'); if (b) compter(b); }
+      if (el.matches('.chiffres li') && !document.body.classList.contains('g-edition')) { var b = el.querySelector('b'); if (b) compter(b); }
     };
     if (!('IntersectionObserver' in window)) { els.forEach(montrer); return; }
     var io = new IntersectionObserver(function (entrees) {

@@ -712,7 +712,7 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 @media (max-width:759px){
   .g-edition .cmp tr{border:0;border-top:var(--filfort);background:transparent;margin-bottom:0;padding:18px 0}
   .g-edition .cmp tbody th,.g-edition .cmp td{padding:2px 0 8px}
-  .g-edition .cmp td:last-child{background:none;padding-left:0;box-shadow:none;border-left:3px solid var(--bleu);padding-left:12px;margin-top:6px}
+  .g-edition .cmp td:last-child{background:none;padding-left:0;box-shadow:none;border-top:1px solid var(--trait);padding-top:10px;margin-top:6px}
   .g-edition .cmp td::before{font-size:.8125rem;font-weight:600;letter-spacing:0;text-transform:none;color:var(--gris)}
 }
 .g-edition .abo-grille{gap:0;border-top:var(--filfort)}
@@ -1154,3 +1154,5 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition .tete-page .sur{display:none}
 .g-edition .btn,.g-edition a,.g-edition summary,.g-edition button{touch-action:manipulation}
 :root{color-scheme:light}
+/* Gabarit édition : le contenu est visible dès le chargement (pas d'apparition au défilement) */
+.anime .g-edition .rev,.anime.g-edition .rev,.g-edition.anime .rev{opacity:1;transform:none;transition:none}

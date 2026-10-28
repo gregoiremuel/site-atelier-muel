@@ -262,6 +262,12 @@ footer{color:var(--mut);font-size:.85rem;margin-top:20px}
    </ul>
   </div>
  </div>
+ <details><summary>Audit de direction artistique (outils évalués le 28/10/2026)</summary><div class="in"><ul>
+  <li><b>Impeccable</b> (Apache-2.0) : <code>npx impeccable detect</code> lancé avec la télémétrie coupée sur l’accueil, À propos, Contact et une page métier : aucun constat. Sur <code>site.css</code> : 2 constats (une règle d’un autre gabarit non utilisé, une bordure haute de 4 px sur un bandeau à angles droits). Sur Offres, il signale du texte masqué : ce sont les onglets inactifs, voulus.</li>
+  <li><b>Unslop UI</b> (MIT, fichiers Markdown) et <b>Web Interface Guidelines</b> de Vercel (MIT) : installés comme skills locaux, utilisés comme listes de contrôle.</li>
+  <li><b>Design Stack</b> (ui-ux-pro-max) : non retenu (installation lourde, doublon avec Playwright et axe-core).</li>
+  <li>Corrigé : fond papier plus froid, plus de surtitre au-dessus des titres, icônes Lucide (ISC), contenu visible dès le chargement (plus de fondu au défilement ni de compteur animé), bordure latérale du tableau de comparaison remplacée. <span class="badge b-src">AVIS D’OUTILS ET DE SOUS-AGENTS, pas d’un client</span></li>
+ </ul></div></details>
  <div class="note"><b>Tests au 28/10/2026</b> <span class="badge b-ok">VÉRIFIÉ DÉPÔT</span> : <code>npm run verifier</code> sans erreur, <code>npm test</code> 103 vérifications réussies sur le site (88 dans le moteur du kit), accessibilité sans point à la dernière exécution (<code>npm run accessibilite</code>), indice d’allure « IA » de <code>npm run look-ia</code> à 9 sur 100.</div>
 </section>
 
@@ -288,7 +294,7 @@ footer{color:var(--mut);font-size:.85rem;margin-top:20px}
   <ul class="chk"><li><input type="checkbox" id="f-mail"><label for="f-mail">E-mail pro en place (coordonnées et mentions légales à mettre à jour ensuite)</label></li></ul></div></details>
  <details><summary>3. Mettre le site sur Cloudflare (depuis GitHub, sans ordinateur)</summary><div class="in"><ol>
   <li>dash.cloudflare.com : « Workers &amp; Pages », « Create application », « Import a repository », choisir <code>site-atelier-muel</code>.</li>
-  <li><b>Branche à déployer : la branche principale.</b> Le changement de design du 28/10/2026 est sur la branche de travail <code>ccr-04ab3608-pccm5z</code> : à fusionner d’abord (Claude prépare la demande de fusion quand tu le demandes, il n’en ouvre pas sans ton accord).</li>
+  <li><b>Branche à déployer : la branche principale.</b> Les changements de design du 28/10/2026 y sont fusionnés (demandes de fusion n°3 et n°4 du site et du kit).</li>
   <li>Nom du projet : <b>site-atelier-muel</b> exactement. « Save and Deploy ». La mémoire du site (KV) se crée toute seule.</li>
   <li>« Settings », « Variables and Secrets » : deux <b>Secrets</b> (pas des variables) : <code>ADMIN_HASH</code> et <code>SESSION_SECRET</code>. Demande les valeurs à Claude au moment de cette étape (<code>npm run mot-de-passe</code>) ; ne les écris jamais dans le dépôt. Relancer un déploiement.</li>
   <li>Adresse provisoire : <code>site-atelier-muel.&lt;ton-compte&gt;.workers.dev</code>, page de modification à la même adresse suivie de <code>/admin</code>.</li>

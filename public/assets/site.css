@@ -1103,16 +1103,16 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition .sec-tete-ligne::after{display:none}
 .g-edition .clair{background:var(--sable)}
 
-/* Composition de l'accueil */
-.g-edition .hero-compo{position:relative;grid-column:1;width:100%;max-width:520px;aspect-ratio:1/1.02;justify-self:center;margin-top:12px;isolation:isolate}
-.g-edition .compo-trame{position:absolute;right:-6%;top:-3%;width:46%;height:42%;background:var(--trame);z-index:0}
-.g-edition .compo-aplat{position:absolute;left:0;bottom:0;width:62%;height:56%;background:var(--bleu);z-index:0}
-.g-edition .compo-vue{position:absolute;display:block;background:#fff;border:1px solid var(--trait);box-shadow:0 10px 26px rgba(16,18,22,.16);overflow:hidden;z-index:1}
-.g-edition .compo-vue img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
-.g-edition .compo-v1{left:12%;top:2%;width:46%;height:56%}
-.g-edition .compo-v2{right:2%;top:14%;width:40%;height:50%;z-index:2}
-.g-edition .compo-v3{left:30%;bottom:3%;width:44%;height:42%;z-index:3}
-.g-edition .compo-sceau{position:absolute;right:4%;bottom:6%;width:23%;height:auto;aspect-ratio:1;color:var(--encre);background:var(--sable);border-radius:50%;z-index:4;transform:rotate(-8deg)}
+/* Composition de l'accueil : appareils sur un fond uni */
+.g-edition .hero-compo{--noir:#12161c;position:relative;grid-column:1;width:100%;max-width:560px;aspect-ratio:1/.98;justify-self:center;margin-top:12px;background:#dde4ea;overflow:hidden;isolation:isolate}
+.g-edition .compo-ordi{position:absolute;left:7%;top:9%;width:86%;display:block}
+.g-edition .compo-ecran{display:block;aspect-ratio:16/10;background:var(--noir);border:7px solid var(--noir);border-bottom-width:9px;border-radius:8px 8px 2px 2px;overflow:hidden;box-shadow:0 14px 30px rgba(16,28,44,.22)}
+.g-edition .compo-socle{display:block;height:9px;margin:0 -4%;background:linear-gradient(#c9d0d8,#aeb7c1);border-radius:0 0 12px 12px}
+.g-edition .compo-tel{position:absolute;display:block;width:27%;aspect-ratio:9/19;background:var(--noir);border:6px solid var(--noir);border-radius:20px;overflow:hidden;box-shadow:0 16px 30px rgba(16,28,44,.3)}
+.g-edition .compo-t1{left:13%;bottom:5%;z-index:2}
+.g-edition .compo-t2{right:11%;bottom:8%;z-index:3}
+.g-edition .compo-tel::before{content:"";position:absolute;left:50%;top:5px;width:30%;height:5px;margin-left:-15%;border-radius:3px;background:var(--noir);z-index:2}
+.g-edition .compo-ecran img,.g-edition .compo-tel img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
 @media (min-width:900px){
   .g-edition .hero:has(.hero-compo){grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-rows:auto auto auto auto}
   .g-edition .hero:has(.hero-compo) .hero-compo{grid-column:2;grid-row:1 / span 3;margin:0;justify-self:end}
@@ -1120,7 +1120,8 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
   .g-edition .hero:has(.hero-compo) .hero-gar li{padding:22px 24px 22px 0;border-bottom:0}
   .g-edition .hero:has(.hero-compo) .hero-gar li + li{padding-left:24px;border-left:var(--fil)}
 }
-@media (max-width:899px){.g-edition .hero-compo{max-width:420px;order:5}}
+@media (max-width:899px){.g-edition .hero-compo{max-width:460px;order:5}}
+.g-edition .hero:has(.hero-compo){overflow-x:clip}
 
 /* Pictogrammes des offres de l'accueil (traits fins, dessinés ici) */
 .g-edition .metiers li a{position:relative}
@@ -1130,5 +1131,7 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition .metiers li:nth-child(2){--pic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23000' stroke-width='1.6'%3E%3Cpath d='M5 10h22l-2 18H7z'/%3E%3Cpath d='M11 10V8a5 5 0 0 1 10 0v2'/%3E%3C/svg%3E")}
 .g-edition .metiers li:nth-child(3){--pic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23000' stroke-width='1.6'%3E%3Cpath d='M5 28V8h13v20M18 14h9v14M3 28h26M9 13h5M9 18h5M9 23h5M22 19h2M22 24h2'/%3E%3C/svg%3E")}
 .g-edition .metiers li:nth-child(4){--pic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23000' stroke-width='1.6'%3E%3Cpath d='M16 29S6 19 6 12a10 10 0 0 1 20 0c0 7-10 17-10 17z'/%3E%3Ccircle cx='16' cy='12' r='3.5'/%3E%3C/svg%3E")}
-.g-edition .hero:has(.hero-compo){overflow-x:clip}
-.g-edition .compo-trame{right:0}
+/* Corps de texte minimal de 14 px : pied de page, crédits, libellés des coordonnées */
+.g-edition .legal,.g-edition .legal a,.g-edition .legal span,.g-edition .credits,.g-edition .credits summary,.g-edition .credits p,.g-edition .coord dt,.g-edition .coord h3,.g-edition .coord .sur,.g-edition .coord small{font-size:.875rem}
+.g-edition .legal{gap:8px 22px;line-height:1.5}
+.g-edition .hero-gar b{font-size:clamp(1.875rem,3.6vw,3rem)}

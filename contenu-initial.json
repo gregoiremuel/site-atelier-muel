@@ -39,7 +39,7 @@
     "reperes": [
       "590 € | une fois, sans abonnement obligatoire",
       "48 h | pour une maquette gratuite",
-      "1 nom de domaine | à vous, toujours",
+      "1 domaine | à vous, toujours",
       "0 cookie | de suivi, ni publicité"
     ],
     "intro_titre": "",
@@ -202,7 +202,8 @@
       ],
       "photos": [
         "/assets/photos/real-atelier-exemple.jpg",
-        "/assets/photos/real-atelier-exemple-2.jpg"
+        "/assets/photos/real-atelier-exemple-2.jpg",
+        "/assets/photos/mobile-atelier.jpg"
       ],
       "a_la_une": true,
       "visible": true,
@@ -230,7 +231,8 @@
       ],
       "photos": [
         "/assets/photos/real-fleuriste-exemple.jpg",
-        "/assets/photos/real-fleuriste-exemple-2.jpg"
+        "/assets/photos/real-fleuriste-exemple-2.jpg",
+        "/assets/photos/mobile-fleuriste.jpg"
       ],
       "a_la_une": true,
       "visible": true,
@@ -258,7 +260,8 @@
       ],
       "photos": [
         "/assets/photos/real-plombier-exemple.jpg",
-        "/assets/photos/real-plombier-exemple-2.jpg"
+        "/assets/photos/real-plombier-exemple-2.jpg",
+        "/assets/photos/mobile-plombier.jpg"
       ],
       "a_la_une": true,
       "visible": true,
@@ -286,7 +289,8 @@
       ],
       "photos": [
         "/assets/photos/real-restaurant-exemple.jpg",
-        "/assets/photos/real-restaurant-exemple-2.jpg"
+        "/assets/photos/real-restaurant-exemple-2.jpg",
+        "/assets/photos/mobile-restaurant.jpg"
       ],
       "a_la_une": true,
       "visible": true,

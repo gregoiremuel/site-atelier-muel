@@ -337,13 +337,13 @@ const initiales = (n) => String(n || '').split(/[\s-]+/).filter(Boolean).map((m)
 /* Repères de confiance sous la grande photo (courts : trois ou quatre) */
 const garHero = (C) => (Array.isArray((C.accueil || {}).reperes) ? C.accueil.reperes : []).filter((x) => typeof x === 'string' && x.trim()).slice(0, 4);
 
-/* Composition de l'accueil sans grande photo : trois aperçus de sites d'exemple décalés, sur une trame de points et un aplat, avec un sceau « exemples ». Aucun faux client. */
+/* Composition de l'accueil sans grande photo : un ordinateur et deux téléphones montrant des sites d'exemple (captures des démonstrations), sur un fond uni. Aucun faux client. */
 const compoHero = (essais) => {
-  const vues = essais.map((x) => x.apercu || (x.photos || [])[0]).filter(Boolean).slice(0, 3);
-  if (vues.length < 2) return '';
-  return `<div class="hero-compo" role="group" aria-label="Aperçus de sites d’exemple">
-      <span class="compo-trame" aria-hidden="true"></span><span class="compo-aplat" aria-hidden="true"></span>
-      ${vues.map((v, i) => `<span class="compo-vue compo-v${i + 1}">${img(v, 700, 'compo-img', i === 0, '')}</span>`).join('')}
+  const bureau = (essais[0] || {}).photos && essais[0].photos[0], tels = essais.slice(1, 3).map((x) => (x.photos || [])[2] || x.apercu).filter(Boolean);
+  if (!bureau || tels.length < 2) return '';
+  return `<div class="hero-compo" role="group" aria-label="Aperçus de sites d’exemple sur ordinateur et sur téléphone">
+      <span class="compo-ordi"><span class="compo-ecran">${img(bureau, 1000, 'compo-img', true, '')}</span><span class="compo-socle"></span></span>
+      ${tels.map((v, i) => `<span class="compo-tel compo-t${i + 1}">${img(v, 500, 'compo-img', false, '')}</span>`).join('')}
     </div>`;
 };
 

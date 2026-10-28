@@ -9,3 +9,4 @@ Site de Grégoire Muel EI pour son activité de création et refonte de sites (c
 - Toute amélioration du moteur se reporte dans `modeles/agence-operia` du kit (et dans `site-operia` si utile), avec `npm run verifier` et `npm test` relancés.
 - Un site, une identité : ce site ne doit ressembler à aucun autre site de la méthode (couleur, polices, mise en page, formes) et son interface doit rester cohérente avec le métier (règle et registre des styles dans `METHODE.md`, partie 3). Toute évolution du style se vérifie contre les autres sites avant livraison.
 - Avec Greg : français, tutoiement, direct. Réponse finale en trois parties : Réponse claire ; Niveau de confiance (0.0 à 1.0, avec la raison) ; Réserves clés.
+- Design et preuve : `docs/REGLES-DESIGN.md` fait foi (tailles, goût, preuve humaine). Avant livraison, lancer aussi `npm run rendu` (serveur local lancé) ; texte jamais sous 14 px, titres plafonnés, rien de caché au chargement.

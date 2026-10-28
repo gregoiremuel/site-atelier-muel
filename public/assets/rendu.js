@@ -183,6 +183,7 @@ function document_(C, o, page) {
 <title>${esc(titre)}</title>
 <meta name="description" content="${esc(desc)}">
 ${o.maquette ? '<meta name="robots" content="noindex">' : ''}
+${!o.maquette && page.chemin && /^https:\/\//.test((C.reglages || {}).url || '') ? `<link rel="canonical" href="${esc(C.reglages.url.replace(/\/$/, '') + (page.chemin === '/' ? '/' : page.chemin))}">` : ''}
 <meta property="og:title" content="${esc(titre)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:type" content="website">
@@ -746,5 +747,5 @@ export function rendrePage(C, chemin, o = {}) {
   else if (p === '/confidentialite') page = pageConfidentialite(C);
   else if ((m = p.match(/^\/([a-z0-9-]{3,60})$/))) page = pageMetier(C, D, m[1]);
   const statut = page ? 200 : 404;
-  return { statut, html: document_(C, o, page || page404()) };
+  return { statut, html: document_(C, o, page ? { ...page, chemin: p } : page404()) };
 }

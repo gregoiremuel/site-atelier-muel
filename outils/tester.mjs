@@ -8,7 +8,7 @@ import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { pbkdf2Sync, randomBytes } from 'node:crypto';
 import { verifier } from './verifier.mjs';
-import { routes, libellesDemande } from '../public/assets/rendu.js';
+import { routes, libellesDemande, rendrePage } from '../public/assets/rendu.js';
 import { TOUS_FICHIERS_POLICES } from '../public/assets/polices.js';
 
 const racine = fileURLToPath(new URL('..', import.meta.url));
@@ -201,6 +201,10 @@ async function tests() {
   const ferme = structuredClone((await (await req('/api/contenu')).json()).contenu); ferme.contact.actif = false;
   await req('/api/contenu', { method: 'PUT', ...corpsJson(ferme) });
   r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson(client) }); verif(r.status === 403, 'Formulaire fermé : demandes refusées par le serveur');
+
+  /* Adresse canonique : seulement hors version de travail et si l'adresse du site est connue */
+  const Cc = structuredClone(C); Cc.reglages = { ...(Cc.reglages || {}), url: 'https://gregoiremuel.fr/' };
+  verif(/<link rel="canonical" href="https:\/\/gregoiremuel\.fr\/expertises">/.test(rendrePage(Cc, '/expertises', { maquette: false }).html) && !/rel="canonical"/.test(rendrePage(Cc, '/expertises', { maquette: true }).html) && !/rel="canonical"/.test(rendrePage(C, '/expertises', { maquette: false }).html), 'Adresse canonique ajoutée seulement en ligne et avec l’adresse du site');
 
   /* Changer le mot de passe depuis la page de modification */
   const NOUVEAU = 'nouvelle-phrase-secrete-42';

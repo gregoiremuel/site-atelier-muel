@@ -47,7 +47,7 @@ La copie nocturne dans la mémoire du site est automatique après la mise en lig
 2. Cloudflare redéploie. Vérifie : le bandeau « version de travail » a disparu ; `/robots.txt` annonce le plan du site ; `/sitemap.xml` liste les pages (dont les pages par métier) ; un envoi du formulaire arrive dans « Demandes de contact » et par e-mail.
 3. **Le lendemain** : « Visites du site » compte tes propres visites (pas celles des robots) ; la dernière copie de sauvegarde est datée de la nuit.
 
-## 8. Google
+## 8. Google (détail et liste à cocher : `docs/REFERENCEMENT.md`)
 1. **Search Console** (search.google.com/search-console) : ajoute la propriété (domaine), valide par le DNS (Cloudflare), envoie `/sitemap.xml`.
 2. **Ta fiche Google** (business.google.com) : « Création de sites internet », zone Paris 16e et à distance, téléphone, horaires, lien vers le site, photos, description. C'est ta meilleure vitrine ; les premiers avis de clients pilotes y comptent le plus. **Ne demande pas d'avis en échange d'un rabais ni de faux avis.**
 3. Sur ta fiche et sur ton site, **les mêmes** nom, adresse, téléphone et horaires.

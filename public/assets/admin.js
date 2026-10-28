@@ -1,4 +1,4 @@
-/* Espace de modification. Fonctionne avec le serveur (mode normal) ou seul dans un fichier (mode démonstration). */
+/* Page de modification. Fonctionne avec le serveur (mode normal) ou seul dans un fichier (mode démonstration). */
 import { rendrePage, slug, favicon, LIBELLES, libelle, libellesDemande } from './rendu.js';
 import { cssPolices } from './polices.js';
 
@@ -63,6 +63,17 @@ const vraiApi = {
     const j = await r.json().catch(() => ({}));
     if (!j.ok) throw new Error(j.erreur || 'Demandes indisponibles.');
     return j.demandes;
+  },
+  async motDePasse(actuel, nouveau) {
+    const r = await fetch('/api/mot-de-passe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ actuel, nouveau }) });
+    const j = await r.json().catch(() => ({}));
+    if (!j.ok) throw new Error(j.erreur || 'Changement impossible.');
+  },
+  async audience(jours) {
+    const r = await fetch('/api/audience?jours=' + jours);
+    const j = await r.json().catch(() => ({}));
+    if (!j.ok) throw new Error(j.erreur || 'Visites indisponibles.');
+    return j;
   },
   async statut(id, statut) {
     const r = await fetch('/api/demandes/' + id, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ statut }) });
@@ -136,6 +147,12 @@ const demoApi = {
       ex('ex2', 50, 'devis', 'Exemple : Paul Durand', [['E-mail', 'exemple@exemple.fr'], ['Téléphone', '06 00 00 00 02'], ['Type de locaux', 'Commerce ou restaurant'], ['Ville du projet', 'Saint-Nazaire'], ['Projet', 'Exemple : rénovation d’une cellule commerciale.']]),
     ]);
   },
+  async motDePasse() { throw new Error('Indisponible dans la démonstration : le vrai site a son propre mot de passe.'); },
+  async audience(jours) {
+    const base = Date.parse(new Date().toISOString().slice(0, 10) + 'T12:00:00Z');
+    const mod = [7, 12, 9, 15, 11, 6, 4];
+    return { ok: true, plafond: 800, sauvegarde: null, jours: Array.from({ length: jours }, (_, i) => { const t = mod[i % 7] + (i % 3); return { jour: new Date(base - (jours - 1 - i) * 86400e3).toISOString().slice(0, 10), t, p: { '/': Math.ceil(t * 0.6), '/expertises': Math.floor(t * 0.25), '/contact': Math.floor(t * 0.15) }, s: { g: Math.floor(t * 0.4), d: Math.floor(t * 0.2), a: Math.floor(t * 0.1), i: Math.floor(t * 0.3) } }; }) };
+  },
   async statut(id, statut) { const l = await demoApi.demandes(); l.forEach((c) => { if (c.id === id) c.statut = statut; }); memo.ecrire('demandes', l); },
 };
 const api = DEMO ? demoApi : vraiApi;
@@ -173,7 +190,7 @@ function ecranConnexion(message) {
     onsubmit: seConnecter,
   },
   el('h1', { text: nom }),
-  el('p', { class: 'sous', text: 'Espace de modification' }),
+  el('p', { class: 'sous', text: 'Page de modification' }),
   DEMO ? el('p', { class: 'aide', text: 'Démonstration : aucun mot de passe n’est demandé, vos essais restent sur cet appareil.' }) : null,
   el('div', { class: 'champ' }, el('label', { for: 'mdp', text: 'Mot de passe' }), el('div', { class: 'mdp' }, input, voir)),
   err, bouton,
@@ -374,7 +391,7 @@ function contraste(a, b) {
 
 /* Identifiants des pièces, collections et types : tirés du nom à la création, puis fixes */
 function assurerIds(C) {
-  ['realisations', 'metiers', 'secteurs'].forEach((k) => {
+  ['realisations', 'metiers', 'secteurs', 'pages_metier'].forEach((k) => {
     const L = C[k] || [], pris = new Set(L.map((x) => x.id).filter(Boolean));
     L.forEach((x) => { if (!x.id && x.nom) { let b = slug(x.nom) || k, id = b, n = 2; while (pris.has(id)) id = b + '-' + n++; x.id = id; pris.add(id); } });
   });
@@ -412,13 +429,61 @@ function listeCommandes() {
     boite);
 }
 
+/* ---------- Visites (pages vues comptées par le serveur, sans cookie) ---------- */
+function blocVisites() {
+  const boite = el('div', { class: 'visites' }, el('p', { class: 'aide', text: 'Chargement des visites…' }));
+  const charger = async (jours) => {
+    try {
+      const d = await api.audience(jours);
+      const J = d.jours || [], total = J.reduce((n, x) => n + (x.t || 0), 0);
+      const pages = {}, src = { g: 0, d: 0, a: 0, i: 0 };
+      J.forEach((x) => { Object.entries(x.p || {}).forEach(([k, v]) => { pages[k] = (pages[k] || 0) + v; }); Object.entries(x.s || {}).forEach(([k, v]) => { src[k] = (src[k] || 0) + v; }); });
+      const top = Object.entries(pages).sort((a, b) => b[1] - a[1]).slice(0, 8);
+      const entrees = src.g + src.d + src.a;
+      const max = Math.max(1, ...J.map((x) => x.t || 0));
+      boite.replaceChildren(
+        el('p', { class: 'aide', text: total + ' page' + (total > 1 ? 's' : '') + ' vue' + (total > 1 ? 's' : '') + ' sur ' + jours + ' jours' + (entrees ? ' · ' + entrees + ' arrivée' + (entrees > 1 ? 's' : '') + ' : ' + src.g + ' par un moteur de recherche, ' + src.a + ' par un autre site, ' + src.d + ' en tapant l’adresse ou par un favori' : '') + '.' }),
+        el('div', { class: 'barres', role: 'img', 'aria-label': 'Pages vues par jour sur ' + jours + ' jours', style: 'display:flex;align-items:flex-end;gap:2px;height:64px;margin:8px 0' }, J.map((x) => el('span', { title: x.jour + ' : ' + (x.t || 0), style: 'flex:1;min-width:2px;background:currentColor;opacity:.55;border-radius:2px 2px 0 0;height:' + Math.max(2, Math.round(((x.t || 0) / max) * 64)) + 'px' }))),
+        top.length ? el('ol', { class: 'aide', style: 'padding-left:1.2em;list-style:decimal' }, top.map(([k, v]) => el('li', { text: k + ' : ' + v }))) : el('p', { class: 'vide', text: 'Aucune visite comptée pour l’instant (le comptage démarre quand le site est ouvert au public).' }),
+        d.sauvegarde ? el('p', { class: 'aide', text: 'Dernière copie de sauvegarde : ' + new Date(d.sauvegarde.quand).toLocaleString('fr-FR', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }) + (d.sauvegarde.kv ? ' (7 dernières nuits gardées)' : '') + (d.sauvegarde.r2 ? (d.sauvegarde.r2.erreur ? ' · copie externe en erreur : ' + d.sauvegarde.r2.erreur : ' · copie externe faite') : '') + '.' }) : el('p', { class: 'aide', text: 'Pas encore de copie de sauvegarde enregistrée : la première se fait la nuit qui suit la mise en ligne.' }));
+    } catch (x) { boite.replaceChildren(el('p', { class: 'erreur', text: x.message })); }
+  };
+  charger(30);
+  return el('div', { class: 'pan-corps', style: 'padding:0' },
+    DEMO ? el('p', { class: 'aide', style: 'font-weight:600', text: 'Démonstration : les chiffres ci-dessous sont des exemples inventés, pas de vraies visites.' }) : null,
+    el('p', { class: 'aide', text: 'Le site compte les pages vues sans cookie, sans adresse IP et sans identifier personne. Les chiffres sont un ordre de grandeur : quelques visites très rapprochées peuvent ne pas être comptées.' }),
+    el('div', { style: 'display:flex;gap:8px;flex-wrap:wrap' }, [7, 30, 90].map((n) => el('button', { type: 'button', class: 'btn sec petit', text: n + ' jours', onclick: () => charger(n) }))),
+    boite);
+}
+
+/* ---------- Mot de passe : changé ici, gardé par le serveur (empreinte, jamais le mot de passe) ---------- */
+function blocMotDePasse() {
+  const champMdp = (id, libelle, auto) => { const i = el('input', { id, type: 'password', autocomplete: auto, class: 'saisie' }); return [i, el('div', { class: 'champ' }, el('label', { for: id, text: libelle }), i)]; };
+  const [a, ba] = champMdp('mdp-actuel', 'Mot de passe actuel', 'current-password');
+  const [n, bn] = champMdp('mdp-nouveau', 'Nouveau mot de passe (12 caractères au moins)', 'new-password');
+  const [c, bc] = champMdp('mdp-confirme', 'Nouveau mot de passe, une seconde fois', 'new-password');
+  const msg = el('p', { class: 'aide', role: 'status', 'aria-live': 'polite' });
+  const dire = (texte, erreur) => { msg.textContent = texte; msg.className = erreur ? 'erreur' : 'aide'; msg.setAttribute('role', erreur ? 'alert' : 'status'); };
+  const bouton = el('button', { type: 'button', class: 'btn', text: 'Changer le mot de passe', onclick: async () => {
+    if (n.value.length < 12) return dire('Le nouveau mot de passe doit faire 12 caractères au moins (une phrase, par exemple).', true);
+    if (n.value !== c.value) return dire('Les deux nouveaux mots de passe ne sont pas identiques.', true);
+    bouton.disabled = true; dire('Changement en cours…');
+    try { await api.motDePasse(a.value, n.value); a.value = n.value = c.value = ''; dire('Mot de passe changé. Gardez-le dans un gestionnaire de mots de passe : il ne peut pas être relu.'); }
+    catch (x) { dire(x.message, true); }
+    bouton.disabled = false;
+  } });
+  return el('div', { class: 'pan-corps', style: 'padding:0' },
+    el('p', { class: 'aide', text: 'Choisissez une phrase longue et unique, que vous n’utilisez nulle part ailleurs. Vous restez connecté ; les autres appareils devront utiliser le nouveau mot de passe à leur prochaine connexion. Si vous l’oubliez, Grégoire peut le réinitialiser.' }),
+    ba, bn, bc, el('div', { class: 'actions' }, bouton), msg);
+}
+
 /* ---------- Rubriques ---------- */
 const montrer = (chemin) => { if (E.page !== chemin) { E.page = chemin; rendreApercu(true); } };
-/* Libellés modifiables, rangés pour l'espace de modification */
+/* Libellés modifiables, rangés pour la page de modification */
 const LIBELLES_GROUPES = [
-  ['Menu et boutons', ['nav_expertises', 'nav_realisations', 'nav_agence', 'bouton_principal', 'bouton_realisations', 'bouton_appel', 'appel_titre', 'intro_lien']],
+  ['Menu et boutons', ['nav_expertises', 'nav_realisations', 'nav_agence', 'nav_engagements', 'bouton_principal', 'bouton_realisations', 'bouton_appel', 'appel_titre', 'intro_lien']],
   ['Titres de l’accueil', ['exp_sur', 'exp_titre', 'exp_lien', 'essai_sur', 'real_sur', 'real_titre', 'real_tout', 'methode_sur', 'methode_titre', 'refs_sur', 'refs_titre']],
-  ['Autres pages', ['page_exp_titre', 'page_exp_description', 'methode_titre_page', 'lots_sur', 'lots_titre', 'page_real_titre', 'garanties_sur', 'garanties_titre', 'equipe_sur', 'equipe_titre']],
+  ['Autres pages', ['page_exp_titre', 'page_exp_description', 'methode_titre_page', 'lots_sur', 'lots_titre', 'page_real_titre', 'garanties_sur', 'garanties_titre', 'equipe_sur', 'equipe_titre', 'eng_sur', 'page_eng_titre', 'page_eng_chapo', 'eng_index', 'eng_lien']],
   ['Fiche d’une réalisation', ['fiche_client', 'fiche_lieu', 'fiche_surface', 'fiche_mission', 'fiche_annee', 'fiche_secteur', 'interventions']],
   ['Page contact et formulaire', ['contact_titre', 'contact_chapo', 'form_societe', 'form_type', 'form_surface', 'form_surface_exemple', 'form_ville', 'form_message', 'form_message_exemple', 'form_envoyer']],
   ['Pied de page et mentions', ['pied_trouver', 'pied_joindre', 'mentions_siege', 'mentions_immatriculation']],
@@ -429,6 +494,7 @@ const LIBELLES_NOMS = {
   page_exp_titre: 'Titre de la page des offres', page_exp_description: 'Description Google de cette page', methode_titre_page: 'Titre : méthode (page des offres)', lots_sur: 'Petite ligne : liste', lots_titre: 'Titre : liste', page_real_titre: 'Titre de la page des réalisations', garanties_sur: 'Petite ligne : engagements', garanties_titre: 'Titre : engagements (par défaut)', equipe_sur: 'Petite ligne : équipe', equipe_titre: 'Titre : équipe',
   fiche_client: 'Client', fiche_lieu: 'Lieu', fiche_surface: 'Surface (ou autre)', fiche_mission: 'Mission', fiche_annee: 'Année', fiche_secteur: 'Secteur', interventions: 'Titre de la liste',
   contact_titre: 'Titre de la page contact', contact_chapo: 'Phrase sous le titre', form_societe: 'Champ « société »', form_type: 'Champ « type »', form_surface: 'Champ « surface »', form_surface_exemple: 'Exemple dans ce champ', form_ville: 'Champ « ville »', form_message: 'Champ « message »', form_message_exemple: 'Exemple dans le message', form_envoyer: 'Bouton d’envoi',
+  nav_engagements: 'Menu : rubrique Engagements', eng_sur: 'Petite ligne : engagements', page_eng_titre: 'Titre de la page Engagements', page_eng_chapo: 'Phrase sous le titre (page Engagements)', eng_index: 'Titre du sommaire', eng_lien: 'Lien depuis « À propos »',
   pied_trouver: 'Pied : colonne adresse', pied_joindre: 'Pied : colonne contact', mentions_siege: 'Mentions : « Siège »', mentions_immatriculation: 'Mentions : « RCS »',
 };
 
@@ -476,6 +542,7 @@ function panneaux() {
             { k: 'interventions', l: libelle(E.C, 'interventions'), t: 'lignes' },
             { k: 'lien', l: 'Lien à ouvrir', ex: 'facultatif : le site en ligne ou une démonstration', ph: 'https://… ou /demos/…' },
             { k: 'lien_texte', l: 'Texte du bouton', ph: 'Ex. : Voir le site en ligne' },
+            { k: 'etiquette', l: 'Étiquette sur la vignette', ph: 'Ex. : Démonstration (laisser vide pour un vrai client)' },
             { k: 'a_la_une', l: 'À la une sur l’accueil', t: 'case' },
             { k: 'visible', l: 'Afficher sur le site', t: 'case' },
           ],
@@ -484,6 +551,18 @@ function panneaux() {
           el('p', { class: 'aide', text: 'Seuls les secteurs qui ont des réalisations apparaissent sur le site.' }),
           editeurListe('secteurs', { titre: 'nom', sansTitre: 'Nouveau secteur', vide: 'Aucun secteur.', ajouter: 'Ajouter un secteur', nouveau: { id: '', nom: '' }, apres: () => assurerIds(E.C), champs: [{ k: 'nom', l: 'Nom' }] }),
         ], '/realisations'),
+      ],
+    },
+    {
+      id: 'engagements', titre: 'Engagements', page: '/engagements',
+      resume: () => ((E.C.engagements || []).map((b) => b.titre).filter(Boolean).join(', ') || 'Page non affichée'),
+      corps: () => [
+        el('p', { class: 'aide', text: 'La page « Engagements » apparaît dans le menu dès qu’il y a au moins un bloc : hébergement, données personnelles, sauvegardes, délais de réponse…' }),
+        editeurListe('engagements', {
+          titre: 'titre', sansTitre: 'Nouvel engagement', vide: 'Aucun engagement : la page n’est pas affichée.', ajouter: 'Ajouter un engagement',
+          nouveau: { titre: '', texte: '', points: [] },
+          champs: [{ k: 'titre', l: 'Titre' }, { k: 'texte', l: 'Texte', t: 'zone', lignes: 7 }, { k: 'points', l: 'Liste à puces', ex: 'facultatif', t: 'lignes', lignes: 3 }],
+        }),
       ],
     },
     {
@@ -517,7 +596,7 @@ function panneaux() {
       corps: () => [
         groupe('Métiers', 'Space planning, maîtrise d’œuvre…', [
           editeurListe('metiers', { titre: 'nom', sansTitre: 'Nouveau métier', photo: 'photo', vide: 'Aucun métier.', ajouter: 'Ajouter un métier', nouveau: { id: '', nom: '', accroche: '', prix: '', texte: '', points: [], photo: '' }, apres: () => assurerIds(E.C),
-            champs: [{ k: 'nom', l: 'Nom' }, { k: 'accroche', l: 'Accroche' }, { k: 'prix', l: 'Prix', ex: 'facultatif', ph: 'Ex. : À partir de 590 €' }, { k: 'texte', l: 'Texte', t: 'zone', lignes: 5 }, { k: 'points', l: 'Points clés', t: 'lignes' }, { k: 'photo', l: 'Photo', t: 'photo' }] }),
+            champs: [{ k: 'nom', l: 'Nom' }, { k: 'accroche', l: 'Accroche' }, { k: 'prix', l: 'Prix', ex: 'facultatif : « montant | précision » se compose sur deux lignes', ph: 'Ex. : 590 € | une fois, sans abonnement' }, { k: 'texte', l: 'Texte', t: 'zone', lignes: 5 }, { k: 'points', l: 'Points clés', t: 'lignes' }, { k: 'photo', l: 'Photo', t: 'photo' }] }),
         ], '/expertises'),
         groupe('Méthode', 'Les étapes d’un projet', [
           editeurListe('etapes', { titre: 'titre', sansTitre: 'Nouvelle étape', vide: 'Aucune étape.', ajouter: 'Ajouter une étape', nouveau: { titre: '', points: [] }, champs: [{ k: 'titre', l: 'Titre' }, { k: 'points', l: 'Détails', t: 'lignes' }] }),
@@ -529,8 +608,8 @@ function panneaux() {
       id: 'agence', titre: 'L’agence, l’équipe, les références', page: '/agence',
       resume: () => [(E.C.equipe || []).length + ' personnes', (E.C.references || []).length + ' références'].join(', '),
       corps: () => [
-        groupe('Présentation', '', [champ(E.C, { k: 'presentation.titre', l: 'Titre' }), champ(E.C, { k: 'presentation.texte', l: 'Texte', t: 'zone', lignes: 8 }), champ(E.C, { k: 'presentation.photo', l: 'Photo', t: 'photo' })], '/agence'),
-        groupe('Engagements', 'Garanties et assurances', [champ(E.C, { k: 'garanties.titre', l: 'Titre' }), champ(E.C, { k: 'garanties.texte', l: 'Texte', t: 'zone' }), champ(E.C, { k: 'garanties.points', l: 'Points', t: 'lignes' })], '/agence'),
+        groupe('Présentation', '', [champ(E.C, { k: 'presentation.titre', l: 'Titre' }), champ(E.C, { k: 'presentation.texte', l: 'Texte', t: 'zone', lignes: 8 }), champ(E.C, { k: 'presentation.photo', l: 'Photo (portrait)', t: 'photo' }), champ(E.C, { k: 'presentation.photo_2', l: 'Photo large (sous le texte)', t: 'photo' })], '/agence'),
+        groupe('Garanties', 'Les points résumés sous « À propos »', [champ(E.C, { k: 'garanties.titre', l: 'Titre' }), champ(E.C, { k: 'garanties.texte', l: 'Texte', t: 'zone' }), champ(E.C, { k: 'garanties.points', l: 'Points', t: 'lignes' })], '/agence'),
         groupe('Équipe', 'Noms, rôles et portraits', [
           champ(E.C, { k: 'affichage.equipe', l: 'Afficher l’équipe', t: 'case' }),
           editeurListe('equipe', { titre: 'nom', sansTitre: 'Nouvelle personne', photo: 'photo', sous: (p) => p.role || '', vide: 'Personne pour l’instant.', ajouter: 'Ajouter une personne', nouveau: { nom: '', role: '', photo: '' }, champs: [{ k: 'nom', l: 'Nom' }, { k: 'role', l: 'Rôle' }, { k: 'photo', l: 'Portrait', ex: 'sans photo : les initiales', t: 'photo' }] }),
@@ -577,6 +656,45 @@ function panneaux() {
       ],
     },
     {
+      id: 'pages', titre: 'Pages par métier', page: '/', seulementSi: () => Array.isArray(E.C.pages_metier),
+      resume: () => ((E.C.pages_metier || []).filter((x) => x.visible !== false).map((x) => x.nom).filter(Boolean).join(', ') || 'Aucune page'),
+      corps: () => [
+        el('p', { class: 'aide', text: 'Une page par métier (restaurant, plombier…), avec sa démonstration, ses questions et son prix de départ. L’adresse de la page est « /identifiant ». Les questions et réponses de chaque page se modifient avec Claude, pour garder une forme régulière.' }),
+        editeurListe('pages_metier', {
+          titre: 'nom', sansTitre: 'Nouvelle page', photo: 'photo', sous: (x) => [x.id ? '/' + x.id : '', x.prix, x.visible === false ? 'masquée' : ''].filter(Boolean).join(' · '),
+          vide: 'Aucune page par métier.', ajouter: 'Ajouter une page', nouveau: { id: '', nom: '', titre: '', description: '', accroche: '', texte: '', prix: '', points: [], demo: '', demo_texte: '', bouton: '', photo: '', questions: [], liste: true, visible: true },
+          ouvert: (x) => { if (x.id) montrer('/' + x.id); }, apres: (x) => { assurerIds(E.C); if (x.id && E.page !== '/' + x.id) montrer('/' + x.id); },
+          champs: [
+            { k: 'nom', l: 'Nom (menu et liens)' }, { k: 'id', l: 'Adresse de la page', ex: 'minuscules et tirets, 3 signes au moins, ex. site-restaurant', ph: 'site-restaurant' },
+            { k: 'titre', l: 'Titre de la page' }, { k: 'accroche', l: 'Phrase d’accroche', t: 'zone', lignes: 3 }, { k: 'prix', l: 'Prix de départ', ph: 'Ex. : À partir de 590 €, une fois' },
+            { k: 'texte', l: 'Texte', t: 'zone', lignes: 7 }, { k: 'points', l: 'Ce qui est compris', t: 'lignes' }, { k: 'photo', l: 'Photo', t: 'photo' },
+            { k: 'demo', l: 'Lien de la démonstration', ex: 'facultatif', ph: '/demos/restaurant-exemple' }, { k: 'demo_texte', l: 'Texte du bouton de la démonstration', ph: 'Essayer la démonstration' }, { k: 'bouton', l: 'Texte du bouton « contact »', ph: 'Demander ma maquette gratuite' },
+            { k: 'description', l: 'Description pour Google', t: 'zone', lignes: 3 }, { k: 'liste', l: 'Dans le pied de page et la liste « par métier »', t: 'case' }, { k: 'visible', l: 'Afficher sur le site', t: 'case' },
+          ],
+        }),
+      ],
+    },
+    {
+      id: 'comparaison', titre: 'Comparaison avec un constructeur en ligne', page: '/expertises', seulementSi: () => !!(E.C.comparaison && typeof E.C.comparaison === 'object'),
+      resume: () => (((E.C.comparaison || {}).lignes || []).length + ' lignes'),
+      corps: () => [
+        groupe('Présentation', 'Le tableau s’affiche sur la page des offres', [champ(E.C, { k: 'comparaison.titre', l: 'Titre' }), champ(E.C, { k: 'comparaison.intro', l: 'Texte', t: 'zone', lignes: 4 }), champ(E.C, { k: 'comparaison.note', l: 'Petite note sous le tableau', t: 'zone', lignes: 3 })], '/expertises'),
+        groupe('Lignes', 'Critère, colonne A, colonne B', [
+          editeurListe('comparaison.lignes', { titre: 'critere', sansTitre: 'Nouvelle ligne', vide: 'Aucune ligne.', ajouter: 'Ajouter une ligne', nouveau: { critere: '', a: '', b: '' }, champs: [{ k: 'critere', l: 'Critère' }, { k: 'a', l: 'Constructeur en ligne', t: 'zone', lignes: 3 }, { k: 'b', l: 'Mon offre', t: 'zone', lignes: 3 }] }),
+        ], '/expertises'),
+      ],
+    },
+    {
+      id: 'visites', titre: 'Visites du site', page: '/',
+      resume: () => 'Pages vues, sans cookie',
+      corps: () => [blocVisites()],
+    },
+    {
+      id: 'motdepasse', titre: 'Mot de passe', page: '/',
+      resume: () => 'Changer le mot de passe de cette page',
+      corps: () => [blocMotDePasse()],
+    },
+    {
       id: 'infos', titre: 'Coordonnées, logo et mentions', page: '/contact',
       resume: () => [E.C.agence.email, E.C.agence.telephone, E.C.agence.ville].filter(Boolean).join(', '),
       corps: () => [
@@ -600,15 +718,15 @@ function panneaux() {
 }
 let PANNEAUX = [];
 
-/* ---------- Démonstration en un seul fichier : le site d'abord, puis l'espace maison ---------- */
+/* ---------- Démonstration en un seul fichier : le site d'abord, puis la page de modification ---------- */
 const optsDemo = (extra) => ({ maquette: true, urlPolice: (f) => DEMO.polices[f] || '', css: DEMO.css, js: DEMO.js, apiContact: '', apercu: true, ...extra });
 let pageDemo = '/';
 function vueSiteDemo() {
   let v = document.getElementById('demo-site');
   if (!v) {
-    v = el('div', { id: 'demo-site', class: 'apercu-plein' },
+    v = el('div', { id: 'demo-site', class: 'apercu-plein', role: 'region', 'aria-label': 'Aperçu du site' },
       el('div', { class: 'barre' }, el('b', { text: 'Le site' }),
-        el('button', { type: 'button', class: 'btn petit', text: 'Essayer l’espace de modification', onclick: () => { v.hidden = true; document.body.style.overflow = ''; } })),
+        el('button', { type: 'button', class: 'btn petit', text: 'Essayer la page de modification', onclick: () => { v.hidden = true; document.body.style.overflow = ''; } })),
       el('iframe', { title: 'Le site' }));
     document.body.append(v);
   }
@@ -700,7 +818,7 @@ function dessinerEditeur() {
 function ecranPrincipal() {
   racine.replaceChildren();
   const nom = E.C.agence.nom || 'Votre site';
-  document.title = nom + ' : espace de modification';
+  document.title = nom + ' : page de modification';
   PANNEAUX = panneaux().filter((p) => !p.seulementSi || p.seulementSi());
   appliquerTheme(E.C);
   const plein = el('div', { class: 'apercu-plein', hidden: true },
@@ -714,18 +832,18 @@ function ecranPrincipal() {
   etatBarre = el('span', { class: 'etat' });
   bEnr = el('button', { type: 'button', class: 'btn', text: 'Enregistrer', onclick: enregistrer });
   bAnn = el('button', { type: 'button', class: 'btn danger', onclick: annuler });
-  barre = el('div', { class: 'barre-enr' }, el('div', { class: 'in' }, etatBarre,
+  barre = el('div', { class: 'barre-enr', role: 'region', 'aria-label': 'Enregistrement' }, el('div', { class: 'in' }, etatBarre,
     el('button', { type: 'button', class: 'btn sec btn-apercu', text: 'Aperçu', onclick: () => { plein.hidden = false; document.body.style.overflow = 'hidden'; rendreApercu(); } }),
     bAnn, bEnr));
 
   racine.append(
     el('header', { class: 'haut' }, el('div', { class: 'haut-in' },
-      el('div', { class: 'haut-titre' }, el('b', { text: nom }), el('span', { text: 'Espace de modification' })),
+      el('div', { class: 'haut-titre' }, el('b', { text: nom }), el('span', { text: 'Page de modification' })),
       el('a', { class: 'btn', href: DEMO ? '#' : '/', target: DEMO ? null : '_blank', rel: 'noopener', text: 'Voir le site', onclick: DEMO ? (e) => { e.preventDefault(); plein.hidden = false; rendreApercu(); } : null }),
       el('button', { type: 'button', class: 'btn', text: 'Se déconnecter', onclick: async () => { if (modifie() && !confirm2()) return; await api.deconnexion(); ecranConnexion(); } }))),
-    DEMO ? el('p', { class: 'bandeau', text: 'Démonstration : vos essais restent sur cet appareil, rien n’est publié.' })
-      : (E.maquette ? el('p', { class: 'bandeau', text: 'Le site est encore en mode proposition : les demandes ne sont pas envoyées.' }) : null),
-    el('div', { class: 'cadre' }, editeur, colonne), barre, plein);
+    DEMO ? el('aside', { class: 'bandeau', 'aria-label': 'Information', text: 'Démonstration : vos essais restent sur cet appareil, rien n’est publié.' })
+      : (E.maquette ? el('aside', { class: 'bandeau', 'aria-label': 'Information', text: 'Le site est encore en mode proposition : les demandes ne sont pas envoyées.' }) : null),
+    el('main', { class: 'cadre' }, editeur, colonne), barre, plein);
   dessinerEditeur(); majBarre(); rendreApercu();
   api.demandes().then((L) => { E.nouvelles = L.filter((c) => c.statut === 'nouvelle').length; majResumes(); }).catch(() => {});
 }
@@ -754,7 +872,7 @@ async function demarrer() {
     if (brouillon && !DEMO) { E.C = normaliser(brouillon); memo.ecrire('brouillon', null); toast('Vos modifications non enregistrées ont été récupérées.'); }
     ecranPrincipal();
   } catch (x) {
-    racine.replaceChildren(el('main', { class: 'connexion' }, el('div', { class: 'erreur', text: 'Impossible de charger l’espace de modification : ' + x.message + ' Vérifiez la connexion internet et rechargez la page.' })));
+    racine.replaceChildren(el('main', { class: 'connexion' }, el('div', { class: 'erreur', text: 'Impossible de charger la page de modification : ' + x.message + ' Vérifiez la connexion internet et rechargez la page.' })));
   } finally {
     /* démonstration : on montre d'abord le site, une seule fois */
     if (DEMO && DEMO.siteDabord && !siteMontre) { siteMontre = true; vueSiteDemo(); }

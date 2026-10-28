@@ -1,0 +1,14 @@
+{
+  "id": "P013",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "besoin",
+  "raison": "Je suis en service toute la journée et je n'ai pas le temps de suivre un site ni de le faire modifier. Ma fiche Google et mes réseaux me suffisent pour l'instant, et je ne vois pas ce que 590 € me rapporteraient concrètement.",
+  "objection": "Est-ce que ça m'amène vraiment des clients en plus, ou c'est une belle vitrine que personne ne regarde ?",
+  "ce_qui_me_ferait_changer_davis": "Qu'on me montre des clients précis qui sont venus grâce au site, avec un chiffre à l'appui.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 290,
+  "prix_cher": 400,
+  "prix_trop_cher": 500
+}

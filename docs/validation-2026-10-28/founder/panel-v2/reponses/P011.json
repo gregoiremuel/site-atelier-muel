@@ -1,0 +1,14 @@
+{
+  "id": "P011",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "besoin",
+  "raison": "Je suis déjà sur Google Maps et sur les réseaux, et je ne vois pas ce qu'un site ferait de plus pour mon bistrot. Le diagnostic gratuit, je le prendrais, mais je ne sors pas d'argent pour ça.",
+  "objection": "Je ne sais pas ce que le site me rapporterait concrètement, et je ne connais pas ce Grégoire : ses démonstrations sont des entreprises imaginaires, il n'a aucun client à me montrer.",
+  "ce_qui_me_ferait_changer_davis": "Que deux ou trois bistrots ou artisans du quartier me disent que le site leur a amené des clients, et que mon confrère me le conseille.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 290,
+  "prix_cher": 450,
+  "prix_trop_cher": 700
+}

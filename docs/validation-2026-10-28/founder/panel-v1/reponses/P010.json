@@ -1,0 +1,14 @@
+{
+  "id": "P010",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "besoin",
+  "raison": "Je suis déjà sur Google Maps et sur les réseaux, et je ne vois pas ce qu'un site ajouterait à ça pour mon commerce. Les démonstrations sont des entreprises imaginaires et il n'a pas encore de clients à montrer, donc je n'ai rien de concret pour juger.",
+  "objection": "Je ne sais pas ce que le site me rapporterait en plus de ma fiche Google, et personne ne m'a montré de commerce de bouche qui y a gagné des clients.",
+  "ce_qui_me_ferait_changer_davis": "Voir un vrai commerçant de bouche de mon secteur qui a gagné des clients grâce à son site, avec des chiffres.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 350,
+  "prix_cher": 500,
+  "prix_trop_cher": 800
+}

@@ -1,0 +1,14 @@
+{
+  "id": "P015",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "besoin",
+  "raison": "Je travaille sur les chantiers et je réponds au téléphone toute la journée. Mes clients me trouvent par ma fiche Google et le bouche-à-oreille, et je ne vois pas ce qu'un site me rapporterait en plus. 590 € une fois, ça pèse sur mon année.",
+  "objection": "Je ne vois pas si ça me ramène des appels. Je ne sais pas si ça changerait quelque chose, et je n'ai pas le temps de m'en occuper.",
+  "ce_qui_me_ferait_changer_davis": "Qu'un artisan de mon métier me dise que son site lui a fait venir des clients que sa fiche Google ne lui amenait pas.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 300,
+  "prix_cher": 500,
+  "prix_trop_cher": 800
+}

@@ -1,0 +1,14 @@
+{
+  "id": "P018",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je regarde, mais je n'achète pas cette semaine : rien ne me montre que le site ou la fiche Google me fera venir un seul client, et il n'a aucun client à montrer. Je prendrais le diagnostic gratuit et la maquette, puis je déciderais.",
+  "objection": "Les démos sont des entreprises imaginaires et il n'a pas encore de clients : je paierais 590 € pour un site dont personne ne m'a prouvé qu'il rapporte quelque chose.",
+  "ce_qui_me_ferait_changer_davis": "Voir trois commerçants réels du quartier, avec un avant/après de leurs appels ou de leurs réservations, et une maquette de mon restaurant que je trouve vraiment bonne.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 290,
+  "prix_cher": 450,
+  "prix_trop_cher": 800
+}

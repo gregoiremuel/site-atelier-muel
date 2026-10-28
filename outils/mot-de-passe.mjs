@@ -1,4 +1,4 @@
-// Crée le mot de passe de l'espace boutique et son empreinte (à mettre dans le secret ADMIN_HASH).
+// Crée le mot de passe de la page de modification et son empreinte (à mettre dans le secret ADMIN_HASH).
 // Usage : node outils/mot-de-passe.mjs            -> mot de passe tiré au hasard
 //         node outils/mot-de-passe.mjs "mon mot"  -> mot de passe choisi (12 caractères au moins)
 import { pbkdf2Sync, randomBytes, randomInt } from 'node:crypto';

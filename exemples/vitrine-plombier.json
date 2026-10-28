@@ -1,0 +1,262 @@
+{
+  "_schema": "site-boutique v2",
+  "metier": {
+    "type_schema": "Plumber",
+    "titre_page": "plomberie et dépannage",
+    "nav_boutique": "L’entreprise",
+    "produits": {
+      "nav": "Interventions",
+      "rubrique": "Ce que nous faisons",
+      "singulier": "intervention",
+      "pluriel": "interventions",
+      "feminin": true,
+      "famille": "",
+      "familles": [],
+      "autres": "Autres interventions",
+      "origine": "Type",
+      "exemple_precision": "dépannage",
+      "exemple_prix": "sur devis"
+    },
+    "offres": {
+      "nav": "Dépannage ou devis",
+      "rubrique": "Dépannage ou devis",
+      "singulier": "demande",
+      "pluriel": "demandes",
+      "feminin": true,
+      "bouton": "Demander un devis"
+    },
+    "demande": {
+      "type": "devis",
+      "nav": "Demander un devis",
+      "rubrique": "Demandes reçues",
+      "quantite": "",
+      "unite": "",
+      "par_unite": "",
+      "date": "Date souhaitée",
+      "precisions": "Décrivez le problème ou les travaux",
+      "exemple": "Ex. : fuite sous l’évier de la cuisine, ou remplacement d’un chauffe-eau",
+      "lien": "",
+      "lien_texte": "",
+      "qui": "l’entreprise",
+      "etape_jour": "Indiquez la date qui vous arrange",
+      "sujet": "Demande de devis"
+    }
+  },
+  "theme": {
+    "couleur": "#1f4f8f",
+    "couleur_foncee": "#11294d",
+    "couleur_pale": "#eef2f8",
+    "accent": "#d8392b",
+    "polices": "net",
+    "gabarit": "depannage",
+    "accueil": "sobre",
+    "titres": "simple",
+    "angles": "droits",
+    "offres_fond": "clair",
+    "ordre": [
+      "produits",
+      "offres",
+      "boutique",
+      "questions",
+      "presse"
+    ]
+  },
+  "boutique": {
+    "nom": "Plomberie Delorme",
+    "telephone": "06 00 00 00 00",
+    "adresse": "12, rue de l’Exemple",
+    "ville": "75012 Paris",
+    "quartier": "",
+    "acces": "Paris et proche banlieue",
+    "email": "",
+    "instagram": "",
+    "logo": "/photos/logo-delorme"
+  },
+  "annonce": {
+    "afficher": false,
+    "texte": ""
+  },
+  "horaires": {
+    "lundi": [
+      [
+        "08:00",
+        "19:00"
+      ]
+    ],
+    "mardi": [
+      [
+        "08:00",
+        "19:00"
+      ]
+    ],
+    "mercredi": [
+      [
+        "08:00",
+        "19:00"
+      ]
+    ],
+    "jeudi": [
+      [
+        "08:00",
+        "19:00"
+      ]
+    ],
+    "vendredi": [
+      [
+        "08:00",
+        "19:00"
+      ]
+    ],
+    "samedi": [
+      [
+        "09:00",
+        "13:00"
+      ]
+    ],
+    "dimanche": []
+  },
+  "horaires_note": "En dehors de ces horaires, laissez un message au numéro ci-dessus : l’entreprise rappelle à l’ouverture.",
+  "sections": {
+    "boutique": true,
+    "produits": true,
+    "offres": true,
+    "presse": false,
+    "questions": true
+  },
+  "textes": {
+    "titre": "Dépannage de plomberie à Paris",
+    "intro": "Une fuite, un chauffe-eau en panne, une salle de bains à refaire : appelez pour un dépannage, ou décrivez vos travaux pour recevoir un devis.",
+    "photo_accueil": "/photos/plombier-timur1",
+    "boutique_titre": "L’entreprise",
+    "boutique_texte": "Plomberie Delorme intervient à Paris et en petite couronne : fuites, évacuations, chauffe-eau, salles de bains. Pour une urgence, on se déplace dans la journée ; pour des travaux, on passe voir sur place avant de vous envoyer un devis écrit.\n\nLe prix est annoncé avant le début de l’intervention.",
+    "boutique_photo_1": "",
+    "boutique_photo_2": "",
+    "produits_titre": "Ce que nous faisons",
+    "produits_intro": "Six types d’intervention.",
+    "produits_photo": "/photos/plombier-timur3",
+    "offres_titre": "Dépannage ou devis",
+    "offres_texte": "Trois façons de nous joindre selon votre besoin.",
+    "offres_photo": "",
+    "description_google": "Démonstration : site d’une entreprise de plomberie imaginaire, créé par Grégoire Muel, avec téléphone cliquable et demande de devis."
+  },
+  "produits": [
+    {
+      "nom": "Fuite d’eau",
+      "origine": "Dépannage",
+      "famille": "",
+      "detail": "Canalisation, joint, siphon",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Évacuation bouchée",
+      "origine": "Dépannage",
+      "famille": "",
+      "detail": "Évier, douche, canalisation",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Chauffe-eau et ballon",
+      "origine": "Dépannage ou devis",
+      "famille": "",
+      "detail": "Remplacement, entretien",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Robinetterie et sanitaires",
+      "origine": "Devis",
+      "famille": "",
+      "detail": "Mitigeur, lavabo, WC",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Salle de bains",
+      "origine": "Devis",
+      "famille": "",
+      "detail": "Rénovation complète ou partielle",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Entretien d’une installation",
+      "origine": "Rendez-vous",
+      "famille": "",
+      "detail": "Contrôle et remise en état",
+      "prix": "",
+      "photo": ""
+    }
+  ],
+  "offres": [
+    {
+      "nom": "Dépannage urgent",
+      "description": "Vous appelez : l’entreprise dit si elle peut passer, et à quel moment, avant de se déplacer.",
+      "prix": "",
+      "prix_unite": ""
+    },
+    {
+      "nom": "Devis pour des travaux",
+      "description": "Vous décrivez les travaux. L’entreprise passe voir sur place si besoin, puis envoie un devis écrit.",
+      "prix": "",
+      "prix_unite": ""
+    },
+    {
+      "nom": "Entretien d’une installation",
+      "description": "Un chauffe-eau ou une robinetterie à contrôler : rendez-vous à la date qui vous arrange.",
+      "prix": "",
+      "prix_unite": ""
+    }
+  ],
+  "commandes": {
+    "actif": true,
+    "titre": "Demander un devis",
+    "intro": "Décrivez le problème ou les travaux. Dans cette démonstration, rien n’est envoyé.",
+    "cle_web3forms": "",
+    "email": "",
+    "delai_heures": 24,
+    "quantite_min": 1,
+    "quantite_max": 1,
+    "paiement": "Le prix est établi par un devis avant tout travail, sauf dépannage d’urgence : le prix est alors annoncé au téléphone.",
+    "confirmation": "Merci, votre demande est partie. L’entreprise vous rappelle pour préciser le travail et envoyer un devis."
+  },
+  "questions": [
+    {
+      "question": "Cette entreprise existe-t-il ?",
+      "reponse": "Non. C’est une démonstration créée par Grégoire Muel : le nom, l’adresse, le téléphone et les textes sont imaginaires, et les photos sont des photos d’illustration."
+    },
+    {
+      "question": "Que peut changer le professionnel lui-même ?",
+      "reponse": "Ses horaires, sa zone d’intervention, ses textes, ses interventions. Elle reçoit aussi les demandes de devis."
+    },
+    {
+      "question": "Comment demander un dépannage ?",
+      "reponse": "Le client appuie sur le numéro de téléphone, affiché en haut de chaque écran : sur un téléphone, l’appel se lance tout de suite."
+    },
+    {
+      "question": "Comment demander un devis ?",
+      "reponse": "Le client décrit le problème ou les travaux dans le formulaire ; la demande arrive directement à l’entreprise, qui rappelle et envoie son devis."
+    }
+  ],
+  "presse": [],
+  "avis": {
+    "note": "",
+    "nombre": "",
+    "date": "",
+    "lien": ""
+  },
+  "mentions": {
+    "raison_sociale": "",
+    "siret": "",
+    "directeur_publication": "",
+    "email_contact": ""
+  },
+  "credits_photos": "Photos d’illustration : Timur Shakerzianov (Unsplash). Elles ne montrent pas cette entreprise, qui n’existe pas.",
+  "reglages": {
+    "geo": [],
+    "url": "",
+    "bandeau": "Démonstration : entreprise de plomberie imaginaire, créée par Grégoire Muel. Aucun lien avec une entreprise réelle ; photos d’illustration.",
+    "illustration": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "P019",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je ne vois aucune preuve que ça marche : les démonstrations sont des entreprises imaginaires et il n'a pas encore de clients. Avant de sortir un seul euro, je demanderais l'avis d'un confrère, et je prendrais le diagnostic gratuit et la maquette sans rien payer.",
+  "objection": "Qui est ce monsieur, et ce site à 590 € va-t-il me ramener un seul client ? Il ne promet pas de place dans Google, alors je ne sais pas à quoi je paierais.",
+  "ce_qui_me_ferait_changer_davis": "Un commerçant du quartier que je connais, qui me dit que son site lui a vraiment ramené des clients.",
+  "prix_trop_bas": 200,
+  "prix_bonne_affaire": 300,
+  "prix_cher": 450,
+  "prix_trop_cher": 550
+}

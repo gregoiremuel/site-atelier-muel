@@ -1,0 +1,14 @@
+{
+  "id": "P005",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je fais mes devis et ma compta le soir, je n'ai pas le temps pour un site. La maquette gratuite, je veux bien la regarder, mais je compare avant de payer et on ne me montre aucun client réel, seulement des entreprises imaginaires. Pour l'instant je n'achète pas.",
+  "objection": "Est-ce que ça me ramènera des clients ? Il ne promet pas de place dans Google, et ma fiche Google marche déjà un peu sans site.",
+  "ce_qui_me_ferait_changer_davis": "Une maquette à mon nom que je trouve belle et claire, et l'exemple d'un fleuriste qui a vraiment gagné des clients grâce à son site.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 300,
+  "prix_cher": 500,
+  "prix_trop_cher": 800
+}

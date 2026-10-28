@@ -1,5 +1,5 @@
 // Fabrique demonstration.html : un seul fichier à ouvrir sur un téléphone, sans serveur.
-// Il s'ouvre sur le site (navigation, demande de contact en démonstration), puis « Essayer l'espace de modification »
+// Il s'ouvre sur le site (navigation, demande de contact en démonstration), puis « Essayer la page de modification »
 // (n'importe quel mot de passe, les essais restent sur le téléphone).
 // Usage : node outils/apercu.mjs [fichier de contenu]   (par défaut : contenu-initial.json)
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';

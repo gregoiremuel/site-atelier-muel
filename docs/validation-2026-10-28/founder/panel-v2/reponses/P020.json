@@ -1,0 +1,14 @@
+{
+  "id": "P020",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je prendrais le diagnostic gratuit et je regarderais la maquette, mais je ne paierais pas 590 € pour un site sans avoir vu un vrai travail. Je ne connais pas ce monsieur et ses démonstrations sont des entreprises imaginaires.",
+  "objection": "Qui est-ce, et qui me répond quand j'ai un souci un samedi matin ? Il n'a aucun client à me montrer, donc je ne sais pas si son site rapporte quelque chose.",
+  "ce_qui_me_ferait_changer_davis": "Voir un site fait par lui pour un commerçant du quartier que je connais, et qui me dit que ça lui amène des clients.",
+  "prix_trop_bas": 200,
+  "prix_bonne_affaire": 350,
+  "prix_cher": 700,
+  "prix_trop_cher": 900
+}

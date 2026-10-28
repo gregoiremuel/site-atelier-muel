@@ -4,3 +4,4 @@ node_modules/
 demonstration.html
 apercu-*.html
 demo-en-ligne/
+.wrangler-test.json

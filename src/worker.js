@@ -1,9 +1,9 @@
 /*
   Serveur du site de l'agence (Cloudflare Worker).
   - Toutes les pages sont rendues à chaque visite depuis le contenu enregistré (KV « CONTENU »).
-  - /admin : l'espace de modification (fichiers statiques dans public/admin), protégé par mot de passe.
+  - /admin : la page de modification (fichiers statiques dans public/admin), protégé par mot de passe.
   - /api/… : lecture et enregistrement du contenu, envoi de photos, demandes de contact reçues.
-  Secrets à définir : ADMIN_HASH (npm run mot-de-passe), SESSION_SECRET (texte aléatoire).
+  Secrets à définir : ADMIN_HASH (npm run mot-de-passe), SESSION_SECRET (texte aléatoire). Le mot de passe se change ensuite depuis la page de modification (clé KV admin:hash, prioritaire sur ADMIN_HASH).
   Variable : MAQUETTE = "oui" tant que le site n'est pas validé (bandeau + formulaire en démonstration).
 */
 import { rendrePage, routes, libellesDemande } from '../public/assets/rendu.js';
@@ -47,8 +47,16 @@ async function limite(env, cle, max, secondes) {
 }
 
 /* ---------- Mot de passe et session ---------- */
+/* L'empreinte choisie depuis la page de modification (KV) l'emporte sur le Secret ADMIN_HASH */
+async function empreinteActive(env) { return (await env.CONTENU.get('admin:hash')) || String(env.ADMIN_HASH || ''); }
+async function fabriquerEmpreinte(mdp) {
+  const sel = crypto.getRandomValues(new Uint8Array(16)), iter = 10000; // limite de calcul de l'offre gratuite Cloudflare
+  const cle = await crypto.subtle.importKey('raw', enc.encode(mdp), 'PBKDF2', false, ['deriveBits']);
+  const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt: sel, iterations: iter }, cle, 256);
+  return `pbkdf2$${iter}$${btoa(String.fromCharCode(...sel))}$${btoa(String.fromCharCode(...new Uint8Array(bits)))}`;
+}
 async function verifierMotDePasse(env, mdp) {
-  const parts = String(env.ADMIN_HASH || '').split('$');
+  const parts = (await empreinteActive(env)).split('$');
   if (parts.length !== 4 || parts[0] !== 'pbkdf2') return null;
   const iter = parseInt(parts[1], 10);
   const cle = await crypto.subtle.importKey('raw', enc.encode(mdp), 'PBKDF2', false, ['deriveBits']);
@@ -70,10 +78,13 @@ async function cookieSession(env) {
   return `${COOKIE}=${exp}.${await signer(env, 'boutique.' + exp)}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${DUREE_SESSION}`;
 }
 
-/* ---------- Vérification du contenu envoyé par l'espace boutique ---------- */
+/* ---------- Vérification du contenu envoyé par la page de modification ---------- */
 const CLES_OBJETS = ['agence', 'annonce', 'accueil', 'presentation', 'garanties', 'affichage', 'contact', 'mentions'];
-const CLES_LISTES = ['chiffres', 'metiers', 'etapes', 'secteurs', 'realisations', 'equipe', 'references'];
-/* Réglés par Grégoire, jamais modifiables depuis l'espace de modification */
+const CLES_LISTES = ['chiffres', 'metiers', 'etapes', 'secteurs', 'realisations', 'equipe', 'references', 'engagements'];
+/* Clés facultatives : gardées telles qu'elles sont enregistrées quand le contenu envoyé ne les a pas, sinon remplacées (sans elles, un contenu enregistré perdrait ses formules d'abonnement et ses libellés) */
+const OBJETS_FACULTATIFS = ['abonnements', 'libelles', 'comparaison'];
+const LISTES_FACULTATIVES = ['pages_metier'];
+/* Réglés par Grégoire, jamais modifiables depuis la page de modification */
 const CLES_FIXES = ['_schema', 'theme', 'reglages'];
 const STATUTS = ['nouvelle', 'rappelee', 'devis', 'signee', 'classee'];
 function nettoyer(c, actuel) {
@@ -81,15 +92,87 @@ function nettoyer(c, actuel) {
   const out = {};
   CLES_OBJETS.forEach((k) => { out[k] = c[k] && typeof c[k] === 'object' && !Array.isArray(c[k]) ? c[k] : (actuel[k] || {}); });
   CLES_LISTES.forEach((k) => { out[k] = Array.isArray(c[k]) ? c[k].filter((x) => x && typeof x === 'object').slice(0, 200) : (actuel[k] || []); });
+  OBJETS_FACULTATIFS.forEach((k) => {
+    if (c[k] && typeof c[k] === 'object' && !Array.isArray(c[k])) out[k] = c[k]; else if (actuel[k]) out[k] = actuel[k];
+  });
+  LISTES_FACULTATIVES.forEach((k) => {
+    if (Array.isArray(c[k])) out[k] = c[k].filter((x) => x && typeof x === 'object').slice(0, 40); else if (actuel[k]) out[k] = actuel[k];
+  });
   out.lots = Array.isArray(c.lots) ? c.lots.filter((x) => typeof x === 'string').map((x) => x.slice(0, 200)).slice(0, 60) : (actuel.lots || []);
   out.credits_photos = String(c.credits_photos || '').slice(0, 800);
   CLES_FIXES.forEach((k) => { out[k] = actuel[k] || {}; });
   return out;
 }
 
+/* ---------- Mesure d'audience sans cookie ---------- */
+/* Pages vues comptées par jour dans un seul enregistrement : aucun cookie, aucune adresse IP, aucun identifiant de visiteur n'est gardé. */
+const ROBOTS = /bot|crawl|spider|slurp|preview|headless|monitor|lighthouse|pingdom|uptime|curl|wget|python|java|go-http|node|undici|axios/i;
+const PLAFOND_VUES_JOUR = 800; /* la mémoire gratuite accepte 1 000 écritures par jour : on s'arrête avant */
+const jourParis = (d) => (d || new Date()).toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' });
+async function compterVue(env, req, chemin) {
+  if (ROBOTS.test(req.headers.get('User-Agent') || 'robot') || (req.headers.get('Sec-Purpose') || '').includes('prefetch')) return;
+  const cle = 'vue:' + jourParis();
+  const j = (await env.CONTENU.get(cle, { type: 'json' })) || { t: 0, p: {}, s: { g: 0, d: 0, a: 0, i: 0 } };
+  if (j.t >= PLAFOND_VUES_JOUR) return;
+  j.t++;
+  const page = j.p[chemin] != null || Object.keys(j.p).length < 40 ? chemin : '(autres)';
+  j.p[page] = (j.p[page] || 0) + 1;
+  /* Provenance : moteur de recherche (g), lien d'un autre site (a), adresse tapée (d), navigation dans le site (i) */
+  let h = '';
+  try { h = new URL(req.headers.get('Referer') || '').hostname; } catch (e) { /* pas de provenance */ }
+  const s = !h ? 'd' : h === new URL(req.url).hostname ? 'i' : /(^|\.)(google|bing|duckduckgo|qwant|ecosia|yahoo)\./.test(h) ? 'g' : 'a';
+  j.s[s] = (j.s[s] || 0) + 1;
+  await env.CONTENU.put(cle, JSON.stringify(j), { expirationTtl: 400 * 24 * 3600 });
+}
+/* Les n derniers jours (le plus ancien d'abord), en jours civils de Paris */
+function derniersJours(n) {
+  const base = Date.parse(jourParis() + 'T12:00:00Z');
+  return Array.from({ length: n }, (_, i) => new Date(base - (n - 1 - i) * 86400e3).toISOString().slice(0, 10));
+}
+
+/* ---------- Sauvegarde nocturne ---------- */
+/* Chaque nuit : une copie du contenu gardée 7 nuits dans la mémoire du site. Si un stockage R2 « SAUVEGARDE » est relié (wrangler.jsonc), le contenu y est aussi copié (30 jours),
+   avec les photos et vidéos (une seule fois chacune, 30 fichiers par nuit au plus). */
+const NUITS_GARDEES = 7, FICHIERS_PAR_NUIT = 30;
+async function sauvegarder(env) {
+  const jour = jourParis();
+  const etat = { jour, quand: new Date().toISOString(), kv: false, r2: null };
+  const c = await env.CONTENU.get('contenu');
+  if (c) { await env.CONTENU.put('sauvegarde:' + jour, c, { expirationTtl: (NUITS_GARDEES + 1) * 86400 }); etat.kv = true; }
+  if (env.SAUVEGARDE) {
+    const r2 = { contenu: false, fichiers: 0, restants: 0 };
+    try {
+      await env.SAUVEGARDE.put('contenu/' + jour + '.json', c || JSON.stringify(initial), { httpMetadata: { contentType: 'application/json' } });
+      r2.contenu = true;
+      for (const prefixe of ['photo:', 'video:']) {
+        let curseur;
+        do {
+          const l = await env.CONTENU.list({ prefix: prefixe, cursor: curseur, limit: 200 });
+          for (const k of l.keys) {
+            const nom = 'medias/' + k.name.replace(':', '/');
+            if (await env.SAUVEGARDE.head(nom)) continue;
+            if (r2.fichiers >= FICHIERS_PAR_NUIT) { r2.restants++; continue; }
+            const { value, metadata } = await env.CONTENU.getWithMetadata(k.name, { type: 'arrayBuffer' });
+            if (!value) continue;
+            await env.SAUVEGARDE.put(nom, value, { httpMetadata: { contentType: (metadata && metadata.type) || 'application/octet-stream' } });
+            r2.fichiers++;
+          }
+          curseur = l.list_complete ? undefined : l.cursor;
+        } while (curseur);
+      }
+      const limite30 = derniersJours(31)[0];
+      const anciens = (await env.SAUVEGARDE.list({ prefix: 'contenu/' })).objects.filter((o) => o.key.slice(8, 18) < limite30).map((o) => o.key);
+      if (anciens.length) await env.SAUVEGARDE.delete(anciens);
+    } catch (e) { r2.erreur = String((e && e.message) || e).slice(0, 200); }
+    etat.r2 = r2;
+  }
+  await env.CONTENU.put('etat:sauvegarde', JSON.stringify(etat));
+}
+
 /* ---------- Routes ---------- */
 export default {
-  async fetch(req, env) {
+  async scheduled(event, env, ctx) { ctx.waitUntil(sauvegarder(env)); },
+  async fetch(req, env, ctx) {
     const url = new URL(req.url);
     const p = url.pathname;
     const methode = req.method;
@@ -106,7 +189,7 @@ export default {
         const corps = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes(C).filter((r) => !r.includes('?')).map((r) => `<url><loc>${base}${r}</loc></url>`).join('')}</urlset>`;
         return new Response(corps, { headers: { 'Content-Type': 'application/xml; charset=utf-8' } });
       }
-      /* Vidéos envoyées depuis l'espace de modification : lecture par morceaux (Range), indispensable pour Safari */
+      /* Vidéos envoyées depuis la page de modification : lecture par morceaux (Range), indispensable pour Safari */
       if ((methode === 'GET' || methode === 'HEAD') && p.startsWith('/videos/')) {
         const id = p.slice(8);
         if (!/^[a-z0-9-]{6,40}$/.test(id)) return new Response('Introuvable', { status: 404 });
@@ -148,9 +231,9 @@ export default {
         return json({ ok: true });
       }
 
-      /* Espace de modification : connexion */
+      /* Page de modification : connexion */
       if (methode === 'POST' && p === '/api/connexion') {
-        if (!env.ADMIN_HASH || !env.SESSION_SECRET) return json({ ok: false, erreur: 'Espace de modification pas encore configuré : demandez à Grégoire.' }, 503);
+        if (!(await empreinteActive(env)) || !env.SESSION_SECRET) return json({ ok: false, erreur: 'Page de modification pas encore configuré : demandez à Grégoire.' }, 503);
         const n = await essais(env, 'cnx:' + ip(req));
         if (n >= 8) return json({ ok: false, erreur: 'Trop d’essais. Réessayez dans un quart d’heure.' }, 429);
         const corps = await req.json().catch(() => ({}));
@@ -171,6 +254,19 @@ export default {
       /* Tout le reste de /api demande d'être connecté */
       if (p.startsWith('/api/')) {
         if (!(await connecte(req, env))) return json({ ok: false, erreur: 'Session expirée : reconnectez-vous.' }, 401);
+
+        if (methode === 'POST' && p === '/api/mot-de-passe') {
+          const n = await essais(env, 'mdp:' + ip(req));
+          if (n >= 8) return json({ ok: false, erreur: 'Trop d’essais. Réessayez dans un quart d’heure.' }, 429);
+          const corps = await req.json().catch(() => ({}));
+          const actuel = String(corps.actuel || ''), nouveau = String(corps.nouveau || '');
+          if (!(await verifierMotDePasse(env, actuel))) { await compter(env, 'mdp:' + ip(req), n, 900); return json({ ok: false, erreur: 'Le mot de passe actuel est incorrect.' }, 403); }
+          if (nouveau.length < 12) return json({ ok: false, erreur: 'Le nouveau mot de passe doit faire 12 caractères au moins.' }, 400);
+          if (nouveau.length > 200) return json({ ok: false, erreur: 'Le nouveau mot de passe est trop long.' }, 400);
+          if (nouveau === actuel) return json({ ok: false, erreur: 'Choisissez un mot de passe différent de l’actuel.' }, 400);
+          await env.CONTENU.put('admin:hash', await fabriquerEmpreinte(nouveau));
+          return json({ ok: true });
+        }
 
         if (methode === 'GET' && p === '/api/contenu') {
           return json({ ok: true, contenu: await lireContenu(env, true), maquette: estMaquette(env) });
@@ -210,6 +306,12 @@ export default {
           await env.CONTENU.put('video:' + id, buf, { metadata: { type } });
           return json({ ok: true, url: '/videos/' + id });
         }
+        if (methode === 'GET' && p === '/api/audience') {
+          const n = Math.min(90, Math.max(1, parseInt(url.searchParams.get('jours') || '30', 10) || 30));
+          const jours = derniersJours(n);
+          const vues = await Promise.all(jours.map((j) => env.CONTENU.get('vue:' + j, { type: 'json' })));
+          return json({ ok: true, jours: jours.map((jour, i) => ({ jour, ...(vues[i] || { t: 0, p: {}, s: {} }) })), plafond: PLAFOND_VUES_JOUR, sauvegarde: await env.CONTENU.get('etat:sauvegarde', { type: 'json' }) });
+        }
         if (methode === 'GET' && p === '/api/demandes') {
           const liste = await env.CONTENU.list({ prefix: 'demande:', limit: 60 });
           const dems = (await Promise.all(liste.keys.map((k) => env.CONTENU.get(k.name, { type: 'json' })))).filter(Boolean);
@@ -236,6 +338,7 @@ export default {
       if (methode === 'GET' || methode === 'HEAD') {
         const C = await lireContenu(env);
         const { statut, html: page } = rendrePage(C, p + url.search, { maquette: estMaquette(env), lienAdmin: '/admin/', apiContact: '/api/contact' });
+        if (statut === 200 && methode === 'GET' && !estMaquette(env)) ctx.waitUntil(compterVue(env, req, p.replace(/\/+$/, '').slice(0, 80) || '/').catch(() => {}));
         return html(page, statut);
       }
       return new Response('Méthode non permise', { status: 405 });

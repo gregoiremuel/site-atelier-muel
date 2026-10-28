@@ -1,0 +1,14 @@
+{
+  "id": "P015",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "besoin",
+  "raison": "J'ai déjà ma fiche Google et les clients m'appellent par le bouche-à-oreille. Un site, je ne vois pas à quoi il me servirait concrètement tout de suite, et entre deux chantiers je n'ai pas le temps de m'en occuper.",
+  "objection": "Je ne vois pas ce que ça me rapporte en clients en plus. 590 € d'un coup plus un abonnement, c'est de l'argent que je ne mets pas dans le camion sans savoir ce qui rentre.",
+  "ce_qui_me_ferait_changer_davis": "Voir sur trois mois des appels ou des chantiers gagnés grâce au site ou à la fiche, chiffrés, et qu'un artisan du coin me dise que ça marche pour lui.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 290,
+  "prix_cher": 590,
+  "prix_trop_cher": 900
+}

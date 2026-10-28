@@ -1,0 +1,14 @@
+{
+  "id": "P003",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "besoin",
+  "raison": "Mes clients viennent surtout de Google Maps et du bouche-à-oreille, et ça marche. Un site à 590 € ne me rapporte pas un dépannage de plus si je n'en vois pas la preuve avant.",
+  "objection": "Qu'est-ce que j'ai concrètement en plus d'appels ? Il ne promet aucune place dans Google, donc je paie quoi exactement ?",
+  "ce_qui_me_ferait_changer_davis": "Un plombier du quartier qui a déjà reçu plus d'appels grâce à son site, que je peux appeler moi-même.",
+  "prix_trop_bas": 150,
+  "prix_bonne_affaire": 290,
+  "prix_cher": 450,
+  "prix_trop_cher": 600
+}

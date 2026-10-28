@@ -1,4 +1,4 @@
-/* Polices du site (fichiers dans public/fonts, licence SIL OFL). Gabarit classique : titres en Playfair Display, texte en Manrope. Gabarit studio : Bricolage Grotesque et DM Sans. */
+/* Polices du site (fichiers dans public/fonts, licence SIL OFL). Gabarit classique : titres en Playfair Display, texte en Manrope. Gabarit studio : Bricolage Grotesque et DM Sans. Gabarit édition : Besley (titres) et Schibsted Grotesk (texte). */
 export const POLICES = {
   agence: {
     titres: '"Playfair Display","Didot","Bodoni 72",Georgia,serif',
@@ -25,12 +25,27 @@ export const POLICES = {
       ['DM Sans', 700, 'dm-sans-latin-700-normal.woff2', 'normal'],
     ],
   },
+  /* Gabarit « édition » : une égyptienne chaleureuse (Besley) pour les titres, une grotesque de presse (Schibsted Grotesk) pour le texte. Pour une activité de service sobre, tenue comme un document imprimé. */
+  edition: {
+    titres: '"Besley","Georgia","Times New Roman",serif',
+    texte: '"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif',
+    fichiers: [
+      ['Besley', 500, 'besley-latin-500-normal.woff2', 'normal'],
+      ['Besley', 500, 'besley-latin-500-italic.woff2', 'italic'],
+      ['Besley', 600, 'besley-latin-600-normal.woff2', 'normal'],
+      ['Schibsted Grotesk', 400, 'schibsted-grotesk-latin-400-normal.woff2', 'normal'],
+      ['Schibsted Grotesk', 400, 'schibsted-grotesk-latin-400-italic.woff2', 'italic'],
+      ['Schibsted Grotesk', 500, 'schibsted-grotesk-latin-500-normal.woff2', 'normal'],
+      ['Schibsted Grotesk', 600, 'schibsted-grotesk-latin-600-normal.woff2', 'normal'],
+      ['Schibsted Grotesk', 700, 'schibsted-grotesk-latin-700-normal.woff2', 'normal'],
+    ],
+  },
 };
 
 /* Tous les fichiers de polices (pour l'aperçu et les tests). */
 export const TOUS_FICHIERS_POLICES = [...new Set(Object.values(POLICES).flatMap((P) => P.fichiers.map((x) => x[2])))];
 
-/* jeu : « agence » (gabarit classique) ou « studio ». */
+/* jeu : « agence » (gabarit classique), « studio » ou « edition ». */
 export function cssPolices(url, jeu) {
   const P = POLICES[jeu] || POLICES.agence;
   return P.fichiers.map(([fam, w, f, st]) => `@font-face{font-family:"${fam}";font-weight:${w};font-style:${st};font-display:swap;src:url(${url(f)}) format("woff2")}`).join('\n')

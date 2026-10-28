@@ -1,0 +1,14 @@
+{
+  "id": "P007",
+  "achete": false,
+  "achats_premier_mois": 0,
+  "formule": "aucune",
+  "code_raison": "confiance",
+  "raison": "Je regarde déjà ma fiche Google moi-même sur mon téléphone, et je ne vois pas ce que 590 € me rapporteraient de plus. Il n'a encore aucun client à montrer, et ses démonstrations sont des entreprises imaginaires.",
+  "objection": "Je ne connais pas ce monsieur, il n'a aucun client à me montrer, et il ne promet pas de place dans Google. Je ne vais pas mettre 590 € là-dedans sur une simple maquette.",
+  "ce_qui_me_ferait_changer_davis": "Une maquette gratuite qui me plaît vraiment, puis trois ou quatre commerces réels de mon quartier qui me disent que leur site leur amène des appels.",
+  "prix_trop_bas": 100,
+  "prix_bonne_affaire": 250,
+  "prix_cher": 400,
+  "prix_trop_cher": 500
+}

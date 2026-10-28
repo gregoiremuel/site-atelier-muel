@@ -25,6 +25,6 @@ Adresse d'une photo : `https://images.unsplash.com/<identifiant>`.
 
 | Fichier (public/assets/photos/) | Origine | À contrôler |
 |---|---|---|
-| gregoire-portrait.jpg | Photo de Grégoire, fournie par lui le 28/10/2026 (recadrée en 4/5, métadonnées retirées) | Fond de falaise et sac à dos : photo de vacances ; un portrait plus neutre serait préférable |
+| gregoire-portrait.jpg | Photo de Grégoire, fournie par lui le 28/10/2026 : fond retiré (modèle de détourage u2net_human_seg), buste recadré en 4/5, fond gris clair uni, sac à dos retiré par le recadrage, métadonnées retirées | Les lunettes sur la tête reflètent du ciel (bleu) : sans importance, ou une autre photo |
 | travail-clavier.jpg | Unsplash, « person using laptop computer », Christin Hume (photo-1516387938699-a93567ec168e) | Photographe relevé sur la page de résultats ; vérifier sur la page de la photo. Photo d'illustration : ce ne sont pas les mains de Grégoire |
 | paris-16e-cafe.jpg | Unsplash, « Cafe with outdoor seating on a Parisian street », Shalev Cohen (photo-1762597269801-a4232de6a8f2) | Même contrôle. Rue parisienne, pas forcément Auteuil : ne pas la légender « Auteuil » |

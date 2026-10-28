@@ -1,0 +1,284 @@
+{
+  "_schema": "site-boutique v2",
+  "metier": {
+    "type_schema": "Florist",
+    "titre_page": "fleuriste (site d’exemple)",
+    "nav_boutique": "La boutique",
+    "produits": {
+      "nav": "Les fleurs",
+      "rubrique": "Fleurs de la semaine",
+      "singulier": "fleur",
+      "pluriel": "fleurs",
+      "feminin": true,
+      "famille": "Saison",
+      "familles": [
+        [
+          "Printemps",
+          "Fleurs du printemps"
+        ],
+        [
+          "Ete",
+          "Fleurs de l’été"
+        ],
+        [
+          "Automne",
+          "Fleurs de l’automne"
+        ],
+        [
+          "Hiver",
+          "Fleurs de l’hiver"
+        ]
+      ],
+      "autres": "Autres fleurs",
+      "origine": "Couleur",
+      "exemple_precision": "rose pâle",
+      "exemple_prix": "3 € la tige"
+    },
+    "offres": {
+      "nav": "Bouquets",
+      "rubrique": "Bouquets et compositions",
+      "singulier": "bouquet",
+      "pluriel": "bouquets",
+      "feminin": false,
+      "bouton": "Commander un bouquet"
+    },
+    "demande": {
+      "type": "retrait",
+      "nav": "Commander",
+      "rubrique": "Commandes de bouquets",
+      "quantite": "",
+      "unite": "",
+      "par_unite": "",
+      "date": "Jour du retrait",
+      "precisions": "Couleurs, occasion, budget",
+      "exemple": "Ex. : un bouquet pastel pour un anniversaire, budget 40 €",
+      "lien": "",
+      "lien_texte": ""
+    }
+  },
+  "theme": {
+    "couleur": "#2f5d50",
+    "couleur_foncee": "#1f4037",
+    "couleur_pale": "#eaf2ef",
+    "accent": "#f0d58c",
+    "polices": "net",
+    "accueil": "sobre",
+    "titres": "simple",
+    "angles": "doux",
+    "offres_fond": "clair",
+    "ordre": [
+      "offres",
+      "produits",
+      "boutique",
+      "questions",
+      "presse"
+    ]
+  },
+  "boutique": {
+    "nom": "Le Pétale Sauvage",
+    "telephone": "01 00 00 00 00",
+    "adresse": "1, rue de l’Exemple",
+    "ville": "75016 Paris",
+    "quartier": "",
+    "acces": "",
+    "email": "",
+    "instagram": ""
+  },
+  "annonce": {
+    "afficher": false,
+    "texte": ""
+  },
+  "horaires": {
+    "lundi": [],
+    "mardi": [
+      [
+        "09:00",
+        "19:30"
+      ]
+    ],
+    "mercredi": [
+      [
+        "09:00",
+        "19:30"
+      ]
+    ],
+    "jeudi": [
+      [
+        "09:00",
+        "19:30"
+      ]
+    ],
+    "vendredi": [
+      [
+        "09:00",
+        "19:30"
+      ]
+    ],
+    "samedi": [
+      [
+        "09:00",
+        "19:30"
+      ]
+    ],
+    "dimanche": [
+      [
+        "09:00",
+        "13:00"
+      ]
+    ]
+  },
+  "horaires_note": "",
+  "sections": {
+    "boutique": true,
+    "produits": true,
+    "offres": true,
+    "presse": false,
+    "questions": true
+  },
+  "textes": {
+    "titre": "Des fleurs de saison, des bouquets à emporter",
+    "intro": "Site d’exemple : cette boutique n’existe pas. Touchez « Essayer l’espace boutique » en haut de l’écran, puis changez ce texte, un horaire ou un bouquet.",
+    "photo_accueil": "",
+    "boutique_titre": "La boutique",
+    "boutique_texte": "Une boutique imaginaire, pour montrer ce que voit un client : qui vous êtes, ce que vous vendez, quand vous êtes ouverts et comment venir.\n\nDans l’espace boutique, la fleuriste change elle-même ces textes, ses photos, ses bouquets et ses horaires, depuis son téléphone.",
+    "boutique_photo_1": "",
+    "boutique_photo_2": "",
+    "produits_titre": "Dans les seaux cette semaine",
+    "produits_intro": "La liste se met à jour depuis l’espace boutique : une fleur arrive, une autre part, en quelques secondes.",
+    "produits_photo": "",
+    "offres_titre": "Bouquets et commandes",
+    "offres_texte": "Choisissez un bouquet et le jour du retrait. La boutique confirme avec vous.",
+    "offres_photo": "",
+    "description_google": "Site d’exemple d’une fleuriste imaginaire, créé par Grégoire Muel pour montrer un site de commerce avec commande à retirer et espace boutique."
+  },
+  "produits": [
+    {
+      "nom": "Pivoines",
+      "origine": "Rose pâle",
+      "famille": "Printemps",
+      "detail": "",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Tulipes",
+      "origine": "Mélange de couleurs",
+      "famille": "Printemps",
+      "detail": "",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Renoncules",
+      "origine": "Corail",
+      "famille": "Printemps",
+      "detail": "",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Dahlias",
+      "origine": "Bordeaux",
+      "famille": "Automne",
+      "detail": "",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Zinnias",
+      "origine": "Orange",
+      "famille": "Ete",
+      "detail": "",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Chrysanthèmes",
+      "origine": "Blanc",
+      "famille": "Automne",
+      "detail": "",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Hellébores",
+      "origine": "Vert pâle",
+      "famille": "Hiver",
+      "detail": "",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Eucalyptus",
+      "origine": "Feuillage",
+      "famille": "Hiver",
+      "detail": "",
+      "prix": "",
+      "photo": ""
+    }
+  ],
+  "offres": [
+    {
+      "nom": "Bouquet de saison",
+      "description": "Composé le jour même avec les fleurs de la semaine, selon vos couleurs et votre budget.",
+      "prix": "",
+      "prix_unite": ""
+    },
+    {
+      "nom": "Bouquet pour une occasion",
+      "description": "Anniversaire, remerciement, naissance : dites-nous l’occasion, la boutique compose.",
+      "prix": "",
+      "prix_unite": ""
+    },
+    {
+      "nom": "Abonnement fleurs",
+      "description": "Un bouquet de saison à retirer chaque semaine, selon ce que vous convenez avec la boutique.",
+      "prix": "",
+      "prix_unite": ""
+    }
+  ],
+  "commandes": {
+    "actif": true,
+    "titre": "Commander un bouquet",
+    "intro": "Choisissez votre bouquet et le jour du retrait. Dans ce site d’exemple, rien n’est envoyé.",
+    "cle_web3forms": "",
+    "email": "",
+    "delai_heures": 24,
+    "quantite_min": 1,
+    "quantite_max": 1,
+    "paiement": "Le prix définitif et le règlement sont confirmés par la boutique.",
+    "confirmation": "Merci, votre demande est partie. La boutique vous rappelle pour confirmer le bouquet et le prix."
+  },
+  "questions": [
+    {
+      "question": "Cette boutique existe-t-elle ?",
+      "reponse": "Non, c’est un site d’exemple créé par Grégoire Muel. Les noms, l’adresse et le téléphone sont imaginaires."
+    },
+    {
+      "question": "Que peut changer la fleuriste elle-même ?",
+      "reponse": "Ses horaires, ses fermetures, la liste des fleurs, ses bouquets, ses prix et ses photos, et elle reçoit les commandes."
+    },
+    {
+      "question": "Peut-on commander en ligne ?",
+      "reponse": "Oui : le client choisit un bouquet et un jour de retrait, la boutique reçoit la demande et confirme."
+    }
+  ],
+  "presse": [],
+  "avis": {
+    "note": "",
+    "nombre": "",
+    "date": "",
+    "lien": ""
+  },
+  "mentions": {
+    "raison_sociale": "",
+    "siret": "",
+    "directeur_publication": "",
+    "email_contact": ""
+  },
+  "credits_photos": "",
+  "reglages": {
+    "geo": [],
+    "url": ""
+  }
+}

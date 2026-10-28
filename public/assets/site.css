@@ -363,3 +363,102 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
   .appel::after{background:color-mix(in srgb,var(--marine) 86%,transparent)}
   @media (max-width:700px){.hero::after{background:linear-gradient(0deg,color-mix(in srgb,var(--nuit) 90%,transparent) 0%,color-mix(in srgb,var(--nuit) 70%,transparent) 55%,color-mix(in srgb,var(--nuit) 45%,transparent) 100%)}}
 }
+
+/* ====== Abonnement mensuel (page des offres) ====== */
+.abo-grille{display:grid;gap:clamp(16px,2vw,24px)}
+.abo-carte{position:relative;display:flex;flex-direction:column;gap:12px;padding:clamp(24px,3vw,34px);background:#fff;border:1px solid var(--trait);border-radius:2px}
+.abo-carte h3{font-size:1.375rem}
+.abo-prix{display:flex;align-items:baseline;gap:8px;color:var(--gris)}
+.abo-prix b{font-family:var(--titres);font-weight:400;font-size:clamp(2rem,3vw,2.5rem);line-height:1;color:var(--marine)}
+.abo-desc{color:var(--gris);font-size:.9688rem}
+.abo-carte .coches{margin-top:6px;max-width:none}
+.abo-carte .coches li{padding:9px 0;font-size:.9375rem}
+.abo-reco{border:2px solid var(--marine)}
+.abo-badge{position:absolute;top:-13px;left:24px;background:var(--or);color:var(--encre);font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 11px;border-radius:2px}
+.abo-note{margin-top:22px;max-width:70ch;font-size:.875rem;color:var(--gris)}
+@media (min-width:900px){.abo-grille{grid-template-columns:repeat(3,1fr)}.abo-grille:has(> :nth-child(2):last-child){grid-template-columns:repeat(2,1fr)}}
+
+/* ====== Gabarit « studio » (theme.gabarit = "studio") : papier chaud, grotesque, pastilles, bandes arrondies. Ne ressemble pas au gabarit classique. ====== */
+.g-studio{--r:16px}
+.g-studio h1,.g-studio h2,.g-studio h3{font-weight:700;letter-spacing:-.035em;line-height:1.03}
+.g-studio .marque{font-weight:700;font-size:1.3125rem;letter-spacing:-.03em}
+.g-studio .tete{border-bottom:0}
+.g-studio .tete.defile{box-shadow:0 10px 30px -22px rgba(28,27,25,.5)}
+.g-studio .nav a{font-weight:500}
+.g-studio .btn{border-radius:999px;min-height:50px;padding:0 26px;font-family:var(--texte);font-weight:700;letter-spacing:0}
+.g-studio .btn:hover{background:var(--or);border-color:var(--or);color:var(--encre)}
+.g-studio .btn-or:hover{background:var(--encre);border-color:var(--encre);color:#fff}
+.g-studio .btn-ligne{color:var(--encre);border-color:var(--encre)}
+.g-studio .btn-ligne:hover{background:var(--encre);border-color:var(--encre);color:#fff}
+.g-studio .btn-petit{min-height:40px}
+.g-studio .lien{border-bottom:2px solid var(--or);font-weight:700}
+.g-studio .sur{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--encre)}
+.g-studio .sur::before{width:10px;height:10px;border-radius:50%;background:var(--or)}
+.g-studio .sombre .sur,.g-studio .appel .sur{color:rgba(255,255,255,.85)}
+.g-studio .chapo,.g-studio .hero-chapo{color:var(--gris)}
+.g-studio .metier-num{font-family:var(--texte);font-style:normal;font-weight:700;font-size:.8125rem;letter-spacing:.1em}
+.g-studio .clair{background:#e0e6e4}
+.g-studio .real-fig,.g-studio .carte-img,.g-studio .galerie li,.g-studio .portrait,.g-studio .portrait-vide{background:#dde3e1}
+.g-studio .portrait-vide{border-top:0;font-weight:700}
+/* Accueil : texte à gauche, visuel à droite, sur le papier */
+.g-studio .hero{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;min-height:0;color:var(--encre);background:var(--fond);isolation:auto;overflow:visible;padding:clamp(28px,5vw,72px) max(clamp(20px,4vw,48px),calc((100% - 1320px) / 2 + clamp(20px,4vw,48px)))}
+.g-studio .hero::after{display:none}
+.g-studio .hero-media{position:static;inset:auto;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;z-index:0;animation:none;border-radius:28px;grid-row:2;max-height:72svh;justify-self:center}
+.g-studio .hero-txt{padding:0;max-width:none;margin:0;grid-row:1}
+.g-studio .hero h1{color:var(--encre);font-size:clamp(2.5rem,5.4vw,4.75rem);max-width:13ch;letter-spacing:-.035em;line-height:1}
+.g-studio .hero-chapo{color:var(--gris);max-width:46ch}
+.g-studio .hero-gar{border-top:1px solid var(--trait);color:var(--gris);max-width:none}
+.g-studio .hero-gar li::before{width:8px;height:8px;border-radius:50%;transform:none;background:var(--or)}
+.g-studio .hero .btn-ligne-clair{border-color:var(--encre);color:var(--encre);background:transparent}
+.g-studio .hero .btn-ligne-clair:hover{background:var(--encre);color:#fff}
+@media (min-width:900px){
+  .g-studio .hero{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+  .g-studio .hero-media{grid-column:2;grid-row:1;aspect-ratio:4/5;max-height:76svh;justify-self:end;width:auto;max-width:100%}
+  .g-studio .hero-txt{grid-column:1;grid-row:1}
+}
+/* Présentation, chiffres, cartes, étapes */
+.g-studio .intro-fig::before{inset:auto -14px -14px auto;width:42%;height:42%;border:0;border-radius:var(--r);background:var(--or);z-index:-1}
+.anime .g-studio .intro-fig.rev::before{transform:translate(-14px,-14px)}
+.g-studio .intro-img,.g-studio .metier-img,.g-studio .real-fig,.g-studio .real-img,.g-studio .galerie li,.g-studio .carte-img,.g-studio .portrait{border-radius:var(--r)}
+.g-studio .chiffres{border-top:0;gap:14px}
+.g-studio .chiffres li{border:1px solid var(--trait);border-radius:var(--r);background:#fff;padding:26px 28px}
+.g-studio .chiffres b{font-weight:700;letter-spacing:-.04em;color:var(--encre)}
+@media (min-width:900px){.g-studio .chiffres li,.g-studio .chiffres li:first-child{border:1px solid var(--trait);padding:26px 28px}}
+.g-studio .etapes>li{border:1px solid var(--trait);border-radius:var(--r);background:#fff;padding:28px}
+.g-studio .etapes>li::before{display:none}
+.g-studio .etape-num{font-weight:700;letter-spacing:-.04em;color:var(--or)}
+.g-studio .filtres a{border-radius:999px;font-weight:700}
+.g-studio .filtres a[aria-current="page"],.g-studio .filtres a:hover{background:var(--encre);border-color:var(--encre);color:#fff}
+.g-studio .carte-nom{font-weight:700;letter-spacing:-.025em}
+.g-studio .carte a:hover .carte-nom{text-decoration-thickness:2px}
+.g-studio .illus,.g-studio .abo-badge{border-radius:999px}
+.g-studio .essai-liens{border-top:0;display:grid;gap:12px}
+.g-studio .essai-liens li{border:1px solid var(--trait);border-radius:var(--r);background:#fff}
+.g-studio .essai-liens a{padding:22px 24px}
+.g-studio .essai-liens b{font-weight:700;letter-spacing:-.02em}
+.g-studio .essai-liens li:hover{border-color:var(--encre)}
+.g-studio .coches li{border-top:0;padding:8px 0}
+.g-studio .coches li:last-child{border-bottom:0}
+.g-studio .coches svg{color:var(--or);stroke-width:2.2}
+.g-studio .abo-carte{border-radius:var(--r)}
+.g-studio .abo-prix b{font-weight:700;letter-spacing:-.04em}
+.g-studio .abo-reco{border:2px solid var(--encre);background:#fff}
+/* Bandes sombres et appel : panneaux arrondis posés sur le papier */
+.g-studio .sombre,.g-studio .appel{margin:clamp(8px,1.5vw,20px);border-radius:28px}
+.g-studio .metiers a{color:#fff}
+.g-studio .metier-prix{color:var(--encre)}
+.g-studio .metiers .metier-prix{color:var(--or)}
+.g-studio .metier-txt .metier-prix{border-left:3px solid var(--or)}
+/* Formulaire, contact, pied */
+.g-studio .saisie{border-radius:12px;border-color:var(--trait);min-height:52px}
+.g-studio .saisie:focus{border-color:var(--encre)}
+.g-studio .demande-ok{border-radius:var(--r);border-top-width:1px}
+.g-studio .coord{border-radius:var(--r)}
+.g-studio .pied{background:var(--marine);margin:clamp(8px,1.5vw,20px);border-radius:28px;padding-left:0;padding-right:0}
+.g-studio .pied h2{letter-spacing:.1em;text-transform:uppercase;font-size:.75rem;font-weight:700}
+.g-studio .fiche{border-top:2px solid var(--encre)}
+.g-studio .refs,.g-studio .refs li{border-color:var(--trait)}
+/* Les petits traits qui se dessinent à l'apparition deviennent des pastilles fixes */
+.anime .g-studio .rev .sur::before,.anime .g-studio .tete-page > .sur.rev::before{width:10px;transition:none}
+.anime .g-studio .rev.vu .sur::before,.anime .g-studio .tete-page > .sur.rev.vu::before{width:10px}
+@media (max-width:700px){.g-studio .sombre,.g-studio .appel,.g-studio .pied{border-radius:20px}}

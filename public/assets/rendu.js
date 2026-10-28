@@ -54,7 +54,11 @@ export function donnees(C) {
   const lots = liste('lots').filter((l) => typeof l === 'string' && l.trim());
   const secteur = (id) => secteurs.find((s) => s.id === id) || null;
   const secteursUtiles = secteurs.filter((s) => realisations.some((x) => x.secteur === s.id));
-  return { secteurs, secteursUtiles, realisations, metiers, etapes, equipe, references, chiffres, lots, secteur };
+  /* Abonnement mensuel facultatif (clé facultative « abonnements ») */
+  const AB = C.abonnements && typeof C.abonnements === 'object' ? C.abonnements : null;
+  const formules = AB && Array.isArray(AB.formules) ? AB.formules.filter((f) => f && f.nom).map((f) => ({ ...f, points: (Array.isArray(f.points) ? f.points : []).filter(Boolean) })) : [];
+  const abonnements = formules.length ? { titre: AB.titre || '', intro: AB.intro || '', note: AB.note || '', formules } : null;
+  return { secteurs, secteursUtiles, realisations, metiers, etapes, equipe, references, chiffres, lots, secteur, abonnements };
 }
 
 function src(p, largeur) {
@@ -128,7 +132,8 @@ function appel(C) {
 function document_(C, o, page) {
   const G = C.agence || {}, T = C.theme || {}, K = C.contact || {};
   const nom = G.nom || 'Agence';
-  const theme = `${cssPolices(o.urlPolice || ((f) => '/fonts/' + f))}\n:root{--fond:${hex(T.fond, '#f7f5f0')};--encre:${hex(T.encre, '#15172e')};--gris:${hex(T.gris, '#585b70')};--trait:${hex(T.trait, '#e2ded4')};--marine:${hex(T.marine, '#262a59')};--or:${hex(T.or, '#f8c151')}}`;
+  const gabarit = T.gabarit === 'studio' ? 'studio' : 'classique';
+  const theme = `${cssPolices(o.urlPolice || ((f) => '/fonts/' + f), gabarit === 'studio' ? 'studio' : 'agence')}\n:root{--fond:${hex(T.fond, '#f7f5f0')};--encre:${hex(T.encre, '#15172e')};--gris:${hex(T.gris, '#585b70')};--trait:${hex(T.trait, '#e2ded4')};--marine:${hex(T.marine, '#262a59')};--or:${hex(T.or, '#f8c151')}}`;
   const style = o.css != null ? `<style>\n${o.css}\n${theme}\n</style>` : `<link rel="stylesheet" href="${o.cssHref || '/assets/site.css'}">\n<style>${theme}</style>`;
   const marque = src(G.nom_image, 600) ? `<img src="${esc(src(G.nom_image, 600))}" alt="${esc(nom)}">` : esc(nom);
   const marqueClaire = src(G.nom_image_blanc, 600) ? `<img src="${esc(src(G.nom_image_blanc, 600))}" alt="${esc(nom)}">` : esc(nom);
@@ -161,7 +166,7 @@ ${page.image && src(page.image, 1200) ? `<meta property="og:image" content="${es
 <link rel="icon" href="${esc(favicon(C))}">
 ${style}
 </head>
-<body class="${page.classe || ''}${o.calme ? ' calme' : ''}">
+<body class="${page.classe || ''}${gabarit === 'studio' ? ' g-studio' : ''}${o.calme ? ' calme' : ''}">
 <a class="skip" href="#contenu">Aller au contenu</a>
 ${o.maquette ? `<div class="maquette" role="note">${esc(libelle(C, 'bandeau_maquette') || `Proposition de site pour ${nom}, préparée par Grégoire Muel. Version de travail non publiée : textes et photos à valider.`)}</div>` : ''}
 ${C.annonce && C.annonce.afficher && C.annonce.texte ? `<div class="annonce" role="status">${esc(C.annonce.texte)}</div>` : ''}
@@ -224,6 +229,27 @@ const carte = (D, x, grande) => `<li class="carte${grande ? ' carte-grande' : ''
 const titreSection = (sur, titre, id) => `<p class="sur">${esc(sur)}</p><h2${id ? ` id="${id}"` : ''}>${esc(titre)}</h2>`;
 const listeCoches = (pts) => (pts.length ? `<ul class="coches">${pts.map((p) => `<li>${ico.coche}<span>${esc(p)}</span></li>`).join('')}</ul>` : '');
 const etapesHtml = (D) => (D.etapes.length ? `<ol class="etapes">${D.etapes.map((e, i) => `<li><span class="etape-num">${num(i)}</span><h3>${esc(e.titre)}</h3>${e.points.length ? `<ul>${e.points.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}</li>`).join('')}</ol>` : '');
+const abonnementsHtml = (D) => {
+  const A = D.abonnements;
+  if (!A) return '';
+  return `
+  <section class="sec abo" id="abonnements" aria-labelledby="t-abo">
+    <div class="wrap">
+      <div class="sec-tete">${titreSection('Abonnement facultatif', A.titre || 'Un coup de main au mois, si vous le souhaitez', 't-abo')}${A.intro ? `<p class="chapo">${esc(A.intro)}</p>` : ''}</div>
+      <ul class="abo-grille">
+        ${A.formules.map((f) => `<li class="abo-carte${f.recommande ? ' abo-reco' : ''}">
+          ${f.recommande ? '<span class="abo-badge">Recommandée</span>' : ''}
+          <h3>${esc(f.nom)}</h3>
+          <p class="abo-prix"><b>${esc(f.prix || '')}</b>${f.periode ? ` <span>${esc(f.periode)}</span>` : ''}</p>
+          ${f.description ? `<p class="abo-desc">${esc(f.description)}</p>` : ''}
+          ${listeCoches(f.points)}
+        </li>`).join('\n        ')}
+      </ul>
+      ${A.note ? `<p class="abo-note">${esc(A.note)}</p>` : ''}
+      <div class="actions"><a class="btn btn-or" href="/contact">${esc(libelle({}, 'bouton_appel'))}</a></div>
+    </div>
+  </section>`;
+};
 const referencesHtml = (D) => `<ul class="refs">${D.references.map((r) => `<li>${src(r.logo, 400) ? `<img src="${esc(src(r.logo, 400))}" alt="${esc(r.nom)}" loading="lazy">` : `<span>${esc(r.nom)}</span>`}</li>`).join('')}</ul>`;
 const initiales = (n) => String(n || '').split(/[\s-]+/).filter(Boolean).map((m) => m[0]).slice(0, 2).join('').toUpperCase();
 
@@ -337,6 +363,7 @@ function pageExpertises(C, D) {
       </div>
     </div>
   </section>`).join('')}
+  ${abonnementsHtml(D)}
   ${D.etapes.length ? `
   <section class="sec clair" aria-labelledby="t-met">
     <div class="wrap">

@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { pbkdf2Sync, randomBytes } from 'node:crypto';
 import { verifier } from './verifier.mjs';
 import { routes } from '../public/assets/rendu.js';
-import { POLICES } from '../public/assets/polices.js';
+import { TOUS_FICHIERS_POLICES } from '../public/assets/polices.js';
 
 const racine = fileURLToPath(new URL('..', import.meta.url));
 const fichier = resolve(process.argv[2] || join(racine, 'contenu-initial.json'));
@@ -56,9 +56,11 @@ async function tests() {
   let r = await req('/nexistepas'); verif(r.status === 404 && (await r.text()).includes('Page introuvable'), 'Adresse inconnue : page 404');
   r = await req('/'); let h = await r.text();
   verif(!h.includes('class="maquette"') && !h.includes('noindex'), 'Pas de bandeau de proposition quand MAQUETTE = non');
+  if (C.abonnements) { r = await req('/expertises'); const hx = await r.text(); verif(hx.includes('class="abo-grille"') && C.abonnements.formules.every((f) => hx.includes(f.nom)), 'Les formules d’abonnement s’affichent sur la page des offres'); }
+  if ((C.theme || {}).gabarit === 'studio') { r = await req('/'); const hs = await r.text(); verif(hs.includes('g-studio') && hs.includes('Bricolage Grotesque'), 'Gabarit « studio » : classe et polices du site'); r = await req('/fonts/bricolage-grotesque-latin-700-normal.woff2'); verif(r.status === 200, 'Police du gabarit « studio » servie'); }
   r = await req('/robots.txt'); verif((await r.text()).includes('Sitemap:'), 'robots.txt avec plan du site');
   r = await req('/sitemap.xml'); h = await r.text(); verif(h.includes('/realisations/') && !h.includes('?secteur'), 'Plan du site avec les réalisations');
-  for (const f of ['/assets/site.css', '/assets/site.js', '/assets/rendu.js', '/assets/polices.js', '/assets/admin.js', '/assets/admin.css', ...POLICES.agence.fichiers.map((x) => '/fonts/' + x[2])]) {
+  for (const f of ['/assets/site.css', '/assets/site.js', '/assets/rendu.js', '/assets/polices.js', '/assets/admin.js', '/assets/admin.css', ...TOUS_FICHIERS_POLICES.map((f) => '/fonts/' + f)]) {
     r = await req(f); verif(r.status === 200, 'Fichier ' + f);
   }
   const imagesSite = [...new Set(JSON.stringify(C).match(/\/assets\/[\w./-]+\.(?:jpe?g|png|webp|avif|svg)/gi) || [])];

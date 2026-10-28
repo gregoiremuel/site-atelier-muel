@@ -1,0 +1,250 @@
+{
+  "_schema": "site-boutique v2",
+  "metier": {
+    "type_schema": "LocalBusiness",
+    "titre_page": "ébénisterie et restauration de meubles (site d’exemple)",
+    "nav_boutique": "L’atelier",
+    "produits": {
+      "nav": "Savoir-faire",
+      "rubrique": "Ce que fait l’atelier",
+      "singulier": "savoir-faire",
+      "pluriel": "savoir-faire",
+      "feminin": false,
+      "famille": "",
+      "familles": [],
+      "autres": "Autres travaux",
+      "origine": "Délai",
+      "exemple_precision": "plusieurs semaines",
+      "exemple_prix": "sur devis"
+    },
+    "offres": {
+      "nav": "Travaux",
+      "rubrique": "Travaux courants",
+      "singulier": "travail",
+      "pluriel": "travaux",
+      "feminin": false,
+      "bouton": "Demander un devis"
+    },
+    "demande": {
+      "type": "devis",
+      "nav": "Devis",
+      "rubrique": "Demandes de devis",
+      "quantite": "",
+      "unite": "",
+      "par_unite": "",
+      "date": "Date souhaitée",
+      "precisions": "Décrivez le meuble et le travail à faire",
+      "exemple": "Ex. : table de ferme à décaper et à reteinter, un pied à réparer",
+      "lien": "",
+      "lien_texte": ""
+    }
+  },
+  "theme": {
+    "couleur": "#6b4a2e",
+    "couleur_foncee": "#4a321e",
+    "couleur_pale": "#f5f0ea",
+    "accent": "#e9cd8a",
+    "polices": "atelier",
+    "accueil": "sobre",
+    "titres": "filet",
+    "angles": "droits",
+    "offres_fond": "clair",
+    "ordre": [
+      "boutique",
+      "offres",
+      "produits",
+      "questions",
+      "presse"
+    ]
+  },
+  "boutique": {
+    "nom": "Atelier du Merrain",
+    "telephone": "01 00 00 00 00",
+    "adresse": "1, rue de l’Exemple",
+    "ville": "75011 Paris",
+    "quartier": "",
+    "acces": "",
+    "email": "",
+    "instagram": ""
+  },
+  "annonce": {
+    "afficher": false,
+    "texte": ""
+  },
+  "horaires": {
+    "lundi": [
+      [
+        "08:30",
+        "12:30"
+      ],
+      [
+        "14:00",
+        "18:00"
+      ]
+    ],
+    "mardi": [
+      [
+        "08:30",
+        "12:30"
+      ],
+      [
+        "14:00",
+        "18:00"
+      ]
+    ],
+    "mercredi": [
+      [
+        "08:30",
+        "12:30"
+      ],
+      [
+        "14:00",
+        "18:00"
+      ]
+    ],
+    "jeudi": [
+      [
+        "08:30",
+        "12:30"
+      ],
+      [
+        "14:00",
+        "18:00"
+      ]
+    ],
+    "vendredi": [
+      [
+        "08:30",
+        "12:30"
+      ],
+      [
+        "14:00",
+        "17:00"
+      ]
+    ],
+    "samedi": [],
+    "dimanche": []
+  },
+  "horaires_note": "Visite de l’atelier sur rendez-vous.",
+  "sections": {
+    "boutique": true,
+    "produits": true,
+    "offres": true,
+    "presse": false,
+    "questions": true
+  },
+  "textes": {
+    "titre": "Meubles restaurés, meubles sur mesure",
+    "intro": "Site d’exemple : cet atelier n’existe pas. Touchez « Essayer l’espace de modification » en haut de l’écran, puis changez ce texte, un horaire ou un tarif.",
+    "photo_accueil": "",
+    "boutique_titre": "L’atelier",
+    "boutique_texte": "Un atelier imaginaire, pour montrer ce que voit un client : qui travaille, ce qui est proposé, quand passer et comment demander un devis.\n\nDans l’espace de modification, l’artisan change lui-même ces textes, ses photos, ses travaux et ses horaires, depuis son téléphone.",
+    "boutique_photo_1": "",
+    "boutique_photo_2": "",
+    "produits_titre": "Ce que fait l’atelier",
+    "produits_intro": "La liste se met à jour depuis l’espace de modification : un savoir-faire s’ajoute, un autre se retire, en quelques secondes.",
+    "produits_photo": "",
+    "offres_titre": "Travaux courants",
+    "offres_texte": "Trois exemples de demandes que l’atelier reçoit. L’artisan change cette liste quand il veut.",
+    "offres_photo": "",
+    "description_google": "Site d’exemple d’un atelier d’ébénisterie imaginaire, créé par Grégoire Muel pour montrer un site d’artisan avec demande de devis et espace de modification."
+  },
+  "produits": [
+    {
+      "nom": "Restauration de meubles anciens",
+      "origine": "Plusieurs semaines",
+      "famille": "",
+      "detail": "Décapage, réparation, teinte et finition",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Meubles sur mesure",
+      "origine": "Selon le projet",
+      "famille": "",
+      "detail": "Bibliothèques, tables, rangements",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Réparation de chaises et de fauteuils",
+      "origine": "Quelques jours",
+      "famille": "",
+      "detail": "Assemblages, pieds, assises",
+      "prix": "",
+      "photo": ""
+    },
+    {
+      "nom": "Finitions",
+      "origine": "Selon le meuble",
+      "famille": "",
+      "detail": "Cire, huile, vernis",
+      "prix": "",
+      "photo": ""
+    }
+  ],
+  "offres": [
+    {
+      "nom": "Restauration d’un meuble",
+      "description": "Vous décrivez le meuble et son état, l’atelier chiffre le travail et le délai.",
+      "prix": "",
+      "prix_unite": ""
+    },
+    {
+      "nom": "Meuble sur mesure",
+      "description": "Vous donnez les dimensions et l’usage, l’atelier propose un dessin et un devis.",
+      "prix": "",
+      "prix_unite": ""
+    },
+    {
+      "nom": "Remise en état d’une chaise",
+      "description": "Un pied, un dossier ou une assise à reprendre : l’atelier estime le travail.",
+      "prix": "",
+      "prix_unite": ""
+    }
+  ],
+  "commandes": {
+    "actif": true,
+    "titre": "Demander un devis",
+    "intro": "Décrivez le meuble et le travail à faire. Dans ce site d’exemple, rien n’est envoyé.",
+    "cle_web3forms": "",
+    "email": "",
+    "delai_heures": 48,
+    "quantite_min": 1,
+    "quantite_max": 1,
+    "paiement": "Le prix est établi par un devis avant tout travail.",
+    "confirmation": "Merci, votre demande est partie. L’atelier vous rappelle pour préciser le travail et envoyer un devis."
+  },
+  "questions": [
+    {
+      "question": "Ce site est-il celui d’un vrai atelier ?",
+      "reponse": "Non, c’est un site d’exemple créé par Grégoire Muel. Les noms, l’adresse et le téléphone sont imaginaires."
+    },
+    {
+      "question": "Que peut changer l’artisan lui-même ?",
+      "reponse": "Ses horaires, ses fermetures, ses textes, ses photos, ses travaux et ses tarifs, et il reçoit les demandes de devis."
+    },
+    {
+      "question": "Comment demander un devis ?",
+      "reponse": "Le client décrit le meuble et le travail, la demande arrive dans l’espace de l’artisan, qui répond et envoie son devis."
+    }
+  ],
+  "presse": [],
+  "avis": {
+    "note": "",
+    "nombre": "",
+    "date": "",
+    "lien": ""
+  },
+  "mentions": {
+    "raison_sociale": "",
+    "siret": "",
+    "directeur_publication": "",
+    "email_contact": ""
+  },
+  "credits_photos": "",
+  "reglages": {
+    "geo": [],
+    "url": ""
+  }
+}

@@ -4,7 +4,7 @@
 // Usage : node outils/apercu.mjs [fichier de contenu]   (par défaut : contenu-initial.json)
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { POLICES } from '../public/assets/polices.js';
+import { TOUS_FICHIERS_POLICES } from '../public/assets/polices.js';
 import { verifier } from './verifier.mjs';
 
 const ici = (f) => new URL('../' + f, import.meta.url);
@@ -27,7 +27,7 @@ parcourir(C);
 const css = lire('public/assets/site.css');
 const js = lire('public/assets/site.js');
 const polices = {};
-POLICES.agence.fichiers.forEach(([, , f]) => { polices[f] = 'data:font/woff2;base64,' + readFileSync(ici('public/fonts/' + f)).toString('base64'); });
+TOUS_FICHIERS_POLICES.forEach((f) => { polices[f] = 'data:font/woff2;base64,' + readFileSync(ici('public/fonts/' + f)).toString('base64'); });
 
 const surScript = (t) => t.replace(/<\/script/gi, '<\\/script');
 const json = (o) => JSON.stringify(o).replace(/</g, '\\u003c');

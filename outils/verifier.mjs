@@ -30,7 +30,7 @@ const ELEMENTS = {
   references: ['nom', 'logo'],
 };
 /* Clés facultatives (ajoutées au moteur après Opéria : un contenu sans elles reste valide) */
-const FACULTATIVES = { '': ['libelles'], accueil: ['essai_titre', 'essai_texte'], mentions: ['tva'], metiers: ['prix'], realisations: ['lien', 'lien_texte'] };
+const FACULTATIVES = { '': ['libelles', 'abonnements'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte'], mentions: ['tva'], metiers: ['prix'], realisations: ['lien', 'lien_texte'] };
 const INTERDITS = [
   [/\bbienvenue\b/i, 'Bienvenue'], [/\bdécouvr(ez|ir)\b/i, 'Découvrez'], [/n['’]hésitez pas/i, 'N’hésitez pas'], [/au c(œ|oe)ur d/i, 'au cœur de'],
   [/\bvéritable/i, 'véritable'], [/\bincontournable/i, 'incontournable'], [/\bpassion/i, 'passion'], [/savoir-faire unique/i, 'savoir-faire unique'],
@@ -71,6 +71,25 @@ export function verifier(C) {
     if (!C.libelles || typeof C.libelles !== 'object' || Array.isArray(C.libelles)) E('« libelles » doit être un objet.');
     else Object.entries(C.libelles).forEach(([k, v]) => { if (!(k in LIBELLES)) E(`Libellé inconnu : libelles.${k}`); else if (!estTexte(v)) E(`libelles.${k} doit être un texte.`); });
   }
+  if ('abonnements' in C) {
+    const AB = C.abonnements;
+    if (!AB || typeof AB !== 'object' || Array.isArray(AB)) E('« abonnements » doit être un objet (titre, intro, formules, note).');
+    else {
+      Object.keys(AB).filter((k) => !['titre', 'intro', 'formules', 'note'].includes(k)).forEach((k) => E(`Clé inconnue : abonnements.${k}`));
+      ['titre', 'intro', 'note'].forEach((k) => { if (k in AB && !estTexte(AB[k])) E(`abonnements.${k} doit être un texte.`); });
+      if (!Array.isArray(AB.formules) || !AB.formules.length) E('abonnements.formules doit être une liste d’au moins une formule.');
+      else AB.formules.forEach((f, i) => {
+        if (!f || typeof f !== 'object') { E(`abonnements.formules[${i}] doit être un objet.`); return; }
+        Object.keys(f).filter((k) => !['nom', 'prix', 'periode', 'description', 'points', 'recommande'].includes(k)).forEach((k) => E(`Clé inconnue : abonnements.formules[${i}].${k}`));
+        ['nom', 'prix'].forEach((k) => { if (!estTexte(f[k]) || !String(f[k]).trim()) E(`abonnements.formules[${i}].${k} est vide.`); });
+        ['periode', 'description'].forEach((k) => { if (k in f && !estTexte(f[k])) E(`abonnements.formules[${i}].${k} doit être un texte.`); });
+        if ('points' in f && (!Array.isArray(f.points) || f.points.some((x) => !estTexte(x)))) E(`abonnements.formules[${i}].points doit être une liste de textes.`);
+        if ('recommande' in f && typeof f.recommande !== 'boolean') E(`abonnements.formules[${i}].recommande doit valoir true ou false.`);
+      });
+      if (Array.isArray(AB.formules) && AB.formules.filter((f) => f && f.recommande).length > 1) A('abonnements : plus d’une formule recommandée.');
+    }
+  }
+  if (C.theme && 'gabarit' in C.theme && !['classique', 'studio'].includes(C.theme.gabarit)) E('theme.gabarit doit valoir "classique" ou "studio".');
   (Array.isArray(C.realisations) ? C.realisations : []).forEach((x, i) => { if (x && x.lien && !/^(\/[^\s<>"]*|https:\/\/[^\s<>"]+)$/.test(String(x.lien).trim())) E(`realisations[${i}].lien doit commencer par / ou https://`); });
   if (casse) return { erreurs, alertes, afaire };
   if (C._schema !== SCHEMA) E(`_schema doit valoir "${SCHEMA}".`);

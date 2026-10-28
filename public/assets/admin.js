@@ -289,10 +289,15 @@ function champPhoto(id, def, val, maj) {
 }
 
 /* ---------- Listes (fromages, plateaux, questions, presse) ---------- */
+function listeDe(cle) {
+  const ch = cle.split('.'), dernier = ch.pop();
+  const parent = ch.reduce((o, k) => (o[k] = o[k] || {}), E.C);
+  return (parent[dernier] = parent[dernier] || []);
+}
 function editeurListe(cle, cfg) {
   const boite = el('div', { class: 'liste' });
   const dessiner = (ouvrir) => {
-    const L = E.C[cle] = E.C[cle] || [];
+    const L = listeDe(cle);
     boite.replaceChildren();
     L.forEach((it, i) => {
       const titre = el('b', { text: it[cfg.titre] || cfg.sansTitre });
@@ -550,6 +555,17 @@ function panneaux() {
             champ(E.C, { k: 'contact.confirmation', l: 'Message affiché après l’envoi', t: 'zone' }),
             champ(E.C, { k: 'contact.cle_web3forms', l: 'Clé Web3Forms', ex: 'pour recevoir les demandes par e-mail' }),
             champ(E.C, { k: 'contact.email', l: 'E-mail de secours', ex: 'utilisé si la clé est vide', type: 'email' }))),
+      ],
+    },
+    {
+      id: 'abonnements', titre: 'Abonnement mensuel', page: '/expertises', seulementSi: () => !!(E.C.abonnements && typeof E.C.abonnements === 'object'),
+      resume: () => ((E.C.abonnements || {}).formules || []).map((f) => f.nom).filter(Boolean).join(', '),
+      corps: () => [
+        groupe('Présentation', 'Le bloc s’affiche sur la page des offres', [champ(E.C, { k: 'abonnements.titre', l: 'Titre' }), champ(E.C, { k: 'abonnements.intro', l: 'Texte', t: 'zone', lignes: 4 }), champ(E.C, { k: 'abonnements.note', l: 'Petite note sous les formules', t: 'zone', lignes: 3 })], '/expertises'),
+        groupe('Formules', 'Nom, prix et ce qui est compris', [
+          editeurListe('abonnements.formules', { titre: 'nom', sansTitre: 'Nouvelle formule', sous: (f) => [f.prix, f.periode].filter(Boolean).join(' '), vide: 'Aucune formule.', ajouter: 'Ajouter une formule', nouveau: { nom: '', prix: '', periode: 'par mois', description: '', points: [], recommande: false },
+            champs: [{ k: 'nom', l: 'Nom' }, { k: 'prix', l: 'Prix', ph: 'Ex. : 19 €' }, { k: 'periode', l: 'Période', ph: 'Ex. : par mois' }, { k: 'description', l: 'Phrase de présentation', t: 'zone', lignes: 3 }, { k: 'points', l: 'Ce qui est compris', t: 'lignes' }, { k: 'recommande', l: 'Mettre en avant (Recommandée)', t: 'case' }] }),
+        ], '/expertises'),
       ],
     },
     {

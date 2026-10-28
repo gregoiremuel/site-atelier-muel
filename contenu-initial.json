@@ -17,12 +17,13 @@
     "description_google": "Grégoire Muel crée et refait les sites des commerces, des artisans et des entreprises, à Paris 16e et à distance : maquette gratuite en 48 h, et un espace de modification pour tout changer soi-même."
   },
   "theme": {
-    "fond": "#f5f3ee",
-    "encre": "#121614",
-    "gris": "#545a56",
-    "trait": "#e1ddd4",
-    "marine": "#18231f",
-    "or": "#cfa86a"
+    "fond": "#f2f4f3",
+    "encre": "#12181a",
+    "gris": "#4f5b5a",
+    "trait": "#d5dbd9",
+    "marine": "#12181a",
+    "or": "#ff5a36",
+    "gabarit": "studio"
   },
   "annonce": {
     "afficher": false,
@@ -68,7 +69,7 @@
       "id": "site-vitrine",
       "nom": "Site vitrine",
       "accroche": "Pour un commerce ou un artisan : ce que vous faites, vos horaires, vos tarifs, et un bouton pour vous appeler.",
-      "prix": "À partir de 590 €, puis 29 € par mois",
+      "prix": "À partir de 590 €, abonnement facultatif",
       "texte": "Le site que vos clients consultent avant de passer vous voir. Il se lit d’abord sur téléphone : horaires du jour, itinéraire et appel en un geste.\n\nVous le tenez à jour vous-même, depuis votre téléphone, sans rien installer.",
       "points": [
         "Maquette gratuite à votre nom en 48 h",
@@ -83,7 +84,7 @@
       "id": "boutique-catalogue",
       "nom": "Boutique et catalogue",
       "accroche": "Pour présenter vos pièces ou vos produits : collections, fiches détaillées, panier et demandes de commande.",
-      "prix": "À partir de 1 290 €, puis 29 € par mois",
+      "prix": "À partir de 1 290 €, abonnement facultatif",
       "texte": "Un catalogue à votre image, rangé par collections et par types, avec une fiche pour chaque pièce : photos, prix, matières, options.\n\nVos clients composent un panier et vous envoient une demande de commande ; vous confirmez avec eux. Pas de commission sur vos ventes.",
       "points": [
         "Collections, types et fiches de pièces",
@@ -98,7 +99,7 @@
       "id": "site-entreprise",
       "nom": "Site d’entreprise ou refonte",
       "accroche": "Pour une entreprise de services ou du bâtiment : vos métiers, vos réalisations, votre méthode, et des demandes de projet qualifiées.",
-      "prix": "À partir de 1 900 €, puis 29 € par mois",
+      "prix": "À partir de 1 900 €, abonnement facultatif",
       "texte": "Un site qui inspire confiance à un client qui ne vous connaît pas encore : vos expertises, des réalisations classées par secteur, votre façon de travailler, vos engagements.\n\nSi vous avez déjà un site, je reprends ce qui est bon et je refais le reste.",
       "points": [
         "Pages métiers, réalisations et méthode",
@@ -152,12 +153,12 @@
   ],
   "secteurs": [
     {
-      "id": "commerces",
-      "nom": "Commerces"
+      "id": "artisans",
+      "nom": "Artisans et ateliers"
     },
     {
-      "id": "boutiques",
-      "nom": "Boutiques et créateurs"
+      "id": "commerces",
+      "nom": "Commerces"
     },
     {
       "id": "entreprises",
@@ -193,57 +194,55 @@
       "lien_texte": "Voir le site"
     },
     {
-      "id": "fromagerie-exemple",
-      "nom": "Fromagerie de quartier",
-      "client": "Site d’exemple, d’après une maquette préparée pour une fromagerie du 16e",
-      "secteur": "commerces",
-      "lieu": "Paris 16e",
-      "surface": "Site vitrine et espace boutique",
-      "annee": "2026",
-      "mission": "Maquette",
-      "accroche": "Horaires du jour, fromages du moment, plateaux à commander : tout ce qu’un client cherche avant de passer.",
-      "texte": "Ce site d’exemple reprend la maquette préparée pour une fromagerie du quartier, avec un nom et des coordonnées imaginaires.\n\nLe commerçant change lui-même ses horaires et ses fermetures, la liste des fromages, ses plateaux et ses photos ; les commandes de plateaux arrivent dans son espace.",
-      "interventions": [
-        "Horaires avec l’ouverture du jour",
-        "Liste des produits par famille",
-        "Commande de plateaux avec jour de retrait",
-        "Questions pratiques",
-        "Espace boutique sur téléphone"
-      ],
-      "photos": [
-        "/assets/photos/real-fromagerie.jpg",
-        "/assets/photos/real-fromagerie-2.jpg"
-      ],
-      "a_la_une": true,
-      "visible": true,
-      "lien": "/demos/fromagerie-exemple",
-      "lien_texte": "Essayer la démonstration"
-    },
-    {
-      "id": "joaillerie-exemple",
-      "nom": "Joaillerie et catalogue",
-      "client": "Site d’exemple : maison imaginaire",
-      "secteur": "boutiques",
+      "id": "atelier-exemple",
+      "nom": "Atelier d’ébénisterie",
+      "client": "Site d’exemple : atelier imaginaire",
+      "secteur": "artisans",
       "lieu": "Paris",
-      "surface": "Catalogue, panier et espace de modification",
+      "surface": "Site d’artisan, demande de devis et espace de modification",
       "annee": "2026",
       "mission": "Démonstration",
-      "accroche": "Des collections, une fiche par pièce, un panier et des demandes de commande.",
-      "texte": "Une maison de joaillerie imaginaire, pour montrer un catalogue complet. Chaque collection a sa couleur, chaque pièce sa fiche, avec photos, prix et options.\n\nLe client compose un panier et envoie une demande ; la maison la reçoit dans son espace et confirme.",
+      "accroche": "Un atelier, ses savoir-faire, ses horaires et une demande de devis que le client remplit depuis son téléphone.",
+      "texte": "Un atelier d’ébénisterie imaginaire, pour montrer un site d’artisan : ce que fait l’atelier, quand passer, et comment demander un devis.\n\nL’artisan change lui-même ses textes, ses horaires et ses travaux, et reçoit les demandes de devis dans son espace.",
       "interventions": [
-        "Collections et types de pièces",
-        "Fiches avec galerie et options",
-        "Panier et demande de commande",
-        "Pages entretien, tailles et livraison",
+        "Savoir-faire et travaux courants",
+        "Horaires avec l’ouverture du jour",
+        "Demande de devis en ligne",
         "Espace de modification sur téléphone"
       ],
       "photos": [
-        "/assets/photos/real-joaillerie.jpg",
-        "/assets/photos/real-joaillerie-2.jpg"
+        "/assets/photos/real-atelier.jpg",
+        "/assets/photos/real-atelier-2.jpg"
       ],
       "a_la_une": true,
       "visible": true,
-      "lien": "/demos/joaillerie-exemple",
+      "lien": "/demos/atelier-exemple",
+      "lien_texte": "Essayer la démonstration"
+    },
+    {
+      "id": "commerce-exemple",
+      "nom": "Fleuriste de quartier",
+      "client": "Site d’exemple : commerce imaginaire",
+      "secteur": "commerces",
+      "lieu": "Paris",
+      "surface": "Site de commerce, commande à retirer et espace boutique",
+      "annee": "2026",
+      "mission": "Démonstration",
+      "accroche": "Les fleurs de la semaine, des bouquets à commander et un jour de retrait choisi dans les horaires de la boutique.",
+      "texte": "Une boutique de fleurs imaginaire, pour montrer un site de commerce : horaires du jour, fleurs de saison, bouquets à commander.\n\nLa fleuriste change elle-même ses horaires, la liste des fleurs et ses bouquets, et les commandes arrivent dans son espace.",
+      "interventions": [
+        "Horaires avec l’ouverture du jour",
+        "Fleurs de la semaine par saison",
+        "Commande de bouquets avec jour de retrait",
+        "Espace boutique sur téléphone"
+      ],
+      "photos": [
+        "/assets/photos/real-commerce.jpg",
+        "/assets/photos/real-commerce-2.jpg"
+      ],
+      "a_la_une": true,
+      "visible": true,
+      "lien": "/demos/commerce-exemple",
       "lien_texte": "Essayer la démonstration"
     }
   ],
@@ -347,5 +346,51 @@
     "mentions_immatriculation": "SIRET",
     "type_schema": "ProfessionalService",
     "bandeau_maquette": "Version de travail non publiée : textes et prix à valider."
+  },
+  "abonnements": {
+    "titre": "Un coup de main au mois, seulement si vous le souhaitez",
+    "intro": "Le site est à vous dès sa livraison : vous pouvez le gérer seul depuis l’espace de modification. Si vous préférez ne plus vous en occuper, choisissez une formule mensuelle, sans engagement de durée.",
+    "formules": [
+      {
+        "nom": "Sans abonnement",
+        "prix": "0 €",
+        "periode": "par mois",
+        "description": "Vous gérez votre site vous-même.",
+        "points": [
+          "Espace de modification pour changer textes, horaires, prix et photos",
+          "Aide pour la prise en main à la livraison",
+          "Intervention ponctuelle sur devis"
+        ],
+        "recommande": false
+      },
+      {
+        "nom": "Sérénité",
+        "prix": "19 €",
+        "periode": "par mois",
+        "description": "Vous n’avez plus à penser à la technique.",
+        "points": [
+          "Hébergement et nom de domaine renouvelé",
+          "Sauvegardes régulières du contenu",
+          "Petites modifications à ma charge : jusqu’à 30 minutes par mois",
+          "Réponse sous 2 jours ouvrés"
+        ],
+        "recommande": false
+      },
+      {
+        "nom": "Croissance",
+        "prix": "49 €",
+        "periode": "par mois",
+        "description": "Pour que le site amène des clients, pas seulement des visites.",
+        "points": [
+          "Tout ce que comprend Sérénité",
+          "Jusqu’à 2 heures de modifications par mois",
+          "Mise à jour de votre fiche Google",
+          "Suivi des visites et conseils chaque trimestre",
+          "Nouvelles pages ou nouvelle fonction sur devis"
+        ],
+        "recommande": true
+      }
+    ],
+    "note": "Prix hors options, sans engagement de durée. Les formules s’arrêtent à tout moment ; le site, son contenu et son nom de domaine restent à vous."
   }
 }

@@ -444,6 +444,7 @@ function blocVisites() {
   };
   charger(30);
   return el('div', { class: 'pan-corps', style: 'padding:0' },
+    DEMO ? el('p', { class: 'aide', style: 'font-weight:600', text: 'Démonstration : les chiffres ci-dessous sont des exemples inventés, pas de vraies visites.' }) : null,
     el('p', { class: 'aide', text: 'Le site compte les pages vues sans cookie, sans adresse IP et sans identifier personne. Les chiffres sont un ordre de grandeur : quelques visites très rapprochées peuvent ne pas être comptées.' }),
     el('div', { style: 'display:flex;gap:8px;flex-wrap:wrap' }, [7, 30, 90].map((n) => el('button', { type: 'button', class: 'btn sec petit', text: n + ' jours', onclick: () => charger(n) }))),
     boite);

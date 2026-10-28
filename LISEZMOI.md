@@ -2,22 +2,23 @@
 
 Le site de Grégoire Muel EI pour son activité de création et refonte de sites (commerces, artisans, entreprises). « Atelier Muel » est gardé pour la joaillerie et n'apparaît pas ici ; seul le nom technique du dépôt et du projet Cloudflare (`site-atelier-muel`) le contient. Moteur « agence » de la méthode (`gregoiremuel/kit-sites-boutiques`), hébergé gratuitement chez Cloudflare, avec son page de modification (`/admin`).
 
-- **Accueil** : promesse, trois repères, présentation (« Un site, et la main dessus ») et chiffres, les trois offres avec leur prix de départ, le bloc « Essayez la page de modification » (liens vers les démonstrations), les réalisations, la méthode, l'appel « Une maquette gratuite en 48 h ».
-- **Offres** (`/expertises`) : site vitrine, boutique et catalogue, site d'entreprise ou refonte, avec le détail, **l'abonnement facultatif** (Sans abonnement 0 €, Sérénité 19 €/mois, Croissance 49 €/mois) et la méthode.
+- **Accueil** : promesse « Votre site, et je m’en occupe », trois repères (dont « 590 € une fois, sans abonnement »), présentation (« Je m’en occupe pour vous ») et chiffres, les quatre offres (trois sites et la Visibilité Google) avec leur prix, le bloc « Essayez la page de modification » (liens vers les démonstrations), les réalisations, la méthode, l'appel « Une maquette gratuite en 48 h ».
+- **Offres** (`/expertises`) : site vitrine, boutique et catalogue, site d'entreprise ou refonte, **Visibilité Google**, le tableau « un constructeur en ligne, ou moi ? » (coût sur 3 ans, relevé du 28/10/2026), **l'abonnement facultatif** (Sans abonnement 0 €, Sérénité 19 €/mois, Croissance 49 €/mois avec 1 heure de modifications, Visibilité Google 39 €/mois) avec le coût de la première année, les liens vers les pages par métier et la méthode.
+- **Pages par métier** : `/site-restaurant`, `/site-plombier`, `/site-fleuriste`, `/site-commerce-de-bouche` (chacune avec sa démonstration, ses questions et son prix de départ) et `/visibilite-google` (fiche Google tenue chaque mois, mini-diagnostic gratuit). Bloc `pages_metier` du contenu.
 - **Réalisations** : Opéria (refonte en cours) et quatre démonstrations (atelier d'ébénisterie, fleuriste, plombier, restaurant), chacune avec sa fiche, un bouton vers la démonstration et l'étiquette « Démonstration » sur sa vignette. Les vignettes sont de vraies captures des démonstrations.
-- **Offres** (`/expertises`) : site vitrine, boutique et catalogue, site d'entreprise ou refonte, avec le détail, **l'abonnement facultatif** (Sans abonnement 0 €, Sérénité 19 €/mois, Croissance 49 €/mois) et la méthode.
 - **À propos** (`/agence`) : qui tu es, ta façon de travailler, un résumé de tes garanties.
 - **Engagements** (`/engagements`) : hébergement, données personnelles (RGPD), sauvegardes, délai de réponse, ce qui se passe si le client arrête l'abonnement, ton accès à ses données. La page n'existe que s'il y a au moins un bloc (rubrique « Engagements » de la page de modification).
 - **Contact** : formulaire « Votre demande » (créer, refaire, boutique, entretien, autre). Les demandes arrivent dans la page de modification, avec un statut.
 - **Démonstrations** : `public/demos/atelier-exemple.html` (Atelier du Merrain, ébéniste), `fleuriste-exemple.html` (Le Pétale Sauvage), `plombier-exemple.html` (Plomberie Delorme : téléphone cliquable, « Dépannage ou devis » en haut) et `restaurant-exemple.html` (La Cuillère Haute : carte, réservation, horaires). Quatre sites imaginaires, chacun avec sa propre mise en page (gabarits `atelier`, `marche`, `depannage` et `carte` du moteur vitrine du kit), son jeu de polices et sa palette. Le visiteur peut les modifier lui-même (rien n'est publié, tout reste dans son navigateur). Bandeau « Démonstration » en haut, photos libres d'Unsplash étiquetées « Photo d'illustration » et créditées, aucun prix de carte (le restaurateur les saisit). Non indexées par Google. Pas de démonstration de joaillerie : ce métier est réservé à Atelier Muel.
 - **Visuels** : de vraies captures d'écran des démonstrations (sans cadre de téléphone ni d'ordinateur), fabriquées par `npm run vignettes`. Aucune photo de banque d'images ne sert de visuel du site lui-même ; celles des démonstrations sont des photos d'illustration, jamais présentées comme un vrai client.
+- **Mesure des visites et sauvegarde** : le site compte les pages vues par jour sans cookie ni adresse IP (panneau « Visites du site »), et garde chaque nuit une copie du contenu pendant 7 nuits ; mise en route : `docs/MISE-EN-LIGNE.md`.
 - **Design** : gabarit « studio » du moteur (`theme.gabarit`), différent d'Opéria : papier gris froid, encre presque noire, vermillon, titres en Bricolage Grotesque, texte en DM Sans, accueil en deux colonnes, boutons en pastille, bandes arrondies.
 
 ## À valider par Greg avant d'ouvrir
 
-1. **Prix** : 590 € (vitrine), **1 290 €** (boutique) et **1 900 €** (entreprise) sont des propositions : change-les dans « Expertises et méthode ». 590 € est sous la fourchette des freelances débutants (800 à 2 500 €) : bon pour les premiers clients, à relever ensuite (voir `METHODE.md`, partie 9).
-2. **Abonnement facultatif** (panneau « Abonnement mensuel ») : Sérénité 19 €/mois et Croissance 49 €/mois sont des propositions, avec leurs engagements (« sans engagement de durée », « 30 minutes » et « 2 heures » de modifications par mois, « réponse sous 2 jours ouvrés », mise à jour de la fiche Google, suivi des visites chaque trimestre) : à garder seulement si tu peux les tenir. Le domaine est dit « renouvelé » dans Sérénité : à valider (coût ~10 € par an).
-3. **Opéria** : leur accord pour être cités. Sans accord : décocher « Afficher sur le site » dans la réalisation. Avec accord et site ouvert : coller leur adresse dans « Lien à ouvrir ».
+1. **Prix** : 590 € (vitrine, **une fois**), **1 290 €** (boutique) et **1 900 €** (entreprise) sont des propositions : change-les dans « Expertises et méthode », dans « Pages par métier » et dans « Comparaison » (trois endroits). 590 € est sous la fourchette des freelances débutants (800 à 2 500 €) et dans la fourchette acceptable du panel simulé (250 à 700 €) : bon pour les premiers clients, à relever ensuite (voir `METHODE.md`, partie 9 et `docs/validation-2026-10-28/RESULTATS.md`).
+2. **Abonnement facultatif** (panneau « Abonnement mensuel ») : Sérénité 19 €/mois, Croissance 49 €/mois et Visibilité Google 39 €/mois sont des propositions, avec leurs engagements (« sans engagement de durée », « 30 minutes » et « 1 heure » de modifications par mois, une copie complète chaque mois, chiffres des visites chaque mois, rapport d'une page chaque mois pour Visibilité Google, « réponse sous 2 jours ouvrés », suivi des visites chaque trimestre) : à garder seulement si tu peux les tenir. Le domaine est dit « renouvelé » dans Sérénité : à valider (coût ~10 € par an).
+3. **Opéria** : **masqué par défaut** (leur accord n'est pas confirmé). Avec leur accord : cocher « Afficher sur le site » dans la réalisation. Avec accord et site ouvert : coller leur adresse dans « Lien à ouvrir ».
 4. **Téléphone** (07 80 00 81 37, déjà affiché) ; **e-mail pro** à afficher (rubrique « Coordonnées ») et e-mail des mentions légales.
 5. **Zone** : « Paris et alentours, et à distance partout en France ».
 6. **TVA** : « TVA non applicable, article 293 B du CGI » suppose que tu es en franchise de TVA (cas normal d'une micro-entreprise qui n'a pas choisi la TVA).
@@ -28,6 +29,12 @@ Le site de Grégoire Muel EI pour son activité de création et refonte de sites
 11. **Page Engagements** : ce sont des propositions à valider, à garder seulement si tu peux les tenir. À vérifier : qui détient le compte Cloudflare du client (ton compte ou le sien) et donc ce que devient le site si l'abonnement s'arrête ; la phrase sur les serveurs de Cloudflare (hors d'Europe possible) ; la fréquence des sauvegardes (« régulières » avec abonnement, copie à la livraison sans) et la copie des photos ; le délai « 2 jours ouvrés » pour tous ; la fermeture de ton accès à la demande du client ; le rôle de responsable du traitement des données (à faire relire par un juriste).
 12. **Photos des démonstrations** : photographes relevés sur les pages Unsplash par une recherche web, à contrôler avant l'ouverture (`exemples/photos/SOURCES.md`). Les photos Unsplash se réutilisent librement, sans obligation de crédit ; les créditer reste la règle de ce site.
 
+13. **Nom commercial** : « Grégoire Muel » est affiché dans les mentions légales ; le registre dit encore « Atelier Muel » : modification à faire sur le Guichet unique avant l'ouverture.
+14. **Comparaison** : les tarifs du constructeur (17 à 30 € par mois) viennent d'un comparatif public (28/10/2026), pas du site officiel : à relire le jour de l'ouverture.
+15. **Franchise de TVA** : à confirmer (la mention de la ligne TVA et des modèles de documents en dépend).
+16. **Pages par métier** : questions et réponses relues par toi (elles disent ce que tu peux tenir) ; pas de démonstration « commerce de bouche » (la démonstration fleuriste sert d'exemple de produits frais).
+17. **Pas de clients réels pour l'instant** : les démonstrations sont dites imaginaires sur le site ; c'est le principal frein relevé par le panel simulé (`docs/validation-2026-10-28/RESULTATS.md`).
+
 ## Mettre en ligne depuis un téléphone (GitHub + Cloudflare)
 
 Comme pour Opéria, avec le dépôt `site-atelier-muel` :
@@ -37,6 +44,8 @@ Comme pour Opéria, avec le dépôt `site-atelier-muel` :
 3. Nom du projet : **site-atelier-muel** (exactement). « Save and Deploy ».
 4. « Settings », « Variables and Secrets » : ajouter deux **Secrets** (pas des variables) `ADMIN_HASH` et `SESSION_SECRET`, valeurs données par Claude ou par `npm run mot-de-passe`. Relancer un déploiement.
 5. Adresse : `site-atelier-muel.<ton-compte>.workers.dev`, page de modification à la même adresse suivie de `/admin`.
+
+Pas à pas complet, étape par étape : `docs/MISE-EN-LIGNE.md`.
 
 Tant que `MAQUETTE` vaut « oui » dans `wrangler.jsonc` : bandeau « version de travail », non indexé, formulaire en démonstration. Une fois les points ci-dessus validés : demander à Claude de passer MAQUETTE à « non » (le site devient public et les demandes arrivent vraiment), puis brancher Web3Forms pour recevoir chaque demande par e-mail.
 

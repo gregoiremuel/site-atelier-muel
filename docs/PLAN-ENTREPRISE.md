@@ -4,6 +4,32 @@ Version du 28 octobre 2026. Préparé par Claude à partir de ton guide de déma
 
 ---
 
+## Mise à jour du 28 octobre 2026 (fin de session de travail)
+
+Ce qui a changé depuis la première version de ce plan. Le détail des chiffres est dans `docs/CHIFFRES.md`, les modèles dans `docs/modeles/`, la mise en ligne dans `docs/MISE-EN-LIGNE.md`, la validation dans `docs/validation-2026-10-28/RESULTATS.md`.
+
+**Décisions prises par défaut (tu m'as dit « défaut pour tous » si c'étaient les meilleurs choix) :**
+1. **Nom commercial de l'activité web : « Grégoire Muel »**, « Atelier Muel » libéré pour la joaillerie. À modifier sur le Guichet unique ; dépôt de la marque en classe 14 (190 €) **non décidé** (dépense à toi).
+2. **Domaines** : `gregoiremuel.fr` et `ateliermuel.fr`, e-mail `contact@gregoiremuel.fr` (à acheter par toi).
+3. **Prix** : site vitrine **590 € une fois** (inchangé), boutique 1 290 €, entreprise 1 900 €, Sérénité 19 €, **Croissance 49 € mais allégée à 1 heure de modifications** (la fiche Google en sort), **Visibilité Google 39 € par mois** (nouvelle offre, sans engagement). Croissance passe d'environ 18 € net de l'heure à environ 36 € net pour une heure (29 € avec un quart d'heure de suivi).
+4. **Métiers visés** : restaurants, artisans du bâtiment (plombiers), fleuristes, commerces de bouche ; quartier Paris 16e (Auteuil), Boulogne, Paris 15e.
+5. **Clients pilotes** : aucun nom connu. Aucun client n'est cité sur le site.
+6. **Opéria** : masqué sur le site tant que leur accord n'est pas confirmé.
+7. **Situation personnelle** : salarié en parallèle (dans la joaillerie : relire le contrat) ; entre 18 et 25 ans ; pas de second compte bancaire (Crédit Agricole) ; **franchise de TVA non confirmée**.
+
+**Fait dans les dépôts (tests à jour) :** site (« je m'en occupe pour vous », « 590 € une fois », tableau de comparaison avec un constructeur en ligne, offre Visibilité Google, mini-diagnostic gratuit, quatre pages métier et une page Visibilité Google) ; moteur (pages par métier, comparaison, mesure d'audience sans cookie, copie de sauvegarde nocturne, **correction d'un défaut : le premier enregistrement depuis la page de modification supprimait les formules d'abonnement et les libellés**) reporté dans le kit et dans `site-operia` ; fabrique de maquettes en 1 heure (kit, `METHODE.md` 2.2 bis) ; six modèles de documents ; validation par panel simulé.
+
+**Ce que la validation a appris :** sur 20 acheteurs simulés (deux passes), 0 achète ; **le prix n'est pas le frein (590 € est dans la fourchette acceptable de 250 à 700 €), la preuve l'est** : « un vrai commerçant de mon quartier, de mon métier, qui dit que ça lui a amené des clients ». Les trois clients pilotes, avec accord écrit, passent donc avant tout autre chantier. Ce sont des avis simulés, avec des biais connus (voir `RESULTATS.md`).
+
+**Corrections à la première version de ce plan :**
+- **Banque** : le compte dédié est obligatoire quand le chiffre d'affaires dépasse 10 000 € deux années de suite (loi PACTE, article L613-10 du Code de la sécurité sociale d'après les sources ; ne pas confondre avec un compte « pro »). **Mais dès que tu ajouteras la joaillerie (activité commerciale ou artisanale de vente), un compte dédié est obligatoire quel que soit le chiffre d'affaires** d'après une source juridique (à vérifier) : autant en ouvrir un maintenant. Un compte personnel secondaire peut faire l'affaire s'il est utilisé **seulement** pour l'activité ; beaucoup de banques demandent un compte professionnel : à demander à ta banque. Comptes en ligne à comparer (tarifs à vérifier sur leurs sites, relevés de comparatifs du 28/10/2026) : Shine (formule gratuite, souvent recommandée aux micro-entrepreneurs), Finom (formule gratuite), Revolut Business (surtout utile si tu factures à l'étranger), Qonto (payant, dès environ 9 € HT par mois, plutôt pour des sociétés). Aucune grille de Crédit Agricole trouvée : à demander à ton agence.
+- **Acompte et rétractation** : un commerçant de 5 salariés au plus qui signe **en boutique** un site (hors de sa compétence principale) peut être traité comme un consommateur : 14 jours de rétractation et **aucun paiement demandé dans les 7 premiers jours** d'après mes connaissances (articles L221-3 et L221-10 du Code de la consommation, **à faire confirmer**). L'acompte de 30 % de `METHODE.md` est donc à décaler. Les modèles de documents le prévoient.
+- **Stockage en juridiction UE** : la commande `npx wrangler kv namespace create … --jurisdiction=eu` existe (aide du Wrangler 4.149) ; la documentation de Cloudflare se contredit sur la disponibilité (journal du 02/10/2026 : disponibilité générale ; page de référence : bêta privée). **Test à faire sur ton compte** (`docs/MISE-EN-LIGNE.md`, étape 4). Tant que ce n'est pas fait, les engagements du site ne promettent rien sur l'UE.
+- **Concurrent « Wix »** : forfait Light 16,80 € par mois et Essentiel 30 €, TTC, abonnement annuel (La Fabrique du Net, 2026) ; le site officiel n'a pas pu être lu depuis l'espace de Claude : relire avant toute affirmation.
+- **Chatbot** : toujours **pas prioritaire** et pas construit ; si tu l'ajoutes, il faudra mettre à jour la page de confidentialité et l'annexe 3 du contrat de sous-traitance avant de l'activer.
+
+---
+
 ## 0. En une page : ce que je ferais à ta place
 
 **Cette semaine (administratif, rien ne doit glisser)**
@@ -279,3 +305,8 @@ IA et référencement
 - Prix du référencement local : [CCI des Landes](https://www.landes.cci.fr/wp-content/uploads/2025/06/ABONNEMENT-GOOGLE.pdf), [Plateya](https://plateya.fr/blog/detail/prix-du-seo-pour-un-artisan-en-2026-2027-le-vrai-calcul), [seo.com](https://www.seo.com/fr/blog/local-seo-pricing/)
 - API de la fiche Google : [FAQ Google](https://developers.google.com/my-business/content/faq), [upload-post.com](https://www.upload-post.com/google-business-profile-api/), [slashpost.ai](https://slashpost.ai/blogs/google-business-profile/google-business-profile-api-documentation-2026)
 - Visibilité dans les IA (sources commerciales) : [Custplace, GEO local](https://fr.custplace.com/business/geo-comment-dominer-recommandation-locale-ia/), [Custplace, Whitespark 2026](https://fr.custplace.com/business/referencement-local-en-2026/)
+
+Ajouts du 28/10/2026 (fin de session)
+- Wix, tarifs 2026 : [La Fabrique du Net](https://www.lafabriquedunet.fr/logiciels/tendances/prix-site-wix) (le site officiel de Wix n'a pas pu être consulté)
+- KV en juridiction UE : [journal Cloudflare du 02/10/2026](https://developers.cloudflare.com/changelog/post/2026-10-02-kv-jurisdictions-ga/) et [page de référence « data location »](https://developers.cloudflare.com/kv/reference/data-location/) (les deux se contredisent sur la disponibilité) ; aide de `wrangler kv namespace create` (Wrangler 4.149, vérifiée localement)
+- Compte bancaire du micro-entrepreneur : [service-public](https://entreprendre.service-public.gouv.fr/vosdroits/F36255/2?idFicheParent=F35991) (extrait seulement), [La Micro by Flo](https://lamicrobyflo.fr/le-compte-bancaire-en-micro-entreprise/), [Légalstart](https://www.legalstart.fr/fiches-pratiques/autoentrepreneur/compte-bancaire-micro-entreprise/) ; comparatifs de banques pro : [Meilleurtaux](https://banque.meilleurtaux.com/ouvrir-un-compte-bancaire/guide/banques-auto-entrepreneurs.html), [independant.io](https://independant.io/meilleures-banques-auto-entrepreneur/), [Codeur](https://www.codeur.com/comparatif/banque-pro)

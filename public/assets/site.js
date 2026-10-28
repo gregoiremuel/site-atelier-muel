@@ -170,7 +170,18 @@
     if (!d.nom) manque.push('votre nom');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) manque.push('une adresse e-mail valide');
     if (d.telephone.replace(/\D/g, '').length < 6) manque.push('un numéro de téléphone');
-    if (manque.length) { montrer('Il manque ' + manque.join(', ') + '.'); return; }
+    ['nom', 'email', 'telephone'].forEach(function (n) { if (form.elements[n]) form.elements[n].removeAttribute('aria-invalid'); });
+    if (manque.length) {
+      var fautifs = [];
+      if (!d.nom) fautifs.push('nom');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) fautifs.push('email');
+      if (d.telephone.replace(/\D/g, '').length < 6) fautifs.push('telephone');
+      if (!erreur.id) erreur.id = 'demande-erreur';
+      fautifs.forEach(function (n) { var c = form.elements[n]; if (c) { c.setAttribute('aria-invalid', 'true'); c.setAttribute('aria-describedby', erreur.id); } });
+      montrer('Il manque ' + manque.join(', ') + '.');
+      if (form.elements[fautifs[0]]) form.elements[fautifs[0]].focus();
+      return;
+    }
     var Lb = A.lib || {};
     var recap = [['Nom', d.nom], [Lb.societe || 'Société', d.societe], ['E-mail', d.email], ['Téléphone', d.telephone], [Lb.type || 'Type de locaux', d.type], [Lb.surface || 'Surface', d.surface], [Lb.ville || 'Ville du projet', d.ville], [Lb.message || 'Projet', d.message]].filter(function (l) { return l[1]; });
     var sujet = 'Demande de projet' + (d.type ? ' : ' + d.type : '') + (d.societe ? ' (' + d.societe + ')' : '');
@@ -181,7 +192,8 @@
     if (form.elements.botcheck && form.elements.botcheck.checked) { fini('Demande envoyée', A.confirmation); return; }
     if (A.maquette) { fini('Aperçu de la demande', 'Démonstration : rien n’a été envoyé. Une fois le site en ligne, l’agence reçoit exactement ce message.'); return; }
     var envois = [];
-    if (A.api) envois.push(fetch(A.api, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) }).then(function (r) { if (!r.ok) throw new Error('refus'); }));
+    var limite = false;
+    if (A.api) envois.push(fetch(A.api, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) }).then(function (r) { if (r.status === 429) limite = true; if (!r.ok) throw new Error('refus'); }));
     if (A.cle) {
       var fd = new FormData();
       fd.append('access_key', A.cle); fd.append('subject', sujet); fd.append('from_name', 'Site ' + A.nom); fd.append('email', d.email);
@@ -199,7 +211,7 @@
         if (--restants) return;
         bouton.disabled = false; bouton.textContent = 'Envoyer la demande';
         if (ok) fini('Demande envoyée', A.confirmation);
-        else montrer('L’envoi n’a pas abouti. Réessayez dans un instant' + (A.email ? ', ou écrivez à <a href="mailto:' + esc(A.email) + '">' + esc(A.email) + '</a>' : '') + '.');
+        else montrer((limite ? 'Trop de demandes en peu de temps : patientez quelques minutes.' : 'L’envoi n’a pas abouti. Réessayez dans un instant.') + (A.email ? ' Vous pouvez aussi écrire à <a href="mailto:' + esc(A.email) + '">' + esc(A.email) + '</a>' : '') + (A.tel ? (A.email ? ' ou' : ' Vous pouvez aussi') + ' appeler le ' + esc(A.tel) : '') + ((A.email || A.tel) ? '.' : ''));
       });
     });
   };

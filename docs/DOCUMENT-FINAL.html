@@ -109,6 +109,7 @@ footer{color:var(--mut);font-size:.85rem;margin-top:20px}
   <ol id="tocl">
    <li><a href="#lire"><span class="n">0</span>À lire d’abord</a></li>
    <li><a href="#calendrier"><span class="n">1</span>Calendrier daté</a></li>
+   <li><a href="#decisions"><span class="n">B</span>Décisions à prendre</a></li>
    <li><a href="#activite"><span class="n">2</span>Activité et offres</a></li>
    <li><a href="#site"><span class="n">3</span>Le site et l’espace de modification</a></li>
    <li><a href="#faire"><span class="n">4</span>Comment faire</a></li>
@@ -121,6 +122,7 @@ footer{color:var(--mut);font-size:.85rem;margin-top:20px}
    <li><a href="#prospection"><span class="n">11</span>Prospection sur 90 jours</a></li>
    <li><a href="#risques"><span class="n">12</span>Risques et parades</a></li>
    <li><a href="#reste"><span class="n">13</span>Ce qui reste à faire</a></li>
+   <li><a href="#tests"><span class="n">T</span>Tests de bout en bout</a></li>
    <li><a href="#sources"><span class="n">14</span>Sources</a></li>
   </ol>
  </div>
@@ -180,6 +182,42 @@ footer{color:var(--mut);font-size:.85rem;margin-top:20px}
   <li><time>28/11 → 27/12/2026 (jours 31 à 60)</time>Livraison des pilotes, lancement de Visibilité Google, premières pages métier.</li>
   <li><time>28/12/2026 → 26/01/2027 (jours 61 à 90)</time>Bilan chiffré, ajustement des prix, automatisation du mensuel, nouveau test d’acheteurs avec la vraie offre.</li>
  </ul>
+</section>
+
+<section id="decisions">
+ <h2><span class="n">B</span>Décisions administratives à prendre, dans l’ordre</h2>
+ <p class="lead">Ce sont les décisions qui bloquent l’ouverture au public. Rien n’est publié tant que <code>MAQUETTE</code> vaut « oui ». Le site (preuve humaine : portrait, clients pilotes, avis) passe ensuite, après tes premiers clients.</p>
+ <div class="tw"><table>
+  <thead><tr><th>#</th><th>Quoi</th><th>Où</th><th>Quand</th><th>Si tu ne le fais pas</th></tr></thead>
+  <tbody>
+   <tr><td>1</td><td><b>Demande d’ACRE</b></td><td>Espace Urssaf (messagerie) ou cerfa 13584</td><td><b>Avant le 17/12/2026</b> (60 jours après le 18/10/2026) <span class="badge b-av">À VÉRIFIER</span></td><td>Pas d’exonération (25 % sur les cotisations d’après les sources tierces)</td></tr>
+   <tr><td>2</td><td><b>Confirmer la franchise de TVA</b></td><td>impots.gouv.fr, « Gérer mon activité », ou ton SIE</td><td>Avant l’ouverture</td><td>La ligne « TVA non applicable, art. 293 B du CGI » du site et des modèles serait fausse</td></tr>
+   <tr><td>3</td><td><b>Changer le nom commercial</b> « Atelier Muel » en « Grégoire Muel »</td><td>Guichet unique (procedures.inpi.fr), modification de l’EI</td><td>Avant l’ouverture</td><td>Le registre et les mentions légales se contredisent. Sinon, retirer la ligne <code>mentions.nom_commercial</code></td></tr>
+   <tr><td>4</td><td><b>Déclaration initiale de CFE</b> (1447-C-SD)</td><td>Ton espace professionnel impots.gouv.fr ou le service des impôts des entreprises</td><td><b>Avant le 31/12/2026</b> <span class="badge b-av">date exacte à vérifier</span></td><td>Tu risques de perdre l’exonération de la première année</td></tr>
+   <tr><td>5</td><td><b>Acheter le domaine</b> <code>gregoiremuel.fr</code> (et <code>ateliermuel.fr</code>), l’ajouter à Cloudflare</td><td>Un bureau d’enregistrement (OVHcloud, Gandi…) puis Cloudflare</td><td>Avant de passer <code>MAQUETTE</code> à « non »</td><td>L’adresse canonique du site pointerait vers un site inexistant</td></tr>
+   <tr><td>6</td><td><b>Faire relire</b> mentions légales et confidentialité ; décider de l’adresse (publiée ou domiciliation)</td><td>Juriste, ou au minimum relecture attentive de <code>/mentions-legales</code></td><td>Avant l’ouverture</td><td>Brouillons non relus publiés</td></tr>
+   <tr><td>7</td><td><b>Dire « go »</b> à Claude</td><td>Dans la conversation</td><td>Quand 2 à 6 sont faits</td><td>Il passe <code>MAQUETTE</code> à « non », ajoute la route du domaine, lance <code>npm run verifier</code>, <code>npm test</code>, <code>npm run accessibilite</code>, <code>npm run rendu</code>, puis pousse</td></tr>
+  </tbody></table></div>
+ <ul class="chk">
+  <li><input type="checkbox" id="b-1"><label for="b-1"><b>1.</b> ACRE déposée (accusé conservé)</label></li>
+  <li><input type="checkbox" id="b-2"><label for="b-2"><b>2.</b> Franchise de TVA confirmée</label></li>
+  <li><input type="checkbox" id="b-3"><label for="b-3"><b>3.</b> Nom commercial corrigé au Guichet unique</label></li>
+  <li><input type="checkbox" id="b-4"><label for="b-4"><b>4.</b> CFE 1447-C-SD déposée</label></li>
+  <li><input type="checkbox" id="b-5"><label for="b-5"><b>5.</b> Domaine acheté et actif sur Cloudflare</label></li>
+  <li><input type="checkbox" id="b-6"><label for="b-6"><b>6.</b> Mentions légales et confidentialité relues, adresse décidée</label></li>
+  <li><input type="checkbox" id="b-7"><label for="b-7"><b>7.</b> « Go » donné, site ouvert</label></li>
+ </ul>
+ <details><summary>Autres décisions, à prendre en parallèle</summary><div class="in"><ul class="chk">
+  <li><input type="checkbox" id="b-rc"><label for="b-rc">Devis de RC Pro (≈ 110 à 275 € par an)</label></li>
+  <li><input type="checkbox" id="b-bq"><label for="b-bq">Compte bancaire dédié (section Banque)</label></li>
+  <li><input type="checkbox" id="b-fe"><label for="b-fe">Plateforme de réception des factures électroniques</label></li>
+  <li><input type="checkbox" id="b-ur"><label for="b-ur">Espace Urssaf activé, fréquence de déclaration notée</label></li>
+  <li><input type="checkbox" id="b-ct"><label for="b-ct">Contrat de travail relu (exclusivité, activité annexe)</label></li>
+  <li><input type="checkbox" id="b-px"><label for="b-px">Prix validés ; prix de lancement des 3 pilotes (290 à 390 €) ; garantie « 30 jours » ou non</label></li>
+  <li><input type="checkbox" id="b-mq"><label for="b-mq">Marque « Atelier Muel » à l’INPI (190 €) : décider</label></li>
+  <li><input type="checkbox" id="b-op"><label for="b-op">Opéria : accord écrit avant de le citer</label></li>
+ </ul></div></details>
+ <div class="warn"><b>Ne passe pas <code>MAQUETTE</code> à « non » avant l’étape 5.</b> L’adresse du site (<code>https://gregoiremuel.fr</code>) est déjà renseignée dans le contenu : elle servirait d’adresse canonique et de plan du site.</div>
 </section>
 
 <section id="activite">
@@ -668,6 +706,45 @@ footer{color:var(--mut);font-size:.85rem;margin-top:20px}
  <details open><summary>Clients</summary><div class="in"><ul class="chk">
   <li><input type="checkbox" id="r-pil"><label for="r-pil">Trouver les trois clients pilotes (script de visite, contrat, accord écrit de portfolio)</label></li>
  </ul></div></details>
+</section>
+
+<section id="tests">
+ <h2><span class="n">T</span>Tests de bout en bout du 28/10/2026</h2>
+ <p class="lead">Quatre testeurs automatiques (modèles économiques, navigateur réel, site servi en local avec un mot de passe de test) ont parcouru le site de A à Z, bureau (1 366 px) et mobile (390 px). Ce sont des essais en local : rien n’a été vérifié sur Cloudflare. <span class="badge b-src">TESTS AUTOMATIQUES, pas des clients</span></p>
+ <div class="tw"><table>
+  <thead><tr><th>Parcours</th><th>Résultat</th></tr></thead>
+  <tbody>
+   <tr><td><b>Visiteur</b> : 13 pages, 27 liens internes, menu mobile, onglets, accordéons, filtres, formulaire de contact, 404, clavier, <code>robots.txt</code>, <code>sitemap.xml</code></td><td>Tout fonctionne : aucune page en erreur, aucune image cassée, aucun débordement</td></tr>
+   <tr><td><b>Espace de modification</b> : connexion, 14 rubriques, modification et affichage public, demandes de contact, visites, mot de passe, photo, déconnexion</td><td>Tout fonctionne ; un mot « null » affiché sous l’en-tête (corrigé)</td></tr>
+   <tr><td><b>Quatre démonstrations</b> : bandeau, boutons, formulaires, page de modification de démonstration, aucune requête d’écriture envoyée au serveur</td><td>Conformes ; une photo d’en-tête dépassait de l’écran sur la démo plombier en mobile (corrigée)</td></tr>
+   <tr><td><b>Commandes</b> : <code>verifier</code>, <code>apercu</code>, <code>referencement</code>, <code>look-ia</code>, <code>dimensions</code>, <code>accessibilite</code>, <code>npm test</code> (103 vérifications, 8 s), contenus volontairement cassés</td><td>Tout passe ; aucun fichier suivi modifié</td></tr>
+  </tbody></table></div>
+ <h3>Erreurs corrigées</h3>
+ <ul>
+  <li>Mot « null » affiché sous l’en-tête de l’espace de modification.</li>
+  <li>Mot de passe vide : message « Saisissez votre mot de passe » sans appel au serveur.</li>
+  <li>Formulaire de contact : champs en erreur signalés (<code>aria-invalid</code>), focus sur le premier champ fautif ; message « Trop de demandes » en cas de limite (429) ; e-mail et téléphone de secours dans le message d’échec.</li>
+  <li>Boutons « Voir le site » et « Se déconnecter » de l’espace de modification portés à 44 px.</li>
+  <li>Vérificateur : téléphone vide refusé, message d’un JSON invalide en français avec ligne et colonne.</li>
+  <li>Démonstration plombier : photo d’en-tête contenue dans l’écran sur mobile (feuille de style du kit, démonstrations refaites).</li>
+  <li>LISEZMOI : polices du site, tableau des commandes (<code>dev</code>, <code>deploy</code>, <code>rendu</code>, <code>dimensions</code>, <code>mobiles</code>).</li>
+ </ul>
+ <h3>Développement à faire, par ordre d’utilité</h3>
+ <div class="tw"><table>
+  <thead><tr><th>#</th><th>À faire</th><th>Pourquoi</th><th>Effort</th></tr></thead>
+  <tbody>
+   <tr><td>1</td><td><b>Valider les horaires</b> dans l’éditeur (ouverture avant fermeture)</td><td>Une plage inversée est acceptée puis disparaît sans message (constaté sur la démo restaurant)</td><td>Petit</td></tr>
+   <tr><td>2</td><td><b>Décider si l’essai d’une démonstration survit au rechargement</b></td><td>Aujourd’hui il est gardé dans le navigateur (cohérent avec « vos essais restent sur ce téléphone ») ; bouton « Remettre la démonstration à zéro » disponible</td><td>Décision, puis petit</td></tr>
+   <tr><td>3</td><td>Limite d’envois du formulaire (429 après environ 4 envois en quelques minutes) : choisir le seuil</td><td>Protège contre les abus ; un vrai client qui se trompe peut être bloqué</td><td>Petit</td></tr>
+   <tr><td>4</td><td>Aperçu de la page de modification : retirer <code>allow-same-origin</code> du bac à sable ou documenter pourquoi</td><td>Avertissement du navigateur à chaque ouverture</td><td>Petit</td></tr>
+   <tr><td>5</td><td>Vérificateur : alerte si un métier n’a pas de prix ; nommer la réalisation dans les messages ; progression de l’audit d’accessibilité (2 min 30 sans affichage)</td><td>Confort et clarté</td><td>Petit</td></tr>
+   <tr><td>6</td><td>Démonstrations : lien « Mentions légales » qui pointe vers le haut de page</td><td>À renvoyer vers une section ou marquer fictif</td><td>Petit</td></tr>
+   <tr><td>7</td><td>Contrôle qui compare le tableau des commandes de LISEZMOI à <code>package.json</code></td><td>Il aurait détecté les commandes manquantes</td><td>Petit</td></tr>
+   <tr><td>8</td><td>Image de partage (<code>og:image</code>) sur l’accueil et Visibilité Google</td><td>Aperçu des liens partagés sans visuel</td><td>Petit</td></tr>
+   <tr><td>9</td><td>Réservation avec créneaux et capacité (restaurants) ; acompte en ligne ; version anglaise ; chatbot</td><td>Pistes du plan (section 5.1 de <code>PLAN-ENTREPRISE.md</code>), à faire quand un client les paie <span class="badge b-src">ESTIMATION du plan : 2 à 5 jours chacune</span></td><td>Moyen</td></tr>
+   <tr><td>10</td><td>Hébergement en France en option payante</td><td>Seulement si un client le demande (chantier de 2 à 4 jours)</td><td>Moyen</td></tr>
+  </tbody></table></div>
+ <div class="warn"><b>Non confirmé.</b> Un burger mobile qui n’a pas répondu dans un enchaînement de test long n’a pas pu être reproduit (rejoué seul, il marche) : probablement le script de test. Le comportement du site en production (Cloudflare) n’a pas pu être testé.</div>
 </section>
 
 <section id="sources">

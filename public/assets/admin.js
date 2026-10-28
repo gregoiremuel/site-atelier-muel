@@ -29,6 +29,7 @@ const vraiApi = {
     return j;
   },
   async connexion(mdp) {
+    if (!String(mdp || '').trim()) throw new Error('Saisissez votre mot de passe.');
     const r = await fetch('/api/connexion', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ motdepasse: mdp }) });
     const j = await r.json().catch(() => ({}));
     if (!j.ok) throw new Error(j.erreur || 'Connexion impossible.');
@@ -842,7 +843,7 @@ function ecranPrincipal() {
       el('a', { class: 'btn', href: DEMO ? '#' : '/', target: DEMO ? null : '_blank', rel: 'noopener', text: 'Voir le site', onclick: DEMO ? (e) => { e.preventDefault(); plein.hidden = false; rendreApercu(); } : null }),
       el('button', { type: 'button', class: 'btn', text: 'Se déconnecter', onclick: async () => { if (modifie() && !confirm2()) return; await api.deconnexion(); ecranConnexion(); } }))),
     DEMO ? el('aside', { class: 'bandeau', 'aria-label': 'Information', text: 'Démonstration : vos essais restent sur cet appareil, rien n’est publié.' })
-      : (E.maquette ? el('aside', { class: 'bandeau', 'aria-label': 'Information', text: 'Le site est encore en mode proposition : les demandes ne sont pas envoyées.' }) : null),
+      : (E.maquette ? el('aside', { class: 'bandeau', 'aria-label': 'Information', text: 'Le site est encore en mode proposition : les demandes ne sont pas envoyées.' }) : ''),
     el('main', { class: 'cadre' }, editeur, colonne), barre, plein);
   dessinerEditeur(); majBarre(); rendreApercu();
   api.demandes().then((L) => { E.nouvelles = L.filter((c) => c.statut === 'nouvelle').length; majResumes(); }).catch(() => {});

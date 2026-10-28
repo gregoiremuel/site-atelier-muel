@@ -66,13 +66,18 @@ Photos : 1200 px de large, JPEG qualité 78, sans métadonnées (GPS comprises),
 
 | Commande | Ce qu'elle fait |
 |---|---|
-| `npm run verifier` | Contrôle le contenu et liste ce qui reste à faire. |
+| `npm run dev` | Lance le site en local (wrangler). |
+| `npm run deploy` | Lance `verifier` puis déploie (wrangler). |
+| `npm run verifier` | Contrôle le contenu (erreurs bloquantes) et signale quelques points à faire avant l'ouverture (la liste complète est dans « À valider par Greg »). |
 | `npm test` | Lance le vrai serveur sur l'ordinateur et le teste de bout en bout. |
 | `npm run apercu` | Fabrique `demonstration.html` (le site et son page de modification, en un fichier). |
 | `npm run referencement` | Contrôle le référencement de chaque page (titres, descriptions, canonique, données structurées, liens). |
 | `npm run look-ia` | Repère ce qui donne une allure « faite par IA » (textes, couleurs, formes, longueur). |
 | `npm run mot-de-passe` | Crée le mot de passe de départ de la page de modification et son empreinte (Secret `ADMIN_HASH`). |
-| `npm run accessibilite` | Audit d'accessibilité : axe-core (WCAG 2.2 AA) sur chaque page, en bureau, mobile et « moins d'animations », puis parcours au clavier (demande Playwright). |
+| `npm run accessibilite` | Audit d'accessibilité : axe-core (WCAG 2.2 AA) sur chaque page, en bureau, mobile et « moins d'animations », puis parcours au clavier (demande Playwright ; environ 2 min 30, sans affichage pendant le calcul). |
+| `npm run rendu` | Contrôle du rendu réel selon `docs/REGLES-DESIGN.md` (serveur local lancé, adresse en argument) : taille du texte, titres, débordement mobile, contenu visible, `alt`. |
+| `npm run dimensions` | Écrit dans `public/assets/rendu.js` la table des dimensions des images (python3 et Pillow requis) ; à relancer après l'ajout d'une photo. |
+| `npm run mobiles` | Refait les captures « téléphone » des démonstrations (`mobile-*.jpg`, Playwright). |
 | `npm run demos` | Refait les quatre démonstrations avec le moteur vitrine du kit. |
 | `npm run vignettes` | Refait les vignettes et visuels à partir des démonstrations (et d'Opéria si `../site-operia` est là). |
 
@@ -84,7 +89,7 @@ Photos : 1200 px de large, JPEG qualité 78, sans métadonnées (GPS comprises),
 | `exemples/` | Contenus des quatre démonstrations (atelier, fleuriste, plombier, restaurant), photos dans `exemples/photos/` |
 | `public/demos/` | Les quatre démonstrations à essayer |
 | `public/assets/photos/` | Visuels : captures des démonstrations |
-| `public/fonts/` | Polices (Bricolage Grotesque, DM Sans pour ce site ; Playfair et Manrope pour le gabarit classique) |
+| `public/fonts/` | Polices (Besley et Schibsted Grotesk pour ce site, gabarit « édition » ; Bricolage Grotesque et DM Sans pour « studio » ; Playfair et Manrope pour « classique ») |
 | `public/assets/gregoire-muel-monogramme.svg` | Icône d'onglet (GM) |
 | `src/worker.js`, `public/assets/*`, `outils/` | Le moteur agence (voir le kit) |
 

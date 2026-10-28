@@ -955,7 +955,7 @@ ${suite.map(partie).join('\n')}
       </ul></div>
     </div>
     <div class="legal">
-      <a href="${lienMentions}">Mentions légales</a>
+      ${lienMentions === '#' ? '<span>Mentions légales : démonstration, entreprise imaginaire</span>' : `<a href="${lienMentions}">Mentions légales</a>`}
       ${o.lienAdmin ? `<a href="${o.lienAdmin}">Page de modification</a>` : ''}
       <span>© ${new Date().getFullYear()} ${esc(nom)}</span>
       ${C.credits_photos ? `<span>${esc(C.credits_photos)}</span>` : ''}

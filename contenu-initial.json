@@ -388,7 +388,8 @@
   },
   "credits_photos": "Vignettes : captures d’écran des démonstrations. Photos d’illustration des démonstrations (Unsplash) : Sander Hallaste, Bailey Alexander, Craft Kitties, HENG YIN, Minh Đức (atelier) ; Vika Fleysher, Oxana Melis, Viktoriia Yatsentiuk, Roman Kraft (fleuriste) ; Timur Shakerzianov (plombier) ; Glenov Brankovic, Antonio Araujo (restaurant). Photos d’illustration du site (Unsplash) : le poste de travail (Christin Hume) et la rue parisienne (Shalev Cohen) ne montrent ni l’auteur ni un client. Les démonstrations ne montrent pas de vrais clients.",
   "reglages": {
-    "url": "https://gregoiremuel.fr"
+    "url": "https://gregoiremuel.fr",
+    "image_partage": "/assets/photos/partage.jpg"
   },
   "libelles": {
     "nav_expertises": "Offres",

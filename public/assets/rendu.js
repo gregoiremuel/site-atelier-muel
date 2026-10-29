@@ -353,6 +353,12 @@ const garHero = (C) => (Array.isArray((C.accueil || {}).reperes) ? C.accueil.rep
 
 /* Composition de l'accueil sans grande photo : un ordinateur et deux téléphones montrant des sites d'exemple (captures des démonstrations), sur un fond uni. Aucun faux client. */
 const compoHero = (essais) => {
+  /* Quatre démonstrations ou plus avec leur capture « téléphone » : une planche de téléphones, chacun ouvre sa démonstration (gabarit édition) */
+  const tels4 = essais.filter((x) => x.lien && (x.photos || [])[2]).slice(0, 4);
+  if (tels4.length >= 3) return `<div class="hero-compo hero-planche">
+      <ul class="planche" aria-label="Démonstrations à essayer (entreprises imaginaires)">${tels4.map((x, i) => `<li><a class="planche-tel" href="${esc(x.lien)}"${/^https?:/.test(x.lien) ? ' target="_blank" rel="noopener"' : ''}><span class="planche-ecran">${img(x.photos[2], 500, 'compo-img', i < 2, '', '(max-width: 600px) 42vw, 130px')}</span><span class="planche-nom">${esc(String(x.nom).split(',')[0])}</span></a></li>`).join('')}</ul>
+      <p class="planche-note">Démonstrations : entreprises imaginaires. Touchez un téléphone pour l’essayer.</p>
+    </div>`;
   const bureau = (essais[0] || {}).photos && essais[0].photos[0], tels = essais.slice(1, 3).map((x) => (x.photos || [])[2] || x.apercu).filter(Boolean);
   if (!bureau || tels.length < 2) return '';
   return `<div class="hero-compo" role="group" aria-label="Aperçus de sites d’exemple sur ordinateur et sur téléphone">
@@ -385,6 +391,7 @@ function accueil(C, D) {
         <a class="btn btn-or" href="/contact">${esc(libelle(C, 'bouton_principal'))}</a>
         ${D.realisations.length ? `<a class="btn btn-ligne-clair" href="/realisations">${esc(libelle(C, 'bouton_realisations'))}</a>` : ''}
       </div>
+      ${A.hero_tel && G.telephone ? `<p class="hero-tel">${esc(A.hero_tel)} <a href="tel:${esc(String(G.telephone).replace(/[^\d+]/g, ''))}">${esc(G.telephone)}</a></p>` : ''}
       ${garHero(C).length ? `<ul class="hero-gar">${garHero(C).map((g) => { const [v, ...r] = g.split('|'); return r.length ? `<li><b>${esc(v.trim())}</b><span>${esc(r.join('|').trim())}</span></li>` : `<li>${esc(g)}</li>`; }).join('')}</ul>` : ''}
     </div>
   </section>
@@ -410,11 +417,22 @@ function accueil(C, D) {
       </ol>
     </div>
   </section>` : ''}
+  ${A.personne_titre && A.personne_texte ? `
+  <section class="sec personne" aria-labelledby="t-personne">
+    <div class="wrap personne-grille">
+      ${src((C.presentation || {}).photo, 600) ? `<figure class="personne-fig">${img(C.presentation.photo, 600, 'personne-img', false, (C.equipe || [])[0] && C.equipe[0].nom ? 'Portrait de ' + C.equipe[0].nom : '', '(max-width: 700px) 40vw, 260px')}</figure>` : ''}
+      <div class="personne-txt">
+        <h2 id="t-personne">${esc(A.personne_titre)}</h2>
+        <div class="prose">${texteRiche(A.personne_texte)}</div>
+        <p class="personne-actions">${G.telephone ? `<a class="btn" href="tel:${esc(String(G.telephone).replace(/[^\d+]/g, ''))}">${ico.tel || ''}Appeler ${esc(G.telephone)}</a>` : ''}<a class="lien" href="/agence">${esc(libelle(C, 'intro_lien'))} ${ico.fleche}</a></p>
+      </div>
+    </div>
+  </section>` : ''}
   ${essais.length && A.essai_titre ? `
   <section class="sec essai" aria-labelledby="t-essai">
     <div class="wrap essai-grille">
       <div class="essai-txt">${titreSection(libelle(C, 'essai_sur'), A.essai_titre, 't-essai')}${A.essai_texte ? `<div class="prose">${texteRiche(A.essai_texte)}</div>` : ''}</div>
-      <ul class="essai-liens">${essais.map((x) => `<li><a href="${esc(x.lien)}"${/^https?:/.test(x.lien) ? ' target="_blank" rel="noopener"' : ''} data-ouvrir>${x.apercu || x.photos[0] ? `<span class="essai-vue">${img(x.apercu || x.photos[0], 900, 'essai-img', false, '', '(max-width: 700px) 70vw, 25vw')}</span>` : ''}<span class="essai-corps"><b>${esc(x.nom)}</b>${x.accroche ? `<small>${esc(x.accroche)}</small>` : ''}</span><span class="essai-act">${esc(x.lien_texte || 'Ouvrir')} ${ico.fleche}</span></a></li>`).join('')}</ul>
+      <ul class="essai-liens">${essais.map((x) => `<li><a href="${esc(x.lien)}"${/^https?:/.test(x.lien) ? ' target="_blank" rel="noopener"' : ''} data-ouvrir>${!A.essai_points && (x.apercu || x.photos[0]) ? `<span class="essai-vue">${img(x.apercu || x.photos[0], 900, 'essai-img', false, '', '(max-width: 700px) 70vw, 25vw')}</span>` : ''}<span class="essai-corps"><b>${esc(x.nom)}</b>${x.accroche ? `<small>${esc(x.accroche)}</small>` : ''}${A.essai_points && (x.interventions || []).length ? `<span class="essai-points"><span class="essai-points-t">À essayer</span>${x.interventions.slice(0, 3).map((t) => `<span>${esc(t)}</span>`).join('')}</span>` : ''}</span><span class="essai-act">${esc(x.lien_texte || 'Ouvrir')} ${ico.fleche}</span></a></li>`).join('')}</ul>
     </div>
   </section>` : ''}
   ${choix.length ? `
@@ -689,8 +707,9 @@ function pageContact(C, D) {
         <div class="champs">
           <div class="champ"><label for="d-nom">Nom et prénom</label><input class="saisie" id="d-nom" name="nom" autocomplete="name" required></div>
           ${L('form_societe') ? `<div class="champ"><label for="d-soc">${esc(L('form_societe'))} <span class="fac">(facultatif)</span></label><input class="saisie" id="d-soc" name="societe" autocomplete="organization"></div>` : ''}
-          <div class="champ"><label for="d-mail">E-mail</label><input class="saisie" id="d-mail" name="email" type="email" autocomplete="email" required></div>
-          <div class="champ"><label for="d-tel">Téléphone</label><input class="saisie" id="d-tel" name="telephone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+          <p class="champ large champ-note" id="d-joindre">Pour vous répondre : un e-mail <b>ou</b> un téléphone suffit.</p>
+          <div class="champ"><label for="d-tel">Téléphone</label><input class="saisie" id="d-tel" name="telephone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="d-joindre"></div>
+          <div class="champ"><label for="d-mail">E-mail</label><input class="saisie" id="d-mail" name="email" type="email" autocomplete="email" aria-describedby="d-joindre"></div>
           ${types.length && L('form_type') ? `<div class="champ"><label for="d-type">${esc(L('form_type'))} <span class="fac">(facultatif)</span></label><select class="saisie" id="d-type" name="type"><option value="">Choisir</option>${types.map((t) => `<option>${esc(t)}</option>`).join('')}</select></div>` : ''}
           ${L('form_surface') ? `<div class="champ"><label for="d-surf">${esc(L('form_surface'))} <span class="fac">(facultatif)</span></label><input class="saisie" id="d-surf" name="surface" placeholder="${esc(L('form_surface_exemple'))}"></div>` : ''}
           ${L('form_ville') ? `<div class="champ large"><label for="d-ville">${esc(L('form_ville'))} <span class="fac">(facultatif)</span></label><input class="saisie" id="d-ville" name="ville" autocomplete="address-level2"></div>` : ''}

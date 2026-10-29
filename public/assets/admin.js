@@ -574,6 +574,10 @@ function panneaux() {
           champ(E.C, { k: 'accueil.photo', l: 'Grande photo', t: 'photo' }), champ(E.C, { k: 'accueil.video', l: 'Vidéo de fond', ex: 'MP4 sans son, 10 à 20 secondes, 20 Mo au plus. La photo reste l’image d’attente.', t: 'video' }), champ(E.C, { k: 'accueil.fond_video', l: 'Vidéo en fond (sinon la photo)', t: 'case' }),
           champ(E.C, { k: 'accueil.sur_titre', l: 'Petite ligne au-dessus du titre' }), champ(E.C, { k: 'accueil.titre', l: 'Grand titre' }), champ(E.C, { k: 'accueil.texte', l: 'Phrase sous le titre', t: 'zone' }),
           champ(E.C, { k: 'accueil.reperes', l: 'Repères sous les boutons', ph: 'Ex. : Garantie décennale SMA BTP', t: 'lignes', lignes: 3 }),
+          champ(E.C, { k: 'accueil.hero_tel', l: 'Phrase avant le téléphone, sous les boutons', ph: 'Ex. : Ou appelez-moi :' }),
+        ], '/'),
+        groupe('Bloc « Qui fait votre site »', 'Votre portrait (photo de la rubrique À propos) et quelques lignes', [
+          champ(E.C, { k: 'accueil.personne_titre', l: 'Titre' }), champ(E.C, { k: 'accueil.personne_texte', l: 'Texte', t: 'zone', lignes: 5 }),
         ], '/'),
         groupe('Présentation', '', [
           champ(E.C, { k: 'accueil.intro_titre', l: 'Titre' }), champ(E.C, { k: 'accueil.intro_texte', l: 'Texte', t: 'zone', lignes: 6 }), champ(E.C, { k: 'accueil.photo_intro', l: 'Photo', t: 'photo' }),
@@ -581,6 +585,7 @@ function panneaux() {
         groupe('Bloc « À essayer »', 'Les réalisations qui ont un lien', [
           el('p', { class: 'aide', text: 'S’affiche sur l’accueil quand un titre est rempli et qu’au moins une réalisation a un lien.' }),
           champ(E.C, { k: 'accueil.essai_titre', l: 'Titre' }), champ(E.C, { k: 'accueil.essai_texte', l: 'Texte', t: 'zone', lignes: 4 }),
+          champ(E.C, { k: 'accueil.essai_points', l: 'Montrer « À essayer » (trois points de chaque réalisation) au lieu de sa vignette', t: 'case' }),
         ], '/'),
         groupe('Chiffres', 'Trois repères sous la présentation', [
           champ(E.C, { k: 'affichage.chiffres', l: 'Afficher les chiffres', t: 'case' }),

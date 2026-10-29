@@ -222,7 +222,9 @@ export default {
         if (!(await limite(env, 'dem:' + ip(req), 10, 600))) return json({ ok: false, erreur: 'Trop de demandes, réessayez dans quelques minutes.' }, 429);
         const corps = await req.json().catch(() => null);
         const t2 = (v, n) => String(v == null ? '' : v).trim().slice(0, n);
-        if (!corps || !t2(corps.nom, 120) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t2(corps.email, 200)) || String(corps.telephone || '').replace(/\D/g, '').length < 6) return json({ ok: false, erreur: 'Demande incomplète.' }, 400);
+        const mail = corps ? t2(corps.email, 200) : '', telChiffres = corps ? String(corps.telephone || '').replace(/\D/g, '') : '';
+        /* Un nom, et un moyen de répondre : e-mail ou téléphone ; celui qui est donné doit être valable */
+        if (!corps || !t2(corps.nom, 120) || (!mail && !telChiffres) || (mail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) || (telChiffres && telChiffres.length < 6)) return json({ ok: false, erreur: 'Demande incomplète.' }, 400);
         const Lb = libellesDemande(Cc);
         const lignes = [[Lb.societe, t2(corps.societe, 160)], ['E-mail', t2(corps.email, 200)], ['Téléphone', t2(corps.telephone, 40)], [Lb.type, t2(corps.type, 80)], [Lb.surface, t2(corps.surface, 60)], [Lb.ville, t2(corps.ville, 120)], [Lb.message, t2(corps.message, 3000)]].filter(([, v]) => v);
         const id = (9999999999999 - Date.now()).toString(36) + '-' + Math.random().toString(36).slice(2, 8);

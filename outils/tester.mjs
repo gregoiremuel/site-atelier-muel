@@ -202,7 +202,9 @@ async function tests() {
   for (let i = 0; i < 20 && !recuN8N.length; i++) await new Promise((ok) => setTimeout(ok, 250));
   { const n = recuN8N[0]; let d = {}; try { d = JSON.parse(n.corps); } catch (e) { /* vide */ } verif(n && n.secret === SECRET_N8N && d.email === client.email && d.id, 'Demande copiée vers n8n avec le secret'); }
   r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson({ ...client, email: 'faux' }) }); verif(r.status === 400, 'Demande sans e-mail valable refusée');
-  r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson({ ...client, telephone: '12' }) }); verif(r.status === 400, 'Demande sans téléphone refusée');
+  r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson({ ...client, telephone: '12' }) }); verif(r.status === 400, 'Demande avec un téléphone incomplet refusée');
+  r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson({ ...client, email: '' }) }); verif(r.status === 200, 'Demande avec le téléphone seul acceptée');
+  r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson({ ...client, email: '', telephone: '' }) }); verif(r.status === 400, 'Demande sans e-mail ni téléphone refusée');
   j = await (await req('/api/demandes')).json();
   const dem = (j.demandes || []).find((c) => c.nom === 'Client Test');
   verif(dem && dem.statut === 'nouvelle' && dem.societe === 'Test SAS' && dem.lignes.some(([k, v]) => k === libellesDemande(C).surface && v === '300 m²'), 'La demande arrive complète dans la page de modification');

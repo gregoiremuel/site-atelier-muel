@@ -760,7 +760,7 @@ function pageConfidentialite(C) {
     <h2>La mesure des visites</h2>
     <p>Le site compte les pages vues, jour par jour : combien de visites, quelles pages, et d’où l’on vient (moteur de recherche, autre site, adresse tapée). Il n’enregistre ni adresse IP, ni identifiant, et ne dépose rien dans votre navigateur : un visiteur ne peut pas être reconnu d’un jour à l’autre. Ces totaux ne servent qu’à savoir ce qui est utile.</p>
     <h2>Les demandes de contact</h2>
-    <p>Quand vous envoyez une demande, les informations du formulaire sont transmises à ${esc(G.nom || 'l’agence')}${K.cle_web3forms ? ', par e-mail via le service Web3Forms' : ''}. Elles servent uniquement à répondre à votre demande et sont conservées 180 jours au plus dans la page de modification du site, sauf si un contrat est conclu.</p>
+    <p>Quand vous envoyez une demande, les informations du formulaire sont transmises à ${esc(G.nom || 'l’agence')}${K.cle_web3forms ? ', par e-mail via le service Web3Forms' : ''}. Elles servent uniquement à répondre à votre demande et sont conservées 180 jours au plus dans la page de modification du site, sauf si un contrat est conclu.</p>${K.traitement ? `\n    <p>${esc(K.traitement)}</p>` : ''}
     <h2>Vos droits</h2>
     <p>Vous pouvez demander l’accès, la correction ou la suppression de vos données${G.email ? ` en écrivant à <a href="mailto:${esc(G.email)}">${esc(G.email)}</a>` : ''}, et saisir la CNIL.</p>
   </div></section>`,

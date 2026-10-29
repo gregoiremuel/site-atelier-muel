@@ -7,6 +7,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { pbkdf2Sync, randomBytes } from 'node:crypto';
+import { createServer } from 'node:http';
 import { verifier } from './verifier.mjs';
 import { routes, libellesDemande, rendrePage } from '../public/assets/rendu.js';
 import { TOUS_FICHIERS_POLICES } from '../public/assets/polices.js';
@@ -17,6 +18,9 @@ const C = JSON.parse(readFileSync(fichier, 'utf8'));
 if (verifier(C).erreurs.length) { console.error('\nLe contenu a des erreurs : lancez d’abord « npm run verifier ».\n'); process.exit(1); }
 
 const PORT = 8799, BASE = `http://127.0.0.1:${PORT}`;
+/* Faux n8n : reçoit la copie des demandes (Secrets N8N_WEBHOOK_URL et N8N_SECRET) */
+const PORT_N8N = 8798, SECRET_N8N = randomBytes(12).toString('hex'), recuN8N = [];
+const fauxN8N = createServer((q, s) => { let b = ''; q.on('data', (d) => (b += d)); q.on('end', () => { recuN8N.push({ secret: q.headers['x-webhook-secret'], corps: b }); s.end('ok'); }); }).listen(PORT_N8N, '127.0.0.1');
 const MDP = 'test-' + randomBytes(6).toString('hex');
 const sel = randomBytes(16);
 const HASH = `pbkdf2$10000$${sel.toString('base64')}$${pbkdf2Sync(MDP, sel, 10000, 32, 'sha256').toString('base64')}`;
@@ -33,11 +37,11 @@ if (process.argv[2]) {
   if (r.status !== 0) { console.error('Impossible de déposer le contenu de test :\n' + r.stderr); process.exit(1); }
 }
 const serveur = spawn(wrangler, ['dev', '-c', configTest, '--test-scheduled', '--port', String(PORT), '--ip', '127.0.0.1', '--persist-to', memoireTest, '--show-interactive-dev-session=false',
-  '--var', 'ADMIN_HASH:' + HASH, '--var', 'SESSION_SECRET:' + randomBytes(24).toString('hex'), '--var', 'MAQUETTE:non'],
+  '--var', 'ADMIN_HASH:' + HASH, '--var', 'SESSION_SECRET:' + randomBytes(24).toString('hex'), '--var', 'MAQUETTE:non', '--var', `N8N_WEBHOOK_URL:http://127.0.0.1:${PORT_N8N}/webhook`, '--var', 'N8N_SECRET:' + SECRET_N8N],
 { cwd: racine, detached: true, stdio: ['ignore', 'pipe', 'pipe'] });
 let journal = '';
 serveur.stdout.on('data', (d) => { journal += d; }); serveur.stderr.on('data', (d) => { journal += d; });
-const arreter = () => { try { process.kill(-serveur.pid, 'SIGTERM'); } catch (e) { /* déjà arrêté */ } try { rmSync(memoireTest, { recursive: true, force: true }); rmSync(configTest, { force: true }); } catch (e) { /* rien */ } };
+const arreter = () => { try { fauxN8N.close(); } catch (e) { /* déjà fermé */ } try { process.kill(-serveur.pid, 'SIGTERM'); } catch (e) { /* déjà arrêté */ } try { rmSync(memoireTest, { recursive: true, force: true }); rmSync(configTest, { force: true }); } catch (e) { /* rien */ } };
 process.on('SIGINT', () => { arreter(); process.exit(130); });
 
 let ok = 0; const echecs = [];
@@ -195,6 +199,8 @@ async function tests() {
   /* Demande de contact d'un visiteur */
   const client = { nom: 'Client Test', societe: 'Test SAS', email: 'client@exemple.fr', telephone: '06 12 34 56 78', type: 'Bureaux', surface: '300 m²', ville: 'Nantes', message: 'Essai' };
   r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson(client) }); verif(r.status === 200, 'Un visiteur envoie une demande');
+  for (let i = 0; i < 20 && !recuN8N.length; i++) await new Promise((ok) => setTimeout(ok, 250));
+  { const n = recuN8N[0]; let d = {}; try { d = JSON.parse(n.corps); } catch (e) { /* vide */ } verif(n && n.secret === SECRET_N8N && d.email === client.email && d.id, 'Demande copiée vers n8n avec le secret'); }
   r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson({ ...client, email: 'faux' }) }); verif(r.status === 400, 'Demande sans e-mail valable refusée');
   r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson({ ...client, telephone: '12' }) }); verif(r.status === 400, 'Demande sans téléphone refusée');
   j = await (await req('/api/demandes')).json();

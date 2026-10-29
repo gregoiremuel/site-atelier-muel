@@ -30,7 +30,7 @@ const ELEMENTS = {
   references: ['nom', 'logo'],
 };
 /* Clés facultatives (ajoutées au moteur après Opéria : un contenu sans elles reste valide) */
-const FACULTATIVES = { '': ['libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier'], reglages: ['image_partage'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte', 'cartes'], mentions: ['tva', 'nom_commercial'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette', 'apercu'] };
+const FACULTATIVES = { '': ['libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier'], reglages: ['image_partage'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte', 'cartes'], mentions: ['tva', 'nom_commercial'], contact: ['traitement'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette', 'apercu'] };
 const INTERDITS = [
   [/\bbienvenue\b/i, 'Bienvenue'], [/\bdécouvr(ez|ir)\b/i, 'Découvrez'], [/n['’]hésitez pas/i, 'N’hésitez pas'], [/au c(œ|oe)ur d/i, 'au cœur de'],
   [/\bvéritable/i, 'véritable'], [/\bincontournable/i, 'incontournable'], [/\bpassion/i, 'passion'], [/savoir-faire unique/i, 'savoir-faire unique'],

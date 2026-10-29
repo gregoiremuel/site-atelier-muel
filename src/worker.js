@@ -228,6 +228,11 @@ export default {
         const id = (9999999999999 - Date.now()).toString(36) + '-' + Math.random().toString(36).slice(2, 8);
         const dem = { id, recue: new Date().toISOString(), statut: 'nouvelle', nom: t2(corps.nom, 120), societe: t2(corps.societe, 160), telephone: t2(corps.telephone, 40), email: t2(corps.email, 200), lignes };
         await env.CONTENU.put('demande:' + id, JSON.stringify(dem), { expirationTtl: 180 * 24 * 3600 });
+        /* Facultatif : copie de la demande vers un outil d'automatisation (n8n), si les deux Secrets existent. Un échec ne gêne pas le visiteur. */
+        if (env.N8N_WEBHOOK_URL && env.N8N_SECRET && /^https?:\/\//.test(env.N8N_WEBHOOK_URL)) {
+          const envoi = { ...dem, type: t2(corps.type, 80), ville: t2(corps.ville, 120), message: t2(corps.message, 3000), site: url.origin };
+          ctx.waitUntil(fetch(env.N8N_WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Webhook-Secret': env.N8N_SECRET }, body: JSON.stringify(envoi), signal: AbortSignal.timeout(10000) }).catch(() => {}));
+        }
         return json({ ok: true });
       }
 

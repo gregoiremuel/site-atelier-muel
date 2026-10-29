@@ -634,7 +634,8 @@ function panneaux() {
             champ(E.C, { k: 'contact.types', l: 'Types de locaux proposés', t: 'lignes' }),
             champ(E.C, { k: 'contact.confirmation', l: 'Message affiché après l’envoi', t: 'zone' }),
             champ(E.C, { k: 'contact.cle_web3forms', l: 'Clé Web3Forms', ex: 'pour recevoir les demandes par e-mail' }),
-            champ(E.C, { k: 'contact.email', l: 'E-mail de secours', ex: 'utilisé si la clé est vide', type: 'email' }))),
+            champ(E.C, { k: 'contact.email', l: 'E-mail de secours', ex: 'utilisé si la clé est vide', type: 'email' }),
+            champ(E.C, { k: 'contact.traitement', l: 'Traitement automatique des demandes (confidentialité)', t: 'zone', ex: 'à remplir avant d’activer un outil comme n8n ; texte ajouté à la page Confidentialité' }))),
       ],
     },
     {

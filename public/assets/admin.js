@@ -830,6 +830,35 @@ async function annuler() {
   majBarre();
 }
 
+/* ---------- Publier une actualité en une minute (en tête de l'espace, pensé pour le téléphone) ---------- */
+const jourParis = () => new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' });
+function blocPublier() {
+  const b = E.rapide || (E.rapide = { titre: '', texte: '', photos: [] });
+  const dates = (E.C.actualites || []).filter((x) => x.visible !== false && x.date).map((x) => x.date).sort();
+  const jours = dates.length ? Math.floor((Date.parse(jourParis()) - Date.parse(dates[dates.length - 1])) / 864e5) : null;
+  const rappel = jours === null ? 'Aucune actualité pour l’instant : la première fait apparaître la rubrique sur le site.'
+    : jours === 0 ? 'Dernière actualité : aujourd’hui. Bravo.' : `Dernière actualité il y a ${jours} jour${jours > 1 ? 's' : ''}.${jours > 14 ? ' Une nouvelle aide Google à voir que l’entreprise est active.' : ''}`;
+  const erreur = el('p', { class: 'ex', role: 'alert', hidden: true });
+  const publier = el('button', { type: 'button', class: 'btn', text: 'Publier maintenant', onclick: async () => {
+    const titre = b.titre.trim(), texte = b.texte.trim();
+    if (!titre || !texte) { erreur.textContent = 'Il faut un titre et quelques lignes de texte.'; erreur.hidden = false; return; }
+    if (!Array.isArray(E.C.actualites)) E.C.actualites = [];
+    E.C.actualites.unshift({ id: '', titre, date: jourParis(), texte, photos: b.photos.slice(), realisation: '', visible: true });
+    assurerIds(E.C);
+    E.rapide = null;
+    await enregistrer();
+    dessinerEditeur(); rendreApercu();
+  } });
+  return el('section', { class: 'rapide', 'aria-labelledby': 't-rapide' },
+    el('h2', { id: 't-rapide', text: 'Publier une actualité' }),
+    el('p', { class: 'aide', text: 'Un chantier qui démarre, une livraison, un conseil : 2 ou 3 photos et quelques phrases (ce qui a été fait, où, avec quoi). ' + rappel }),
+    champPhotos(b, { k: 'photos', l: 'Photos', max: 6 }),
+    champ(b, { k: 'titre', l: 'Titre', ph: 'Ex. : Démarrage du chantier, bureaux de 300 m² à Rezé' }),
+    champ(b, { k: 'texte', l: 'Texte', t: 'zone', lignes: 4, ph: 'Ce qui a été fait, où, avec quels matériaux, ce que le client voulait…' }),
+    erreur,
+    el('div', { class: 'actions' }, publier, el('span', { class: 'ex', text: 'Elle est datée d’aujourd’hui ; vous pourrez la modifier dans la rubrique « Actualités ».' })));
+}
+
 /* ---------- Écran principal ---------- */
 let editeur;
 function dessinerEditeur() {
@@ -837,6 +866,7 @@ function dessinerEditeur() {
     el('section', { class: 'intro-edit' },
       el('h1', { text: 'Bonjour' }),
       el('p', { class: 'aide', text: 'Touchez une rubrique pour la modifier, puis « Enregistrer » en bas de l’écran. L’aperçu montre le résultat avant d’enregistrer.' })),
+    blocPublier(),
     ...PANNEAUX.map((p) => {
       const d = el('details', { class: 'pan', id: 'pan-' + p.id, open: E.ouverts.has(p.id) },
         el('summary', {}, el('h2', { text: p.titre }), el('span', { class: 'resume', id: 'res-' + p.id, text: p.resume() }), el('span', { class: 'chev', 'aria-hidden': 'true' })));

@@ -183,3 +183,7 @@ details.item>summary span.s{display:block;color:var(--gris);font-size:.9375rem;o
 /* Champ de fichier (vidéo de fond) : jamais plus large que l'écran */
 .champ input[type=file]{max-width:100%}
 .champ{min-width:0}
+/* Publier une actualité en une minute */
+.rapide{background:#fff;border:1px solid var(--trait);border-radius:10px;padding:16px 18px;display:grid;gap:12px;min-width:0}
+.rapide h2{font-size:1.25rem;margin:0}
+.rapide .actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}

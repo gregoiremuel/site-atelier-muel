@@ -80,7 +80,7 @@ async function cookieSession(env) {
 
 /* ---------- Vérification du contenu envoyé par la page de modification ---------- */
 const CLES_OBJETS = ['agence', 'annonce', 'accueil', 'presentation', 'garanties', 'affichage', 'contact', 'mentions'];
-const CLES_LISTES = ['chiffres', 'metiers', 'etapes', 'secteurs', 'realisations', 'actualites', 'equipe', 'references', 'engagements'];
+const CLES_LISTES = ['chiffres', 'metiers', 'etapes', 'secteurs', 'realisations', 'actualites', 'equipe', 'references', 'engagements', 'redirections'];
 /* Clés facultatives : gardées telles qu'elles sont enregistrées quand le contenu envoyé ne les a pas, sinon remplacées (sans elles, un contenu enregistré perdrait ses formules d'abonnement et ses libellés) */
 const OBJETS_FACULTATIFS = ['abonnements', 'libelles', 'comparaison'];
 const LISTES_FACULTATIVES = ['pages_metier'];
@@ -102,6 +102,25 @@ function nettoyer(c, actuel) {
   out.credits_photos = String(c.credits_photos || '').slice(0, 800);
   CLES_FIXES.forEach((k) => { out[k] = actuel[k] || {}; });
   return out;
+}
+
+/* ---------- Redirections permanentes (301) ----------
+   1. La liste « redirections » du contenu : { de: '/ancienne-adresse/', vers: '/nouvelle' } (avec ou sans « / » final).
+   2. Les adresses types de WordPress : /feed/, /category/…, /tag/…, /author/…, /page/2/.
+   3. Une adresse qui finit par « / » renvoie vers la même sans « / » (une seule adresse par page). */
+function redirection(C, p) {
+  let chemin = p;
+  try { chemin = decodeURI(p); } catch (e) { /* adresse mal codée : on la garde telle quelle */ }
+  const sans = (x) => (x.length > 1 ? x.replace(/\/+$/, '') : x);
+  const ok = (v) => /^(\/[^\s]*|https:\/\/\S+)$/.test(String(v || ''));
+  const R = (Array.isArray(C.redirections) ? C.redirections : []).find((r) => r && ok(r.vers) && typeof r.de === 'string' && sans(r.de.trim()) === sans(chemin));
+  if (R && sans(R.vers) !== sans(chemin)) return R.vers;
+  const D = donnees(C);
+  if (/^\/(feed|rss|comments\/feed)\/?$/.test(chemin)) return D.actualites.length ? '/actualites.xml' : '/';
+  if (/^\/(category|categorie|tag|etiquette)\//.test(chemin)) return D.actualites.length ? '/actualites' : '/realisations';
+  if (/^\/(author|auteur)\/|^\/page\/\d+\/?$/.test(chemin)) return '/';
+  if (chemin.length > 1 && chemin.endsWith('/')) return sans(p);
+  return '';
 }
 
 /* ---------- IndexNow : prévenir Bing (et la recherche de ChatGPT, qui s'appuie sur Bing), Yandex, Seznam… dès qu'une page change ----------
@@ -407,6 +426,9 @@ export default {
       /* Toutes les autres adresses : les pages du site */
       if (methode === 'GET' || methode === 'HEAD') {
         const C = await lireContenu(env);
+        /* Anciennes adresses (refonte d'un site, WordPress…) : redirection permanente, pour garder leur classement */
+        const cible = redirection(C, p);
+        if (cible) return Response.redirect(/^https:\/\//.test(cible) ? cible : url.origin + cible, 301);
         const { statut, html: page } = rendrePage(C, p + url.search, { maquette: estMaquette(env), lienAdmin: '/admin/', apiContact: '/api/contact', credit: env.CREDIT_SITE || '' });
         if (statut === 200 && methode === 'GET' && !estMaquette(env)) ctx.waitUntil(compterVue(env, req, p.replace(/\/+$/, '').slice(0, 80) || '/').catch(() => {}));
         return html(page, statut);

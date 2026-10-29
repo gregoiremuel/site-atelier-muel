@@ -121,6 +121,19 @@ async function tests() {
   verif(j.ok && base._schema === 'agence v1', 'Lecture du contenu une fois connecté');
 
   const x0 = base.realisations[0];
+  /* Redirections 301 : liste du contenu, adresses WordPress, « / » final */
+  {
+    const mr = structuredClone(base); mr.redirections = [{ de: '/ancienne-realisation/', vers: '/realisations/' + x0.id }, { de: '/vers-dehors', vers: 'https://exemple.fr/page' }];
+    await req('/api/contenu', { method: 'PUT', ...corpsJson(mr) });
+    const loc = async (ch) => { const r = await fetch(BASE + ch, { redirect: 'manual' }); return r.status + ' ' + (r.headers.get('location') || ''); };
+    verif((await loc('/ancienne-realisation/')).endsWith('301 ' + BASE + '/realisations/' + x0.id) || (await loc('/ancienne-realisation/')) === '301 ' + BASE + '/realisations/' + x0.id, 'Redirection 301 d’une ancienne adresse vers la nouvelle page');
+    verif((await loc('/ancienne-realisation')) === '301 ' + BASE + '/realisations/' + x0.id, 'Redirection 301 aussi sans « / » final');
+    verif((await loc('/vers-dehors')) === '301 https://exemple.fr/page', 'Redirection 301 vers une adresse extérieure');
+    verif((await loc('/agence/')) === '301 ' + BASE + '/agence', 'Une adresse avec « / » final renvoie vers la même sans « / »');
+    verif((await loc('/feed/')).startsWith('301 ') && (await loc('/category/bureaux/')).startsWith('301 ') && (await loc('/author/admin/')) === '301 ' + BASE + '/', 'Adresses WordPress (flux, catégories, auteurs) redirigées');
+    verif((await fetch(BASE + '/realisations/' + x0.id, { redirect: 'manual' })).status === 200, 'Une page existante n’est pas redirigée');
+    await req('/api/contenu', { method: 'PUT', ...corpsJson(base) });
+  }
   { const r1 = await fetch(BASE + '/' + CLE_IDX + '.txt'); verif(r1.status === 200 && (await r1.text()) === CLE_IDX, 'IndexNow : le fichier de clé est servi'); }
   { const ml = structuredClone(base); ml.agence.lien_avis = 'https://g.page/r/essai/review'; ml.agence.profils = ['https://maps.app.goo.gl/essai']; ml.agence.zone = 'Nantes, Vertou et Rezé';
     await req('/api/contenu', { method: 'PUT', ...corpsJson(ml) });
@@ -166,7 +179,7 @@ async function tests() {
     { const jour = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' }); const sm = await (await req('/sitemap.xml')).text();
       verif(sm.includes(`/realisations/${x0.id}</loc><lastmod>${jour}</lastmod>`) && sm.includes(`/actualites</loc><lastmod>`), 'Plan du site : date de modification des pages touchées par l’enregistrement'); }
     h = await (await req('/actualites.xml')).text(); verif(h.includes('<rss') && h.includes('/actualites/essai-actu-test</link>'), 'Flux RSS des actualités');
-    h = await (await req('/')).text(); verif(h.includes('application/rss+xml') && h.includes('<a href="https://exemple.fr">Site réalisé par Essai</a>'), 'Flux RSS annoncé, lien « site réalisé par » en pied de page');
+    h = await (await req('/')).text(); verif(h.includes('application/rss+xml') && h.includes('<a href="https://exemple.fr" rel="nofollow">Site réalisé par Essai</a>'), 'Flux RSS annoncé, lien « site réalisé par » en nofollow (règles de Google)');
     h = await (await req('/actualites/essai-actu-test')).text(); verif(h.includes('content="article"') && h.includes('"BreadcrumbList"') === /canonical/.test(h), 'Actualité : partage de type article, fil d’Ariane pour Google quand l’adresse du site est connue');
     ma.actualites[ma.actualites.length - 1].visible = false;
     await req('/api/contenu', { method: 'PUT', ...corpsJson(ma) });

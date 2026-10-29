@@ -30,7 +30,7 @@ const ELEMENTS = {
   references: ['nom', 'logo'],
 };
 /* Clés facultatives (ajoutées au moteur après Opéria : un contenu sans elles reste valide) */
-const FACULTATIVES = { agence: ['lien_avis', 'profils'], '': ['libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier', 'actualites'], reglages: ['image_partage'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte', 'cartes', 'essai_points', 'hero_tel', 'personne_titre', 'personne_texte', 'actualites'], mentions: ['tva', 'nom_commercial'], contact: ['traitement'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette', 'apercu'] };
+const FACULTATIVES = { agence: ['lien_avis', 'profils'], '': ['redirections', 'libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier', 'actualites'], reglages: ['image_partage'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte', 'cartes', 'essai_points', 'hero_tel', 'personne_titre', 'personne_texte', 'actualites'], mentions: ['tva', 'nom_commercial'], contact: ['traitement'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette', 'apercu'] };
 const INTERDITS = [
   [/\bbienvenue\b/i, 'Bienvenue'], [/\bdécouvr(ez|ir)\b/i, 'Découvrez'], [/n['’]hésitez pas/i, 'N’hésitez pas'], [/au c(œ|oe)ur d/i, 'au cœur de'],
   [/\bvéritable/i, 'véritable'], [/\bincontournable/i, 'incontournable'], [/\bpassion/i, 'passion'], [/savoir-faire unique/i, 'savoir-faire unique'],
@@ -144,6 +144,25 @@ export function verifier(C) {
     ['a_la_une', 'visible'].forEach((k) => { if (typeof x[k] !== 'boolean') E(`${n}.${k} doit valoir true ou false.`); });
     if (x.annee && !/^(19|20)\d\d$/.test(x.annee)) E(`${n}.annee : quatre chiffres (ou vide).`);
   });
+  /* Redirections (facultatives) : { de: ancienne adresse, vers: adresse du site ou https://… } ; « de » ne doit pas masquer une page existante */
+  if ('redirections' in C) {
+    if (!Array.isArray(C.redirections)) E('« redirections » doit être une liste.');
+    else {
+      const pagesSite = new Set(routes(C).map((r) => r.split('?')[0])), vus = new Set();
+      C.redirections.forEach((r, i) => {
+        const n = `redirections[${i}]`;
+        if (!r || typeof r !== 'object') { E(`${n} doit être un objet { de, vers }.`); return; }
+        Object.keys(r).filter((k) => !['de', 'vers'].includes(k)).forEach((k) => E(`Clé inconnue : ${n}.${k}`));
+        const de = String(r.de || '').trim().replace(/\/+$/, '') || '/';
+        if (!/^\/\S*$/.test(String(r.de || ''))) E(`${n}.de doit commencer par « / ».`);
+        else if (pagesSite.has(de)) E(`${n}.de « ${r.de} » est une page du site : elle serait masquée.`);
+        if (vus.has(de)) E(`${n}.de « ${r.de} » est en double.`);
+        vus.add(de);
+        if (!/^(\/\S*|https:\/\/\S+)$/.test(String(r.vers || ''))) E(`${n}.vers doit être une adresse du site (« /… ») ou https://…`);
+        else if (/^\//.test(r.vers) && !pagesSite.has(r.vers.replace(/\/+$/, '') || '/') && !/\.xml$/.test(r.vers)) A(`${n}.vers « ${r.vers} » ne correspond à aucune page du site.`);
+      });
+    }
+  }
   /* Actualités (facultatives) : titre, date AAAA-MM-JJ, adresse libre, réalisation liée existante */
   if ('actualites' in C) {
     if (!Array.isArray(C.actualites)) E('« actualites » doit être une liste.');

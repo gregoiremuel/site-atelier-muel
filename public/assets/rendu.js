@@ -272,7 +272,7 @@ ${page.corps}
       <a href="/confidentialite">Confidentialité</a>
       ${o.lienAdmin ? `<a href="${o.lienAdmin}">Page de modification</a>` : ''}
       <span>© ${new Date().getFullYear()} ${esc(nom)}</span>
-      ${(() => { const [t, u] = String(o.credit || '').split('|').map((x) => x.trim()); return t && /^https:\/\/\S+$/.test(u || '') ? `<a href="${esc(u)}">${esc(t)}</a>` : ''; })()}
+      ${(() => { const [t, u] = String(o.credit || '').split('|').map((x) => x.trim()); return t && /^https:\/\/\S+$/.test(u || '') ? `<a href="${esc(u)}" rel="nofollow">${esc(t)}</a>` : ''; })()}
       ${C.credits_photos ? ((C.theme || {}).gabarit === 'edition' ? `<details class="credits"><summary>Crédits des photos</summary><p>${esc(C.credits_photos)}</p></details>` : `<span class="credits">${esc(C.credits_photos)}</span>`) : ''}
     </div>
   </div>

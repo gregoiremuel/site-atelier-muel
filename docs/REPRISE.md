@@ -1,29 +1,37 @@
-# Reprise dans une nouvelle session (29 octobre 2026)
+# Reprise dans une nouvelle session (29 octobre 2026, fin de journée)
 
 ## Prompt à coller en premier message (après un « clear »)
-> Lis `CLAUDE.md`, `LISEZMOI.md`, puis `docs/REPRISE.md` et `docs/PLAN-REFERENCEMENT-IA.md`. Ajoute le dépôt `gregoiremuel/kit-sites-boutiques` (branche principale ; la branche de travail précédente est fusionnée : repars de `main` avec le même nom de branche, dans les deux dépôts). Sujet du jour : **faire monter le référencement des clients (offre Visibilité Google) et l'automatisation par IA**. Reprends les décisions de la partie 6 du plan, pose-moi seulement les questions qui bloquent, propose le palier 0 puis le script du palier 1, et prépare les prompts mensuels et le modèle de rapport. Ne touche pas au site sans me le dire. Réponse finale en trois parties : Réponse claire, Niveau de confiance (0.0 à 1.0 avec la raison), Réserves clés. Modèle : Sonnet, effort moyen ; sous-traite les tâches simples à Haiku.
+> Lis `CLAUDE.md`, `LISEZMOI.md`, puis `docs/REPRISE.md`. Ajoute le dépôt `gregoiremuel/kit-sites-boutiques` (lis son `LISEZMOI.md` et `METHODE.md`). Branche de travail `ccr-04ab3608-pccm5z` dans les deux dépôts (si elle est fusionnée : repars de `main` avec le même nom). Sujet du jour : [à préciser]. Ne touche pas au site sans me le dire. Réponse finale en trois parties : Réponse claire, Niveau de confiance (0.0 à 1.0 avec la raison), Réserves clés.
 
 ## Où on en est
-- **Site** (`site-atelier-muel`) et **moteur du kit** (`kit-sites-boutiques`, `modeles/agence-operia`) : tout est fusionné dans `main`. Le site est en ligne sur l'adresse provisoire Cloudflare, non indexé (`MAQUETTE` = « oui »). Ne passer `MAQUETTE` à « non » qu'après : franchise de TVA confirmée, nom commercial corrigé au Guichet unique, domaine actif, mentions légales relues.
-- **Dossier de Greg** : `docs/DOCUMENT-FINAL.html` (fichier autonome) et l'artifact privé https://claude.ai/artifact/T41MC37ggVH4Q69m2RuxDL. Pour le mettre à jour : modifier la source, la reconstruire (l'artifact et le fichier sont le même contenu) et republier.
-- **Contrôles** (tous passent le 29/10/2026) : `npm run verifier`, `npm test` (103 ; 88 moteur agence ; 61 moteur vitrine), `npm run accessibilite` (2 min 30), `npm run referencement`, `npm run rendu <adresse>` (serveur local lancé), Impeccable en détection seule.
-- **Design** : règles dans `docs/REGLES-DESIGN.md` ; bandeau d'accueil gris-bleu avec ordinateur et téléphones ; tailles mobiles 28/26/20/17 px.
-- **Prix** (propositions) : 590 € une fois, 1 290 €, 1 900 € ; Sérénité 19 €, Croissance 49 €, Visibilité Google 39 € par mois. Jugés cohérents ; le frein est la preuve et le temps de prospection.
+- **Site** : en ligne sur l'adresse provisoire Cloudflare, non indexé (`MAQUETTE` = « oui »). Ouverture après : franchise de TVA confirmée, nom commercial corrigé au Guichet unique, domaine actif, mentions relues.
+- **Le 29/10 (soir), sur la branche de travail des deux dépôts, pas encore fusionné** :
+  - Offre **Visibilité Google** : prompts mensuels, modèle de rapport, script du palier 1 (`kit/visibilite-google/`, `kit/outils/visibilite-google.mjs`).
+  - **Automatisation des demandes** (n8n sur le VPS Hostinger) : trois flux, scripts du VPS, pas-à-pas (`kit/automatisation/README.md`). Le moteur agence copie les demandes vers n8n seulement si les Secrets `N8N_WEBHOOK_URL` et `N8N_SECRET` existent ; champ « Traitement automatique des demandes » ajouté à `/admin` (vide).
+  - **Vendre** : diagnostic de fiche en une page (`outils/diagnostic-fiche.mjs`), cohérence des coordonnées (`outils/coherence.mjs`), suivi de prospection (`outils/prospection.mjs`).
+  - **Référencement** : `npm run referencement` dans les trois moteurs ; la vitrine a désormais `robots.txt`, plan du site, canonique, image de partage ; le catalogue a des descriptions par page et la canonique ; mise en route Google à la livraison (`kit/livraison/MISE-EN-ROUTE-GOOGLE.md`).
+  - **Contrat de sous-traitance** : Anthropic en annexe 3, annexe 1 bis pour Visibilité Google (à faire relire).
+- **Contrôles** (29/10, soir) : site `npm test` 104 ok ; moteurs agence 89, vitrine 63, catalogue 57 ; accessibilité des trois moteurs sans point ; essais des outils du kit 26 ok.
+- **Dossier de Greg** : `docs/DOCUMENT-FINAL.html` et l'artifact https://claude.ai/artifact/T41MC37ggVH4Q69m2RuxDL (pas encore mis à jour avec le travail du 29/10 au soir).
+
+## Ce que Greg doit faire (dans l'ordre, rien d'autre ne dépend de Claude)
+1. Administratif déjà connu : ACRE avant le 17/12/2026, CFE avant le 31/12/2026, franchise de TVA, nom commercial au Guichet unique, compte bancaire, RC Pro, plateforme de factures.
+2. **E-mail pro** avec accès SMTP, **domaine**.
+3. **Clé API Anthropic** (console.anthropic.com) avec un plafond de dépense.
+4. **VPS** : regarder le pays du centre de données dans hPanel ; puis soit l'installation guidée (`kit/automatisation/README.md`, environ 1 h), soit Remote Control pour que Claude l'installe (utilisateur `greg-claude`, `claude remote-control` dans le dossier du kit).
+5. **Bot Telegram** (@BotFather) ; WhatsApp plus tard (compte Meta Business).
+6. Faire relire : mentions, confidentialité (avec le texte « Traitement automatique »), contrat de sous-traitance (annexes 1 bis et 3).
+7. « Go » pour ouvrir le site, puis Secrets n8n dans Cloudflare.
+8. Fusionner les deux demandes de fusion quand tout est relu.
+9. Premier pilote (commerçant, accord écrit) : diagnostic, maquette, puis Visibilité Google.
 
 ## Règles de travail
 - Français, tutoiement, direct. Ne rien inventer ; ce qui n'est pas vérifié est « à vérifier ». Pas de conseil juridique ou fiscal présenté comme sûr.
-- Branche de travail `ccr-04ab3608-pccm5z` ; demande de fusion vers `main` des deux dépôts ; toute amélioration du moteur se reporte dans `modeles/agence-operia`.
-- Skills : `.claude/skills/revue-site-pro` et `site-joaillerie` (dépôt du kit), `no-ai-slop` et `web-design-guidelines` (locaux).
-- Pièges déjà rencontrés : `METHODE.md` partie 4 (version 15).
+- Toute amélioration du moteur se reporte dans `modeles/agence-operia` (et inversement).
+- Pièges : `METHODE.md` partie 4 (version 16).
 
 ## Environnement de l'espace de travail
-Cloudflare et le site en ligne sont injoignables ; les domaines externes sont refusés (pas de comparaison en direct avec d'autres sites) ; Chromium en root demande `--no-sandbox` ; `pkill -f "[w]rangler"` ; installer les dépendances (`npm install`) dans chaque modèle avant `npm test`.
+Cloudflare, le site en ligne et le VPS sont injoignables depuis l'espace de Claude ; Chromium en root demande `--no-sandbox` ; `pkill -f "[w]rangler"` ; `npm install` dans chaque modèle avant `npm test` ; `node --test <fichier>` (pas un dossier) avec Node 22.
 
-## Ce qui reste à Greg
-Section 2 de l'artifact : ACRE avant le 17/12/2026, CFE avant le 31/12/2026, franchise de TVA, nom commercial, compte bancaire, e-mail pro, domaine, RC Pro, plateforme de factures, mentions relues, puis « go » pour ouvrir le site. Ensuite : trois pilotes, portrait de travail, avis.
-
-## Chantiers futurs (à la demande d'un client)
-Réservation avec créneaux, acompte en ligne, version anglaise, chatbot, hébergement en France ; automatisation du référencement (`docs/PLAN-REFERENCEMENT-IA.md`).
-
-## Site de joaillerie (Atelier Muel)
-Skill `site-joaillerie` : modèle catalogue, identité propre, points à décider avec Greg avant de coder.
+## Chantiers futurs
+Réservation avec créneaux, acompte en ligne, version anglaise, chatbot (sur devis), hébergement en France, API de la fiche Google (palier 2, accès à demander à Google), tableau de bord des clients (palier 3).

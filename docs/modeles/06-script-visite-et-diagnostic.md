@@ -4,6 +4,7 @@
 
 ## 1. Avant de partir (10 minutes)
 - Ouvre la **fiche Google** du commerce et remplis la grille du diagnostic (partie 4) : tu arrives avec **une page qui parle d'eux**, pas avec un catalogue.
+  Plus vite : copie la fiche dans `fiche.txt`, puis dans le kit `node outils/diagnostic-fiche.mjs preparer fiche.txt` (la grille se préremplit), complète les « ? », et `node outils/diagnostic-fiche.mjs fabriquer diagnostics/<nom>/grille.json` : la page est prête à imprimer.
 - Vérifie sur place s'il a un site (il est parfois absent de la fiche).
 - Ouvre sur ton téléphone : la **démonstration de leur métier** (`/site-restaurant`, `/site-plombier`, `/site-fleuriste` ou le fleuriste pour les commerces de bouche) et la page **/visibilite-google**.
 - Si tu as le temps : une maquette à leur nom, faite par la fabrique de maquettes (`METHODE.md`, 2.2 bis), **montrée sur ton téléphone, jamais envoyée par lien public**.

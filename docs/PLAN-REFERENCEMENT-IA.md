@@ -1,6 +1,6 @@
 # Référencement des clients et automatisation par IA : plan préparé (29 octobre 2026)
 
-À discuter avec Greg dans la prochaine session. **Rien de ce qui suit n'est construit.** Les chiffres viennent de `docs/PLAN-ENTREPRISE.md` (partie 4) et `docs/CHIFFRES.md` ; ce qui est une estimation est écrit comme tel ; ce qui n'a pas été vérifié est marqué « à vérifier ».
+Mis à jour le 29/10/2026 (fin de journée) : **les paliers 0 et 1 sont prêts** dans le kit (`visibilite-google/`, `outils/visibilite-google.mjs`), ainsi que l'automatisation des demandes (`automatisation/`). Rien n'est activé. Les chiffres viennent de `docs/PLAN-ENTREPRISE.md` (partie 4) et `docs/CHIFFRES.md` ; ce qui est une estimation est écrit comme tel ; ce qui n'a pas été vérifié est marqué « à vérifier ».
 
 ## 1. L'offre
 **Visibilité Google, 39 € par mois, sans engagement, vendable sans site** (proposition à valider). Repères du marché (sources tierces) : CCI des Landes 50 € HT par mois, agences de 150 à 800 € par mois, Solocal environ 300 € par an. Net après cotisations (25,6 %) : environ 29 € pour une heure de travail. Ce que le client reçoit chaque mois :
@@ -31,7 +31,10 @@ Pas de faux avis. Chaque texte publié est relu par le client. Mêmes nom, adres
 ## 5. Mesure
 Search Console (impressions, clics), fiche Google (appels, itinéraires, visites), « Visites du site » de `/admin` (sans cookie). À attendre : des appels via la fiche avant les clics du site, un classement local en plusieurs mois. Si rien ne bouge après trois mois, regarder la fiche et les avis avant le code.
 
-## 6. À décider avec Greg
+## 6. Décisions (29/10/2026)
+Retenues par défaut, détail dans `kit-sites-boutiques/visibilite-google/README.md` : 39 € sans engagement ; palier 0 d'abord, script prêt pour le 5e client ; un canal par client (SMS ou e-mail), 3 jours ouvrés, silence = rien de publié ; Greg gestionnaire de la fiche ; chatbot sur devis seulement ; annexe 3 du contrat mise à jour (Anthropic), à faire relire. Reste ouvert : le premier pilote.
+
+### Questions d'origine
 1. Prix : 39 € ou 49 € par mois (repère CCI : 50 € HT), engagement ou non.
 2. Palier 0 d'abord, ou construire tout de suite le script du palier 1 ?
 3. Canal de validation par le client (SMS, WhatsApp, e-mail) et délai.

@@ -38,7 +38,7 @@
     "texte": "Nous créons le site de votre commerce, de votre atelier ou de votre entreprise, nous le tenons à jour, et vous recevez les demandes de vos clients. Vous préférez le modifier vous-même ? Une page privée le permet, depuis votre téléphone.",
     "reperes": [
       "590 € | une fois, sans abonnement obligatoire",
-      "48 h | pour une maquette gratuite",
+      "48 h | ouvrées pour la maquette, dès vos infos reçues",
       "1 domaine | à vous, toujours",
       "0 cookie | de suivi, ni publicité"
     ],
@@ -48,7 +48,7 @@
     "essai_titre": "Essayez avant de décider",
     "essai_texte": "Quatre sites d’exemple, un par métier. Ouvrez-en un, touchez « Essayer la page de modification », changez un horaire ou une photo : rien n’est publié, tout reste dans votre navigateur. Les entreprises n’existent pas.",
     "appel_titre": "Une maquette de votre site, gratuite, en 48 h",
-    "appel_texte": "Dites-nous qui vous êtes et ce que vous faites : nous préparons une maquette à votre nom. Elle ne vous plaît pas ? Vous ne nous devez rien.",
+    "appel_texte": "Dites-moi qui vous êtes et ce que vous faites : je prépare une maquette à votre nom, en 48 h ouvrées après réception de vos informations. Elle ne vous plaît pas ? Vous ne me devez rien.",
     "photo_appel": "",
     "cartes": false,
     "hero_tel": "Ou appelez-moi directement :",
@@ -80,10 +80,11 @@
       "nom": "Site vitrine",
       "accroche": "Pour un commerce ou un artisan : ce que vous faites, vos horaires, vos tarifs, et un bouton pour vous appeler.",
       "prix": "590 € | une fois, sans abonnement obligatoire",
-      "texte": "Le site que vos clients consultent avant de passer vous voir. Il se lit d’abord sur téléphone : horaires du jour, itinéraire et appel en un geste.\n\nVous le tenez à jour vous-même, depuis votre téléphone, ou vous nous confiez les changements (compris dans l’abonnement Sérénité, sur devis sinon).",
+      "texte": "Le site que vos clients consultent avant de passer vous voir. Il se lit d’abord sur téléphone : horaires du jour, itinéraire et appel en un geste.\n\nVous le tenez à jour vous-même, depuis votre téléphone, ou vous nous confiez les changements (compris dans l’abonnement Sérénité, sur devis sinon).\n\nCe qui est compris : un site d’une page complète (présentation, services ou produits, horaires, accès, demandes, mentions légales), deux séries de corrections, et la mise en ligne sous deux semaines après réception de vos textes et photos. Le nom de domaine reste à votre charge (environ 10 € par an) ; l’hébergement ne vous coûte rien. Des pages en plus, une boutique ou une réservation : sur devis.",
       "points": [
-        "Maquette gratuite à votre nom en 48 h",
-        "Photos de la boutique comprises",
+        "Maquette gratuite à votre nom en 48 h ouvrées, après réception de vos informations",
+        "Un site d’une page complète, deux séries de corrections comprises",
+        "Vos photos recadrées et allégées ; à Paris, quelques photos prises sur place si besoin",
         "Horaires, tarifs, photos et textes modifiables par vous",
         "Demandes de vos clients (commandes, réservations, devis) reçues dans votre espace",
         "Nom de domaine à votre nom"
@@ -142,7 +143,7 @@
     {
       "titre": "Une maquette gratuite en 48 h",
       "points": [
-        "Un échange de quelques minutes, puis la maquette à votre nom. Elle ne vous plaît pas : vous ne devez rien."
+        "Vous m’envoyez votre nom, votre activité et votre fiche Google ou quelques photos ; la maquette à votre nom arrive dans les 48 h ouvrées. Elle ne vous plaît pas : vous ne devez rien."
       ]
     },
     {
@@ -334,7 +335,7 @@
   ],
   "presentation": {
     "titre": "À propos",
-    "texte": "Nous concevons, refaisons et entretenons les sites des commerces, des artisans et des entreprises, depuis Auteuil (Paris 16e). Grégoire Muel, entrepreneur individuel, est votre interlocuteur.\n\n## Notre façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, de la maquette à la mise en ligne, puis pour l’entretien.",
+    "texte": "Je conçois, refais et entretiens les sites des commerces, des artisans et des entreprises, depuis Auteuil (Paris 16e). Je suis Grégoire Muel, entrepreneur individuel : c’est moi que vous avez au téléphone, de la maquette à l’entretien.\n\n## Ma façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, de la maquette à la mise en ligne, puis pour l’entretien.",
     "photo": "/assets/photos/gregoire-portrait.jpg",
     "photo_2": ""
   },
@@ -377,7 +378,7 @@
     ],
     "cle_web3forms": "",
     "email": "",
-    "confirmation": "Merci, votre demande est bien partie. Nous vous recontactons pour en parler."
+    "confirmation": "Merci, votre demande est bien partie. Je vous recontacte pour en parler."
   },
   "mentions": {
     "raison_sociale": "Grégoire Muel EI",
@@ -524,7 +525,7 @@
     },
     {
       "titre": "Délai de réponse",
-      "texte": "Une demande envoyée par le formulaire ou par téléphone reçoit une réponse sous 2 jours ouvrés, avec ou sans abonnement. La maquette gratuite est livrée en 48 h.\n\nUne modification qui relève de votre formule mensuelle est faite dans le même délai. Hors formule, nous vous envoyons un devis avant de commencer.",
+      "texte": "Une demande envoyée par le formulaire ou par téléphone reçoit une réponse sous 2 jours ouvrés, avec ou sans abonnement. La maquette gratuite est livrée dans les 48 h ouvrées qui suivent la réception de vos informations (nom, activité, fiche Google ou photos).\n\nUne modification qui relève de votre formule mensuelle est faite dans le même délai. Hors formule, nous vous envoyons un devis avant de commencer.",
       "points": []
     },
     {
@@ -613,7 +614,7 @@
         },
         {
           "q": "Combien ça coûte ?",
-          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 48 h. Pas d’abonnement obligatoire. Le nom de domaine se renouvelle environ 10 € par an."
+          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 48 h ouvrées après réception de vos informations. Pas d’abonnement obligatoire. Le nom de domaine se renouvelle environ 10 € par an."
         },
         {
           "q": "Et pour être trouvé sur Google Maps ?",
@@ -662,7 +663,7 @@
         },
         {
           "q": "Combien ça coûte ?",
-          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 48 h. Pas d’abonnement obligatoire. Le nom de domaine se renouvelle environ 10 € par an."
+          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 48 h ouvrées après réception de vos informations. Pas d’abonnement obligatoire. Le nom de domaine se renouvelle environ 10 € par an."
         },
         {
           "q": "Puis-je tout changer moi-même ?",
@@ -684,7 +685,7 @@
         "Horaires avec l’ouverture du jour",
         "Fleurs de la semaine, par saison",
         "Commande de bouquets avec jour de retrait",
-        "Photos de la boutique comprises",
+        "Vos photos recadrées et allégées",
         "Itinéraire et appel en un geste",
         "Nom de domaine à votre nom"
       ],
@@ -703,11 +704,11 @@
         },
         {
           "q": "Qui prend les photos ?",
-          "r": "Les photos de la boutique sont comprises dans le prix du site vitrine : nous les prenons sur place."
+          "r": "Vous nous envoyez vos photos : nous les recadrons et les allégeons pour le site. À Paris, nous pouvons en prendre quelques-unes lors d’un passage si besoin. Jamais de photos trouvées sur internet présentées comme les vôtres."
         },
         {
           "q": "Combien ça coûte ?",
-          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 48 h. Pas d’abonnement obligatoire. Le nom de domaine se renouvelle environ 10 € par an."
+          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 48 h ouvrées après réception de vos informations. Pas d’abonnement obligatoire. Le nom de domaine se renouvelle environ 10 € par an."
         },
         {
           "q": "Et pour être trouvé sur Google Maps ?",
@@ -730,7 +731,7 @@
         "Offres sur commande : plateaux, gâteaux, coffrets",
         "Commande à retirer, jour choisi dans vos horaires",
         "Horaires avec l’ouverture du jour",
-        "Photos de la boutique comprises",
+        "Vos photos recadrées et allégées",
         "Nom de domaine à votre nom"
       ],
       "demo": "/demos/fleuriste-exemple",
@@ -748,7 +749,7 @@
         },
         {
           "q": "Combien ça coûte ?",
-          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 48 h. Pas d’abonnement obligatoire. Le nom de domaine se renouvelle environ 10 € par an."
+          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 48 h ouvrées après réception de vos informations. Pas d’abonnement obligatoire. Le nom de domaine se renouvelle environ 10 € par an."
         },
         {
           "q": "Et pour être trouvé sur Google Maps ?",

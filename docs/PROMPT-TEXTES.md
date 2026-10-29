@@ -15,7 +15,7 @@ Tu es rédacteur web pour un indépendant qui crée des sites pour les commerces
 Ne mets en avant que ce qui est vrai et déjà dans le dépôt :
 - **Un seul interlocuteur** : Grégoire travaille seul, depuis Auteuil (Paris 16e) ; c'est lui qui fait la maquette, le site et qui répond. Le site parle donc à la **première personne du singulier** (« je ») partout. Aujourd'hui l'accueil dit « Nous créons… » alors que la présentation dit « Je travaille seul » : à corriger.
 - **Maquette gratuite en 48 h ouvrées**, avant de payer quoi que ce soit.
-- **Prix clairs, payés une fois** : site vitrine 590 €, boutique et catalogue dès 1 290 €, site d'entreprise ou refonte dès 1 900 € ; abonnement **facultatif** (Sérénité 19 €/mois, Croissance 49 €/mois) ; Visibilité Google 39 €/mois sans engagement.
+- **Prix clairs, payés une fois** (ce sont encore des propositions que Greg doit valider : les reprendre tels quels, sans les changer ni en ajouter) : site vitrine 590 €, boutique et catalogue dès 1 290 €, site d'entreprise ou refonte dès 1 900 € ; abonnement **facultatif** (Sérénité 19 €/mois, Croissance 49 €/mois) ; Visibilité Google 39 €/mois sans engagement.
 - **Le client garde la main** : une page de modification privée, depuis son téléphone (textes, photos, prix, horaires), et « Publier une actualité » en une minute.
 - **Les demandes de ses clients** arrivent dans cette page, avec un suivi.
 - **Être trouvé** : chaque site est préparé pour Google, Google Maps, Bing et les assistants IA (pages claires, plan du site, données lues par Google, lien d'avis). Ne jamais promettre une place dans Google.
@@ -36,6 +36,7 @@ Ne mets en avant que ce qui est vrai et déjà dans le dépôt :
 - **N'invente rien** : aucun client, avis, chiffre, label ou délai qui ne soit déjà dans le dépôt. Un fait manque : il va dans la liste « à valider ».
 - Aucun mot de la liste « site IA » (Bienvenue, Découvrez, N’hésitez pas, passion, expérience, excellence…). Typographie française (espace avant « : ; ! ? »).
 - Garder exactement les clés et la forme du JSON ; ne toucher ni aux prix ni aux mentions légales.
+- Respecter `CLAUDE.md` : Opéria cité seulement avec son accord, ni Fromagerie La Fontaine, ni Maison Tcheskiss, ni joaillerie.
 
 ## Déroulé
 1. Propose d'abord un **tableau avant / après** par page (texte actuel, texte proposé, pourquoi), plus la liste « à valider ». N'écris rien dans les fichiers avant l'accord de Greg.

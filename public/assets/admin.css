@@ -28,8 +28,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 .petit{min-height:36px;padding:0 12px;font-size:.9375rem}
 
 /* Connexion */
-.connexion{min-height:100svh;display:grid;place-items:center;padding:24px 16px}
-.connexion form{width:100%;max-width:380px;background:#fff;border:1px solid var(--trait);border-radius:10px;padding:28px 24px;display:grid;gap:16px}
+.connexion{min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr);place-items:center;padding:24px 16px}
+.connexion form{width:100%;max-width:380px;background:#fff;border:1px solid var(--trait);border-radius:10px;padding:28px 24px;display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.connexion .btn{white-space:normal;text-align:center}
 .connexion h1{font-size:1.625rem}
 .connexion .sous{color:var(--gris);margin-top:-8px}
 .mdp{display:flex;border:1px solid #b6c1ca;border-radius:var(--r);overflow:hidden;background:#fff}
@@ -176,3 +177,9 @@ details.item>summary span.s{display:block;color:var(--gris);font-size:.9375rem;o
 .video-apercu video{width:100%;max-width:320px;aspect-ratio:16/9;object-fit:cover;border-radius:6px;background:#000;display:block}
 .video-champ .saisie{margin-top:8px}
 .bandeau button{background:none;border:0;color:inherit;font:inherit;text-decoration:underline;cursor:pointer;min-height:44px;padding:0 6px}
+.apercu-plein .barre{flex-wrap:wrap;gap:8px 16px}
+.apercu-plein .barre-titre{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.apercu-plein .barre-titre a{font-size:.9375rem;color:inherit}
+/* Champ de fichier (vidéo de fond) : jamais plus large que l'écran */
+.champ input[type=file]{max-width:100%}
+.champ{min-width:0}

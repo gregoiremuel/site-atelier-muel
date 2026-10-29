@@ -183,7 +183,7 @@ function ecranConnexion(message) {
     if (bouton.disabled) return;
     err.hidden = true; bouton.disabled = true; bouton.textContent = 'Connexion…';
     try { await api.connexion(input.value); await demarrer(); }
-    catch (x) { err.textContent = x.message; err.hidden = false; bouton.disabled = false; bouton.textContent = 'Se connecter'; }
+    catch (x) { err.textContent = x.message; err.hidden = false; bouton.disabled = false; bouton.textContent = 'Se connecter'; input.focus(); input.select(); }
   };
   const bouton = el('button', { class: 'btn', type: 'button', id: 'btn-connexion', text: 'Se connecter', onclick: seConnecter });
   input.addEventListener('keydown', (e) => { if (e.key === 'Enter') seConnecter(e); });
@@ -574,6 +574,10 @@ function panneaux() {
           champ(E.C, { k: 'accueil.photo', l: 'Grande photo', t: 'photo' }), champ(E.C, { k: 'accueil.video', l: 'Vidéo de fond', ex: 'MP4 sans son, 10 à 20 secondes, 20 Mo au plus. La photo reste l’image d’attente.', t: 'video' }), champ(E.C, { k: 'accueil.fond_video', l: 'Vidéo en fond (sinon la photo)', t: 'case' }),
           champ(E.C, { k: 'accueil.sur_titre', l: 'Petite ligne au-dessus du titre' }), champ(E.C, { k: 'accueil.titre', l: 'Grand titre' }), champ(E.C, { k: 'accueil.texte', l: 'Phrase sous le titre', t: 'zone' }),
           champ(E.C, { k: 'accueil.reperes', l: 'Repères sous les boutons', ph: 'Ex. : Garantie décennale SMA BTP', t: 'lignes', lignes: 3 }),
+          champ(E.C, { k: 'accueil.hero_tel', l: 'Phrase avant le téléphone, sous les boutons', ph: 'Ex. : Ou appelez-moi :' }),
+        ], '/'),
+        groupe('Bloc « Qui fait votre site »', 'Votre portrait (photo de la rubrique À propos) et quelques lignes', [
+          champ(E.C, { k: 'accueil.personne_titre', l: 'Titre' }), champ(E.C, { k: 'accueil.personne_texte', l: 'Texte', t: 'zone', lignes: 5 }),
         ], '/'),
         groupe('Présentation', '', [
           champ(E.C, { k: 'accueil.intro_titre', l: 'Titre' }), champ(E.C, { k: 'accueil.intro_texte', l: 'Texte', t: 'zone', lignes: 6 }), champ(E.C, { k: 'accueil.photo_intro', l: 'Photo', t: 'photo' }),
@@ -581,6 +585,7 @@ function panneaux() {
         groupe('Bloc « À essayer »', 'Les réalisations qui ont un lien', [
           el('p', { class: 'aide', text: 'S’affiche sur l’accueil quand un titre est rempli et qu’au moins une réalisation a un lien.' }),
           champ(E.C, { k: 'accueil.essai_titre', l: 'Titre' }), champ(E.C, { k: 'accueil.essai_texte', l: 'Texte', t: 'zone', lignes: 4 }),
+          champ(E.C, { k: 'accueil.essai_points', l: 'Montrer « À essayer » (trois points de chaque réalisation) au lieu de sa vignette', t: 'case' }),
         ], '/'),
         groupe('Chiffres', 'Trois repères sous la présentation', [
           champ(E.C, { k: 'affichage.chiffres', l: 'Afficher les chiffres', t: 'case' }),
@@ -634,7 +639,8 @@ function panneaux() {
             champ(E.C, { k: 'contact.types', l: 'Types de locaux proposés', t: 'lignes' }),
             champ(E.C, { k: 'contact.confirmation', l: 'Message affiché après l’envoi', t: 'zone' }),
             champ(E.C, { k: 'contact.cle_web3forms', l: 'Clé Web3Forms', ex: 'pour recevoir les demandes par e-mail' }),
-            champ(E.C, { k: 'contact.email', l: 'E-mail de secours', ex: 'utilisé si la clé est vide', type: 'email' }))),
+            champ(E.C, { k: 'contact.email', l: 'E-mail de secours', ex: 'utilisé si la clé est vide', type: 'email' }),
+            champ(E.C, { k: 'contact.traitement', l: 'Traitement automatique des demandes (confidentialité)', t: 'zone', ex: 'à remplir avant d’activer un outil comme n8n ; texte ajouté à la page Confidentialité' }))),
       ],
     },
     {
@@ -726,7 +732,8 @@ function vueSiteDemo() {
   let v = document.getElementById('demo-site');
   if (!v) {
     v = el('div', { id: 'demo-site', class: 'apercu-plein', role: 'region', 'aria-label': 'Aperçu du site' },
-      el('div', { class: 'barre' }, el('b', { text: 'Le site' }),
+      el('div', { class: 'barre' }, el('span', { class: 'barre-titre' }, el('b', { text: 'Démonstration' }),
+          /^https?:$/.test(location.protocol) && /\/demos\//.test(location.pathname) ? el('a', { href: '/', text: '← Retour au site' }) : null),
         el('button', { type: 'button', class: 'btn petit', text: 'Essayer la page de modification', onclick: () => { v.hidden = true; document.body.style.overflow = ''; } })),
       el('iframe', { title: 'Le site' }));
     document.body.append(v);
@@ -792,7 +799,7 @@ async function enregistrer() {
 }
 async function annuler() {
   if (modifie()) { E.C = JSON.parse(E.base); dessinerEditeur(); rendreApercu(); toast('Modifications annulées.'); return; }
-  if (!bAnn.classList.contains('confirmer')) { bAnn.classList.add('confirmer'); bAnn.textContent = 'Confirmer'; setTimeout(() => { bAnn.classList.remove('confirmer'); majBarre(); }, 4000); return; }
+  if (!bAnn.classList.contains('confirmer')) { bAnn.classList.add('confirmer'); bAnn.textContent = 'Confirmer le retour ?'; bAnn.title = 'Touchez encore pour rétablir la version enregistrée juste avant'; setTimeout(() => { bAnn.classList.remove('confirmer'); majBarre(); }, 4000); return; }
   bAnn.classList.remove('confirmer');
   try { E.C = await api.annuler(); E.base = JSON.stringify(E.C); dessinerEditeur(); rendreApercu(); toast('Version précédente rétablie.'); } catch (x) { toast(x.message); }
   majBarre();
@@ -841,7 +848,8 @@ function ecranPrincipal() {
   racine.append(
     el('header', { class: 'haut' }, el('div', { class: 'haut-in' },
       el('div', { class: 'haut-titre' }, el('b', { text: nom }), el('span', { text: 'Page de modification' })),
-      el('a', { class: 'btn', href: DEMO ? '#' : '/', target: DEMO ? null : '_blank', rel: 'noopener', text: 'Voir le site', onclick: DEMO ? (e) => { e.preventDefault(); plein.hidden = false; rendreApercu(); } : null }),
+      DEMO ? el('button', { type: 'button', class: 'btn', text: 'Voir le site', onclick: () => { plein.hidden = false; rendreApercu(); } })
+        : el('a', { class: 'btn', href: '/', target: '_blank', rel: 'noopener', text: 'Voir le site' }),
       el('button', { type: 'button', class: 'btn', text: 'Se déconnecter', onclick: async () => { if (modifie() && !confirm2()) return; await api.deconnexion(); ecranConnexion(); } }))),
     DEMO ? el('aside', { class: 'bandeau', 'aria-label': 'Information' }, 'Démonstration : vos essais restent sur cet appareil, rien n’est publié. ', el('button', { type: 'button', text: 'Tout remettre à zéro', onclick: () => { remettreAZero(); ecranConnexion(); toast('Démonstration remise à zéro : le site est revenu à sa version d’origine.'); } }))
       : (E.maquette ? el('aside', { class: 'bandeau', 'aria-label': 'Information', text: 'Le site est encore en mode proposition : les demandes ne sont pas envoyées.' }) : ''),

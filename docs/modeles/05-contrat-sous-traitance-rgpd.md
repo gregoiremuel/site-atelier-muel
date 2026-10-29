@@ -42,6 +42,13 @@ Chaque partie répond de ses manquements au RGPD envers les personnes et la CNIL
 - **Durée de conservation** : 180 jours dans la mémoire du site, puis effacement automatique. Les e-mails envoyés via Web3Forms sont conservés selon ce service et la messagerie du responsable.
 - **Mesure des visites** : le site compte les pages vues, sans cookie, sans adresse IP ni identifiant : pas de donnée personnelle enregistrée.
 
+## Annexe 1 bis. Offre Visibilité Google (si souscrite)
+- **Nature** : mise à jour de la fiche d'établissement Google du responsable (horaires, photos fournies par lui, posts), préparation de réponses aux avis, rapport mensuel.
+- **Données** : prénom (tel qu'affiché par Google) et texte des avis laissés sur la fiche ; aucune donnée sensible ; aucun contact des auteurs.
+- **Accès** : le sous-traitant est **gestionnaire** de la fiche, le responsable en reste propriétaire ; aucun mot de passe du responsable n'est demandé.
+- **Validation** : aucun post ni aucune réponse n'est publié sans l'accord écrit du responsable (canal prévu au devis).
+- **Conservation** : les fiches de travail du sous-traitant sont effacées [12] mois après la fin de l'abonnement *(durée à décider)*.
+
 ## Annexe 2. Mesures de sécurité (état au 28/10/2026)
 - Connexions chiffrées (HTTPS). Page de modification protégée par un mot de passe haché (PBKDF2) ; 8 essais ratés bloquent 15 minutes ; session de 30 jours à cookie sécurisé (HttpOnly, SameSite).
 - Demandes du formulaire limitées par appareil ; effacement automatique à 180 jours.
@@ -54,6 +61,7 @@ Chaque partie répond de ses manquements au RGPD envers les personnes et la CNIL
 |---|---|---|
 | Cloudflare, Inc. | Hébergement du site, de la mémoire du site et des sauvegardes | États-Unis, serveurs répartis dans le monde [garanties à compléter] |
 | Web3Forms | Envoi par e-mail des demandes du formulaire (si activé) | [pays et garanties à compléter après vérification] |
+| Anthropic (Claude) | Seulement si l'offre Visibilité Google est souscrite : préparation des brouillons de réponses aux avis Google (prénom de l'auteur et texte de l'avis, jamais d'autre donnée) et des brouillons de posts. Aucun texte n'est publié sans la validation du responsable | États-Unis [garanties à compléter après lecture des conditions de l'offre utilisée : transferts, durée de conservation, usage ou non des données pour l'entraînement] |
 | Aucun autre | | |
 
 *Si tu ajoutes un assistant (chatbot) ou un autre service, **mets cette annexe à jour avant de l'activer** (un fournisseur d'IA recevrait les messages des visiteurs).*

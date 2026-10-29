@@ -222,12 +222,19 @@ export default {
         if (!(await limite(env, 'dem:' + ip(req), 10, 600))) return json({ ok: false, erreur: 'Trop de demandes, réessayez dans quelques minutes.' }, 429);
         const corps = await req.json().catch(() => null);
         const t2 = (v, n) => String(v == null ? '' : v).trim().slice(0, n);
-        if (!corps || !t2(corps.nom, 120) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t2(corps.email, 200)) || String(corps.telephone || '').replace(/\D/g, '').length < 6) return json({ ok: false, erreur: 'Demande incomplète.' }, 400);
+        const mail = corps ? t2(corps.email, 200) : '', telChiffres = corps ? String(corps.telephone || '').replace(/\D/g, '') : '';
+        /* Un nom, et un moyen de répondre : e-mail ou téléphone ; celui qui est donné doit être valable */
+        if (!corps || !t2(corps.nom, 120) || (!mail && !telChiffres) || (mail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) || (telChiffres && telChiffres.length < 6)) return json({ ok: false, erreur: 'Demande incomplète.' }, 400);
         const Lb = libellesDemande(Cc);
         const lignes = [[Lb.societe, t2(corps.societe, 160)], ['E-mail', t2(corps.email, 200)], ['Téléphone', t2(corps.telephone, 40)], [Lb.type, t2(corps.type, 80)], [Lb.surface, t2(corps.surface, 60)], [Lb.ville, t2(corps.ville, 120)], [Lb.message, t2(corps.message, 3000)]].filter(([, v]) => v);
         const id = (9999999999999 - Date.now()).toString(36) + '-' + Math.random().toString(36).slice(2, 8);
         const dem = { id, recue: new Date().toISOString(), statut: 'nouvelle', nom: t2(corps.nom, 120), societe: t2(corps.societe, 160), telephone: t2(corps.telephone, 40), email: t2(corps.email, 200), lignes };
         await env.CONTENU.put('demande:' + id, JSON.stringify(dem), { expirationTtl: 180 * 24 * 3600 });
+        /* Facultatif : copie de la demande vers un outil d'automatisation (n8n), si les deux Secrets existent. Un échec ne gêne pas le visiteur. */
+        if (env.N8N_WEBHOOK_URL && env.N8N_SECRET && /^https?:\/\//.test(env.N8N_WEBHOOK_URL)) {
+          const envoi = { ...dem, type: t2(corps.type, 80), ville: t2(corps.ville, 120), message: t2(corps.message, 3000), site: url.origin };
+          ctx.waitUntil(fetch(env.N8N_WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Webhook-Secret': env.N8N_SECRET }, body: JSON.stringify(envoi), signal: AbortSignal.timeout(10000) }).catch(() => {}));
+        }
         return json({ ok: true });
       }
 

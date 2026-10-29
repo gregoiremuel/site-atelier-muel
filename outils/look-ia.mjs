@@ -18,7 +18,9 @@ const note = (poids, titre, detail, correction) => trouvailles.push({ poids, tit
 /* ---------- Textes ---------- */
 const pages = routes(C).filter((r) => !r.includes('?')).map((r) => [r, rendrePage(C, r, { maquette: false }).html]);
 const texte = (html) => html.replace(/<(script|style)[\s\S]*?<\/\1>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&#160;| | /g, ' ').replace(/&amp;/g, '&').replace(/&#39;|&rsquo;/g, '’').replace(/\s+/g, ' ');
-const corps = (html) => html.replace(/<(footer|nav|summary|button|select|label)[\s\S]*?<\/\1>/g, ' ').replace(/«[^»]*»/g, ' ').replace(/<figure class="feuille">[\s\S]*?<\/figure>/g, ' ').replace(/<a [^>]*class="btn[^"]*"[\s\S]*?<\/a>/g, ' ');
+const corps = (html) => html.replace(/<(footer|nav|summary|button|select|label)[\s\S]*?<\/\1>/g, ' ').replace(/«[^»]*»/g, ' ').replace(/<figure class="feuille">[\s\S]*?<\/figure>/g, ' ')
+  /* Le bloc signé « Qui fait votre site » et la phrase du téléphone parlent à la première personne exprès : la personne derrière l'activité, identifiée */
+  .replace(/<section class="sec personne"[\s\S]*?<\/section>/g, ' ').replace(/<p class="hero-tel">[\s\S]*?<\/p>/g, ' ').replace(/<a [^>]*class="btn[^"]*"[\s\S]*?<\/a>/g, ' ');
 const tout = pages.map(([r, h]) => [r, texte(corps(h))]);
 
 const PREMIERE = /\b(je|j[’']|moi|m[’']|mon|ma|mes)\b|\bJe\b/gi;

@@ -45,12 +45,16 @@
     "intro_titre": "",
     "intro_texte": "",
     "photo_intro": "",
-    "essai_titre": "Quatre sites d’exemple",
-    "essai_texte": "Ouvrez-en un, touchez « Essayer la page de modification », changez un horaire ou une photo : rien n’est publié. Les entreprises n’existent pas.",
+    "essai_titre": "Essayez avant de décider",
+    "essai_texte": "Quatre sites d’exemple, un par métier. Ouvrez-en un, touchez « Essayer la page de modification », changez un horaire ou une photo : rien n’est publié, tout reste dans votre navigateur. Les entreprises n’existent pas.",
     "appel_titre": "Une maquette de votre site, gratuite, en 48 h",
     "appel_texte": "Dites-nous qui vous êtes et ce que vous faites : nous préparons une maquette à votre nom. Elle ne vous plaît pas ? Vous ne nous devez rien.",
     "photo_appel": "",
-    "cartes": false
+    "cartes": false,
+    "hero_tel": "Ou appelez-moi directement :",
+    "personne_titre": "Qui fait votre site",
+    "personne_texte": "Je m’appelle Grégoire Muel. Je travaille seul, depuis Auteuil, dans le 16e arrondissement de Paris : c’est moi qui prépare votre maquette, qui fais votre site et qui vous réponds.\n\nPas de standard ni de commercial : vous m’appelez, et vous parlez à la personne qui fait le travail.",
+    "essai_points": true
   },
   "chiffres": [
     {

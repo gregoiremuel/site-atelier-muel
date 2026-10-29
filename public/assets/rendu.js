@@ -90,7 +90,7 @@ function src(p, largeur) {
   if (/^(https:\/\/|data:image\/|\/photos\/|\/assets\/)/i.test(p)) return p;
   return '';
 }
-/*DIM-DEBUT*/const DIM = {"/assets/photos/accueil.jpg":[1200,1500],"/assets/photos/gregoire-portrait.jpg":[640,640],"/assets/photos/intro.jpg":[1200,1500],"/assets/photos/mobile-atelier.jpg":[520,1126],"/assets/photos/mobile-fleuriste.jpg":[520,1126],"/assets/photos/mobile-plombier.jpg":[520,1126],"/assets/photos/mobile-restaurant.jpg":[520,1126],"/assets/photos/offre-catalogue.jpg":[1200,1500],"/assets/photos/offre-entreprise.jpg":[1200,1500],"/assets/photos/offre-vitrine.jpg":[1200,1500],"/assets/photos/paris-16e-cafe.jpg":[1600,1066],"/assets/photos/partage.jpg":[1200,630],"/assets/photos/real-atelier-exemple-2.jpg":[1600,1000],"/assets/photos/real-atelier-exemple.jpg":[1600,1000],"/assets/photos/real-fleuriste-exemple-2.jpg":[1600,1000],"/assets/photos/real-fleuriste-exemple.jpg":[1600,1000],"/assets/photos/real-operia-2.jpg":[1600,1000],"/assets/photos/real-operia.jpg":[1600,1000],"/assets/photos/real-plombier-exemple-2.jpg":[1600,1000],"/assets/photos/real-plombier-exemple.jpg":[1600,1000],"/assets/photos/real-restaurant-exemple-2.jpg":[1600,1000],"/assets/photos/real-restaurant-exemple.jpg":[1600,1000],"/assets/photos/travail-clavier.jpg":[1200,800],"/assets/photos/tuile-atelier-exemple.jpg":[780,974],"/assets/photos/tuile-fleuriste-exemple.jpg":[780,974],"/assets/photos/tuile-plombier-exemple.jpg":[780,974],"/assets/photos/tuile-restaurant-exemple.jpg":[780,974]};/*DIM-FIN*/
+/*DIM-DEBUT*/const DIM = {"/assets/photos/accueil-1000w.jpg":[1000,1250],"/assets/photos/accueil-300w.jpg":[300,375],"/assets/photos/accueil-600w.jpg":[600,750],"/assets/photos/accueil.jpg":[1200,1500],"/assets/photos/gregoire-portrait-300w.jpg":[300,300],"/assets/photos/gregoire-portrait.jpg":[640,640],"/assets/photos/intro-1000w.jpg":[1000,1250],"/assets/photos/intro-300w.jpg":[300,375],"/assets/photos/intro-600w.jpg":[600,750],"/assets/photos/intro.jpg":[1200,1500],"/assets/photos/mobile-atelier-300w.jpg":[300,650],"/assets/photos/mobile-atelier.jpg":[520,1126],"/assets/photos/mobile-fleuriste-300w.jpg":[300,650],"/assets/photos/mobile-fleuriste.jpg":[520,1126],"/assets/photos/mobile-plombier-300w.jpg":[300,650],"/assets/photos/mobile-plombier.jpg":[520,1126],"/assets/photos/mobile-restaurant-300w.jpg":[300,650],"/assets/photos/mobile-restaurant.jpg":[520,1126],"/assets/photos/offre-catalogue-1000w.jpg":[1000,1250],"/assets/photos/offre-catalogue-300w.jpg":[300,375],"/assets/photos/offre-catalogue-600w.jpg":[600,750],"/assets/photos/offre-catalogue.jpg":[1200,1500],"/assets/photos/offre-entreprise-1000w.jpg":[1000,1250],"/assets/photos/offre-entreprise-300w.jpg":[300,375],"/assets/photos/offre-entreprise-600w.jpg":[600,750],"/assets/photos/offre-entreprise.jpg":[1200,1500],"/assets/photos/offre-vitrine-1000w.jpg":[1000,1250],"/assets/photos/offre-vitrine-300w.jpg":[300,375],"/assets/photos/offre-vitrine-600w.jpg":[600,750],"/assets/photos/offre-vitrine.jpg":[1200,1500],"/assets/photos/paris-16e-cafe-1000w.jpg":[1000,666],"/assets/photos/paris-16e-cafe-300w.jpg":[300,200],"/assets/photos/paris-16e-cafe-600w.jpg":[600,400],"/assets/photos/paris-16e-cafe.jpg":[1600,1066],"/assets/photos/partage-1000w.jpg":[1000,525],"/assets/photos/partage-300w.jpg":[300,158],"/assets/photos/partage-600w.jpg":[600,315],"/assets/photos/partage.jpg":[1200,630],"/assets/photos/real-atelier-exemple-1000w.jpg":[1000,625],"/assets/photos/real-atelier-exemple-2-1000w.jpg":[1000,625],"/assets/photos/real-atelier-exemple-2-300w.jpg":[300,188],"/assets/photos/real-atelier-exemple-2-600w.jpg":[600,375],"/assets/photos/real-atelier-exemple-2.jpg":[1600,1000],"/assets/photos/real-atelier-exemple-300w.jpg":[300,188],"/assets/photos/real-atelier-exemple-600w.jpg":[600,375],"/assets/photos/real-atelier-exemple.jpg":[1600,1000],"/assets/photos/real-fleuriste-exemple-1000w.jpg":[1000,625],"/assets/photos/real-fleuriste-exemple-2-1000w.jpg":[1000,625],"/assets/photos/real-fleuriste-exemple-2-300w.jpg":[300,188],"/assets/photos/real-fleuriste-exemple-2-600w.jpg":[600,375],"/assets/photos/real-fleuriste-exemple-2.jpg":[1600,1000],"/assets/photos/real-fleuriste-exemple-300w.jpg":[300,188],"/assets/photos/real-fleuriste-exemple-600w.jpg":[600,375],"/assets/photos/real-fleuriste-exemple.jpg":[1600,1000],"/assets/photos/real-operia-1000w.jpg":[1000,625],"/assets/photos/real-operia-2-1000w.jpg":[1000,625],"/assets/photos/real-operia-2-300w.jpg":[300,188],"/assets/photos/real-operia-2-600w.jpg":[600,375],"/assets/photos/real-operia-2.jpg":[1600,1000],"/assets/photos/real-operia-300w.jpg":[300,188],"/assets/photos/real-operia-600w.jpg":[600,375],"/assets/photos/real-operia.jpg":[1600,1000],"/assets/photos/real-plombier-exemple-1000w.jpg":[1000,625],"/assets/photos/real-plombier-exemple-2-1000w.jpg":[1000,625],"/assets/photos/real-plombier-exemple-2-300w.jpg":[300,188],"/assets/photos/real-plombier-exemple-2-600w.jpg":[600,375],"/assets/photos/real-plombier-exemple-2.jpg":[1600,1000],"/assets/photos/real-plombier-exemple-300w.jpg":[300,188],"/assets/photos/real-plombier-exemple-600w.jpg":[600,375],"/assets/photos/real-plombier-exemple.jpg":[1600,1000],"/assets/photos/real-restaurant-exemple-1000w.jpg":[1000,625],"/assets/photos/real-restaurant-exemple-2-1000w.jpg":[1000,625],"/assets/photos/real-restaurant-exemple-2-300w.jpg":[300,188],"/assets/photos/real-restaurant-exemple-2-600w.jpg":[600,375],"/assets/photos/real-restaurant-exemple-2.jpg":[1600,1000],"/assets/photos/real-restaurant-exemple-300w.jpg":[300,188],"/assets/photos/real-restaurant-exemple-600w.jpg":[600,375],"/assets/photos/real-restaurant-exemple.jpg":[1600,1000],"/assets/photos/travail-clavier-1000w.jpg":[1000,667],"/assets/photos/travail-clavier-300w.jpg":[300,200],"/assets/photos/travail-clavier-600w.jpg":[600,400],"/assets/photos/travail-clavier.jpg":[1200,800],"/assets/photos/tuile-atelier-exemple-300w.jpg":[300,375],"/assets/photos/tuile-atelier-exemple-600w.jpg":[600,749],"/assets/photos/tuile-atelier-exemple.jpg":[780,974],"/assets/photos/tuile-fleuriste-exemple-300w.jpg":[300,375],"/assets/photos/tuile-fleuriste-exemple-600w.jpg":[600,749],"/assets/photos/tuile-fleuriste-exemple.jpg":[780,974],"/assets/photos/tuile-plombier-exemple-300w.jpg":[300,375],"/assets/photos/tuile-plombier-exemple-600w.jpg":[600,749],"/assets/photos/tuile-plombier-exemple.jpg":[780,974],"/assets/photos/tuile-restaurant-exemple-300w.jpg":[300,375],"/assets/photos/tuile-restaurant-exemple-600w.jpg":[600,749],"/assets/photos/tuile-restaurant-exemple.jpg":[780,974]};/*DIM-FIN*/
 const dimAttr = (u) => { const d = DIM[u]; return d ? ` width="${d[0]}" height="${d[1]}"` : ''; };
 const essai = (p) => /^https:\/\/images\.unsplash\.com\//.test(String(p || ''));
 /* Vidéo de fond (accueil) : fichier envoyé depuis la page de modification, lien https .mp4/.webm, ou fichier du site */
@@ -102,9 +102,19 @@ function videoFond(v, poster, cls) {
   const type = /^data:video\/webm|\.webm(\?|$)/i.test(s) ? 'video/webm' : 'video/mp4';
   return `<video class="${cls}" autoplay muted loop playsinline preload="auto"${poster ? ` poster="${esc(poster)}"` : ''} aria-hidden="true" data-video-fond><source src="${esc(s)}" type="${type}"></video><button class="video-pause" type="button" data-video-pause aria-label="Mettre la vidéo en pause" aria-pressed="false">${ICO_PAUSE}</button>`;
 }
-function img(p, largeur, cls, prio, alt) {
+/* Déclinaisons légères d'une photo du site (nom-300w.jpg…, fabriquées par npm run dimensions) : le navigateur choisit selon l'écran */
+const SIZES = '(max-width: 700px) 100vw, 60vw';
+function srcset(s) {
+  const m = /^(\/assets\/.+?)(\.jpe?g)$/i.exec(s);
+  if (!m || !DIM[s]) return '';
+  const v = Object.keys(DIM).map((k) => { const x = new RegExp('^' + m[1].replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '-(\\d+)w' + m[2].replace('.', '\\.') + '$').exec(k); return x ? [k, +x[1]] : null; }).filter(Boolean);
+  return v.length ? [...v.sort((a, b) => a[1] - b[1]), [s, DIM[s][0]]].map(([u, w]) => `${u} ${w}w`).join(', ') : '';
+}
+function img(p, largeur, cls, prio, alt, sizes) {
   const s = src(p, largeur);
-  return s ? `<img class="${cls}" src="${esc(s)}"${dimAttr(s)} alt="${esc(alt || '')}" ${prio ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">` : '';
+  if (!s) return '';
+  const set = srcset(s);
+  return `<img class="${cls}" src="${esc(s)}"${set ? ` srcset="${esc(set)}" sizes="${esc(sizes || SIZES)}"` : ''}${dimAttr(s)} alt="${esc(alt || '')}" ${prio ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 }
 /* Une photo de réalisation qui n'est pas encore celle du chantier le dit */
 const illus = (p) => (essai(p) ? '<span class="illus">Photo d’illustration</span>' : '');
@@ -343,11 +353,17 @@ const garHero = (C) => (Array.isArray((C.accueil || {}).reperes) ? C.accueil.rep
 
 /* Composition de l'accueil sans grande photo : un ordinateur et deux téléphones montrant des sites d'exemple (captures des démonstrations), sur un fond uni. Aucun faux client. */
 const compoHero = (essais) => {
+  /* Quatre démonstrations ou plus avec leur capture « téléphone » : une planche de téléphones, chacun ouvre sa démonstration (gabarit édition) */
+  const tels4 = essais.filter((x) => x.lien && (x.photos || [])[2]).slice(0, 4);
+  if (tels4.length >= 3) return `<div class="hero-compo hero-planche">
+      <ul class="planche" aria-label="Démonstrations à essayer (entreprises imaginaires)">${tels4.map((x, i) => `<li><a class="planche-tel" href="${esc(x.lien)}"${/^https?:/.test(x.lien) ? ' target="_blank" rel="noopener"' : ''}><span class="planche-ecran">${img(x.photos[2], 500, 'compo-img', i < 2, '', '(max-width: 600px) 42vw, 130px')}</span><span class="planche-nom">${esc(String(x.nom).split(',')[0])}</span></a></li>`).join('')}</ul>
+      <p class="planche-note">Démonstrations : entreprises imaginaires. Touchez un téléphone pour l’essayer.</p>
+    </div>`;
   const bureau = (essais[0] || {}).photos && essais[0].photos[0], tels = essais.slice(1, 3).map((x) => (x.photos || [])[2] || x.apercu).filter(Boolean);
   if (!bureau || tels.length < 2) return '';
   return `<div class="hero-compo" role="group" aria-label="Aperçus de sites d’exemple sur ordinateur et sur téléphone">
-      <span class="compo-ordi"><span class="compo-ecran">${img(bureau, 1000, 'compo-img', true, '')}</span><span class="compo-socle"></span></span>
-      ${tels.map((v, i) => `<span class="compo-tel compo-t${i + 1}">${img(v, 500, 'compo-img', false, '')}</span>`).join('')}
+      <span class="compo-ordi"><span class="compo-ecran">${img(bureau, 1000, 'compo-img', true, '', '(max-width: 700px) 85vw, 40vw')}</span><span class="compo-socle"></span></span>
+      ${tels.map((v, i) => `<span class="compo-tel compo-t${i + 1}">${img(v, 500, 'compo-img', false, '', '(max-width: 700px) 25vw, 140px')}</span>`).join('')}
     </div>`;
 };
 
@@ -375,6 +391,7 @@ function accueil(C, D) {
         <a class="btn btn-or" href="/contact">${esc(libelle(C, 'bouton_principal'))}</a>
         ${D.realisations.length ? `<a class="btn btn-ligne-clair" href="/realisations">${esc(libelle(C, 'bouton_realisations'))}</a>` : ''}
       </div>
+      ${A.hero_tel && G.telephone ? `<p class="hero-tel">${esc(A.hero_tel)} <a href="tel:${esc(String(G.telephone).replace(/[^\d+]/g, ''))}">${esc(G.telephone)}</a></p>` : ''}
       ${garHero(C).length ? `<ul class="hero-gar">${garHero(C).map((g) => { const [v, ...r] = g.split('|'); return r.length ? `<li><b>${esc(v.trim())}</b><span>${esc(r.join('|').trim())}</span></li>` : `<li>${esc(g)}</li>`; }).join('')}</ul>` : ''}
     </div>
   </section>
@@ -400,11 +417,22 @@ function accueil(C, D) {
       </ol>
     </div>
   </section>` : ''}
+  ${A.personne_titre && A.personne_texte ? `
+  <section class="sec personne" aria-labelledby="t-personne">
+    <div class="wrap personne-grille">
+      ${src((C.presentation || {}).photo, 600) ? `<figure class="personne-fig">${img(C.presentation.photo, 600, 'personne-img', false, (C.equipe || [])[0] && C.equipe[0].nom ? 'Portrait de ' + C.equipe[0].nom : '', '(max-width: 700px) 40vw, 260px')}</figure>` : ''}
+      <div class="personne-txt">
+        <h2 id="t-personne">${esc(A.personne_titre)}</h2>
+        <div class="prose">${texteRiche(A.personne_texte)}</div>
+        <p class="personne-actions">${G.telephone ? `<a class="btn" href="tel:${esc(String(G.telephone).replace(/[^\d+]/g, ''))}">${ico.tel || ''}Appeler ${esc(G.telephone)}</a>` : ''}<a class="lien" href="/agence">${esc(libelle(C, 'intro_lien'))} ${ico.fleche}</a></p>
+      </div>
+    </div>
+  </section>` : ''}
   ${essais.length && A.essai_titre ? `
   <section class="sec essai" aria-labelledby="t-essai">
     <div class="wrap essai-grille">
       <div class="essai-txt">${titreSection(libelle(C, 'essai_sur'), A.essai_titre, 't-essai')}${A.essai_texte ? `<div class="prose">${texteRiche(A.essai_texte)}</div>` : ''}</div>
-      <ul class="essai-liens">${essais.map((x) => `<li><a href="${esc(x.lien)}"${/^https?:/.test(x.lien) ? ' target="_blank" rel="noopener"' : ''} data-ouvrir>${x.apercu || x.photos[0] ? `<span class="essai-vue">${img(x.apercu || x.photos[0], 900, 'essai-img', false, '')}</span>` : ''}<span class="essai-corps"><b>${esc(x.nom)}</b>${x.accroche ? `<small>${esc(x.accroche)}</small>` : ''}</span><span class="essai-act">${esc(x.lien_texte || 'Ouvrir')} ${ico.fleche}</span></a></li>`).join('')}</ul>
+      <ul class="essai-liens">${essais.map((x) => `<li><a href="${esc(x.lien)}"${/^https?:/.test(x.lien) ? ' target="_blank" rel="noopener"' : ''} data-ouvrir>${!A.essai_points && (x.apercu || x.photos[0]) ? `<span class="essai-vue">${img(x.apercu || x.photos[0], 900, 'essai-img', false, '', '(max-width: 700px) 70vw, 25vw')}</span>` : ''}<span class="essai-corps"><b>${esc(x.nom)}</b>${x.accroche ? `<small>${esc(x.accroche)}</small>` : ''}${A.essai_points && (x.interventions || []).length ? `<span class="essai-points"><span class="essai-points-t">À essayer</span>${x.interventions.slice(0, 3).map((t) => `<span>${esc(t)}</span>`).join('')}</span>` : ''}</span><span class="essai-act">${esc(x.lien_texte || 'Ouvrir')} ${ico.fleche}</span></a></li>`).join('')}</ul>
     </div>
   </section>` : ''}
   ${choix.length ? `
@@ -675,16 +703,17 @@ function pageContact(C, D) {
   </section>
   <section class="sec sec-serre">
     <div class="wrap contact-grille">
-      ${K.actif === false ? `<div class="demande"><p>Le formulaire est fermé pour le moment : appelez-nous ou écrivez-nous.</p></div>` : `<form class="demande" id="demande" novalidate>
+      ${K.actif === false ? `<div class="demande"><p>Le formulaire est fermé pour le moment : appelez-nous ou écrivez-nous.</p></div>` : `<form class="demande" id="demande" method="post" novalidate>
         <div class="champs">
           <div class="champ"><label for="d-nom">Nom et prénom</label><input class="saisie" id="d-nom" name="nom" autocomplete="name" required></div>
           ${L('form_societe') ? `<div class="champ"><label for="d-soc">${esc(L('form_societe'))} <span class="fac">(facultatif)</span></label><input class="saisie" id="d-soc" name="societe" autocomplete="organization"></div>` : ''}
-          <div class="champ"><label for="d-mail">E-mail</label><input class="saisie" id="d-mail" name="email" type="email" autocomplete="email" required></div>
-          <div class="champ"><label for="d-tel">Téléphone</label><input class="saisie" id="d-tel" name="telephone" type="tel" autocomplete="tel" inputmode="tel" required></div>
-          ${types.length && L('form_type') ? `<div class="champ"><label for="d-type">${esc(L('form_type'))}</label><select class="saisie" id="d-type" name="type"><option value="">Choisir</option>${types.map((t) => `<option>${esc(t)}</option>`).join('')}</select></div>` : ''}
+          <p class="champ large champ-note" id="d-joindre">Pour vous répondre : un e-mail <b>ou</b> un téléphone suffit.</p>
+          <div class="champ"><label for="d-tel">Téléphone</label><input class="saisie" id="d-tel" name="telephone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="d-joindre"></div>
+          <div class="champ"><label for="d-mail">E-mail</label><input class="saisie" id="d-mail" name="email" type="email" autocomplete="email" aria-describedby="d-joindre"></div>
+          ${types.length && L('form_type') ? `<div class="champ"><label for="d-type">${esc(L('form_type'))} <span class="fac">(facultatif)</span></label><select class="saisie" id="d-type" name="type"><option value="">Choisir</option>${types.map((t) => `<option>${esc(t)}</option>`).join('')}</select></div>` : ''}
           ${L('form_surface') ? `<div class="champ"><label for="d-surf">${esc(L('form_surface'))} <span class="fac">(facultatif)</span></label><input class="saisie" id="d-surf" name="surface" placeholder="${esc(L('form_surface_exemple'))}"></div>` : ''}
-          ${L('form_ville') ? `<div class="champ large"><label for="d-ville">${esc(L('form_ville'))}</label><input class="saisie" id="d-ville" name="ville" autocomplete="address-level2"></div>` : ''}
-          <div class="champ large"><label for="d-msg">${esc(L('form_message'))}</label><textarea class="saisie" id="d-msg" name="message" rows="6" placeholder="${esc(L('form_message_exemple'))}"></textarea></div>
+          ${L('form_ville') ? `<div class="champ large"><label for="d-ville">${esc(L('form_ville'))} <span class="fac">(facultatif)</span></label><input class="saisie" id="d-ville" name="ville" autocomplete="address-level2"></div>` : ''}
+          <div class="champ large"><label for="d-msg">${esc(L('form_message'))} <span class="fac">(facultatif)</span></label><textarea class="saisie" id="d-msg" name="message" rows="6" placeholder="${esc(L('form_message_exemple'))}"></textarea></div>
         </div>
         <input type="checkbox" name="botcheck" class="piege" tabindex="-1" autocomplete="off" aria-hidden="true">
         <p class="demande-erreur" role="alert" hidden></p>
@@ -760,7 +789,7 @@ function pageConfidentialite(C) {
     <h2>La mesure des visites</h2>
     <p>Le site compte les pages vues, jour par jour : combien de visites, quelles pages, et d’où l’on vient (moteur de recherche, autre site, adresse tapée). Il n’enregistre ni adresse IP, ni identifiant, et ne dépose rien dans votre navigateur : un visiteur ne peut pas être reconnu d’un jour à l’autre. Ces totaux ne servent qu’à savoir ce qui est utile.</p>
     <h2>Les demandes de contact</h2>
-    <p>Quand vous envoyez une demande, les informations du formulaire sont transmises à ${esc(G.nom || 'l’agence')}${K.cle_web3forms ? ', par e-mail via le service Web3Forms' : ''}. Elles servent uniquement à répondre à votre demande et sont conservées 180 jours au plus dans la page de modification du site, sauf si un contrat est conclu.</p>
+    <p>Quand vous envoyez une demande, les informations du formulaire sont transmises à ${esc(G.nom || 'l’agence')}${K.cle_web3forms ? ', par e-mail via le service Web3Forms' : ''}. Elles servent uniquement à répondre à votre demande et sont conservées 180 jours au plus dans la page de modification du site, sauf si un contrat est conclu.</p>${K.traitement ? `\n    <p>${esc(K.traitement)}</p>` : ''}
     <h2>Vos droits</h2>
     <p>Vous pouvez demander l’accès, la correction ou la suppression de vos données${G.email ? ` en écrivant à <a href="mailto:${esc(G.email)}">${esc(G.email)}</a>` : ''}, et saisir la CNIL.</p>
   </div></section>`,

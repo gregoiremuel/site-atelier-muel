@@ -166,16 +166,15 @@
     if (e) e.preventDefault();
     erreur.hidden = true;
     var d = { nom: val('nom'), societe: val('societe'), email: val('email'), telephone: val('telephone'), type: val('type'), surface: val('surface'), ville: val('ville'), message: val('message') };
-    var manque = [];
-    if (!d.nom) manque.push('votre nom');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) manque.push('une adresse e-mail valide');
-    if (d.telephone.replace(/\D/g, '').length < 6) manque.push('un numéro de téléphone');
+    /* Un nom, et un moyen de vous répondre : e-mail ou téléphone (l'un des deux suffit ; celui qui est écrit doit être valable) */
+    var mailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email), telOk = d.telephone.replace(/\D/g, '').length >= 6;
+    var manque = [], fautifs = [];
+    if (!d.nom) { manque.push('votre nom'); fautifs.push('nom'); }
+    if (!d.email && !d.telephone) { manque.push('un e-mail ou un numéro de téléphone pour vous répondre'); fautifs.push('email'); }
+    if (d.email && !mailOk) { manque.push('une adresse e-mail valide'); fautifs.push('email'); }
+    if (d.telephone && !telOk) { manque.push('un numéro de téléphone complet'); fautifs.push('telephone'); }
     ['nom', 'email', 'telephone'].forEach(function (n) { if (form.elements[n]) form.elements[n].removeAttribute('aria-invalid'); });
     if (manque.length) {
-      var fautifs = [];
-      if (!d.nom) fautifs.push('nom');
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) fautifs.push('email');
-      if (d.telephone.replace(/\D/g, '').length < 6) fautifs.push('telephone');
       if (!erreur.id) erreur.id = 'demande-erreur';
       fautifs.forEach(function (n) { var c = form.elements[n]; if (c) { c.setAttribute('aria-invalid', 'true'); c.setAttribute('aria-describedby', erreur.id); } });
       montrer('Il manque ' + manque.join(', ') + '.');

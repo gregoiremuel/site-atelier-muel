@@ -30,7 +30,7 @@ const ELEMENTS = {
   references: ['nom', 'logo'],
 };
 /* Clés facultatives (ajoutées au moteur après Opéria : un contenu sans elles reste valide) */
-const FACULTATIVES = { '': ['libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier'], reglages: ['image_partage'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte', 'cartes'], mentions: ['tva', 'nom_commercial'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette', 'apercu'] };
+const FACULTATIVES = { '': ['libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier'], reglages: ['image_partage'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte', 'cartes', 'essai_points', 'hero_tel', 'personne_titre', 'personne_texte'], mentions: ['tva', 'nom_commercial'], contact: ['traitement'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette', 'apercu'] };
 const INTERDITS = [
   [/\bbienvenue\b/i, 'Bienvenue'], [/\bdécouvr(ez|ir)\b/i, 'Découvrez'], [/n['’]hésitez pas/i, 'N’hésitez pas'], [/au c(œ|oe)ur d/i, 'au cœur de'],
   [/\bvéritable/i, 'véritable'], [/\bincontournable/i, 'incontournable'], [/\bpassion/i, 'passion'], [/savoir-faire unique/i, 'savoir-faire unique'],
@@ -266,8 +266,15 @@ export function verifier(C) {
 
   /* Rendu réel de chaque page */
   try {
+    const pages = new Set(routes(C).map((r) => r.split('?')[0]));
+    const liensCasses = new Map();
     for (const r of routes(C)) {
       const { statut, html } = rendrePage(C, r, { maquette: true, css: '', js: '' });
+      /* Liens internes vers une page qui n'existe pas (offres, réalisations, pages par métier, textes) */
+      for (const m of html.matchAll(/<a [^>]*href="(\/[^"#?]*)/g)) {
+        const cible = m[1].replace(/\/$/, '') || '/';
+        if (!/^\/(assets|fonts|photos|demos|videos|api|admin)(\/|$)/.test(cible) && !/\.[a-z0-9]{2,4}$/i.test(cible) && !pages.has(cible)) liensCasses.set(cible, [...(liensCasses.get(cible) || []), r]);
+      }
       const sansScript = html.replace(/<script[\s\S]*?<\/script>/g, '');
       if (statut !== 200) E(`Rendu : ${r} répond ${statut}.`);
       if (/undefined|NaN|\[object Object\]|>null</.test(sansScript)) E(`Rendu : ${r} contient « undefined » ou « NaN ».`);
@@ -275,6 +282,7 @@ export function verifier(C) {
       const ld = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/.exec(html);
       if (ld) { try { JSON.parse(ld[1]); } catch (e) { E(`Rendu : données pour Google illisibles sur ${r}.`); } }
     }
+    for (const [cible, rs] of liensCasses) E(`Lien interne vers une page qui n’existe pas : ${cible} (sur ${rs.slice(0, 3).join(', ')}${rs.length > 3 ? '…' : ''}).`);
   } catch (e) { E('Le moteur n’arrive pas à fabriquer le site : ' + e.message); }
   return { erreurs, alertes, afaire };
 }

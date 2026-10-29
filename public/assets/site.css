@@ -1010,12 +1010,14 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition .intro-txt h2{font-size:clamp(1.75rem,3.2vw,2.5rem)}
 .g-edition .sec{padding:clamp(40px,5.5vw,76px) 0}
 .g-edition .sec-tete{margin-bottom:clamp(20px,3vw,36px)}
-/* Accueil : les quatre offres en lignes serrées, sans texte sur téléphone */
+/* Accueil : les quatre offres en lignes serrées sur téléphone, avec leur phrase « pour qui » (comprendre l'offre sans l'ouvrir) */
 @media (max-width:759px){
   .g-edition .metiers a{padding:16px 0}
-  .g-edition .metiers p:not(.metier-prix){display:none}
+  .g-edition .metiers p:not(.metier-prix){font-size:.9375rem;line-height:1.45;margin-top:4px}
   .g-edition .metiers h3{font-size:1.5rem}
 }
+/* Accueil : le titre et le texte du premier écran sont visibles dès le chargement (pas d'apparition animée) */
+.anime .g-edition .hero-txt > *,.g-edition.anime .hero-txt > *,.anime.g-edition .hero-txt > *{animation:none}
 /* Accueil : démonstrations en une ligne de quatre (bande qui défile sur téléphone) */
 .g-edition .essai-grille{grid-template-columns:minmax(0,1fr);gap:24px}
 .g-edition .essai-txt .prose{max-width:62ch}
@@ -1095,14 +1097,14 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition .tete-page h1{max-width:22ch}
 
 /* ====== Édition : compléments de composition (trame, aplats, sceau, pictogrammes, numérotation) ====== */
-.g-edition{--sable:#e4e9ef;--trame:radial-gradient(rgba(34,54,79,.34) 1.1px,transparent 1.2px) 0 0/14px 14px}
+.g-edition{--sable:#e4e9ef}
 .g-edition .clair{background:var(--sable)}
 
 /* Composition de l'accueil : appareils sur un fond uni */
 .g-edition .hero-compo{--noir:#12161c;position:relative;grid-column:1;width:100%;max-width:560px;aspect-ratio:1/.98;justify-self:center;margin-top:12px;background:#dde4ea;overflow:hidden;isolation:isolate}
 .g-edition .compo-ordi{position:absolute;left:7%;top:9%;width:86%;display:block}
 .g-edition .compo-ecran{display:block;aspect-ratio:16/10;background:var(--noir);border:7px solid var(--noir);border-bottom-width:9px;border-radius:8px 8px 2px 2px;overflow:hidden;box-shadow:0 14px 30px rgba(16,28,44,.22)}
-.g-edition .compo-socle{display:block;height:9px;margin:0 -4%;background:linear-gradient(#c9d0d8,#aeb7c1);border-radius:0 0 12px 12px}
+.g-edition .compo-socle{display:block;height:9px;margin:0 -4%;background:#b9c2cc;border-radius:0 0 12px 12px}
 .g-edition .compo-tel{position:absolute;display:block;width:27%;aspect-ratio:9/19;background:var(--noir);border:6px solid var(--noir);border-radius:20px;overflow:hidden;box-shadow:0 16px 30px rgba(16,28,44,.3)}
 .g-edition .compo-t1{left:13%;bottom:5%;z-index:2}
 .g-edition .compo-t2{right:11%;bottom:8%;z-index:3}
@@ -1220,3 +1222,42 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition .hero:has(.hero-compo) .hero-gar{border-top-color:rgba(16,18,22,.28)}
 .g-edition .hero:has(.hero-compo) .hero-gar li + li{border-left-color:rgba(16,18,22,.18)}
 .g-edition .hero:has(.hero-compo) + .sec{padding-top:clamp(28px,4vw,56px)}
+/* Formulaire : la phrase « un e-mail ou un téléphone suffit » */
+.champ-note{margin:4px 0 -6px;font-size:.9375rem;color:var(--gris)}
+/* ====== Édition : planche des démonstrations, téléphone direct, « Qui fait votre site », points à essayer (29/10/2026) ====== */
+.g-edition .hero-planche{aspect-ratio:auto;overflow:visible;background:none;max-width:560px;margin-top:4px}
+.g-edition .hero:has(.hero-planche) .hero-compo{background:none}
+.g-edition .planche{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.6vw,18px);align-items:start}
+.g-edition .planche li{min-width:0}
+.g-edition .planche li:nth-child(2n){margin-top:clamp(18px,3vw,40px)}
+.g-edition .planche-tel{display:block;text-decoration:none;color:var(--encre)}
+.g-edition .planche-ecran{display:block;aspect-ratio:9/19;background:var(--noir);border:5px solid var(--noir);border-radius:18px;overflow:hidden;transition:transform .3s cubic-bezier(.2,.65,.2,1)}
+.g-edition .planche-ecran img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.g-edition .planche-nom{display:block;margin-top:10px;font-size:.9375rem;font-weight:600;line-height:1.25;text-decoration:underline;text-decoration-color:var(--bleu);text-decoration-thickness:2px;text-underline-offset:.3em}
+.g-edition .planche-tel:hover .planche-ecran{transform:translateY(-4px)}
+.g-edition .planche-tel:hover .planche-nom{color:var(--bleu)}
+.g-edition .planche-note{margin:16px 0 0;font-size:.875rem;color:var(--gris)}
+@media (max-width:600px){
+  .g-edition .hero-planche{max-width:none;width:100%;justify-self:stretch}
+  .g-edition .planche{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:40vw;overflow-x:auto;scroll-snap-type:x mandatory;margin-right:calc(-1 * var(--gut));padding:0 var(--gut) 8px 0;scrollbar-width:none}
+  .g-edition .planche li{scroll-snap-align:start}
+  .g-edition .planche li:nth-child(2n){margin-top:0}
+}
+.g-edition .hero-tel{grid-column:1;margin:-8px 0 0;font-size:1rem;color:var(--gris)}
+.g-edition .hero-tel a{color:var(--encre);font-weight:600;white-space:nowrap}
+@media (min-width:900px){.g-edition .hero:has(.hero-compo) .hero-tel{grid-row:4}.g-edition .hero:has(.hero-compo) .hero-gar{grid-row:5}.g-edition .hero:has(.hero-compo) .hero-compo{grid-row:1 / span 4}}
+@media (max-width:899px){.g-edition .hero-tel{order:4}}
+.g-edition .personne{border-top:var(--fil)}
+.g-edition .personne-grille{display:grid;grid-template-columns:minmax(0,1fr);gap:24px 56px;align-items:center}
+.g-edition .personne-fig{margin:0;width:min(220px,55vw)}
+.g-edition .personne-img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border:var(--fil);filter:grayscale(.15)}
+.g-edition .personne-txt h2{margin:0 0 14px}
+.g-edition .personne-txt .prose{max-width:56ch}
+.g-edition .personne-actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin:24px 0 0}
+.g-edition .personne-actions .btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6}
+@media (min-width:760px){.g-edition .personne-grille{grid-template-columns:260px minmax(0,1fr)}.g-edition .personne-fig{width:100%}}
+.g-edition .essai-points{display:grid;gap:6px;margin-top:14px;padding-top:12px;border-top:var(--fil);font-size:.9375rem;line-height:1.4;color:var(--encre)}
+.g-edition .essai-points-t{font-weight:600;color:var(--gris)}
+.g-edition .essai-points span:not(.essai-points-t)::before{content:"";display:inline-block;width:6px;height:6px;margin:0 10px 2px 0;background:var(--bleu)}
+@media (prefers-reduced-motion:reduce){.g-edition .planche-ecran{transition:none}}
+.g-edition .essai-points span:not(.essai-points-t){padding-left:16px;text-indent:-16px}

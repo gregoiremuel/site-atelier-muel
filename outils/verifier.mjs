@@ -30,7 +30,7 @@ const ELEMENTS = {
   references: ['nom', 'logo'],
 };
 /* Clés facultatives (ajoutées au moteur après Opéria : un contenu sans elles reste valide) */
-const FACULTATIVES = { '': ['libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier'], reglages: ['image_partage'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte', 'cartes', 'essai_points', 'hero_tel', 'personne_titre', 'personne_texte'], mentions: ['tva', 'nom_commercial'], contact: ['traitement'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette', 'apercu'] };
+const FACULTATIVES = { '': ['libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier', 'actualites'], reglages: ['image_partage'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte', 'cartes', 'essai_points', 'hero_tel', 'personne_titre', 'personne_texte', 'actualites'], mentions: ['tva', 'nom_commercial'], contact: ['traitement'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette', 'apercu'] };
 const INTERDITS = [
   [/\bbienvenue\b/i, 'Bienvenue'], [/\bdécouvr(ez|ir)\b/i, 'Découvrez'], [/n['’]hésitez pas/i, 'N’hésitez pas'], [/au c(œ|oe)ur d/i, 'au cœur de'],
   [/\bvéritable/i, 'véritable'], [/\bincontournable/i, 'incontournable'], [/\bpassion/i, 'passion'], [/savoir-faire unique/i, 'savoir-faire unique'],
@@ -144,6 +144,29 @@ export function verifier(C) {
     ['a_la_une', 'visible'].forEach((k) => { if (typeof x[k] !== 'boolean') E(`${n}.${k} doit valoir true ou false.`); });
     if (x.annee && !/^(19|20)\d\d$/.test(x.annee)) E(`${n}.annee : quatre chiffres (ou vide).`);
   });
+  /* Actualités (facultatives) : titre, date AAAA-MM-JJ, adresse libre, réalisation liée existante */
+  if ('actualites' in C) {
+    if (!Array.isArray(C.actualites)) E('« actualites » doit être une liste.');
+    else {
+      const idsA = new Set(), idsR = new Set(C.realisations.map((x) => x.id));
+      C.actualites.forEach((x, i) => {
+        const n = `actualites[${i}] (${(x && x.titre) || '?'})`;
+        if (!x || typeof x !== 'object') { E(`actualites[${i}] doit être un objet.`); return; }
+        Object.keys(x).filter((k) => !['id', 'titre', 'date', 'texte', 'photos', 'realisation', 'visible'].includes(k)).forEach((k) => E(`Clé inconnue : actualites[${i}].${k}`));
+        if (vide(x.titre)) E(`${n} : titre vide.`);
+        if (!x.id || !/^[a-z0-9-]{3,60}$/.test(x.id)) E(`${n}.id : lettres minuscules, chiffres et tirets (3 à 60).`);
+        else if (idsA.has(x.id)) E(`${n}.id « ${x.id} » est déjà pris par une autre actualité.`);
+        idsA.add(x.id);
+        if (x.date && !/^\d{4}-\d{2}-\d{2}$/.test(x.date)) E(`${n}.date : format AAAA-MM-JJ.`);
+        if (!x.date) A(`${n} : sans date, elle est classée après les actualités datées.`);
+        if (x.photos != null && !Array.isArray(x.photos)) E(`${n} : photos doit être une liste.`);
+        else (x.photos || []).forEach((u, j) => photoOk(`${n}.photos[${j}]`, u));
+        if (x.realisation && !idsR.has(x.realisation)) E(`${n}.realisation « ${x.realisation} » : aucune réalisation n’a cet identifiant.`);
+        if ('visible' in x && typeof x.visible !== 'boolean') E(`${n}.visible doit valoir true ou false.`);
+        if (estTexte(x.texte) && x.texte.trim() && x.texte.trim().length < 300 && x.visible !== false) A(`${n} : texte court (moins de 300 signes). Pour le référencement, visez 300 à 800 signes : ce qui a été fait, où, avec quoi.`);
+      });
+    }
+  }
   if (!C.realisations.some((x) => x.a_la_une && x.visible !== false)) A('Aucune réalisation « à la une » : l’accueil montre les premières de la liste.');
   C.equipe.forEach((p, i) => { if (vide(p.nom)) E(`equipe[${i}].nom est vide.`); photoOk(`equipe[${i}].photo`, p.photo); });
   C.references.forEach((r, i) => { if (vide(r.nom)) E(`references[${i}].nom est vide.`); photoOk(`references[${i}].logo`, r.logo); });

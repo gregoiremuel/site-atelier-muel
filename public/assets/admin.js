@@ -392,9 +392,9 @@ function contraste(a, b) {
 
 /* Identifiants des pièces, collections et types : tirés du nom à la création, puis fixes */
 function assurerIds(C) {
-  ['realisations', 'metiers', 'secteurs', 'pages_metier'].forEach((k) => {
+  ['realisations', 'actualites', 'metiers', 'secteurs', 'pages_metier'].forEach((k) => {
     const L = C[k] || [], pris = new Set(L.map((x) => x.id).filter(Boolean));
-    L.forEach((x) => { if (!x.id && x.nom) { let b = slug(x.nom) || k, id = b, n = 2; while (pris.has(id)) id = b + '-' + n++; x.id = id; pris.add(id); } });
+    L.forEach((x) => { const nom = x.nom || x.titre; if (!x.id && nom) { let b = slug(nom) || k, id = b, n = 2; while (pris.has(id)) id = b + '-' + n++; x.id = id; pris.add(id); } });
   });
 }
 
@@ -552,6 +552,29 @@ function panneaux() {
           el('p', { class: 'aide', text: 'Seuls les secteurs qui ont des réalisations apparaissent sur le site.' }),
           editeurListe('secteurs', { titre: 'nom', sansTitre: 'Nouveau secteur', vide: 'Aucun secteur.', ajouter: 'Ajouter un secteur', nouveau: { id: '', nom: '' }, apres: () => assurerIds(E.C), champs: [{ k: 'nom', l: 'Nom' }] }),
         ], '/realisations'),
+      ],
+    },
+    {
+      id: 'actualites', titre: 'Actualités', page: '/actualites',
+      resume: () => { const L = (E.C.actualites || []).filter((x) => x.visible !== false && x.titre), d = L.map((x) => x.date).filter(Boolean).sort().pop(); return L.length ? L.length + ' en ligne' + (d ? ', la dernière du ' + d.split('-').reverse().join('/') : '') : 'Aucune actualité : la rubrique n’apparaît pas sur le site'; },
+      corps: () => [
+        el('p', { class: 'aide', text: 'Un chantier en cours, une livraison, un conseil du métier : quelques photos et 3 à 8 phrases suffisent. Une actualité par semaine ou deux aide Google à voir que l’entreprise est active. Dites ce qui a été fait, où et avec quoi ; pas besoin d’en faire trop. La plus récente s’affiche en premier, les 3 dernières sur l’accueil.' }),
+        editeurListe('actualites', {
+          titre: 'titre', sansTitre: 'Nouvelle actualité', photo: (x) => (x.photos || [])[0],
+          sous: (x) => [x.date ? x.date.split('-').reverse().join('/') : 'sans date', x.visible === false ? 'masquée' : '', !(x.photos || []).length ? 'sans photo' : ''].filter(Boolean).join(', '),
+          vide: 'Aucune actualité pour l’instant.', ajouter: 'Ajouter une actualité',
+          nouveau: { id: '', titre: '', date: '', texte: '', photos: [], realisation: '', visible: true },
+          ouvert: (x) => { assurerIds(E.C); if (x.id) montrer('/actualites/' + x.id); },
+          apres: (x) => { if (!x.date && x.titre) x.date = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' }); assurerIds(E.C); if (x.id && E.page !== '/actualites/' + x.id) montrer('/actualites/' + x.id); },
+          champs: [
+            { k: 'titre', l: 'Titre', ph: 'Ex. : Rénovation d’une cuisine à Lyon 3e' },
+            { k: 'date', l: 'Date', type: 'date', ex: 'aujourd’hui si vide' },
+            { k: 'photos', l: 'Photos', t: 'photos', max: 12 },
+            { k: 'texte', l: 'Texte', t: 'zone', lignes: 7, ph: 'Ce qui a été fait, où, avec quels matériaux, ce que le client voulait…' },
+            { k: 'realisation', l: 'Réalisation liée', t: 'choix', ex: 'facultatif', vide: 'Aucune', options: () => (E.C.realisations || []).filter((r) => r.id && r.nom).map((r) => [r.id, r.nom]) },
+            { k: 'visible', l: 'Afficher sur le site', t: 'case' },
+          ],
+        }),
       ],
     },
     {
@@ -862,7 +885,7 @@ function confirm2() { if (avertiDeco) return true; avertiDeco = true; toast('Des
 
 function normaliser(C) {
   ['agence', 'annonce', 'accueil', 'presentation', 'garanties', 'affichage', 'contact', 'mentions', 'theme'].forEach((k) => { if (!C[k] || typeof C[k] !== 'object' || Array.isArray(C[k])) C[k] = {}; });
-  ['chiffres', 'metiers', 'etapes', 'lots', 'secteurs', 'realisations', 'equipe', 'references'].forEach((k) => { if (!Array.isArray(C[k])) C[k] = []; });
+  ['chiffres', 'metiers', 'etapes', 'lots', 'secteurs', 'realisations', 'actualites', 'equipe', 'references'].forEach((k) => { if (!Array.isArray(C[k])) C[k] = []; });
   C.realisations.forEach((x) => { if (!Array.isArray(x.photos)) x.photos = x.photos ? [x.photos] : []; });
   return C;
 }

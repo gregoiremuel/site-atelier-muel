@@ -80,7 +80,7 @@ async function cookieSession(env) {
 
 /* ---------- Vérification du contenu envoyé par la page de modification ---------- */
 const CLES_OBJETS = ['agence', 'annonce', 'accueil', 'presentation', 'garanties', 'affichage', 'contact', 'mentions'];
-const CLES_LISTES = ['chiffres', 'metiers', 'etapes', 'secteurs', 'realisations', 'equipe', 'references', 'engagements'];
+const CLES_LISTES = ['chiffres', 'metiers', 'etapes', 'secteurs', 'realisations', 'actualites', 'equipe', 'references', 'engagements'];
 /* Clés facultatives : gardées telles qu'elles sont enregistrées quand le contenu envoyé ne les a pas, sinon remplacées (sans elles, un contenu enregistré perdrait ses formules d'abonnement et ses libellés) */
 const OBJETS_FACULTATIFS = ['abonnements', 'libelles', 'comparaison'];
 const LISTES_FACULTATIVES = ['pages_metier'];

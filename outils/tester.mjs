@@ -137,6 +137,20 @@ async function tests() {
     r = await req('/' + mp.pages_metier[0].id); verif(r.status === 404, 'Page par métier masquée : son adresse n’existe plus');
     await req('/api/contenu', { method: 'PUT', ...corpsJson(j.contenu) });
   }
+  /* Actualités : ajoutées depuis la page de modification, publiées (menu, accueil, page, plan du site), masquables */
+  {
+    const ma = structuredClone(j.contenu);
+    ma.actualites = [...(ma.actualites || []), { id: 'essai-actu-test', titre: 'Essai : chantier en cours', date: '2099-01-01', texte: 'Pose des cloisons cette semaine.', photos: [], realisation: x0.id, visible: true }];
+    await req('/api/contenu', { method: 'PUT', ...corpsJson(ma) });
+    h = await (await req('/actualites/essai-actu-test')).text();
+    verif(h.includes('Essai : chantier en cours') && h.includes('BlogPosting') && h.includes('/realisations/' + x0.id), 'Actualité enregistrée : sa page existe, avec ses données pour Google et le lien vers la réalisation');
+    h = await (await req('/')).text(); verif(h.includes('href="/actualites"') && h.includes('/actualites/essai-actu-test'), 'Actualité : lien dans le menu et carte sur l’accueil');
+    h = await (await req('/sitemap.xml')).text(); verif(h.includes('/actualites/essai-actu-test'), 'Actualité : présente dans le plan du site');
+    ma.actualites[ma.actualites.length - 1].visible = false;
+    await req('/api/contenu', { method: 'PUT', ...corpsJson(ma) });
+    r = await req('/actualites/essai-actu-test'); verif(r.status === 404, 'Actualité masquée : sa page n’existe plus');
+    await req('/api/contenu', { method: 'PUT', ...corpsJson(j.contenu) });
+  }
   const m2 = structuredClone(j.contenu); m2.realisations[0].visible = false;
   await req('/api/contenu', { method: 'PUT', ...corpsJson(m2) });
   r = await req('/realisations/' + x0.id); verif(r.status === 404, 'Réalisation masquée : sa page n’existe plus');

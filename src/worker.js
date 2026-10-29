@@ -6,7 +6,7 @@
   Secrets à définir : ADMIN_HASH (npm run mot-de-passe), SESSION_SECRET (texte aléatoire). Le mot de passe se change ensuite depuis la page de modification (clé KV admin:hash, prioritaire sur ADMIN_HASH).
   Variable : MAQUETTE = "oui" tant que le site n'est pas validé (bandeau + formulaire en démonstration).
 */
-import { rendrePage, routes, libellesDemande } from '../public/assets/rendu.js';
+import { rendrePage, routes, libellesDemande, donnees } from '../public/assets/rendu.js';
 import initial from '../contenu-initial.json';
 
 const COOKIE = 'boutique_session';
@@ -186,7 +186,10 @@ export default {
       }
       if (methode === 'GET' && p === '/sitemap.xml') {
         const C = await lireContenu(env), base = ((C.reglages || {}).url || url.origin).replace(/\/$/, '');
-        const corps = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes(C).filter((r) => !r.includes('?')).map((r) => `<url><loc>${base}${r}</loc></url>`).join('')}</urlset>`;
+        /* Date de la dernière modification connue : celle de l'actualité, et la plus récente pour l'accueil et la liste des actualités */
+        const A = donnees(C).actualites, dates = Object.fromEntries(A.filter((a) => a.date).map((a) => ['/actualites/' + a.id, a.date]));
+        if (A[0] && A[0].date) { dates['/actualites'] = A[0].date; dates['/'] = A[0].date; }
+        const corps = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes(C).filter((r) => !r.includes('?')).map((r) => `<url><loc>${base}${r}</loc>${dates[r] ? `<lastmod>${dates[r]}</lastmod>` : ''}</url>`).join('')}</urlset>`;
         return new Response(corps, { headers: { 'Content-Type': 'application/xml; charset=utf-8' } });
       }
       /* Vidéos envoyées depuis la page de modification : lecture par morceaux (Range), indispensable pour Safari */

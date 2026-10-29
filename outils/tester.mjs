@@ -145,7 +145,9 @@ async function tests() {
     h = await (await req('/actualites/essai-actu-test')).text();
     verif(h.includes('Essai : chantier en cours') && h.includes('BlogPosting') && h.includes('/realisations/' + x0.id), 'Actualité enregistrée : sa page existe, avec ses données pour Google et le lien vers la réalisation');
     h = await (await req('/')).text(); verif(h.includes('href="/actualites"') && h.includes('/actualites/essai-actu-test'), 'Actualité : lien dans le menu et carte sur l’accueil');
-    h = await (await req('/sitemap.xml')).text(); verif(h.includes('/actualites/essai-actu-test'), 'Actualité : présente dans le plan du site');
+    h = await (await req('/sitemap.xml')).text(); verif(h.includes('/actualites/essai-actu-test</loc><lastmod>2099-01-01</lastmod>'), 'Actualité : présente dans le plan du site, avec sa date');
+    h = await (await req('/realisations/' + x0.id)).text(); verif(h.includes('/actualites/essai-actu-test'), 'La réalisation liée renvoie vers son actualité');
+    h = await (await req('/actualites/essai-actu-test')).text(); verif(h.includes('content="article"') && h.includes('"BreadcrumbList"') === /canonical/.test(h), 'Actualité : partage de type article, fil d’Ariane pour Google quand l’adresse du site est connue');
     ma.actualites[ma.actualites.length - 1].visible = false;
     await req('/api/contenu', { method: 'PUT', ...corpsJson(ma) });
     r = await req('/actualites/essai-actu-test'); verif(r.status === 404, 'Actualité masquée : sa page n’existe plus');

@@ -7,8 +7,11 @@
 ## 1. Objet
 Création, mise en ligne et, si le client le choisit, entretien d'un site internet, et gestion d'une fiche Google, selon le devis signé. Les conditions générales s'appliquent à tout devis ; en cas de contradiction, le devis et le contrat de création l'emportent.
 
+## 1 bis. Le site vitrine (forfait)
+Le forfait « site vitrine » comprend un site d'une page complète (présentation, services ou produits, horaires, accès, demandes des clients, mentions légales), la page de modification, deux séries de corrections et la mise en ligne. Le nom de domaine est enregistré au nom du client et reste à sa charge ; l'hébergement chez Cloudflare est sans frais tant que son offre gratuite existe (voir article 7). Les pages supplémentaires, une boutique ou un catalogue, une réservation en ligne font l'objet d'un devis.
+
 ## 2. Maquette gratuite
-La maquette est offerte et sans engagement. Elle reste ma propriété et n'est ni publiée ni utilisable tant que le devis n'est pas signé. Je ne la mets jamais en ligne au nom du client avant sa signature.
+La maquette est offerte et sans engagement. Elle est livrée dans les 48 heures ouvrées qui suivent la réception des informations du client (nom, activité, fiche Google ou photos). Elle reste ma propriété et n'est ni publiée ni utilisable tant que le devis n'est pas signé. Je ne la mets jamais en ligne au nom du client avant sa signature.
 
 ## 3. Prix, acompte, paiement
 - Prix en euros, sans TVA tant que je suis en franchise (article 293 B du CGI). *À vérifier.*
@@ -17,7 +20,7 @@ La maquette est offerte et sans engagement. Elle reste ma propriété et n'est n
 - Abonnements : facturés chaque mois, payables à réception. Ils n'ont pas de durée minimale.
 
 ## 4. Délais, informations du client
-Les délais du devis courent à partir de la réception des informations, textes et photos demandés. Le client garantit l'exactitude de ses informations (horaires, tarifs, mentions légales) et dispose des droits sur les photos, logos et textes qu'il fournit. **Je n'invente aucune information** : ce qui manque reste vide.
+Les délais du devis courent à partir de la réception des informations, textes et photos demandés ; pour le site vitrine, la mise en ligne intervient sous deux semaines (10 jours ouvrés) après cette réception et l'accord du client sur la maquette. **Les photos sont fournies par le client** ; je les recadre et les allège. À Paris, si le devis le prévoit, je peux prendre quelques photos sur place. Le client garantit l'exactitude de ses informations (horaires, tarifs, mentions légales) et dispose des droits sur les photos, logos et textes qu'il fournit. **Je n'invente aucune information** : ce qui manque reste vide.
 
 ## 5. Validation et corrections
 Deux séries de corrections sont comprises. Le silence du client pendant [10] jours après la mise à disposition de la version finale vaut validation. Les demandes supplémentaires sont facturées au tarif du devis.

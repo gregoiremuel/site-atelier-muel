@@ -1213,3 +1213,10 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 }
 /* Les captures de démonstration sont coupées en bas : fondu léger plutôt qu'une coupure nette dans le texte */
 .g-edition .essai-vue,.g-edition .carte-photo{-webkit-mask-image:linear-gradient(#000 84%,transparent);mask-image:linear-gradient(#000 84%,transparent)}
+
+/* Bandeau d'accueil : une bande de couleur unie derrière le titre et les appareils, pleine largeur */
+.g-edition .hero:has(.hero-compo){background:var(--sable);border-bottom:1px solid var(--trait)}
+.g-edition .hero:has(.hero-compo) .hero-compo{background:var(--fond)}
+.g-edition .hero:has(.hero-compo) .hero-gar{border-top-color:rgba(16,18,22,.28)}
+.g-edition .hero:has(.hero-compo) .hero-gar li + li{border-left-color:rgba(16,18,22,.18)}
+.g-edition .hero:has(.hero-compo) + .sec{padding-top:clamp(28px,4vw,56px)}

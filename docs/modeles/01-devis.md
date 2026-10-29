@@ -13,9 +13,10 @@ SIRET : 131 703 951 00015 · [adresse du siège, comme au registre] · [téléph
 
 | Désignation | Quantité | Prix |
 |---|---|---|
-| Création d'un site vitrine : [métier], mise en ligne à l'adresse [nom-de-domaine.fr], page de modification, photos de la boutique, titres et descriptions pour Google | 1 | [590,00] € |
+| Création d'un site vitrine d'**une page complète** : [métier] (présentation, services ou produits, horaires, accès, demandes des clients, mentions légales), mise en ligne à l'adresse [nom-de-domaine.fr], page de modification, photos **fournies par le client**, recadrées et allégées [à Paris, quelques photos prises sur place si besoin : oui / non], titres et descriptions pour Google, deux séries de corrections | 1 | [590,00] € |
+| Hébergement chez Cloudflare | 1 | sans frais |
 | Nom de domaine [nom-de-domaine.fr], enregistré au nom du client, renouvelable chaque année (environ 10 €, payé par le client à l'enregistrement) | 1 | [à l'identique du tarif du bureau d'enregistrement] |
-| Options choisies : [néant / pages supplémentaires / autre] | | [ ] € |
+| Options sur devis : [néant / pages supplémentaires / boutique ou catalogue / réservation / autre] | | [ ] € |
 | **Total** | | **[590,00] €** |
 
 *Le prix vient de ta proposition (590 €) : il est à valider par toi, pas par un marché.*
@@ -29,8 +30,8 @@ SIRET : 131 703 951 00015 · [adresse du siège, comme au registre] · [téléph
 Les abonnements s'arrêtent à tout moment, en fin de mois. Les prix sont en euros, sans TVA (franchise).
 
 ## Délais et paiement
-- **Maquette** : gratuite, livrée en 48 heures après notre échange. Si elle ne plaît pas, le client ne doit rien.
-- **Livraison** du site : [10] jours ouvrés après réception des informations et photos du client.
+- **Maquette** : gratuite, livrée dans les **48 heures ouvrées** qui suivent la réception des informations du client (nom, activité, fiche Google ou photos). Si elle ne plaît pas, le client ne doit rien.
+- **Mise en ligne** du site : **sous deux semaines** (10 jours ouvrés) après réception des textes et photos du client et de son accord sur la maquette.
 - **Corrections** : deux séries de corrections comprises ; au-delà, [45] € l'heure. *Prix à valider.*
 - **Paiement** : acompte de **30 %** ([177,00] €) **[à demander après le délai de 7 jours qui suit la signature]**, solde à la mise en ligne, 30 jours. *Voir README : l'acompte ne peut pas être demandé les 7 premiers jours si le client est traité comme un consommateur (à vérifier).*
 

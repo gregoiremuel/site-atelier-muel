@@ -19,7 +19,7 @@
    - « Si vous voulez que je m'en occupe : **Sérénité, 19 € par mois** (hébergement, sauvegardes, 30 minutes de modifications). »
    - « Pour être trouvé sur Google Maps : **Visibilité Google, 39 € par mois**. Je tiens votre fiche à jour. Sans engagement : vous arrêtez quand vous voulez. »
    - Si on te parle de Wix : « Wix, c'est environ 17 à 30 € par mois tant que le site existe, et c'est vous qui le faites. Moi, c'est une fois, et je m'en occupe. » *Chiffres relevés fin octobre 2026 : à revérifier avant de les dire.*
-5. **Clôture (1 minute)** : « Je vous prépare la maquette à votre nom, gratuite, en 48 h. Je repasse jeudi à [heure] ? » Tu notes sa réponse **mot pour mot**, son prénom, son horaire, ce qu'il veut mettre en avant.
+5. **Clôture (1 minute)** : « Envoyez-moi deux ou trois photos et vos horaires : je vous prépare la maquette à votre nom, gratuite, dans les 48 h ouvrées. Je repasse jeudi à [heure] ? » Tu notes sa réponse **mot pour mot**, son prénom, son horaire, ce qu'il veut mettre en avant.
 
 ## 3. Ce que tu ne dis jamais
 - Aucune **promesse de classement** ni de nombre d'appels : « je ne promets pas de place dans Google ; je promets un travail fait chaque mois, que je vous montre ».

@@ -183,7 +183,7 @@ function ecranConnexion(message) {
     if (bouton.disabled) return;
     err.hidden = true; bouton.disabled = true; bouton.textContent = 'Connexion…';
     try { await api.connexion(input.value); await demarrer(); }
-    catch (x) { err.textContent = x.message; err.hidden = false; bouton.disabled = false; bouton.textContent = 'Se connecter'; }
+    catch (x) { err.textContent = x.message; err.hidden = false; bouton.disabled = false; bouton.textContent = 'Se connecter'; input.focus(); input.select(); }
   };
   const bouton = el('button', { class: 'btn', type: 'button', id: 'btn-connexion', text: 'Se connecter', onclick: seConnecter });
   input.addEventListener('keydown', (e) => { if (e.key === 'Enter') seConnecter(e); });
@@ -799,7 +799,7 @@ async function enregistrer() {
 }
 async function annuler() {
   if (modifie()) { E.C = JSON.parse(E.base); dessinerEditeur(); rendreApercu(); toast('Modifications annulées.'); return; }
-  if (!bAnn.classList.contains('confirmer')) { bAnn.classList.add('confirmer'); bAnn.textContent = 'Confirmer'; setTimeout(() => { bAnn.classList.remove('confirmer'); majBarre(); }, 4000); return; }
+  if (!bAnn.classList.contains('confirmer')) { bAnn.classList.add('confirmer'); bAnn.textContent = 'Confirmer le retour ?'; bAnn.title = 'Touchez encore pour rétablir la version enregistrée juste avant'; setTimeout(() => { bAnn.classList.remove('confirmer'); majBarre(); }, 4000); return; }
   bAnn.classList.remove('confirmer');
   try { E.C = await api.annuler(); E.base = JSON.stringify(E.C); dessinerEditeur(); rendreApercu(); toast('Version précédente rétablie.'); } catch (x) { toast(x.message); }
   majBarre();

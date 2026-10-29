@@ -1010,12 +1010,14 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition .intro-txt h2{font-size:clamp(1.75rem,3.2vw,2.5rem)}
 .g-edition .sec{padding:clamp(40px,5.5vw,76px) 0}
 .g-edition .sec-tete{margin-bottom:clamp(20px,3vw,36px)}
-/* Accueil : les quatre offres en lignes serrées, sans texte sur téléphone */
+/* Accueil : les quatre offres en lignes serrées sur téléphone, avec leur phrase « pour qui » (comprendre l'offre sans l'ouvrir) */
 @media (max-width:759px){
   .g-edition .metiers a{padding:16px 0}
-  .g-edition .metiers p:not(.metier-prix){display:none}
+  .g-edition .metiers p:not(.metier-prix){font-size:.9375rem;line-height:1.45;margin-top:4px}
   .g-edition .metiers h3{font-size:1.5rem}
 }
+/* Accueil : le titre et le texte du premier écran sont visibles dès le chargement (pas d'apparition animée) */
+.anime .g-edition .hero-txt > *,.g-edition.anime .hero-txt > *,.anime.g-edition .hero-txt > *{animation:none}
 /* Accueil : démonstrations en une ligne de quatre (bande qui défile sur téléphone) */
 .g-edition .essai-grille{grid-template-columns:minmax(0,1fr);gap:24px}
 .g-edition .essai-txt .prose{max-width:62ch}
@@ -1095,14 +1097,14 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition .tete-page h1{max-width:22ch}
 
 /* ====== Édition : compléments de composition (trame, aplats, sceau, pictogrammes, numérotation) ====== */
-.g-edition{--sable:#e4e9ef;--trame:radial-gradient(rgba(34,54,79,.34) 1.1px,transparent 1.2px) 0 0/14px 14px}
+.g-edition{--sable:#e4e9ef}
 .g-edition .clair{background:var(--sable)}
 
 /* Composition de l'accueil : appareils sur un fond uni */
 .g-edition .hero-compo{--noir:#12161c;position:relative;grid-column:1;width:100%;max-width:560px;aspect-ratio:1/.98;justify-self:center;margin-top:12px;background:#dde4ea;overflow:hidden;isolation:isolate}
 .g-edition .compo-ordi{position:absolute;left:7%;top:9%;width:86%;display:block}
 .g-edition .compo-ecran{display:block;aspect-ratio:16/10;background:var(--noir);border:7px solid var(--noir);border-bottom-width:9px;border-radius:8px 8px 2px 2px;overflow:hidden;box-shadow:0 14px 30px rgba(16,28,44,.22)}
-.g-edition .compo-socle{display:block;height:9px;margin:0 -4%;background:linear-gradient(#c9d0d8,#aeb7c1);border-radius:0 0 12px 12px}
+.g-edition .compo-socle{display:block;height:9px;margin:0 -4%;background:#b9c2cc;border-radius:0 0 12px 12px}
 .g-edition .compo-tel{position:absolute;display:block;width:27%;aspect-ratio:9/19;background:var(--noir);border:6px solid var(--noir);border-radius:20px;overflow:hidden;box-shadow:0 16px 30px rgba(16,28,44,.3)}
 .g-edition .compo-t1{left:13%;bottom:5%;z-index:2}
 .g-edition .compo-t2{right:11%;bottom:8%;z-index:3}

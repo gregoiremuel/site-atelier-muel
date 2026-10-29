@@ -727,7 +727,8 @@ function vueSiteDemo() {
   let v = document.getElementById('demo-site');
   if (!v) {
     v = el('div', { id: 'demo-site', class: 'apercu-plein', role: 'region', 'aria-label': 'Aperçu du site' },
-      el('div', { class: 'barre' }, el('b', { text: 'Le site' }),
+      el('div', { class: 'barre' }, el('span', { class: 'barre-titre' }, el('b', { text: 'Démonstration' }),
+          /^https?:$/.test(location.protocol) && /\/demos\//.test(location.pathname) ? el('a', { href: '/', text: '← Retour au site' }) : null),
         el('button', { type: 'button', class: 'btn petit', text: 'Essayer la page de modification', onclick: () => { v.hidden = true; document.body.style.overflow = ''; } })),
       el('iframe', { title: 'Le site' }));
     document.body.append(v);
@@ -842,7 +843,8 @@ function ecranPrincipal() {
   racine.append(
     el('header', { class: 'haut' }, el('div', { class: 'haut-in' },
       el('div', { class: 'haut-titre' }, el('b', { text: nom }), el('span', { text: 'Page de modification' })),
-      el('a', { class: 'btn', href: DEMO ? '#' : '/', target: DEMO ? null : '_blank', rel: 'noopener', text: 'Voir le site', onclick: DEMO ? (e) => { e.preventDefault(); plein.hidden = false; rendreApercu(); } : null }),
+      DEMO ? el('button', { type: 'button', class: 'btn', text: 'Voir le site', onclick: () => { plein.hidden = false; rendreApercu(); } })
+        : el('a', { class: 'btn', href: '/', target: '_blank', rel: 'noopener', text: 'Voir le site' }),
       el('button', { type: 'button', class: 'btn', text: 'Se déconnecter', onclick: async () => { if (modifie() && !confirm2()) return; await api.deconnexion(); ecranConnexion(); } }))),
     DEMO ? el('aside', { class: 'bandeau', 'aria-label': 'Information' }, 'Démonstration : vos essais restent sur cet appareil, rien n’est publié. ', el('button', { type: 'button', text: 'Tout remettre à zéro', onclick: () => { remettreAZero(); ecranConnexion(); toast('Démonstration remise à zéro : le site est revenu à sa version d’origine.'); } }))
       : (E.maquette ? el('aside', { class: 'bandeau', 'aria-label': 'Information', text: 'Le site est encore en mode proposition : les demandes ne sont pas envoyées.' }) : ''),

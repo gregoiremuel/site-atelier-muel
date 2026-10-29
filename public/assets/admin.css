@@ -177,3 +177,6 @@ details.item>summary span.s{display:block;color:var(--gris);font-size:.9375rem;o
 .video-apercu video{width:100%;max-width:320px;aspect-ratio:16/9;object-fit:cover;border-radius:6px;background:#000;display:block}
 .video-champ .saisie{margin-top:8px}
 .bandeau button{background:none;border:0;color:inherit;font:inherit;text-decoration:underline;cursor:pointer;min-height:44px;padding:0 6px}
+.apercu-plein .barre{flex-wrap:wrap;gap:8px 16px}
+.apercu-plein .barre-titre{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.apercu-plein .barre-titre a{font-size:.9375rem;color:inherit}

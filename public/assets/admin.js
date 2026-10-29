@@ -733,6 +733,7 @@ function panneaux() {
           { k: 'agence.zone', l: 'Zone d’intervention' }, { k: 'agence.telephone', l: 'Téléphone', type: 'tel' },
           { k: 'agence.email', l: 'E-mail', type: 'email' }, { k: 'agence.adresse', l: 'Adresse' },
           { k: 'agence.code_postal', l: 'Code postal' }, { k: 'agence.ville', l: 'Ville' },
+          { k: 'agence.lien_avis', l: 'Lien pour laisser un avis Google', type: 'url', ex: 'dans la fiche Google : « Demander des avis », copier le lien. Le site le sert à l’adresse /avis, à mettre en QR code' },
           { k: 'agence.linkedin', l: 'Lien LinkedIn', type: 'url' }, { k: 'agence.instagram', l: 'Lien Instagram', type: 'url' },
         ].map((d) => champ(E.C, d))),
         champ(E.C, { k: 'agence.nom_image', l: 'Logo en haut du site', ex: 'sur fond transparent', t: 'photo' }),

@@ -104,6 +104,28 @@ function nettoyer(c, actuel) {
   return out;
 }
 
+/* ---------- IndexNow : prévenir Bing (et la recherche de ChatGPT, qui s'appuie sur Bing), Yandex, Seznam… dès qu'une page change ----------
+   Seulement site ouvert (MAQUETTE « non »), adresse définitive connue (reglages.url) et Secret INDEXNOW_KEY posé. Google n'utilise pas IndexNow : pour lui, le plan du site daté suffit. */
+async function prevenirMoteurs(env, avant, apres) {
+  const base = String((apres.reglages || {}).url || '').replace(/\/$/, '');
+  if (estMaquette(env) || !env.INDEXNOW_KEY || !/^https:\/\/[^/]+$/.test(base)) return;
+  const A = donnees(avant), B = donnees(apres), urls = new Set();
+  const comparer = (L0, L1, prefixe) => {
+    const vieux = new Map(L0.map((x) => [x.id, JSON.stringify(x)]));
+    L1.forEach((x) => { if (vieux.get(x.id) !== JSON.stringify(x)) urls.add(prefixe + x.id); });
+    L0.forEach((x) => { if (!L1.some((y) => y.id === x.id)) urls.add(prefixe + x.id); });
+  };
+  comparer(A.actualites, B.actualites, '/actualites/');
+  comparer(A.realisations, B.realisations, '/realisations/');
+  if ([...urls].some((u) => u.startsWith('/actualites/'))) { urls.add('/actualites'); urls.add('/'); }
+  if (!urls.size) return;
+  const hote = new URL(base).host;
+  await fetch(env.INDEXNOW_URL || 'https://api.indexnow.org/indexnow', {
+    method: 'POST', headers: { 'Content-Type': 'application/json; charset=utf-8' }, signal: AbortSignal.timeout(10000),
+    body: JSON.stringify({ host: hote, key: env.INDEXNOW_KEY, keyLocation: `${base}/${env.INDEXNOW_KEY}.txt`, urlList: [...urls].slice(0, 100).map((u) => base + u) }),
+  });
+}
+
 /* ---------- Mesure d'audience sans cookie ---------- */
 /* Pages vues comptées par jour dans un seul enregistrement : aucun cookie, aucune adresse IP, aucun identifiant de visiteur n'est gardé. */
 const ROBOTS = /bot|crawl|spider|slurp|preview|headless|monitor|lighthouse|pingdom|uptime|curl|wget|python|java|go-http|node|undici|axios/i;
@@ -178,6 +200,15 @@ export default {
     const methode = req.method;
 
     try {
+      /* Lien court vers le formulaire d'avis Google (agence.lien_avis) : à imprimer en QR code sur les factures, cartes, vitrine */
+      if (methode === 'GET' && p === '/avis') {
+        const lien = String(((await lireContenu(env)).agence || {}).lien_avis || '').trim();
+        return /^https:\/\/\S+$/.test(lien) ? Response.redirect(lien, 302) : new Response('Introuvable', { status: 404 });
+      }
+      /* IndexNow : fichier de clé qui prouve que le site appartient bien à celui qui prévient Bing (Secret INDEXNOW_KEY) */
+      if (methode === 'GET' && env.INDEXNOW_KEY && p === '/' + env.INDEXNOW_KEY + '.txt') {
+        return new Response(env.INDEXNOW_KEY, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+      }
       /* Robots et plan du site */
       if (methode === 'GET' && p === '/robots.txt') {
         const C = await lireContenu(env), base = ((C.reglages || {}).url || url.origin).replace(/\/$/, '');
@@ -288,6 +319,7 @@ export default {
           const C = nettoyer(JSON.parse(texte), actuel);
           await env.CONTENU.put('contenu:precedent', JSON.stringify(actuel));
           await env.CONTENU.put('contenu', JSON.stringify(C));
+          ctx.waitUntil(prevenirMoteurs(env, actuel, C).catch(() => {}));
           return json({ ok: true, enregistre: new Date().toISOString() });
         }
         if (methode === 'POST' && p === '/api/annuler') {

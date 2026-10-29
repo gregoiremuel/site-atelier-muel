@@ -20,6 +20,9 @@ if (verifier(C).erreurs.length) { console.error('\nLe contenu a des erreurs : la
 const PORT = 8799, BASE = `http://127.0.0.1:${PORT}`;
 /* Faux n8n : reçoit la copie des demandes (Secrets N8N_WEBHOOK_URL et N8N_SECRET) */
 const PORT_N8N = 8798, SECRET_N8N = randomBytes(12).toString('hex'), recuN8N = [];
+/* Faux IndexNow : reçoit l'avis envoyé aux moteurs quand une page change */
+const PORT_IDX = 8797, CLE_IDX = randomBytes(16).toString('hex'), recuIdx = [];
+const fauxIdx = createServer((q, s) => { let b = ''; q.on('data', (d) => (b += d)); q.on('end', () => { recuIdx.push(b); s.end('ok'); }); }).listen(PORT_IDX, '127.0.0.1');
 const fauxN8N = createServer((q, s) => { let b = ''; q.on('data', (d) => (b += d)); q.on('end', () => { recuN8N.push({ secret: q.headers['x-webhook-secret'], corps: b }); s.end('ok'); }); }).listen(PORT_N8N, '127.0.0.1');
 const MDP = 'test-' + randomBytes(6).toString('hex');
 const sel = randomBytes(16);
@@ -37,11 +40,11 @@ if (process.argv[2]) {
   if (r.status !== 0) { console.error('Impossible de déposer le contenu de test :\n' + r.stderr); process.exit(1); }
 }
 const serveur = spawn(wrangler, ['dev', '-c', configTest, '--test-scheduled', '--port', String(PORT), '--ip', '127.0.0.1', '--persist-to', memoireTest, '--show-interactive-dev-session=false',
-  '--var', 'ADMIN_HASH:' + HASH, '--var', 'SESSION_SECRET:' + randomBytes(24).toString('hex'), '--var', 'MAQUETTE:non', '--var', `N8N_WEBHOOK_URL:http://127.0.0.1:${PORT_N8N}/webhook`, '--var', 'N8N_SECRET:' + SECRET_N8N],
+  '--var', 'ADMIN_HASH:' + HASH, '--var', 'SESSION_SECRET:' + randomBytes(24).toString('hex'), '--var', 'MAQUETTE:non', '--var', `N8N_WEBHOOK_URL:http://127.0.0.1:${PORT_N8N}/webhook`, '--var', 'N8N_SECRET:' + SECRET_N8N, '--var', 'INDEXNOW_KEY:' + CLE_IDX, '--var', `INDEXNOW_URL:http://127.0.0.1:${PORT_IDX}/indexnow`],
 { cwd: racine, detached: true, stdio: ['ignore', 'pipe', 'pipe'] });
 let journal = '';
 serveur.stdout.on('data', (d) => { journal += d; }); serveur.stderr.on('data', (d) => { journal += d; });
-const arreter = () => { try { fauxN8N.close(); } catch (e) { /* déjà fermé */ } try { process.kill(-serveur.pid, 'SIGTERM'); } catch (e) { /* déjà arrêté */ } try { rmSync(memoireTest, { recursive: true, force: true }); rmSync(configTest, { force: true }); } catch (e) { /* rien */ } };
+const arreter = () => { try { fauxN8N.close(); fauxIdx.close(); } catch (e) { /* déjà fermé */ } try { process.kill(-serveur.pid, 'SIGTERM'); } catch (e) { /* déjà arrêté */ } try { rmSync(memoireTest, { recursive: true, force: true }); rmSync(configTest, { force: true }); } catch (e) { /* rien */ } };
 process.on('SIGINT', () => { arreter(); process.exit(130); });
 
 let ok = 0; const echecs = [];
@@ -118,6 +121,11 @@ async function tests() {
   verif(j.ok && base._schema === 'agence v1', 'Lecture du contenu une fois connecté');
 
   const x0 = base.realisations[0];
+  { const r1 = await fetch(BASE + '/' + CLE_IDX + '.txt'); verif(r1.status === 200 && (await r1.text()) === CLE_IDX, 'IndexNow : le fichier de clé est servi'); }
+  { const ml = structuredClone(base); ml.agence.lien_avis = 'https://g.page/r/essai/review';
+    await req('/api/contenu', { method: 'PUT', ...corpsJson(ml) });
+    const r2 = await fetch(BASE + '/avis', { redirect: 'manual' }); verif(r2.status === 302 && r2.headers.get('location') === 'https://g.page/r/essai/review', 'Lien court /avis vers le formulaire d’avis Google');
+    await req('/api/contenu', { method: 'PUT', ...corpsJson(base) }); }
   const m = structuredClone(base);
   m.realisations[0].surface = '1 750 m²'; m.annonce = { afficher: true, texte: 'Nouvelle réalisation en ligne' };
   m.theme = { fond: '#ff00ff' }; m._schema = 'pirate'; m.lots = ['Peinture', 42, 'Sols'];
@@ -141,7 +149,13 @@ async function tests() {
   {
     const ma = structuredClone(j.contenu);
     ma.actualites = [...(ma.actualites || []), { id: 'essai-actu-test', titre: 'Essai : chantier en cours', date: '2099-01-01', texte: 'Pose des cloisons cette semaine.', photos: [], realisation: x0.id, visible: true }];
+    recuIdx.length = 0;
     await req('/api/contenu', { method: 'PUT', ...corpsJson(ma) });
+    if (/^https:\/\//.test((j.contenu.reglages || {}).url || '')) {
+      for (let i = 0; i < 20 && !recuIdx.length; i++) await new Promise((ok) => setTimeout(ok, 250));
+      let d = {}; try { d = JSON.parse(recuIdx[0] || '{}'); } catch (e) { /* vide */ }
+      verif(d.key === CLE_IDX && (d.urlList || []).some((u) => u.endsWith('/actualites/essai-actu-test')), 'IndexNow : les moteurs sont prévenus de la nouvelle actualité');
+    }
     h = await (await req('/actualites/essai-actu-test')).text();
     verif(h.includes('Essai : chantier en cours') && h.includes('BlogPosting') && h.includes('/realisations/' + x0.id), 'Actualité enregistrée : sa page existe, avec ses données pour Google et le lien vers la réalisation');
     h = await (await req('/')).text(); verif(h.includes('href="/actualites"') && h.includes('/actualites/essai-actu-test'), 'Actualité : lien dans le menu et carte sur l’accueil');

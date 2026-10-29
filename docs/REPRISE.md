@@ -1,11 +1,11 @@
-# Reprise dans une nouvelle session (29 octobre 2026, fin de journée)
+# Reprise dans une nouvelle session (29 octobre 2026, soir)
 
 ## Prompt à coller en premier message (après un « clear »)
 > Lis `CLAUDE.md`, `LISEZMOI.md`, puis `docs/REPRISE.md`. Ajoute le dépôt `gregoiremuel/kit-sites-boutiques` (lis son `LISEZMOI.md` et `METHODE.md`). Branche de travail `ccr-04ab3608-pccm5z` dans les deux dépôts (si elle est fusionnée : repars de `main` avec le même nom). Sujet du jour : [à préciser]. Ne touche pas au site sans me le dire. Réponse finale en trois parties : Réponse claire, Niveau de confiance (0.0 à 1.0 avec la raison), Réserves clés.
 
 ## Où on en est
 - **Site** : en ligne sur l'adresse provisoire Cloudflare, non indexé (`MAQUETTE` = « oui »). Ouverture après : franchise de TVA confirmée, nom commercial corrigé au Guichet unique, domaine actif, mentions relues.
-- **Le 29/10 (soir), sur la branche de travail des deux dépôts, pas encore fusionné** :
+- **Tout est fusionné dans `main`** (site et kit, demandes de fusion n° 15, 16, 17 et suivante). Détail de la journée : `docs/AUDIT-2026-10-29.md` (audit, quatre priorités, démonstrations entièrement différentes, décisions de Greg en partie 9). Avant cela :
   - Offre **Visibilité Google** : prompts mensuels, modèle de rapport, script du palier 1 (`kit/visibilite-google/`, `kit/outils/visibilite-google.mjs`).
   - **Automatisation des demandes** (n8n sur le VPS Hostinger) : trois flux, scripts du VPS, pas-à-pas (`kit/automatisation/README.md`). Le moteur agence copie les demandes vers n8n seulement si les Secrets `N8N_WEBHOOK_URL` et `N8N_SECRET` existent ; champ « Traitement automatique des demandes » ajouté à `/admin` (vide).
   - **Vendre** : diagnostic de fiche en une page (`outils/diagnostic-fiche.mjs`), cohérence des coordonnées (`outils/coherence.mjs`), suivi de prospection (`outils/prospection.mjs`).

@@ -405,7 +405,10 @@ function accueil(C, D) {
       address: G.adresse ? { '@type': 'PostalAddress', streetAddress: G.adresse, postalCode: G.code_postal, addressLocality: G.ville, addressCountry: 'FR' } : undefined,
       image: (() => { const u = src(A.photo, 1200) || src((C.reglages || {}).image_partage, 1200); return u ? (/^\//.test(u) ? baseSite(C) + u : u) : undefined; })(),
       logo: (() => { const u = src(G.logo, 600); return u && baseSite(C) ? (/^\//.test(u) ? baseSite(C) + u : u) : undefined; })(),
-      areaServed: G.zone || undefined, ...((C.reglages || {}).url ? { url: C.reglages.url } : {}), sameAs: ['linkedin', 'instagram'].map((k) => G[k]).filter((u) => /^https:\/\//.test(u || '')) },
+      /* Zone : « Nantes, Vertou, Rezé » devient une liste de villes ; profils : fiche Google, Pages Jaunes, Houzz… relient le site à la même entreprise (Google, Bing, IA) */
+      areaServed: (() => { const v = String(G.zone || '').split(/\s*[,;·]\s*|\s+et\s+/).map((x) => x.trim()).filter(Boolean); return v.length > 1 ? v.map((n) => ({ '@type': 'City', name: n })) : (G.zone || undefined); })(),
+      ...((C.reglages || {}).url ? { url: C.reglages.url } : {}),
+      sameAs: [...new Set([G.linkedin, G.instagram, ...(Array.isArray(G.profils) ? G.profils : [])].filter((u) => /^https:\/\/\S+$/.test(String(u || '').trim())).map((u) => u.trim()))] },
       baseSite(C) ? { '@type': 'WebSite', name: G.nom, url: baseSite(C) + '/', inLanguage: 'fr-FR' } : null),
     corps: `
   <section class="hero">

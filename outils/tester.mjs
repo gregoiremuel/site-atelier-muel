@@ -122,8 +122,9 @@ async function tests() {
 
   const x0 = base.realisations[0];
   { const r1 = await fetch(BASE + '/' + CLE_IDX + '.txt'); verif(r1.status === 200 && (await r1.text()) === CLE_IDX, 'IndexNow : le fichier de clé est servi'); }
-  { const ml = structuredClone(base); ml.agence.lien_avis = 'https://g.page/r/essai/review';
+  { const ml = structuredClone(base); ml.agence.lien_avis = 'https://g.page/r/essai/review'; ml.agence.profils = ['https://maps.app.goo.gl/essai']; ml.agence.zone = 'Nantes, Vertou et Rezé';
     await req('/api/contenu', { method: 'PUT', ...corpsJson(ml) });
+    { const hh = await (await req('/')).text(); verif(hh.includes('https://maps.app.goo.gl/essai') && hh.includes('"@type":"City","name":"Rezé"'), 'Données de l’entreprise : profils reliés (sameAs) et zone en liste de villes'); }
     const r2 = await fetch(BASE + '/avis', { redirect: 'manual' }); verif(r2.status === 302 && r2.headers.get('location') === 'https://g.page/r/essai/review', 'Lien court /avis vers le formulaire d’avis Google');
     await req('/api/contenu', { method: 'PUT', ...corpsJson(base) }); }
   const m = structuredClone(base);

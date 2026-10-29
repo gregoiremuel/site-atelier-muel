@@ -6,7 +6,7 @@
   Secrets à définir : ADMIN_HASH (npm run mot-de-passe), SESSION_SECRET (texte aléatoire). Le mot de passe se change ensuite depuis la page de modification (clé KV admin:hash, prioritaire sur ADMIN_HASH).
   Variable : MAQUETTE = "oui" tant que le site n'est pas validé (bandeau + formulaire en démonstration).
 */
-import { rendrePage, routes, libellesDemande, donnees } from '../public/assets/rendu.js';
+import { rendrePage, routes, libellesDemande, donnees, fluxRss } from '../public/assets/rendu.js';
 import initial from '../contenu-initial.json';
 
 const COOKIE = 'boutique_session';
@@ -106,19 +106,39 @@ function nettoyer(c, actuel) {
 
 /* ---------- IndexNow : prévenir Bing (et la recherche de ChatGPT, qui s'appuie sur Bing), Yandex, Seznam… dès qu'une page change ----------
    Seulement site ouvert (MAQUETTE « non »), adresse définitive connue (reglages.url) et Secret INDEXNOW_KEY posé. Google n'utilise pas IndexNow : pour lui, le plan du site daté suffit. */
-async function prevenirMoteurs(env, avant, apres) {
+/* Pages touchées par un enregistrement, sans rendre les pages (calcul léger : l'offre gratuite limite le temps de calcul) */
+const PAGES_PAR_CLE = { accueil: ['/'], chiffres: ['/', '/agence'], etapes: ['/', '/expertises'], references: ['/', '/agence'], metiers: ['/', '/expertises'], lots: ['/expertises'],
+  abonnements: ['/expertises'], comparaison: ['/expertises'], presentation: ['/agence'], equipe: ['/agence'], garanties: ['/agence'], engagements: ['/engagements'],
+  contact: ['/contact'], mentions: ['/mentions-legales', '/confidentialite'], secteurs: ['/realisations'] };
+const CLES_PARTOUT = ['agence', 'annonce', 'libelles', 'affichage', 'credits_photos', 'theme'];
+function pagesChangees(avant, apres) {
+  const pages = new Set(), egal = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+  if (CLES_PARTOUT.some((k) => !egal(avant[k], apres[k]))) return new Set(routes(apres).filter((r) => !r.includes('?')));
+  Object.entries(PAGES_PAR_CLE).forEach(([k, L]) => { if (!egal(avant[k], apres[k])) L.forEach((r) => pages.add(r)); });
+  const A = donnees(avant), B = donnees(apres);
+  const parId = (L0, L1, adresse, aussi) => {
+    const vieux = new Map(L0.map((x) => [x.id, JSON.stringify(x)])), ids = new Set([...L0, ...L1].map((x) => x.id));
+    ids.forEach((id) => { const n = L1.find((x) => x.id === id); if (!n || vieux.get(id) !== JSON.stringify(n)) { if (n) pages.add(adresse(id)); aussi(n || L0.find((x) => x.id === id)).forEach((r) => pages.add(r)); } });
+  };
+  parId(A.realisations, B.realisations, (id) => '/realisations/' + id, () => ['/realisations', '/']);
+  parId(A.actualites, B.actualites, (id) => '/actualites/' + id, (x) => ['/actualites', '/', ...(x && x.realisation ? ['/realisations/' + x.realisation] : [])]);
+  parId(A.pages, B.pages, (id) => '/' + id, () => ['/expertises']);
+  const existantes = new Set(routes(apres));
+  return new Set([...pages].filter((r) => existantes.has(r)));
+}
+/* Après un enregistrement : date de modification des pages (plan du site), puis IndexNow */
+async function apresModification(env, avant, apres) {
+  const pages = pagesChangees(avant, apres);
+  if (!pages.size) return;
+  const dates = (await env.CONTENU.get('lastmod', { type: 'json' })) || {}, jour = jourParis();
+  pages.forEach((r) => { dates[r] = jour; });
+  await env.CONTENU.put('lastmod', JSON.stringify(dates));
+  await prevenirMoteurs(env, apres, pages);
+}
+async function prevenirMoteurs(env, apres, pages) {
   const base = String((apres.reglages || {}).url || '').replace(/\/$/, '');
   if (estMaquette(env) || !env.INDEXNOW_KEY || !/^https:\/\/[^/]+$/.test(base)) return;
-  const A = donnees(avant), B = donnees(apres), urls = new Set();
-  const comparer = (L0, L1, prefixe) => {
-    const vieux = new Map(L0.map((x) => [x.id, JSON.stringify(x)]));
-    L1.forEach((x) => { if (vieux.get(x.id) !== JSON.stringify(x)) urls.add(prefixe + x.id); });
-    L0.forEach((x) => { if (!L1.some((y) => y.id === x.id)) urls.add(prefixe + x.id); });
-  };
-  comparer(A.actualites, B.actualites, '/actualites/');
-  comparer(A.realisations, B.realisations, '/realisations/');
-  if ([...urls].some((u) => u.startsWith('/actualites/'))) { urls.add('/actualites'); urls.add('/'); }
-  if (!urls.size) return;
+  const urls = pages;
   const hote = new URL(base).host;
   await fetch(env.INDEXNOW_URL || 'https://api.indexnow.org/indexnow', {
     method: 'POST', headers: { 'Content-Type': 'application/json; charset=utf-8' }, signal: AbortSignal.timeout(10000),
@@ -209,6 +229,11 @@ export default {
       if (methode === 'GET' && env.INDEXNOW_KEY && p === '/' + env.INDEXNOW_KEY + '.txt') {
         return new Response(env.INDEXNOW_KEY, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
       }
+      if (methode === 'GET' && p === '/actualites.xml') {
+        const C = await lireContenu(env);
+        if (!donnees(C).actualites.length) return new Response('Introuvable', { status: 404 });
+        return new Response(fluxRss(C, url.origin), { headers: { 'Content-Type': 'application/rss+xml; charset=utf-8', 'Cache-Control': 'public, max-age=600' } });
+      }
       /* Robots et plan du site */
       if (methode === 'GET' && p === '/robots.txt') {
         const C = await lireContenu(env), base = ((C.reglages || {}).url || url.origin).replace(/\/$/, '');
@@ -218,8 +243,10 @@ export default {
       if (methode === 'GET' && p === '/sitemap.xml') {
         const C = await lireContenu(env), base = ((C.reglages || {}).url || url.origin).replace(/\/$/, '');
         /* Date de la dernière modification connue : celle de l'actualité, et la plus récente pour l'accueil et la liste des actualités */
-        const A = donnees(C).actualites, dates = Object.fromEntries(A.filter((a) => a.date).map((a) => ['/actualites/' + a.id, a.date]));
-        if (A[0] && A[0].date) { dates['/actualites'] = A[0].date; dates['/'] = A[0].date; }
+        const A = donnees(C).actualites, dates = { ...((await env.CONTENU.get('lastmod', { type: 'json' })) || {}) };
+        const plusRecente = (r, d) => { if (d && (!dates[r] || dates[r] < d)) dates[r] = d; };
+        A.forEach((a) => plusRecente('/actualites/' + a.id, a.date));
+        if (A[0]) { plusRecente('/actualites', A[0].date); plusRecente('/', A[0].date); }
         const corps = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes(C).filter((r) => !r.includes('?')).map((r) => `<url><loc>${base}${r}</loc>${dates[r] ? `<lastmod>${dates[r]}</lastmod>` : ''}</url>`).join('')}</urlset>`;
         return new Response(corps, { headers: { 'Content-Type': 'application/xml; charset=utf-8' } });
       }
@@ -319,7 +346,7 @@ export default {
           const C = nettoyer(JSON.parse(texte), actuel);
           await env.CONTENU.put('contenu:precedent', JSON.stringify(actuel));
           await env.CONTENU.put('contenu', JSON.stringify(C));
-          ctx.waitUntil(prevenirMoteurs(env, actuel, C).catch(() => {}));
+          ctx.waitUntil(apresModification(env, actuel, C).catch(() => {}));
           return json({ ok: true, enregistre: new Date().toISOString() });
         }
         if (methode === 'POST' && p === '/api/annuler') {
@@ -328,6 +355,7 @@ export default {
           const actuel = await env.CONTENU.get('contenu');
           await env.CONTENU.put('contenu', prec);
           if (actuel) await env.CONTENU.put('contenu:precedent', actuel);
+          if (actuel) ctx.waitUntil(apresModification(env, JSON.parse(actuel), JSON.parse(prec)).catch(() => {}));
           return json({ ok: true, contenu: JSON.parse(prec) });
         }
         if (methode === 'POST' && p === '/api/photo') {
@@ -379,7 +407,7 @@ export default {
       /* Toutes les autres adresses : les pages du site */
       if (methode === 'GET' || methode === 'HEAD') {
         const C = await lireContenu(env);
-        const { statut, html: page } = rendrePage(C, p + url.search, { maquette: estMaquette(env), lienAdmin: '/admin/', apiContact: '/api/contact' });
+        const { statut, html: page } = rendrePage(C, p + url.search, { maquette: estMaquette(env), lienAdmin: '/admin/', apiContact: '/api/contact', credit: env.CREDIT_SITE || '' });
         if (statut === 200 && methode === 'GET' && !estMaquette(env)) ctx.waitUntil(compterVue(env, req, p.replace(/\/+$/, '').slice(0, 80) || '/').catch(() => {}));
         return html(page, statut);
       }

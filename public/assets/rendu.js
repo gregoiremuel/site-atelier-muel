@@ -205,7 +205,8 @@ function document_(C, o, page) {
   };
   const donneesJs = `var AGENCE=${JSON.stringify(AG).replace(/</g, '\\u003c')};`;
   const scripts = o.js != null ? `<script>\n${donneesJs}\n${o.js}\n</script>` : `<script>${donneesJs}</script>\n<script src="${o.jsHref || '/assets/site.js'}" defer></script>`;
-  const titre = page.titre ? `${page.titre}, ${nom}` : `${nom}, ${G.activite || ''}`.replace(/, $/, '');
+  /* Google affiche environ 60 signes : le nom du site n'est ajouté au titre de la page que s'il tient */
+  const titre = page.titre ? (page.titre.length + nom.length + 2 <= 60 ? `${page.titre}, ${nom}` : page.titre) : `${nom}, ${G.activite || ''}`.replace(/, $/, '');
   const desc = page.description || G.description_google || '';
 
   return `<!doctype html>
@@ -222,6 +223,7 @@ ${!o.maquette && page.chemin && /^https:\/\//.test((C.reglages || {}).url || '')
 <meta property="og:type" content="${page.ogType || 'website'}">
 ${page.publie ? `<meta property="article:published_time" content="${esc(page.publie)}">` : ''}
 ${(() => { const u = src(page.image, 1200) || src((C.reglages || {}).image_partage, 1200); const base = /^https:\/\//.test((C.reglages || {}).url || '') ? C.reglages.url.replace(/\/$/, '') : ''; return u ? `<meta property="og:image" content="${esc(/^\//.test(u) ? base + u : u)}">` : ''; })()}
+${donnees(C).actualites.length ? `<link rel="alternate" type="application/rss+xml" title="${esc(libelle(C, 'nav_actualites'))}, ${esc(nom)}" href="/actualites.xml">` : ''}
 <meta name="theme-color" content="${hex(T.fond, '#f4f6f8')}">
 <link rel="icon" href="${esc(favicon(C))}">
 ${style}
@@ -270,6 +272,7 @@ ${page.corps}
       <a href="/confidentialite">Confidentialité</a>
       ${o.lienAdmin ? `<a href="${o.lienAdmin}">Page de modification</a>` : ''}
       <span>© ${new Date().getFullYear()} ${esc(nom)}</span>
+      ${(() => { const [t, u] = String(o.credit || '').split('|').map((x) => x.trim()); return t && /^https:\/\/\S+$/.test(u || '') ? `<a href="${esc(u)}">${esc(t)}</a>` : ''; })()}
       ${C.credits_photos ? ((C.theme || {}).gabarit === 'edition' ? `<details class="credits"><summary>Crédits des photos</summary><p>${esc(C.credits_photos)}</p></details>` : `<span class="credits">${esc(C.credits_photos)}</span>`) : ''}
     </div>
   </div>
@@ -289,6 +292,11 @@ const carte = (D, x, grande) => `<li class="carte${grande ? ' carte-grande' : ''
       <span class="carte-img">${x.photos[0] ? img(x.photos[0], grande ? 1600 : 1000, 'carte-photo', false, '') + illus(x.photos[0]) : '<span class="sans-photo">Photos à venir</span>'}${etiquette(x)}</span>
       <span class="carte-txt"><span class="carte-sec">${esc((D.secteur(x.secteur) || {}).nom || '')}</span><span class="carte-nom">${esc(x.nom)}</span>${meta(x) ? `<span class="carte-meta">${esc(meta(x))}</span>` : ''}</span>
     </a></li>`;
+/* Fil d'Ariane pour Google (BreadcrumbList) : seulement quand l'adresse définitive du site est connue */
+const baseSite = (C) => (/^https:\/\//.test((C.reglages || {}).url || '') ? C.reglages.url.replace(/\/$/, '') : '');
+const filAriane = (C, etapes) => { const b = baseSite(C); return b ? { '@type': 'BreadcrumbList', itemListElement: [[(C.agence || {}).nom || 'Accueil', '/'], ...etapes].map(([n, ch], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: b + ch })) } : null; };
+const graphe = (...objets) => { const g = objets.filter(Boolean); return g.length ? { '@context': 'https://schema.org', '@graph': g } : undefined; };
+
 /* Actualités : date en toutes lettres, extrait du texte, vignette */
 const dateFr = (d) => (d ? new Date(d + 'T12:00:00Z').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }) : '');
 const extrait = (t, n = 150) => { const s = String(t || '').replace(/^##\s+/gm, '').replace(/^-\s+/gm, '').replace(/\s+/g, ' ').trim(); return s.length <= n ? s : s.slice(0, n - 1).replace(/[\s,;:.]+\S*$/, '') + '…'; };
@@ -393,9 +401,12 @@ function accueil(C, D) {
   const essais = D.realisations.filter((x) => x.lien);
   return {
     classe: 'p-accueil', image: A.photo, rubrique: '/',
-    jsonld: { '@context': 'https://schema.org', '@type': libelle(C, 'type_schema'), name: G.nom, description: G.description_google || '', telephone: G.telephone || undefined, email: G.email || undefined,
+    jsonld: graphe({ '@type': libelle(C, 'type_schema'), name: G.nom, description: G.description_google || '', telephone: G.telephone || undefined, email: G.email || undefined,
       address: G.adresse ? { '@type': 'PostalAddress', streetAddress: G.adresse, postalCode: G.code_postal, addressLocality: G.ville, addressCountry: 'FR' } : undefined,
+      image: (() => { const u = src(A.photo, 1200) || src((C.reglages || {}).image_partage, 1200); return u ? (/^\//.test(u) ? baseSite(C) + u : u) : undefined; })(),
+      logo: (() => { const u = src(G.logo, 600); return u && baseSite(C) ? (/^\//.test(u) ? baseSite(C) + u : u) : undefined; })(),
       areaServed: G.zone || undefined, ...((C.reglages || {}).url ? { url: C.reglages.url } : {}), sameAs: ['linkedin', 'instagram'].map((k) => G[k]).filter((u) => /^https:\/\//.test(u || '')) },
+      baseSite(C) ? { '@type': 'WebSite', name: G.nom, url: baseSite(C) + '/', inLanguage: 'fr-FR' } : null),
     corps: `
   <section class="hero">
     ${video ? videoFond(video, src(A.photo, 2200), 'hero-media') : src(A.photo, 2400) ? img(A.photo, 2400, 'hero-media', true, '') : compoHero(essais)}
@@ -580,7 +591,7 @@ function pageMetier(C, D, id) {
   if (!x) return null;
   return {
     classe: 'p-metier', titre: x.titre || x.nom, rubrique: '/' + x.id, image: x.photo, description: x.description || x.accroche || '',
-    jsonld: x.questions.length ? { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: x.questions.map((q) => ({ '@type': 'Question', name: q.q, acceptedAnswer: { '@type': 'Answer', text: q.r } })) } : undefined,
+    jsonld: graphe(x.questions.length ? { '@type': 'FAQPage', mainEntity: x.questions.map((q) => ({ '@type': 'Question', name: q.q, acceptedAnswer: { '@type': 'Answer', text: q.r } })) } : null, filAriane(C, [[x.nom, '/' + x.id]])),
     corps: `
   <section class="tete-page wrap">
     <p class="sur">${esc(x.sur || libelle(C, 'pages_sur'))}</p>
@@ -638,6 +649,7 @@ function pageRealisation(C, D, id) {
   const fiche = [['fiche_client', x.client], ['fiche_lieu', x.lieu], ['fiche_surface', x.surface], ['fiche_mission', x.mission], ['fiche_annee', x.annee], ['fiche_secteur', s && s.nom]].map(([k, v]) => [libelle(C, k), v]).filter(([, v]) => v);
   const [p0, ...autres] = x.photos;
   return {
+    jsonld: graphe(filAriane(C, [[libelle(C, 'nav_realisations'), '/realisations'], [x.nom, '/realisations/' + x.id]])),
     classe: 'p-realisation', titre: x.nom, rubrique: '/realisations', image: p0, description: ((x.lien ? 'Démonstration : ' : '') + (x.accroche || `${x.nom} : ${meta(x)}`)).slice(0, 158),
     corps: `
   <section class="real-tete">
@@ -936,4 +948,12 @@ export function rendrePage(C, chemin, o = {}) {
   else if ((m = p.match(/^\/([a-z0-9-]{3,60})$/))) page = pageMetier(C, D, m[1]);
   const statut = page ? 200 : 404;
   return { statut, html: document_(C, o, page ? { ...page, chemin: p } : page404()) };
+}
+
+/* Flux RSS des actualités (/actualites.xml) : les 20 plus récentes ; lu par les lecteurs de flux, Bing, et accepté comme plan du site par la Search Console */
+export function fluxRss(C, origine) {
+  const D = donnees(C), G = C.agence || {}, base = baseSite(C) || String(origine || '').replace(/\/$/, '');
+  const x = (t) => String(t == null ? '' : t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[c]));
+  const items = D.actualites.slice(0, 20).map((a) => `<item><title>${x(a.titre)}</title><link>${base}/actualites/${a.id}</link><guid isPermaLink="true">${base}/actualites/${a.id}</guid>${a.date ? `<pubDate>${new Date(a.date + 'T08:00:00Z').toUTCString()}</pubDate>` : ''}<description>${x(extrait(a.texte, 300))}</description></item>`).join('');
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>${x(libelle(C, 'nav_actualites') + ', ' + (G.nom || ''))}</title><link>${base}/actualites</link><atom:link href="${base}/actualites.xml" rel="self" type="application/rss+xml"/><description>${x(G.description_google || libelle(C, 'nav_actualites'))}</description><language>fr-FR</language>${items}</channel></rss>`;
 }

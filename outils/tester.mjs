@@ -40,7 +40,7 @@ if (process.argv[2]) {
   if (r.status !== 0) { console.error('Impossible de déposer le contenu de test :\n' + r.stderr); process.exit(1); }
 }
 const serveur = spawn(wrangler, ['dev', '-c', configTest, '--test-scheduled', '--port', String(PORT), '--ip', '127.0.0.1', '--persist-to', memoireTest, '--show-interactive-dev-session=false',
-  '--var', 'ADMIN_HASH:' + HASH, '--var', 'SESSION_SECRET:' + randomBytes(24).toString('hex'), '--var', 'MAQUETTE:non', '--var', `N8N_WEBHOOK_URL:http://127.0.0.1:${PORT_N8N}/webhook`, '--var', 'N8N_SECRET:' + SECRET_N8N, '--var', 'INDEXNOW_KEY:' + CLE_IDX, '--var', `INDEXNOW_URL:http://127.0.0.1:${PORT_IDX}/indexnow`],
+  '--var', 'ADMIN_HASH:' + HASH, '--var', 'SESSION_SECRET:' + randomBytes(24).toString('hex'), '--var', 'MAQUETTE:non', '--var', `N8N_WEBHOOK_URL:http://127.0.0.1:${PORT_N8N}/webhook`, '--var', 'N8N_SECRET:' + SECRET_N8N, '--var', 'INDEXNOW_KEY:' + CLE_IDX, '--var', `INDEXNOW_URL:http://127.0.0.1:${PORT_IDX}/indexnow`, '--var', 'CREDIT_SITE:Site réalisé par Essai|https://exemple.fr'],
 { cwd: racine, detached: true, stdio: ['ignore', 'pipe', 'pipe'] });
 let journal = '';
 serveur.stdout.on('data', (d) => { journal += d; }); serveur.stderr.on('data', (d) => { journal += d; });
@@ -152,15 +152,20 @@ async function tests() {
     recuIdx.length = 0;
     await req('/api/contenu', { method: 'PUT', ...corpsJson(ma) });
     if (/^https:\/\//.test((j.contenu.reglages || {}).url || '')) {
-      for (let i = 0; i < 20 && !recuIdx.length; i++) await new Promise((ok) => setTimeout(ok, 250));
-      let d = {}; try { d = JSON.parse(recuIdx[0] || '{}'); } catch (e) { /* vide */ }
-      verif(d.key === CLE_IDX && (d.urlList || []).some((u) => u.endsWith('/actualites/essai-actu-test')), 'IndexNow : les moteurs sont prévenus de la nouvelle actualité');
+      const lus = () => recuIdx.map((t) => { try { return JSON.parse(t); } catch (e) { return {}; } });
+      const trouve = () => lus().some((d) => d.key === CLE_IDX && (d.urlList || []).some((u) => u.endsWith('/actualites/essai-actu-test')));
+      for (let i = 0; i < 20 && !trouve(); i++) await new Promise((ok) => setTimeout(ok, 250));
+      verif(trouve(), 'IndexNow : les moteurs sont prévenus de la nouvelle actualité');
     }
     h = await (await req('/actualites/essai-actu-test')).text();
     verif(h.includes('Essai : chantier en cours') && h.includes('BlogPosting') && h.includes('/realisations/' + x0.id), 'Actualité enregistrée : sa page existe, avec ses données pour Google et le lien vers la réalisation');
     h = await (await req('/')).text(); verif(h.includes('href="/actualites"') && h.includes('/actualites/essai-actu-test'), 'Actualité : lien dans le menu et carte sur l’accueil');
     h = await (await req('/sitemap.xml')).text(); verif(h.includes('/actualites/essai-actu-test</loc><lastmod>2099-01-01</lastmod>'), 'Actualité : présente dans le plan du site, avec sa date');
     h = await (await req('/realisations/' + x0.id)).text(); verif(h.includes('/actualites/essai-actu-test'), 'La réalisation liée renvoie vers son actualité');
+    { const jour = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' }); const sm = await (await req('/sitemap.xml')).text();
+      verif(sm.includes(`/realisations/${x0.id}</loc><lastmod>${jour}</lastmod>`) && sm.includes(`/actualites</loc><lastmod>`), 'Plan du site : date de modification des pages touchées par l’enregistrement'); }
+    h = await (await req('/actualites.xml')).text(); verif(h.includes('<rss') && h.includes('/actualites/essai-actu-test</link>'), 'Flux RSS des actualités');
+    h = await (await req('/')).text(); verif(h.includes('application/rss+xml') && h.includes('<a href="https://exemple.fr">Site réalisé par Essai</a>'), 'Flux RSS annoncé, lien « site réalisé par » en pied de page');
     h = await (await req('/actualites/essai-actu-test')).text(); verif(h.includes('content="article"') && h.includes('"BreadcrumbList"') === /canonical/.test(h), 'Actualité : partage de type article, fil d’Ariane pour Google quand l’adresse du site est connue');
     ma.actualites[ma.actualites.length - 1].visible = false;
     await req('/api/contenu', { method: 'PUT', ...corpsJson(ma) });

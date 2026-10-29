@@ -6,7 +6,8 @@ import { join } from 'node:path';
 
 const racine = fileURLToPath(new URL('..', import.meta.url));
 const { rendrePage, routes } = await import(pathToFileURL(join(racine, 'public/assets/rendu.js')).href);
-const C = JSON.parse(readFileSync(join(racine, 'contenu-initial.json'), 'utf8'));
+const fichier = process.argv.slice(2).find((a, i, t) => !a.startsWith('--') && t[i - 1] !== '--en-ligne'); // contenu à contrôler (par défaut : contenu-initial.json)
+const C = JSON.parse(readFileSync(fichier || join(racine, 'contenu-initial.json'), 'utf8'));
 const url = ((C.reglages || {}).url || '').replace(/\/$/, '');
 const chemins = routes(C).filter((r) => !r.includes('?'));
 const lignes = []; // { gravite: 'ERREUR'|'à revoir'|'info', page, texte }

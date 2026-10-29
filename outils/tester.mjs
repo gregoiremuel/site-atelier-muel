@@ -132,6 +132,7 @@ async function tests() {
     verif((await loc('/agence/')) === '301 ' + BASE + '/agence', 'Une adresse avec « / » final renvoie vers la même sans « / »');
     verif((await loc('/feed/')).startsWith('301 ') && (await loc('/category/bureaux/')).startsWith('301 ') && (await loc('/author/admin/')) === '301 ' + BASE + '/', 'Adresses WordPress (flux, catégories, auteurs) redirigées');
     verif((await fetch(BASE + '/realisations/' + x0.id, { redirect: 'manual' })).status === 200, 'Une page existante n’est pas redirigée');
+    if ((C.redirections || []).length) { const r0 = C.redirections[0]; verif((await loc(r0.de)).startsWith('301 '), 'Les redirections du fichier de départ marchent même quand le contenu enregistré ne les a pas'); }
     await req('/api/contenu', { method: 'PUT', ...corpsJson(base) });
   }
   { const r1 = await fetch(BASE + '/' + CLE_IDX + '.txt'); verif(r1.status === 200 && (await r1.text()) === CLE_IDX, 'IndexNow : le fichier de clé est servi'); }

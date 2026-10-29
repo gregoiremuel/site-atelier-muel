@@ -113,7 +113,8 @@ function redirection(C, p) {
   try { chemin = decodeURI(p); } catch (e) { /* adresse mal codée : on la garde telle quelle */ }
   const sans = (x) => (x.length > 1 ? x.replace(/\/+$/, '') : x);
   const ok = (v) => /^(\/[^\s]*|https:\/\/\S+)$/.test(String(v || ''));
-  const R = (Array.isArray(C.redirections) ? C.redirections : []).find((r) => r && ok(r.vers) && typeof r.de === 'string' && sans(r.de.trim()) === sans(chemin));
+  /* Celles du contenu enregistré, puis celles du fichier de départ (déployées avec le code : valables même si la mémoire du site a déjà un contenu) */
+  const R = [...(Array.isArray(C.redirections) ? C.redirections : []), ...(Array.isArray(initial.redirections) ? initial.redirections : [])].find((r) => r && ok(r.vers) && typeof r.de === 'string' && sans(r.de.trim()) === sans(chemin));
   if (R && sans(R.vers) !== sans(chemin)) return R.vers;
   const D = donnees(C);
   if (/^\/(feed|rss|comments\/feed)\/?$/.test(chemin)) return D.actualites.length ? '/actualites.xml' : '/';

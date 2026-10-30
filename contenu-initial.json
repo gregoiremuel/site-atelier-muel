@@ -35,53 +35,36 @@
     "fond_video": false,
     "sur_titre": "",
     "titre": "Un site à votre nom, créé et tenu à jour.",
-    "texte": "Je crée le site de votre commerce, de votre atelier ou de votre entreprise, je le tiens à jour, et vous recevez les demandes de vos clients. Vous préférez le modifier vous-même ? Une page privée le permet, depuis votre téléphone.",
+    "texte": "Je crée le site de votre commerce, de votre atelier ou de votre entreprise. Vous recevez les demandes de vos clients, et vous changez vos horaires ou vos photos depuis votre téléphone.",
     "reperes": [
-      "590 € | une fois, sans abonnement obligatoire",
-      "48 h | ouvrées pour la maquette, dès vos infos reçues",
-      "1 domaine | à vous, toujours",
-      "0 cookie | de suivi, ni publicité"
+      "Une seule personne | Vous parlez à celui qui fait le travail, de la maquette à l’entretien",
+      "Maquette gratuite | À votre nom, en 48 h ouvrées : vous jugez avant de payer",
+      "Payé une fois | Pas d’abonnement obligatoire, et le nom de domaine est à vous",
+      "Vous gardez la main | Vos textes, horaires et photos se changent depuis votre téléphone"
     ],
     "intro_titre": "",
     "intro_texte": "",
     "photo_intro": "",
     "essai_titre": "Essayez avant de décider",
-    "essai_texte": "Quatre sites d’exemple, un par métier. Ouvrez-en un, touchez « Essayer la page de modification », changez un horaire ou une photo : rien n’est publié, tout reste dans votre navigateur. Les entreprises n’existent pas.",
-    "appel_titre": "Une maquette de votre site, gratuite, en 48 h",
-    "appel_texte": "Dites-moi qui vous êtes et ce que vous faites : je prépare une maquette à votre nom, en 48 h ouvrées après réception de vos informations. Elle ne vous plaît pas ? Vous ne me devez rien.",
+    "essai_texte": "Quatre sites d’exemple, un par métier. Ouvrez-en un, touchez « Essayer la page de modification » et changez un horaire ou une photo : rien n’est publié. Ces entreprises sont imaginaires.",
+    "appel_titre": "Dites-moi ce que vous faites, je prépare la maquette",
+    "appel_texte": "Elle est gratuite et à votre nom. Elle ne vous plaît pas ? Vous ne me devez rien.",
     "photo_appel": "",
     "cartes": false,
     "hero_tel": "Ou appelez-moi directement :",
-    "personne_titre": "Qui fait votre site",
-    "personne_texte": "Je m’appelle Grégoire Muel. Je travaille seul, depuis Auteuil, dans le 16e arrondissement de Paris : c’est moi qui prépare votre maquette, qui fais votre site et qui vous réponds.\n\nPas de standard ni de commercial : vous m’appelez, et vous parlez à la personne qui fait le travail.",
+    "personne_titre": "",
+    "personne_texte": "",
     "essai_points": true,
     "photo_fond": "/assets/photos/paris-16e-cafe.jpg"
   },
-  "chiffres": [
-    {
-      "valeur": "590 €",
-      "libelle": "une fois pour un site vitrine, sans abonnement obligatoire"
-    },
-    {
-      "valeur": "48 h",
-      "libelle": "pour recevoir votre maquette, gratuite"
-    },
-    {
-      "valeur": "15 min",
-      "libelle": "pour apprendre à modifier votre site"
-    },
-    {
-      "valeur": "1",
-      "libelle": "seul interlocuteur, du premier échange à la mise en ligne"
-    }
-  ],
+  "chiffres": [],
   "metiers": [
     {
       "id": "site-vitrine",
       "nom": "Site vitrine",
-      "accroche": "Pour un commerce ou un artisan : ce que vous faites, vos horaires, vos tarifs, et un bouton pour vous appeler.",
+      "accroche": "Pour qu’un client vous trouve, voie vos horaires et vous appelle en un geste.",
       "prix": "590 € | une fois, sans abonnement obligatoire",
-      "texte": "Le site que vos clients consultent avant de passer vous voir. Il se lit d’abord sur téléphone : horaires du jour, itinéraire et appel en un geste.\n\nVous le tenez à jour vous-même, depuis votre téléphone, ou vous me confiez les changements (compris dans l’abonnement Sérénité, sur devis sinon).\n\nCe qui est compris : un site d’une page complète (présentation, services ou produits, horaires, accès, demandes, mentions légales), deux séries de corrections, et la mise en ligne sous deux semaines après réception de vos textes et photos. Le nom de domaine reste à votre charge (environ 10 € par an) ; l’hébergement ne vous coûte rien. Des pages en plus, une boutique ou une réservation : sur devis.",
+      "texte": "Le site que vos clients consultent avant de passer vous voir. Il se lit d’abord sur téléphone : horaires du jour, itinéraire et appel en un geste.\n\nVous le tenez à jour vous-même, ou vous me confiez les changements (compris dans Sérénité, sur devis sinon). Mise en ligne sous deux semaines après réception de vos textes et photos. Le nom de domaine reste à votre charge (environ 10 € par an) ; l’hébergement ne coûte rien. Pages en plus, boutique ou réservation : sur devis.",
       "points": [
         "Maquette gratuite à votre nom en 48 h ouvrées, après réception de vos informations",
         "Un site d’une page complète, deux séries de corrections comprises",
@@ -95,7 +78,7 @@
     {
       "id": "boutique-catalogue",
       "nom": "Boutique et catalogue",
-      "accroche": "Pour présenter vos pièces ou vos produits : collections, fiches détaillées, panier et demandes de commande.",
+      "accroche": "Vos produits en vitrine : collections, fiches détaillées, panier et demandes de commande.",
       "prix": "dès 1 290 € | une fois, abonnement facultatif",
       "texte": "Un catalogue à votre image, rangé par collections et par types, avec une fiche pour chaque pièce : photos, prix, matières, options.\n\nVos clients composent un panier et vous envoient une demande de commande ; vous confirmez avec eux. Pas de commission sur vos ventes.",
       "points": [
@@ -110,7 +93,7 @@
     {
       "id": "site-entreprise",
       "nom": "Site d’entreprise ou refonte",
-      "accroche": "Pour une entreprise de services ou du bâtiment : vos métiers, vos réalisations, votre méthode, et des demandes de projet qualifiées.",
+      "accroche": "Pour rassurer un client qui ne vous connaît pas : vos métiers, vos réalisations, vos demandes de projet.",
       "prix": "dès 1 900 € | une fois, abonnement facultatif",
       "texte": "Un site qui inspire confiance à un client qui ne vous connaît pas encore : vos expertises, des réalisations classées par secteur, votre façon de travailler, vos engagements.\n\nSi vous avez déjà un site, je reprends ce qui est bon et je refais le reste.",
       "points": [
@@ -125,7 +108,7 @@
     {
       "id": "visibilite-google",
       "nom": "Visibilité Google",
-      "accroche": "Pour être trouvé sur Google Maps, avec ou sans site : votre fiche Google tenue à jour chaque mois.",
+      "accroche": "Pour être trouvé sur Google Maps, avec ou sans site : votre fiche tenue à jour chaque mois.",
       "prix": "39 € | par mois, sans engagement de durée",
       "texte": "Quand quelqu’un cherche « plombier près de moi » ou « fleuriste Paris 16 », la première chose qu’il voit est une fiche Google. Je la tiens à jour chaque mois : horaires, photos, un message publié, réponses aux avis préparées pour que vous les validiez.\n\nJe ne promets pas une place dans Google ni dans les réponses des assistants IA : personne ne peut la garantir. Je promets un travail fait chaque mois, et un rapport d’une page qui le montre.",
       "points": [
@@ -169,10 +152,7 @@
     "Pages mentions légales et confidentialité préparées",
     "Aucun cookie ; les visites sont comptées sans suivre personne",
     "Hébergement rapide",
-    "Nom de domaine en .fr à votre nom",
-    "Vidéo en fond de l’accueil (facultatif)",
-    "Prise en main de quinze minutes",
-    "Une démonstration à essayer avant de décider"
+    "Nom de domaine en .fr à votre nom"
   ],
   "secteurs": [
     {
@@ -336,21 +316,14 @@
   ],
   "presentation": {
     "titre": "À propos",
-    "texte": "Je conçois, refais et entretiens les sites des commerces, des artisans et des entreprises, depuis Auteuil (Paris 16e). Je suis Grégoire Muel, entrepreneur individuel : c’est moi que vous avez au téléphone, de la maquette à l’entretien.\n\n## Ma façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, de la maquette à la mise en ligne, puis pour l’entretien.",
+    "texte": "Je suis Grégoire Muel. Je crée et je tiens à jour les sites des commerces, des artisans et des entreprises, depuis Auteuil, dans le 16e arrondissement de Paris, et à distance partout en France.\n\nJe travaille seul : c’est moi que vous avez au téléphone, qui prépare votre maquette, qui fais votre site et qui réponds à vos questions. Si vous ne savez pas par où commencer, appelez-moi : on regarde ensemble ce dont vous avez besoin.",
     "photo": "/assets/photos/gregoire-portrait.jpg",
     "photo_2": "/assets/photos/travail-clavier.jpg"
   },
   "garanties": {
-    "titre": "Mes engagements en bref",
+    "titre": "",
     "texte": "",
-    "points": [
-      "Une maquette gratuite à votre nom avant toute décision",
-      "Rien à payer si la maquette ne vous plaît pas",
-      "Le nom de domaine et vos contenus restent à vous",
-      "Un site rapide, sans publicité ni cookie de suivi",
-      "Le prix annoncé avant de commencer",
-      "Pas d’abonnement obligatoire : le site se paie une fois"
-    ]
+    "points": []
   },
   "equipe": [
     {
@@ -371,10 +344,8 @@
     "types": [
       "Créer un site",
       "Refaire mon site",
-      "Boutique ou catalogue en ligne",
-      "Diagnostic gratuit de ma fiche Google",
-      "Visibilité Google, fiche tenue chaque mois",
       "Modifier ou entretenir un site",
+      "Diagnostic gratuit de ma fiche Google",
       "Autre demande"
     ],
     "cle_web3forms": "",
@@ -422,14 +393,14 @@
     "lots_sur": "Compris",
     "lots_titre": "Dans chaque site",
     "page_real_titre": "Réalisations et démonstrations",
-    "page_real_chapo": "Ces quatre sites sont des démonstrations imaginaires : aucun de ces commerces n’existe. Chacune montre un métier (ébéniste, fleuriste, plombier, restaurant) avec sa propre mise en page. Ouvrez-en une, touchez « Essayer la page de modification » et changez un horaire, un texte ou une photo : rien n’est publié, tout reste sur votre appareil. Les premiers sites de vrais clients prendront leur place ici, avec leur accord écrit.",
+    "page_real_chapo": "Quatre démonstrations : aucun de ces commerces n’existe. Chacune montre un métier avec sa propre mise en page. Ouvrez-en une, changez un horaire ou une photo : rien n’est publié. Les sites de vrais clients prendront leur place ici, avec leur accord écrit.",
     "fiche_surface": "Type de site",
     "interventions": "Ce qui a été fait",
     "garanties_sur": "Garanties",
     "equipe_sur": "À propos",
     "equipe_titre": "Votre interlocuteur",
     "contact_titre": "Parlons de votre site",
-    "contact_chapo": "Quelques lignes sur votre activité et sur ce que vous attendez de votre site suffisent pour commencer.",
+    "contact_chapo": "Dites-moi en quelques lignes ce que vous faites et ce que vous attendez de votre site. Je vous réponds ensuite.",
     "form_societe": "Commerce ou entreprise",
     "form_type": "Votre demande",
     "form_surface": "",
@@ -453,7 +424,7 @@
   },
   "abonnements": {
     "titre": "Un coup de main au mois, si vous le souhaitez",
-    "intro": "Le site est à vous dès sa livraison : vous pouvez le gérer seul depuis la page de modification. Si vous préférez que je m’en occupe, choisissez une formule mensuelle, sans engagement de durée. Pas sûr de votre choix ? Commencez sans abonnement : vous pourrez en prendre un plus tard, à tout moment.",
+    "intro": "Le site est à vous dès sa livraison : vous pouvez le gérer seul depuis la page de modification. Si vous préférez que je m’en occupe, choisissez une formule mensuelle, sans engagement de durée. Vous pourrez en changer plus tard.",
     "formules": [
       {
         "nom": "Sans abonnement",
@@ -492,23 +463,9 @@
           "Nouvelles pages ou nouvelle fonction sur devis"
         ],
         "recommande": false
-      },
-      {
-        "nom": "Visibilité Google",
-        "prix": "39 €",
-        "periode": "par mois",
-        "description": "Pour être trouvé sur Google Maps, avec ou sans site : je tiens votre fiche à jour.",
-        "points": [
-          "Mini-diagnostic gratuit pour commencer",
-          "Fiche à jour : horaires, photos, congés",
-          "Un message publié chaque mois, que vous validez",
-          "Réponses aux avis préparées, que vous validez",
-          "Rapport d’une page chaque mois"
-        ],
-        "recommande": false
       }
     ],
-    "note": "Ce que ça coûte la première année, site vitrine compris et nom de domaine inclus : environ 600 € sans abonnement, environ 830 € avec Sérénité, environ 1 190 € avec Croissance. Visibilité Google seule : 468 € par an. Sans engagement de durée : les formules s’arrêtent à tout moment ; le site, son contenu et son nom de domaine restent à vous. Je ne promets pas de place dans Google : je promets un travail fait chaque mois."
+    "note": "Ce que ça coûte la première année, site vitrine compris et nom de domaine inclus : environ 600 € sans abonnement, environ 830 € avec Sérénité, environ 1 190 € avec Croissance. Sans engagement de durée : les formules s’arrêtent à tout moment ; le site, son contenu et son nom de domaine restent à vous. Je ne promets pas de place dans Google : je promets un travail fait chaque mois."
   },
   "engagements": [
     {

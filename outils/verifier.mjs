@@ -130,7 +130,7 @@ export function verifier(C) {
   C.etapes.forEach((e, i) => { if (vide(e.titre)) E(`etapes[${i}].titre est vide.`); listeTextes(e.points, `etapes[${i}].points`); });
   listeTextes(C.lots, 'lots');
   listeTextes(C.accueil.reperes, 'accueil.reperes');
-  (C.accueil.reperes || []).forEach((v, i) => { if (estTexte(v) && v.length > (v.includes('|') ? 56 : 40)) A(`accueil.reperes[${i}] : plus de ${v.includes('|') ? 56 : 40} signes, trop long sous la grande photo.`); });
+  (C.accueil.reperes || []).forEach((v, i) => { if (estTexte(v) && v.length > (v.includes('|') ? 100 : 40)) A(`accueil.reperes[${i}] : plus de ${v.includes('|') ? 100 : 40} signes, trop long sous la grande photo.`); });
   C.chiffres.forEach((c, i) => { if (vide(c.valeur) || vide(c.libelle)) E(`chiffres[${i}] : chiffre ou texte vide.`); });
   if (C.chiffres.length > 4) A('Plus de 4 chiffres : la ligne sera chargée.');
   C.realisations.forEach((x, i) => {

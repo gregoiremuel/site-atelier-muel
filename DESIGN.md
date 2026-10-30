@@ -19,3 +19,6 @@ Panneau d'accueil : rue de Paris 16e (Unsplash, Shalev Cohen), étiquetée « Ph
 
 ## Mouvement
 Transformations seulement (montée de 22 px au défilement, téléphones qui montent à l'arrivée, tuiles qui se soulèvent au survol, appui à 97 %), contenu visible dès le chargement, tout coupé avec « moins d'animations ».
+
+## Boutons (version 3, 30/10/2026)
+Principal : plein, filet de 3 px qui monte en fond au survol, flèche qui avance (hover souris seulement), appui à 97 %. Secondaire : texte souligné, sans rectangle. « Choisir » : case « + » collée au libellé. Portraits : ronds (56 px accueil, 88 px À propos), jamais en grand format. Atouts : quatre bandes sous le premier écran.

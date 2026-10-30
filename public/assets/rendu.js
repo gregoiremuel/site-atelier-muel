@@ -231,7 +231,7 @@ ${donnees(C).actualites.length ? `<link rel="alternate" type="application/rss+xm
 <link rel="icon" href="${esc(favicon(C))}">
 ${style}
 </head>
-<body class="${page.classe || ''}${gabarit === 'studio' ? ' g-studio' : gabarit === 'edition' ? ' g-edition' : ''}${o.calme ? ' calme' : ''}">
+<body class="${page.classe || ''}${gabarit === 'studio' ? ' g-studio' : gabarit === 'edition' ? ' g-edition' : ' g-classique'}${o.calme ? ' calme' : ''}">
 <a class="skip" href="#contenu">Aller au contenu</a>
 ${o.maquette ? `<aside class="maquette" aria-label="Information sur ce site">${esc(libelle(C, 'bandeau_maquette') || `Proposition de site pour ${nom}, préparée par Grégoire Muel. Version de travail non publiée : textes et photos à valider.`)}</aside>` : ''}
 ${C.annonce && C.annonce.afficher && C.annonce.texte ? `<aside class="annonce" aria-label="Annonce">${esc(C.annonce.texte)}</aside>` : ''}

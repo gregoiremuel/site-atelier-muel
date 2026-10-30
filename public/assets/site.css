@@ -278,7 +278,7 @@ video.hero-media{animation:none}
 .fac{font-weight:400;color:var(--gris)}
 .saisie{width:100%;min-height:52px;padding:13px 14px;border:1px solid #cfcabd;background:#fff;color:var(--encre);font:inherit;border-radius:2px;appearance:none}
 textarea.saisie{min-height:150px;resize:vertical;line-height:1.5}
-select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris) 50%),linear-gradient(135deg,var(--gris) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat;padding-right:40px}
+select.saisie{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23363c44' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-position:calc(100% - 14px) 50%;background-size:18px 18px;background-repeat:no-repeat;padding-right:44px}
 .saisie:focus{outline:2px solid var(--encre);outline-offset:1px;border-color:var(--marine);box-shadow:0 0 0 3px color-mix(in srgb,var(--or) 45%,transparent)}
 .demande .btn{margin-top:26px}
 .note{font-size:.875rem;color:var(--gris);margin-top:16px}
@@ -1034,3 +1034,97 @@ select.saisie{background-image:linear-gradient(45deg,transparent 50%,var(--gris)
 .g-edition .tete-fig{margin:0;position:relative}
 .g-edition .tete-fig img{width:100%;aspect-ratio:3/2;object-fit:cover;object-position:50% 55%}
 @media (min-width:900px){.g-edition .tete-duo .wrap{grid-template-columns:minmax(0,6fr) minmax(0,5fr)}.g-edition .tete-duo{padding-bottom:0}.g-edition .tete-duo .tete-fig{align-self:end;margin-bottom:calc(-1 * clamp(40px,5vw,72px))}.g-edition .tete-duo + .sec{padding-top:calc(var(--pas) + clamp(40px,5vw,72px) * .4)}}
+
+/* ====== Gabarit « classique », version 2 du 30 octobre 2026 (Opéria) ======
+   Même identité (marine, jaune, Playfair Display, Manrope), des chapitres de couleur à la place des filets : blanc, lilas, marine, jaune, encre.
+   Aucune capitale espacée, aucun numéro décoratif, aucun filet, texte jamais sous 14 px. Mouvement : montée au défilement, soulèvement au survol, appui à 97 %. */
+.g-classique{--lilas:#eceef7;--pas:clamp(56px,7vw,104px);--c-mvt:cubic-bezier(.2,.65,.2,1);font-size:1.0625rem}
+.g-classique .sur,.g-classique .metier-num,.g-classique .etape-num{display:none}
+.g-classique .tete{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:0;transition:background .3s}
+.g-classique .tete.defile{background:var(--lilas)}
+.g-classique .nav a:not(.btn)::after{height:2px;background:var(--or)}
+.g-classique .sec{padding:var(--pas) 0;background:#fff}
+.g-classique .sec-serre{padding:clamp(40px,5vw,72px) 0}
+.g-classique .sec-tete h2,.g-classique .sec h2{max-width:34ch}
+.g-classique .tete-page{padding:clamp(48px,6vw,88px) 0 clamp(40px,5vw,72px);background:var(--lilas)}
+.g-classique .tete-page h1{max-width:28ch}
+.g-classique .chapo,.g-classique .prose{max-width:62ch}
+.g-classique .btn:active{transform:scale(.97)}
+.g-classique .btn{transition:background .2s,color .2s,border-color .2s,transform .15s var(--c-mvt)}
+.g-classique .lien{border-bottom:0;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.3em;background:none}
+/* Accueil */
+.g-classique .hero h1{max-width:20ch}
+.g-classique .hero-chapo{max-width:52ch;font-size:1.1875rem}
+.g-classique .hero-gar{border:0;padding-top:0;gap:10px 28px;font-size:1rem;color:#fff}
+.g-classique .intro{background:#fff}
+.g-classique .intro-fig::before{display:none}
+.g-classique .chiffres{border:0;gap:10px;margin-top:clamp(40px,6vw,80px)}
+.g-classique .chiffres li{border:0;padding:26px 28px;background:var(--lilas)}
+.g-classique .chiffres li:first-child{padding-left:28px}
+.g-classique .chiffres li:nth-child(2){background:var(--or);color:var(--marine)}
+.g-classique .chiffres li:nth-child(3){background:var(--marine);color:#fff}
+.g-classique .chiffres li:nth-child(2) b,.g-classique .chiffres li:nth-child(2) span{color:var(--marine)}
+.g-classique .chiffres li:nth-child(3) b,.g-classique .chiffres li:nth-child(3) span{color:#fff}
+.g-classique .metiers{border:0;gap:10px;align-items:end}
+.g-classique .metiers li{border:0;display:flex}
+.g-classique .metiers a{padding:30px 28px 28px;width:100%;background:rgba(255,255,255,.08);transition:transform .35s var(--c-mvt),background .25s}
+.g-classique .metiers a:hover{transform:translateY(-6px);background:rgba(255,255,255,.14)}
+.g-classique .metiers li:first-child a{padding-left:28px}
+.g-classique .metiers p{color:rgba(255,255,255,.88)}
+@media (min-width:900px){
+  .g-classique .metiers li{border:0}
+  .g-classique .metiers li:nth-child(1) a{min-height:300px}
+  .g-classique .metiers li:nth-child(2) a{min-height:360px}
+  .g-classique .metiers li:nth-child(3) a{min-height:420px}
+  .g-classique .metiers li:nth-child(2) a{background:var(--or);color:var(--marine)}
+  .g-classique .metiers li:nth-child(2) a h3,.g-classique .metiers li:nth-child(2) a p,.g-classique .metiers li:nth-child(2) .lien{color:var(--marine)}
+}
+.g-classique .clair{background:var(--or);color:var(--marine);border:0}
+.g-classique .clair h2,.g-classique .clair h3{color:var(--marine)}
+.g-classique .etapes{gap:10px;counter-reset:none}
+.g-classique .etapes>li{border:0;padding:30px 28px 34px;background:#fff;color:var(--encre)}
+.g-classique .etapes>li::before{display:none}
+.g-classique .etapes>li:nth-child(1){background:var(--marine);color:#fff}
+.g-classique .etapes>li:nth-child(2){background:var(--lilas)}
+.g-classique .etapes>li:nth-child(1) h3,.g-classique .etapes>li:nth-child(1) li{color:#fff}
+.g-classique .etapes h3{font-size:1.5rem;color:inherit}
+.g-classique .etapes ul li{border:0;padding:6px 0;font-size:1.0625rem;color:inherit}
+@media (min-width:900px){.g-classique .etapes{align-items:end}.g-classique .etapes>li:nth-child(1){min-height:300px}.g-classique .etapes>li:nth-child(2){min-height:360px}.g-classique .etapes>li:nth-child(3){min-height:420px}}
+.g-classique .refs{border:0;gap:10px;background:none}
+.g-classique .refs li{border:0;background:var(--lilas)}
+.g-classique .coches li{border:0;padding:8px 0}
+.g-classique .coches li:last-child{border:0}
+.g-classique .lots{border:0;gap:8px}
+.g-classique .lots li{border:0;background:var(--lilas);padding:18px 20px}
+/* Réalisations et expertises */
+.g-classique .carte-sec,.g-classique .etiq,.g-classique .illus,.g-classique small{font-size:.875rem}
+.g-classique .carte-meta{font-size:1rem}
+.g-classique .carte-img{background:var(--lilas)}
+.g-classique .metier{border:0;padding:var(--pas) 0;background:#fff}
+.g-classique .metier:nth-of-type(even){background:var(--lilas)}
+.g-classique .essai{border:0}
+.g-classique .essai-liens{border:0;display:grid;gap:8px}
+.g-classique .essai-liens li{border:0}
+.g-classique .essai-liens a{padding:22px 24px;background:var(--lilas)}
+/* Appel et pied de page */
+.g-classique .appel h2{max-width:none}
+.g-classique .pied{font-size:1rem}
+.g-classique .pied-haut{border:0;padding-bottom:8px}
+.g-classique .pied h2{font:600 1rem/1.2 var(--texte);letter-spacing:0;text-transform:none;font-style:normal;color:#fff;margin-bottom:12px}
+.g-classique .legal{border:0}
+.g-classique .legal,.g-classique .legal a,.g-classique .legal span,.g-classique .credits{font-size:.9375rem}
+.g-classique .credits p{max-width:78ch}
+@media (prefers-reduced-motion:reduce){.g-classique .metiers a{transition:none}}
+
+.g-classique .sec.sombre{background:var(--marine);color:#fff}
+.g-classique .sec.sombre h2,.g-classique .sec.sombre h3{color:#fff}
+.g-classique .sec.sombre .chapo{color:rgba(255,255,255,.88)}
+.g-classique .sec.clair{background:var(--or);color:var(--marine)}
+.g-classique .carte-sec{order:2}
+.g-classique .carte-meta{order:3}
+.g-classique .coord li{border:0}
+.g-classique .coord{border:0}
+@media (max-width:640px){
+  .g-classique .hero h1{font-size:1.75rem;line-height:1.12}
+  .g-classique .appel h2{font-size:1.4rem}
+}

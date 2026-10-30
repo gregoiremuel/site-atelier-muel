@@ -74,9 +74,9 @@ async function tests() {
     r = await req('/expertises'); const hc = await r.text();
     verif(C.comparaison.actif === true ? hc.includes('class="cmp"') : !hc.includes('class="cmp"'), 'La comparaison n’est affichée que si elle est activée');
     const Ca = structuredClone(C); Ca.comparaison.actif = true; const ha = rendrePage(Ca, '/expertises', { maquette: false }).html;
-    verif(ha.includes('class="cmp"') && Ca.comparaison.lignes.every((l) => ha.includes(l.critere.replace(/&/g, '&amp;'))) && ha.includes('id="o-comparaison"'), 'Activée, la comparaison s’affiche dans son onglet');
+    verif(ha.includes('class="cmp"') && Ca.comparaison.lignes.every((l) => ha.includes(l.critere.replace(/&/g, '&amp;'))) && ha.includes('id="comparaison"'), 'Activée, la comparaison s’affiche dans son chapitre');
   }
-  { const hx = rendrePage(C, '/expertises', { maquette: false }).html; verif((C.theme || {}).gabarit === 'edition' ? (/role="tablist"/.test(hx) && /id="p-sites"/.test(hx) && (hx.match(/role="tab"/g) || []).length === (hx.match(/role="tabpanel"/g) || []).length) : !/role="tablist"/.test(hx), 'La page des offres a ses onglets (gabarit édition), chacun avec son panneau'); }
+  { const hx = rendrePage(C, '/expertises', { maquette: false }).html; verif((C.theme || {}).gabarit === 'edition' ? (/class="ancres"/.test(hx) && /id="sites"/.test(hx) && (hx.match(/class="plan"/g) || []).length === (C.metiers || []).length && !/role="tablist"/.test(hx)) : !/class="ancres"/.test(hx), 'La page des offres (gabarit édition) : liens d’ancre, une tuile par offre'); }
   if ((C.pages_metier || []).length) {
     const P = C.pages_metier.filter((x) => x.visible !== false);
     let ok0 = 0;
@@ -93,7 +93,7 @@ async function tests() {
     verif(he.includes('g-edition') && he.includes('Besley') && he.includes('class="hero-gar"'), 'Gabarit « édition » : classe, polices et repères chiffrés');
     r = await req('/fonts/besley-latin-500-normal.woff2'); verif(r.status === 200, 'Police du gabarit « édition » servie');
     r = await req('/expertises'); const hv = await r.text();
-    verif((hv.match(/<details class="offre"/g) || []).length === C.metiers.length, 'Gabarit « édition » : chaque offre est un volet');
+    verif((hv.match(/<li class="plan"/g) || []).length === C.metiers.length, 'Gabarit « édition » : chaque offre est une tuile');
     const pe = (C.pages_metier || []).find((x) => x.exemple);
     if (pe) { r = await req('/' + pe.id); verif((await r.text()).includes('class="feuille"'), 'La feuille d’exemple du diagnostic s’affiche'); }
     verif(he.includes('\u00a0:') || he.includes('\u00a0?') || he.includes('\u00a0€'), 'Typographie française : espaces insécables');

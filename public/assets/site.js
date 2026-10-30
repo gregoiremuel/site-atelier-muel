@@ -20,36 +20,6 @@
     });
   })();
 
-  /* Onglets (page des offres) : sans JavaScript tout reste affiché ; avec, un seul panneau à la fois. L'adresse « #identifiant » ouvre le bon onglet. */
-  var ONGLETS = (function () {
-    var barre = $('.onglets-barre'); if (!barre) return null;
-    var tabs = $$('[role="tab"]', barre), pans = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
-    barre.hidden = false;
-    var activer = function (i, focus) {
-      tabs.forEach(function (t, j) { var on = j === i; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; if (pans[j]) pans[j].hidden = !on; });
-      if (focus) tabs[i].focus();
-    };
-    tabs.forEach(function (t, i) {
-      t.addEventListener('click', function () { activer(i); try { history.replaceState(null, '', '#' + pans[i].id.replace(/^p-/, '')); } catch (e) { /* rien */ } });
-      t.addEventListener('keydown', function (e) {
-        var k = e.key, n = tabs.length;
-        if (k === 'ArrowRight') { e.preventDefault(); activer((i + 1) % n, true); } else if (k === 'ArrowLeft') { e.preventDefault(); activer((i + n - 1) % n, true); }
-        else if (k === 'Home') { e.preventDefault(); activer(0, true); } else if (k === 'End') { e.preventDefault(); activer(n - 1, true); }
-      });
-    });
-    var surHash = function () {
-      var h = decodeURIComponent((location.hash || '').slice(1)); if (!h) return;
-      var cible = document.getElementById(h); if (!cible) return;
-      var pan = cible.closest('[role="tabpanel"]');
-      var i = pan ? pans.indexOf(pan) : pans.map(function (p) { return p && p.id.replace(/^p-/, ''); }).indexOf(h);
-      if (i > -1) activer(i);
-      if (cible.tagName === 'DETAILS') cible.open = true;
-      if (pan) setTimeout(function () { cible.scrollIntoView(); }, 0);
-    };
-    activer(0); surHash(); window.addEventListener('hashchange', surHash);
-    return { activer: activer };
-  })();
-
   /* Volets des offres : l'adresse « #identifiant » ouvre le bon volet */
   (function () {
     var ouvrir = function () { var h = decodeURIComponent((location.hash || '').slice(1)); var d = h && document.getElementById(h); if (d && d.tagName === 'DETAILS') d.open = true; };
@@ -81,7 +51,7 @@
     }
     if (calme) return;
     document.documentElement.classList.add('anime');
-    var CIBLES = ['.sec-tete', '.intro-txt', '.intro-fig', '.chiffres li', '.metiers li', '.cartes .carte', '.etapes > li', '.refs li', '.metier-fig', '.metier-txt', '.lots li', '.fiche', '.real-txt', '.galerie li', '.equipe li', '.engagements > *', '.coord', '.demande', '.appel-in > *', '.tete-page > *', '.prose-grande', '.suite a', '.essai-txt', '.essai-liens li'];
+    var CIBLES = ['.sec-tete', '.intro-txt', '.intro-fig', '.chiffres li', '.metiers li', '.cartes .carte', '.etapes > li', '.refs li', '.metier-fig', '.metier-txt', '.lots li', '.fiche', '.real-txt', '.galerie li', '.equipe li', '.engagements > *', '.coord', '.demande', '.appel-in > *', '.tete-page > *', '.prose-grande', '.suite a', '.essai-txt', '.essai-liens li', '.plan', '.abo-carte', '.lots li', '.faq details', '.metier-liens a', '.personne-grille > *', '.contact-grille > *', '.tete-fig'];
     var els = [];
     CIBLES.forEach(function (sel) {
       Array.prototype.forEach.call(document.querySelectorAll(sel), function (el) {

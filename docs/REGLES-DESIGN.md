@@ -18,5 +18,8 @@
 - **Mouvement** : sobre, `prefers-reduced-motion` respecté.
 - Un site, une identité : ne ressemble à aucun autre site de la méthode (`METHODE.md`, partie 3).
 
+## Skills de direction artistique (30/10/2026)
+Taste (`inspect.mjs`), Impeccable, Frontend UI Engineering et les skills d'Emil Kowalski sont installés dans le kit (`METHODE.md` 2.13). Quand l'un d'eux contredit une règle de ce fichier (titres à 8 vw chez Taste), ce fichier gagne : le titre d'accueil reste à 56 px au plus. Écarts défendus au 30/10/2026 : pas d'image unique couvrant un tiers de l'écran sur les pages intérieures (bandeaux de titre compacts) ; quatre images au moins seulement sur l'accueil et les offres.
+
 ## Outils retenus et écartés
 Retenus : Unslop UI et Web Interface Guidelines (listes de contrôle locales, Markdown), Impeccable (détection seule). Écarté : Design Stack ui-ux-pro-max (installation lourde, doublon avec Playwright et axe-core).

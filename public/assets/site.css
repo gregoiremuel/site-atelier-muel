@@ -1206,3 +1206,4 @@ select.saisie{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.
 .formule:has(input:focus-visible){outline:3px solid var(--marine);outline-offset:2px}
 @media (max-width:600px){.g-edition .btn-choisir{width:100%}}
 .g-edition .carte-txt{flex:1 1 auto}
+@media (max-width:600px){.g-edition .btn-choisir{justify-content:flex-start}}

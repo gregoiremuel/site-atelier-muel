@@ -497,7 +497,7 @@ const offrePlan = (C, m, i) => `
           <div class="plan-tete"><h2>${esc(m.nom)}</h2>${m.accroche ? `<p class="plan-pour">${esc(m.accroche)}</p>` : ''}</div>
           ${m.prix ? `<p class="plan-prix">${prixHtml(m.prix)}</p>` : ''}
           ${listeCoches(m.points.slice(0, 5))}
-          ${m.texte ? `<details class="plan-plus"><summary>Le détail de l’offre</summary><div class="prose">${texteRiche(m.texte)}</div></details>` : ''}
+          ${m.texte && !/^\/[a-z0-9#-]+$/.test(m.lien || '') ? `<details class="plan-plus"><summary>Le détail de l’offre</summary><div class="prose">${texteRiche(m.texte)}</div></details>` : ''}
           <p class="plan-actions"><a class="btn btn-choisir" href="/contact?offre=${esc(m.id)}">${esc(libelle(C, 'bouton_choisir'))}</a>${/^\/[a-z0-9#-]+$/.test(m.lien || '') ? `<a class="lien" href="${esc(m.lien)}">${esc(libelle(C, 'exp_lien'))} ${ico.fleche}</a>` : ''}</p>
         </li>`;
 

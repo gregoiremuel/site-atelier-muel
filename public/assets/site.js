@@ -133,11 +133,17 @@
   if (!form) return;
   var erreur = $('.demande-erreur', form), bouton = $('[data-envoyer]', form), okBox = $('.demande-ok');
   var val = function (n) { var f = form.elements[n]; return f ? String(f.value || '').trim() : ''; };
+  /* Formules : « /contact?offre=site-vitrine » (une ou plusieurs, séparées par une virgule) coche la ou les cases correspondantes */
+  var cases = [].slice.call(form.querySelectorAll('input[name="formule"]'));
+  try { (new URLSearchParams(location.search).get('offre') || '').split(',').forEach(function (id) { cases.forEach(function (c) { if (c.getAttribute('data-id') === id.trim()) c.checked = true; }); }); } catch (e) {}
+  var formulesCochees = function () { return cases.filter(function (c) { return c.checked; }).map(function (c) { return c.value; }); };
   var montrer = function (h) { erreur.innerHTML = h; erreur.hidden = false; };
   var envoyer = function (e) {
     if (e) e.preventDefault();
     erreur.hidden = true;
     var d = { nom: val('nom'), societe: val('societe'), email: val('email'), telephone: val('telephone'), type: val('type'), surface: val('surface'), ville: val('ville'), message: val('message') };
+    var fo = formulesCochees();
+    if (fo.length) d.message = ('Formule(s) souhaitée(s) : ' + fo.join(', ') + '.' + (d.message ? '\n\n' + d.message : '')).slice(0, 3000);
     /* Un nom, et un moyen de vous répondre : e-mail ou téléphone (l'un des deux suffit ; celui qui est écrit doit être valable) */
     var mailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email), telOk = d.telephone.replace(/\D/g, '').length >= 6;
     var manque = [], fautifs = [];

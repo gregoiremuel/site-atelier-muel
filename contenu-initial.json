@@ -37,44 +37,27 @@
     "titre": "Un site à votre nom, créé et tenu à jour.",
     "texte": "Je crée le site de votre commerce, de votre atelier ou de votre entreprise, je le tiens à jour, et vous recevez les demandes de vos clients. Vous préférez le modifier vous-même ? Une page privée le permet, depuis votre téléphone.",
     "reperes": [
-      "590 € | une fois, sans abonnement obligatoire",
-      "48 h | ouvrées pour la maquette, dès vos infos reçues",
-      "1 domaine | à vous, toujours",
-      "0 cookie | de suivi, ni publicité"
+      "Une seule personne | Vous parlez à celui qui fait le travail, de la maquette à l’entretien",
+      "Maquette gratuite | À votre nom, en 48 h ouvrées : vous jugez avant de payer",
+      "Payé une fois | Pas d’abonnement obligatoire, et le nom de domaine est à vous",
+      "Vous gardez la main | Vos textes, horaires et photos se changent depuis votre téléphone"
     ],
     "intro_titre": "",
     "intro_texte": "",
     "photo_intro": "",
     "essai_titre": "Essayez avant de décider",
     "essai_texte": "Quatre sites d’exemple, un par métier. Ouvrez-en un, touchez « Essayer la page de modification », changez un horaire ou une photo : rien n’est publié, tout reste dans votre navigateur. Les entreprises n’existent pas.",
-    "appel_titre": "Une maquette de votre site, gratuite, en 48 h",
-    "appel_texte": "Dites-moi qui vous êtes et ce que vous faites : je prépare une maquette à votre nom, en 48 h ouvrées après réception de vos informations. Elle ne vous plaît pas ? Vous ne me devez rien.",
+    "appel_titre": "Dites-moi ce que vous faites, je prépare la maquette",
+    "appel_texte": "Elle est gratuite et à votre nom. Elle ne vous plaît pas ? Vous ne me devez rien.",
     "photo_appel": "",
     "cartes": false,
     "hero_tel": "Ou appelez-moi directement :",
-    "personne_titre": "Qui fait votre site",
-    "personne_texte": "Je m’appelle Grégoire Muel. Je travaille seul, depuis Auteuil, dans le 16e arrondissement de Paris : c’est moi qui prépare votre maquette, qui fais votre site et qui vous réponds.\n\nPas de standard ni de commercial : vous m’appelez, et vous parlez à la personne qui fait le travail.",
+    "personne_titre": "",
+    "personne_texte": "",
     "essai_points": true,
     "photo_fond": "/assets/photos/paris-16e-cafe.jpg"
   },
-  "chiffres": [
-    {
-      "valeur": "590 €",
-      "libelle": "une fois pour un site vitrine, sans abonnement obligatoire"
-    },
-    {
-      "valeur": "48 h",
-      "libelle": "pour recevoir votre maquette, gratuite"
-    },
-    {
-      "valeur": "15 min",
-      "libelle": "pour apprendre à modifier votre site"
-    },
-    {
-      "valeur": "1",
-      "libelle": "seul interlocuteur, du premier échange à la mise en ligne"
-    }
-  ],
+  "chiffres": [],
   "metiers": [
     {
       "id": "site-vitrine",
@@ -169,10 +152,7 @@
     "Pages mentions légales et confidentialité préparées",
     "Aucun cookie ; les visites sont comptées sans suivre personne",
     "Hébergement rapide",
-    "Nom de domaine en .fr à votre nom",
-    "Vidéo en fond de l’accueil (facultatif)",
-    "Prise en main de quinze minutes",
-    "Une démonstration à essayer avant de décider"
+    "Nom de domaine en .fr à votre nom"
   ],
   "secteurs": [
     {
@@ -336,21 +316,14 @@
   ],
   "presentation": {
     "titre": "À propos",
-    "texte": "Je conçois, refais et entretiens les sites des commerces, des artisans et des entreprises, depuis Auteuil (Paris 16e). Je suis Grégoire Muel, entrepreneur individuel : c’est moi que vous avez au téléphone, de la maquette à l’entretien.\n\n## Ma façon de travailler\n- Une maquette avant toute décision : vous jugez sur pièce.\n- Un site à votre nom : le nom de domaine vous appartient.\n- Une page de modification simple, pensée pour le téléphone.\n- Un seul interlocuteur, de la maquette à la mise en ligne, puis pour l’entretien.",
+    "texte": "Je conçois, refais et entretiens les sites des commerces, des artisans et des entreprises, depuis Auteuil (Paris 16e). Je suis Grégoire Muel, entrepreneur individuel : c’est moi que vous avez au téléphone, de la maquette à l’entretien.",
     "photo": "/assets/photos/gregoire-portrait.jpg",
     "photo_2": "/assets/photos/travail-clavier.jpg"
   },
   "garanties": {
-    "titre": "Mes engagements en bref",
+    "titre": "",
     "texte": "",
-    "points": [
-      "Une maquette gratuite à votre nom avant toute décision",
-      "Rien à payer si la maquette ne vous plaît pas",
-      "Le nom de domaine et vos contenus restent à vous",
-      "Un site rapide, sans publicité ni cookie de suivi",
-      "Le prix annoncé avant de commencer",
-      "Pas d’abonnement obligatoire : le site se paie une fois"
-    ]
+    "points": []
   },
   "equipe": [
     {
@@ -371,10 +344,8 @@
     "types": [
       "Créer un site",
       "Refaire mon site",
-      "Boutique ou catalogue en ligne",
-      "Diagnostic gratuit de ma fiche Google",
-      "Visibilité Google, fiche tenue chaque mois",
       "Modifier ou entretenir un site",
+      "Diagnostic gratuit de ma fiche Google",
       "Autre demande"
     ],
     "cle_web3forms": "",
@@ -492,23 +463,9 @@
           "Nouvelles pages ou nouvelle fonction sur devis"
         ],
         "recommande": false
-      },
-      {
-        "nom": "Visibilité Google",
-        "prix": "39 €",
-        "periode": "par mois",
-        "description": "Pour être trouvé sur Google Maps, avec ou sans site : je tiens votre fiche à jour.",
-        "points": [
-          "Mini-diagnostic gratuit pour commencer",
-          "Fiche à jour : horaires, photos, congés",
-          "Un message publié chaque mois, que vous validez",
-          "Réponses aux avis préparées, que vous validez",
-          "Rapport d’une page chaque mois"
-        ],
-        "recommande": false
       }
     ],
-    "note": "Ce que ça coûte la première année, site vitrine compris et nom de domaine inclus : environ 600 € sans abonnement, environ 830 € avec Sérénité, environ 1 190 € avec Croissance. Visibilité Google seule : 468 € par an. Sans engagement de durée : les formules s’arrêtent à tout moment ; le site, son contenu et son nom de domaine restent à vous. Je ne promets pas de place dans Google : je promets un travail fait chaque mois."
+    "note": "Ce que ça coûte la première année, site vitrine compris et nom de domaine inclus : environ 600 € sans abonnement, environ 830 € avec Sérénité, environ 1 190 € avec Croissance. Sans engagement de durée : les formules s’arrêtent à tout moment ; le site, son contenu et son nom de domaine restent à vous. Je ne promets pas de place dans Google : je promets un travail fait chaque mois."
   },
   "engagements": [
     {

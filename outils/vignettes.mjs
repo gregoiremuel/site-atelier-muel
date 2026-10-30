@@ -24,12 +24,26 @@ try {
   const sites = [['vitrine-atelier', 'atelier-exemple'], ['vitrine-fleuriste', 'fleuriste-exemple'], ['vitrine-plombier', 'plombier-exemple'], ['vitrine-restaurant', 'restaurant-exemple']];
   cpSync(modele, join(tmp, 'moteur'), { recursive: true, filter: (s) => !/node_modules|\.wrangler|demonstration\.html|apercu-site\.html|demo-en-ligne/.test(s) });
   mkdirSync(sortie, { recursive: true });
-  const b = await chromium.launch();
+  const b = await chromium.launch({ args: process.getuid && process.getuid() === 0 ? ['--no-sandbox'] : [] }); /* en root, Chromium demande --no-sandbox */
   const capturer = async (page, nom, haut, y) => {
     await page.evaluate((y) => scrollTo(0, y), y);
     await page.waitForTimeout(700);
+    /* Coupe propre : la capture s'arrête à la fin du dernier bloc entièrement visible (jamais au milieu d'un titre ou d'un bouton) ; le reste prend la couleur de fond de la page */
+    const coupe = await page.evaluate(() => {
+      let bas = 0;
+      for (const e of document.querySelectorAll('body *')) {
+        const r = e.getBoundingClientRect(), cs = getComputedStyle(e);
+        if (!r.height || r.height < 8 || cs.position === 'fixed' || cs.position === 'sticky' || cs.visibility === 'hidden') continue;
+        if (!e.matches('h1,h2,h3,p,img,a.btn,a[class*=btn],button,figure,picture,ul,ol,li,header,nav,section')) continue;
+        if (r.bottom <= window.innerHeight - 6 && r.bottom > bas) bas = r.bottom;
+      }
+      return { bas: Math.max(300, Math.min(window.innerHeight, Math.ceil(bas + 6))), fond: getComputedStyle(document.body).backgroundColor };
+    });
     await page.screenshot({ path: join(tmp, nom + '.png'), clip: { x: 0, y: 0, width: L, height: H } });
-    const r = spawnSync('convert', [join(tmp, nom + '.png'), '-resize', '1600x1000!', '-strip', '-interlace', 'JPEG', '-quality', '82', join(sortie, nom + '.jpg')]);
+    const [rr, gg, bb] = (coupe.fond.match(/\d+/g) || [255, 255, 255]).slice(0, 3);
+    const fondHex = '#' + [rr, gg, bb].map((v) => Number(v).toString(16).padStart(2, '0')).join('');
+    const haut2 = Math.round(coupe.bas * echelle);
+    const r = spawnSync('convert', [join(tmp, nom + '.png'), '-crop', `${Math.round(L * echelle)}x${haut2}+0+0`, '+repage', '-background', fondHex, '-gravity', 'north', '-extent', `${Math.round(L * echelle)}x${Math.round(H * echelle)}`, '-resize', '1600x1000!', '-strip', '-interlace', 'JPEG', '-quality', '82', join(sortie, nom + '.jpg')]);
     if (r.status !== 0) { console.error('ImageMagick (convert) est nécessaire.'); process.exit(1); }
     console.log('public/assets/photos/' + nom + '.jpg');
   };

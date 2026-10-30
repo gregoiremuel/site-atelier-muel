@@ -59,7 +59,7 @@
         var freres = Array.prototype.filter.call(el.parentNode.children, function (x) { return x.matches(sel); });
         var i = freres.indexOf(el);
         el.classList.add('rev');
-        el.style.transitionDelay = Math.min(i, 7) * 70 + 'ms';
+        el.style.transitionDelay = Math.min(i, 7) * 60 + 'ms';
         els.push(el);
       });
     });
@@ -81,6 +81,8 @@
     };
     var montrer = function (el) {
       el.classList.add('vu');
+      /* Le décalage d'apparition ne doit pas retarder le survol ni l'appui une fois la page affichée */
+      setTimeout(function () { el.style.transitionDelay = ''; }, 900);
       if (el.matches('.chiffres li') && !document.body.classList.contains('g-edition')) { var b = el.querySelector('b'); if (b) compter(b); }
     };
     if (!('IntersectionObserver' in window)) { els.forEach(montrer); return; }

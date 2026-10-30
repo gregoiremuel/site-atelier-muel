@@ -664,6 +664,7 @@ function pageRealisation(C, D, id) {
     <div class="real-fig">${p0 ? img(p0, 2200, 'real-img', true, x.nom) + illus(p0) : '<span class="sans-photo">Photos à venir</span>'}${etiquette(x)}</div>
     <div class="wrap real-titre">
       <nav class="fil" aria-label="Fil d’Ariane"><a href="/realisations">${esc(libelle(C, 'nav_realisations'))}</a>${s ? ` <span aria-hidden="true">/</span> <a href="/realisations?secteur=${esc(s.id)}">${esc(s.nom)}</a>` : ''}</nav>
+      ${x.etiquette ? `<span class="etiq etiq-titre">${esc(x.etiquette)}</span>` : ''}
       <h1>${esc(x.nom)}</h1>
       ${x.accroche ? `<p class="chapo">${esc(x.accroche)}</p>` : ''}
     </div>

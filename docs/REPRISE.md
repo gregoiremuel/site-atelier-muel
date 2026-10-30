@@ -1,9 +1,16 @@
-# Reprise dans une nouvelle session (29 octobre 2026, soir)
+# Reprise dans une nouvelle session (30 octobre 2026)
 
 ## Prompt à coller en premier message (après un « clear »)
-> Lis `CLAUDE.md`, `LISEZMOI.md`, puis `docs/REPRISE.md`. Ajoute le dépôt `gregoiremuel/kit-sites-boutiques` (lis son `LISEZMOI.md` et `METHODE.md`). Branche de travail `ccr-04ab3608-pccm5z` dans les deux dépôts (si elle est fusionnée : repars de `main` avec le même nom). Sujet du jour : [à préciser]. Ne touche pas au site sans me le dire. Réponse finale en trois parties : Réponse claire, Niveau de confiance (0.0 à 1.0 avec la raison), Réserves clés.
+> Lis `CLAUDE.md`, `LISEZMOI.md`, `DESIGN.md`, `docs/REPRISE.md`, `docs/CONFORMITE.md`. Ajoute le dépôt `gregoiremuel/kit-sites-boutiques` (lis son `LISEZMOI.md` et `METHODE.md`, parties 2.11 à 2.13 ; ses skills de design sont dans `.claude/skills/`) et, si on parle d'Opéria, `gregoiremuel/site-operia` (privé). Branche de travail `ccr-04ab3608-pccm5z` dans les trois dépôts (si elle est fusionnée : repars de `main` avec le même nom). Sujet du jour : [à préciser]. Réponse finale en trois parties : Réponse claire, Niveau de confiance (0.0 à 1.0 avec la raison), Réserves clés.
 
-## Où on en est
+## Où on en est (30/10/2026)
+- **Branche `ccr-04ab3608-pccm5z`** poussée dans les trois dépôts, **pas encore fusionnée dans `main`** : fusion propre vérifiée (0 conflit). Rien n'est déployé : Cloudflare est injoignable depuis l'espace de Claude ; le site et Opéria passent en ligne quand Greg fusionne dans `main` (ou lance `npm run deploy` chez lui).
+- **Fait le 30/10** : conformité web (`docs/CONFORMITE.md`, prompt `docs/PROMPT-CONFORMITE.md`), titres et descriptions Google page par page (clé `seo`), refonte visuelle du gabarit « édition » v2 (`DESIGN.md`), gabarit « classique » v2 pour Opéria, skills de direction artistique installés dans le kit (`METHODE.md` 2.13), export du VPS lu (dépôt privé `gregoiremuel/vps-docs`).
+- **Contrôles du 30/10** : site `npm test` 132 ok, accessibilité et rendu sans point, référencement 0 point ; moteur du kit 116 ok ; Opéria 117 ok et accessibilité sans point.
+- **À savoir** : si le site en ligne a déjà un contenu dans sa mémoire (KV), les photos d'offres, la photo de l'accueil et le nouveau titre n'y apparaissent qu'après modification dans `/admin` (les titres `seo` s'appliquent toujours). Réseau de la session : `images.unsplash.com` répond, mais ni `unsplash.com` ni les banques d'archives ni Instagram.
+- **Ce que Greg doit faire** : voir la liste « À valider » du `LISEZMOI.md`, plus : e-mail pro (mentions et confidentialité), téléphone de l'hébergeur Cloudflare, domaine puis `MAQUETTE` à « non » avant d'envoyer le plan du site à la Search Console, secrets Cloudflare (`N8N_WEBHOOK_URL`, `N8N_SECRET`, `INDEXNOW_KEY`), double authentification n8n (VPS). Opéria : accord et détails à confirmer avec eux, photos à héberger, 20 anciens chantiers à reprendre (mémoire du dépôt `vps-docs`).
+
+## Historique (29/10/2026, soir)
 - **Site** : en ligne sur l'adresse provisoire Cloudflare, non indexé (`MAQUETTE` = « oui »). Ouverture après : franchise de TVA confirmée, nom commercial corrigé au Guichet unique, domaine actif, mentions relues.
 - **Tout est fusionné dans `main`** (site et kit, demandes de fusion n° 15, 16, 17 et suivante). Détail de la journée : `docs/AUDIT-2026-10-29.md` (audit, quatre priorités, démonstrations entièrement différentes, décisions de Greg en partie 9). Avant cela :
   - Offre **Visibilité Google** : prompts mensuels, modèle de rapport, script du palier 1 (`kit/visibilite-google/`, `kit/outils/visibilite-google.mjs`).

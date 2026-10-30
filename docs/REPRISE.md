@@ -1,7 +1,9 @@
 # Reprise dans une nouvelle session (30 octobre 2026)
 
 ## Prompt à coller en premier message (après un « clear »)
-> Lis `CLAUDE.md`, `LISEZMOI.md`, `DESIGN.md`, `docs/REPRISE.md`, `docs/CONFORMITE.md`. Ajoute le dépôt `gregoiremuel/kit-sites-boutiques` (lis son `LISEZMOI.md` et `METHODE.md`, parties 2.11 à 2.13 ; ses skills de design sont dans `.claude/skills/`) et, si on parle d'Opéria, `gregoiremuel/site-operia` (privé). Branche de travail `ccr-04ab3608-pccm5z` dans les trois dépôts (si elle est fusionnée : repars de `main` avec le même nom). Sujet du jour : [à préciser]. Réponse finale en trois parties : Réponse claire, Niveau de confiance (0.0 à 1.0 avec la raison), Réserves clés.
+> Ajoute `gregoiremuel/kit-sites-boutiques` (et `gregoiremuel/site-operia` si on parle d'Opéria). Suis le skill `sites-boutiques` du kit, lis `CLAUDE.md`, `LISEZMOI.md` et `docs/REPRISE.md` du site. Branche `ccr-04ab3608-pccm5z` (si elle est fusionnée : repars de `main` avec le même nom). Sujet du jour : [à préciser]. Réponse en trois parties.
+
+Le skill `sites-boutiques` (dans le kit, importé aussi dans l'app) dit déjà quoi lire, quels skills de design lancer, quels contrôles faire et comment mettre en ligne : inutile de tout redire.
 
 ## Où on en est (30/10/2026)
 - **Branche `ccr-04ab3608-pccm5z`** poussée dans les trois dépôts, **pas encore fusionnée dans `main`** : fusion propre vérifiée (0 conflit). Rien n'est déployé : Cloudflare est injoignable depuis l'espace de Claude ; le site et Opéria passent en ligne quand Greg fusionne dans `main` (ou lance `npm run deploy` chez lui).

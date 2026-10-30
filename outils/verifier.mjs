@@ -30,7 +30,7 @@ const ELEMENTS = {
   references: ['nom', 'logo'],
 };
 /* Clés facultatives (ajoutées au moteur après Opéria : un contenu sans elles reste valide) */
-const FACULTATIVES = { agence: ['lien_avis', 'profils'], '': ['redirections', 'libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier', 'actualites'], reglages: ['image_partage'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte', 'cartes', 'essai_points', 'hero_tel', 'personne_titre', 'personne_texte', 'actualites'], mentions: ['tva', 'nom_commercial'], contact: ['traitement'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette', 'apercu'] };
+const FACULTATIVES = { agence: ['lien_avis', 'profils'], '': ['redirections', 'libelles', 'abonnements', 'engagements', 'comparaison', 'pages_metier', 'actualites', 'seo'], reglages: ['image_partage'], theme: ['gabarit'], accueil: ['essai_titre', 'essai_texte', 'cartes', 'essai_points', 'hero_tel', 'personne_titre', 'personne_texte', 'actualites'], mentions: ['tva', 'nom_commercial', 'hebergeur_telephone'], contact: ['traitement'], metiers: ['prix', 'lien'], realisations: ['lien', 'lien_texte', 'etiquette', 'apercu'] };
 const INTERDITS = [
   [/\bbienvenue\b/i, 'Bienvenue'], [/\bdécouvr(ez|ir)\b/i, 'Découvrez'], [/n['’]hésitez pas/i, 'N’hésitez pas'], [/au c(œ|oe)ur d/i, 'au cœur de'],
   [/\bvéritable/i, 'véritable'], [/\bincontournable/i, 'incontournable'], [/\bpassion/i, 'passion'], [/savoir-faire unique/i, 'savoir-faire unique'],
@@ -285,6 +285,25 @@ export function verifier(C) {
   const manque = ['raison_sociale', 'rcs', 'adresse', 'directeur_publication'].filter((k) => vide(Mn[k]));
   if (manque.length) afaire.push('Mentions légales à compléter : ' + manque.join(', ') + '.');
   if (!vide(Mn.nom_commercial)) afaire.push(`Nom commercial « ${Mn.nom_commercial} » : vérifier qu’il est bien celui du registre (RNE) avant l’ouverture, sinon faire la modification sur le Guichet unique.`);
+
+  if (vide(Mn.email) && vide(C.agence.email)) afaire.push('Mentions légales et confidentialité : adresse e-mail de contact à renseigner (obligatoire : contact direct de l’éditeur, et pour exercer les droits RGPD).');
+  if (vide(Mn.hebergeur_telephone)) afaire.push('Mentions légales : téléphone de l’hébergeur (Cloudflare) à renseigner (article 6-III de la LCEN : nom, adresse et téléphone).');
+
+  /* Titres et descriptions par page (clé facultative « seo ») */
+  if ('seo' in C) {
+    if (!C.seo || typeof C.seo !== 'object' || Array.isArray(C.seo)) E('« seo » doit être un objet { "/adresse": { titre, description } }.');
+    else {
+      const pagesSeo = new Set(routes(C).filter((r) => !r.includes('?')));
+      Object.entries(C.seo).forEach(([ch, v]) => {
+        const n = `seo["${ch}"]`;
+        if (!pagesSeo.has(ch)) { A(`${n} : cette adresse n’est pas une page du site.`); return; }
+        if (!v || typeof v !== 'object' || Array.isArray(v)) { E(`${n} doit être un objet (titre, description).`); return; }
+        Object.keys(v).filter((k) => !['titre', 'description'].includes(k)).forEach((k) => E(`Clé inconnue : ${n}.${k}`));
+        if ('titre' in v && !estTexte(v.titre)) E(`${n}.titre doit être un texte.`); else if (v.titre && v.titre.length > 60) A(`${n}.titre : ${v.titre.length} signes, Google coupe vers 60.`);
+        if ('description' in v && !estTexte(v.description)) E(`${n}.description doit être un texte.`); else if (v.description && (v.description.length > 160 || v.description.length < 70)) A(`${n}.description : ${v.description.length} signes (visez 70 à 160).`);
+      });
+    }
+  }
 
   /* Style des textes */
   const textes = [['accueil.sur_titre', C.accueil.sur_titre], ['accueil.titre', C.accueil.titre], ['accueil.texte', C.accueil.texte], ...(C.accueil.reperes || []).map((v, i) => [`accueil.reperes[${i}]`, v]), ['accueil.intro_titre', C.accueil.intro_titre], ['accueil.intro_texte', C.accueil.intro_texte],

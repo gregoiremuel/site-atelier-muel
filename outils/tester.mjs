@@ -226,6 +226,24 @@ async function tests() {
   const avant = (await (await req('/api/audience?jours=1')).json()).jours[0];
   r = await req('/', { cookie: false, headers: { ...ua, Referer: 'https://www.google.fr/' } }); h = await r.text();
   verif(!/set-cookie/i.test([...r.headers.keys()].join(',')), 'Une visite ne dépose aucun cookie');
+  /* Conformité : titres et descriptions choisis page par page, pages légales complètes, aucune ressource tierce, aucun cookie */
+  const net = (t) => String(t || '').replace(/&#39;/g, '’').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/[\u00a0\u202f]/g, ' ').replace(/'/g, '’').trim();
+  let seoOk = true;
+  for (const [chemin, v] of Object.entries(C.seo || {})) {
+    const pg = await (await req(chemin, { cookie: false })).text();
+    const t = net((pg.match(/<title>([\s\S]*?)<\/title>/) || [])[1]), d = net((pg.match(/<meta name="description" content="([^"]*)"/) || [])[1]);
+    if (t !== net(v.titre) || (v.description && d !== net(v.description)) || /<meta name="robots" content="noindex">/.test(pg)) { seoOk = false; console.log('     seo : ' + chemin + ' → ' + t); }
+  }
+  verif(seoOk, 'Titres et descriptions choisis page par page (clé « seo ») : appliqués, pages indexables');
+  r = await req('/confidentialite', { cookie: false }); let h2 = await r.text();
+  verif(['Qui est responsable', 'id="cookies"', 'Combien de temps', '180 jours', 'cnil.fr/fr/plaintes', 'art. 6.1.b', 'Hors de l’Union européenne'].every((m) => h2.includes(m)), 'Confidentialité : responsable, cookies, finalité et base légale, durée, destinataires, droits, CNIL');
+  verif(!/set-cookie/i.test([...r.headers.keys()].join(',')), 'Confidentialité : aucun cookie déposé');
+  r = await req('/mentions-legales', { cookie: false }); h2 = await r.text();
+  verif(['Éditeur du site', 'Hébergement', 'Directeur de la publication', 'Utilisation du site'].every((m) => h2.includes(m)), 'Mentions légales : éditeur, hébergeur, directeur de publication, utilisation du site');
+  r = await req('/contact', { cookie: false }); h2 = await r.text();
+  verif(/Conservation : 180 jours/.test(h2) && /href="\/confidentialite">politique de confidentialité/.test(h2) && !/type="checkbox"[^>]*(checked|name="(consent|newsletter))/.test(h2.replace(/<input type="checkbox" name="botcheck"[^>]*>/, '')), 'Formulaire : mention d’information sous le formulaire, aucune case cochée d’avance');
+  verif(/href="\/confidentialite#cookies">Cookies<\/a>/.test(h), 'Pied de page : lien Cookies');
+  verif(!/<(script|link|iframe)[^>]+(src|href)="https?:\/\/(?!gregoiremuel\.fr)/.test(h), 'Aucun script, style ni cadre chargé depuis un autre site (pas de consentement à demander)');
   await req('/expertises', { cookie: false, headers: ua });
   await req('/', { cookie: false, headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1)' } });
   await req('/nexistepas', { cookie: false, headers: ua });

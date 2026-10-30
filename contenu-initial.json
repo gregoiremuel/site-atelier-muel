@@ -378,7 +378,8 @@
     ],
     "cle_web3forms": "",
     "email": "",
-    "confirmation": "Merci, votre demande est bien partie. Je vous recontacte pour en parler."
+    "confirmation": "Merci, votre demande est bien partie. Je vous recontacte pour en parler.",
+    "traitement": "Traitement automatique : une fois le site ouvert, chaque demande est aussi transmise à un outil d’automatisation (n8n) hébergé sur un serveur situé à Paris (Hostinger). Il avertit l’éditeur par e-mail et par message privé (Telegram), et peut vous envoyer un accusé de réception. Ces outils n’ont qu’un rôle technique. Aucune intelligence artificielle ne lit votre demande aujourd’hui ; si cela change, cette page sera mise à jour avant."
   },
   "mentions": {
     "raison_sociale": "Grégoire Muel EI",
@@ -389,7 +390,8 @@
     "email": "",
     "mediateur": "",
     "tva": "TVA non applicable, article 293 B du code général des impôts",
-    "nom_commercial": "Grégoire Muel"
+    "nom_commercial": "Grégoire Muel",
+    "hebergeur_telephone": ""
   },
   "credits_photos": "Vignettes : captures d’écran des démonstrations. Photos d’illustration des démonstrations (Unsplash) : Sander Hallaste, Bailey Alexander, Craft Kitties, HENG YIN, Minh Đức (atelier) ; Vika Fleysher, Oxana Melis, Viktoriia Yatsentiuk, Roman Kraft (fleuriste) ; Timur Shakerzianov (plombier) ; Glenov Brankovic, Antonio Araujo (restaurant). Photos d’illustration du site (Unsplash) : le poste de travail (Christin Hume) et la rue parisienne (Shalev Cohen) ne montrent ni l’auteur ni un client. Les démonstrations ne montrent pas de vrais clients.",
   "reglages": {
@@ -886,5 +888,51 @@
       },
       "sur": "Offre"
     }
-  ]
+  ],
+  "seo": {
+    "/": {
+      "titre": "Création et refonte de site internet à Paris | Grégoire Muel",
+      "description": "Création et refonte de site internet pour commerces, artisans et entreprises, à Paris et partout en France. Maquette gratuite en 48 h, site dès 590 €."
+    },
+    "/expertises": {
+      "titre": "Site vitrine, boutique en ligne, refonte | Grégoire Muel",
+      "description": "Site vitrine, boutique ou catalogue en ligne, site d’entreprise et refonte : formules, prix affichés et abonnement facultatif, avec une page pour tout modifier."
+    },
+    "/realisations": {
+      "titre": "Exemples de sites pour commerces et artisans | Grégoire Muel",
+      "description": "Quatre démonstrations de sites pour un ébéniste, un fleuriste, un plombier et un restaurant. Essayez la page de modification : rien n’est publié."
+    },
+    "/agence": {
+      "titre": "Créateur de site internet à Paris 16e | Grégoire Muel",
+      "description": "Grégoire Muel, entrepreneur individuel à Paris 16e : création, refonte et entretien du site de votre commerce, de votre atelier ou de votre entreprise."
+    },
+    "/engagements": {
+      "titre": "Hébergement, données, sauvegardes du site | Grégoire Muel",
+      "description": "Hébergement, données personnelles, sauvegardes, délai de réponse et fin d’abonnement : les engagements écrits avant de signer la création de votre site."
+    },
+    "/contact": {
+      "titre": "Demander une maquette gratuite de site | Grégoire Muel",
+      "description": "Décrivez votre activité en quelques lignes pour recevoir une maquette gratuite de votre futur site en 48 h, à Paris ou à distance, sans engagement."
+    },
+    "/site-restaurant": {
+      "titre": "Site internet de restaurant : carte, réservation",
+      "description": "Un site de restaurant lisible sur téléphone : carte, réservation, horaires du service. À partir de 590 €, une fois, abonnement facultatif. Maquette gratuite."
+    },
+    "/site-plombier": {
+      "titre": "Site internet de plombier ou d’artisan du bâtiment",
+      "description": "Un site de plombier ou d’artisan du bâtiment : numéro cliquable en haut de chaque écran, « Dépannage ou devis » dès l’arrivée. À partir de 590 €, une fois."
+    },
+    "/site-fleuriste": {
+      "titre": "Site internet de fleuriste : bouquets et retrait",
+      "description": "Un site de fleuriste : fleurs de la semaine, bouquets à commander et jour de retrait dans les horaires de la boutique. À partir de 590 €, une fois."
+    },
+    "/site-commerce-de-bouche": {
+      "titre": "Site internet de commerce de bouche | Grégoire Muel",
+      "description": "Un site de commerce de bouche : produits du moment, commandes à retirer (plateaux, gâteaux, coffrets) et horaires. À partir de 590 €, une fois."
+    },
+    "/visibilite-google": {
+      "titre": "Fiche Google Maps tenue à jour chaque mois",
+      "description": "Votre fiche Google tenue à jour chaque mois : horaires, photos, un message par mois et réponses aux avis que vous validez. 39 € par mois, sans engagement."
+    }
+  }
 }

@@ -33,7 +33,9 @@ const estMaquette = (env) => String(env.MAQUETTE || '').toLowerCase() === 'oui';
 
 async function lireContenu(env, frais) {
   const c = await env.CONTENU.get('contenu', frais ? { type: 'json' } : { type: 'json', cacheTtl: 30 });
-  return c || structuredClone(initial);
+  /* Titres et descriptions par page (« seo ») : ceux du fichier de départ s'appliquent tant que la mémoire n'a pas les siens */
+  if (c) return c.seo || !initial.seo ? c : { ...c, seo: initial.seo };
+  return structuredClone(initial);
 }
 
 /* ---------- Limite de tentatives (connexion, demandes) ---------- */
@@ -82,7 +84,7 @@ async function cookieSession(env) {
 const CLES_OBJETS = ['agence', 'annonce', 'accueil', 'presentation', 'garanties', 'affichage', 'contact', 'mentions'];
 const CLES_LISTES = ['chiffres', 'metiers', 'etapes', 'secteurs', 'realisations', 'actualites', 'equipe', 'references', 'engagements', 'redirections'];
 /* Clés facultatives : gardées telles qu'elles sont enregistrées quand le contenu envoyé ne les a pas, sinon remplacées (sans elles, un contenu enregistré perdrait ses formules d'abonnement et ses libellés) */
-const OBJETS_FACULTATIFS = ['abonnements', 'libelles', 'comparaison'];
+const OBJETS_FACULTATIFS = ['abonnements', 'libelles', 'comparaison', 'seo'];
 const LISTES_FACULTATIVES = ['pages_metier'];
 /* Réglés par Grégoire, jamais modifiables depuis la page de modification */
 const CLES_FIXES = ['_schema', 'theme', 'reglages'];

@@ -206,8 +206,11 @@ function document_(C, o, page) {
   const donneesJs = `var AGENCE=${JSON.stringify(AG).replace(/</g, '\\u003c')};`;
   const scripts = o.js != null ? `<script>\n${donneesJs}\n${o.js}\n</script>` : `<script>${donneesJs}</script>\n<script src="${o.jsHref || '/assets/site.js'}" defer></script>`;
   /* Google affiche environ 60 signes : le nom du site n'est ajouté au titre de la page que s'il tient */
-  const titre = page.titre ? (page.titre.length + nom.length + 2 <= 60 ? `${page.titre}, ${nom}` : page.titre) : `${nom}, ${G.activite || ''}`.replace(/, $/, '');
-  const desc = page.description || G.description_google || '';
+  const titreAuto = page.titre ? (page.titre.length + nom.length + 2 <= 60 ? `${page.titre}, ${nom}` : page.titre) : `${nom}, ${G.activite || ''}`.replace(/, $/, '');
+  /* Titre et description choisis page par page (clé facultative « seo » : { "/adresse": { titre, description } }) ; sinon ceux calculés ci-dessus */
+  const SEO = C.seo && typeof C.seo === 'object' && !Array.isArray(C.seo) && page.chemin && C.seo[page.chemin] && typeof C.seo[page.chemin] === 'object' ? C.seo[page.chemin] : {};
+  const titre = String(SEO.titre || '').trim() || titreAuto;
+  const desc = String(SEO.description || '').trim() || page.description || G.description_google || '';
 
   return `<!doctype html>
 <html lang="fr">
@@ -270,6 +273,7 @@ ${page.corps}
     <div class="legal">
       <a href="/mentions-legales">Mentions légales</a>
       <a href="/confidentialite">Confidentialité</a>
+      <a href="/confidentialite#cookies">Cookies</a>
       ${o.lienAdmin ? `<a href="${o.lienAdmin}">Page de modification</a>` : ''}
       <span>© ${new Date().getFullYear()} ${esc(nom)}</span>
       ${(() => { const [t, u] = String(o.credit || '').split('|').map((x) => x.trim()); return t && /^https:\/\/\S+$/.test(u || '') ? `<a href="${esc(u)}" rel="nofollow">${esc(t)}</a>` : ''; })()}
@@ -835,7 +839,7 @@ function pageContact(C, D) {
         <input type="checkbox" name="botcheck" class="piege" tabindex="-1" autocomplete="off" aria-hidden="true">
         <p class="demande-erreur" role="alert" hidden></p>
         <button class="btn" type="button" data-envoyer>${esc(L('form_envoyer'))}</button>
-        <p class="note">Vos coordonnées servent uniquement à répondre à votre demande. <a href="/confidentialite">Confidentialité</a></p>
+        <p class="note">Ces informations servent uniquement à répondre à votre demande. Responsable : ${esc(((C.mentions || {}).raison_sociale) || G.nom || '')}. Conservation : 180 jours au plus. Vos droits et la réclamation auprès de la CNIL : <a href="/confidentialite">politique de confidentialité</a>.</p>
       </form>
       <div class="demande-ok" tabindex="-1" hidden></div>`}
       <aside class="coord" aria-label="Coordonnées">
@@ -886,8 +890,10 @@ function pageMentions(C) {
     <h2>Éditeur du site</h2>
     <p>${k(M.raison_sociale)}${M.forme ? ', ' + esc(M.forme) : ''}${M.nom_commercial ? '<br>Nom commercial : ' + esc(M.nom_commercial) : ''}<br>${esc(libelle(C, 'mentions_siege'))} : ${k(M.adresse)}<br>${esc(libelle(C, 'mentions_immatriculation'))} : ${k(M.rcs)}${M.tva ? '<br>' + esc(M.tva) : ''}<br>Directeur de la publication : ${k(M.directeur_publication)}<br>Contact : ${k(M.email || G.email)}${G.telephone ? ', ' + esc(G.telephone) : ''}</p>
     <h2>Hébergement</h2>
-    <p>Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, États-Unis.</p>
+    <p>Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, États-Unis. Téléphone : ${k(M.hebergeur_telephone)}.</p>
     ${M.mediateur ? `<h2>Médiation de la consommation</h2><p>${esc(M.mediateur)}</p>` : ''}
+    <h2>Utilisation du site</h2>
+    <p>Les textes, images, vignettes et démonstrations de ce site sont la propriété de ${esc(M.raison_sociale || G.nom || 'l’éditeur')} ou utilisés avec l’accord de leurs auteurs ; toute reproduction sans accord est interdite. Les démonstrations sont des sites imaginaires : elles ne montrent aucun vrai client, et ce que vous y modifiez reste dans votre navigateur. Les informations du site sont données à titre indicatif ; les prix et conditions applicables sont ceux du devis signé.</p>
     <h2>Photos</h2>
     <p>${esc(C.credits_photos || 'Photos : ' + (G.nom || ''))}</p>
   </div></section>`,
@@ -895,20 +901,29 @@ function pageMentions(C) {
 }
 
 function pageConfidentialite(C) {
-  const K = C.contact || {}, G = C.agence || {};
+  const K = C.contact || {}, G = C.agence || {}, M = C.mentions || {};
+  const resp = esc(M.raison_sociale || G.nom || 'l’éditeur du site');
+  const mail = M.email || G.email || '';
+  const joindre = mail ? `<a href="mailto:${esc(mail)}">${esc(mail)}</a>` : '<em>adresse e-mail à compléter</em>';
   return {
-    classe: 'p-texte', description: descr(C, 'Politique de confidentialité'), titre: 'Confidentialité',
+    classe: 'p-texte', description: descr(C, 'Politique de confidentialité et cookies'), titre: 'Confidentialité',
     corps: `
   <section class="tete-page wrap"><h1>Confidentialité</h1></section>
   <section class="sec sec-serre"><div class="wrap prose">
-    <h2>Ce que le site enregistre</h2>
-    <p>Le site ne dépose aucun cookie, ni de mesure d’audience ni de publicité.</p>
+    <h2>Qui est responsable</h2>
+    <p>${resp}${M.adresse ? ', ' + esc(M.adresse) : ''}. Contact pour vos données : ${joindre}${G.telephone ? ', ' + esc(G.telephone) : ''}.</p>
+    <h2 id="cookies">Cookies</h2>
+    <p>Le site ne dépose aucun cookie sur les pages publiques, ni de mesure d’audience, ni de publicité, ni de réseau social. Il ne charge aucun script ni aucune police venant d’un autre site. Il n’y a donc pas de bandeau à accepter ou à refuser. Un seul cookie technique existe, réservé à la page de modification du site (connexion de l’éditeur) ; il est exempté de consentement et n’est déposé qu’après une connexion.</p>
     <h2>La mesure des visites</h2>
-    <p>Le site compte les pages vues, jour par jour : combien de visites, quelles pages, et d’où l’on vient (moteur de recherche, autre site, adresse tapée). Il n’enregistre ni adresse IP, ni identifiant, et ne dépose rien dans votre navigateur : un visiteur ne peut pas être reconnu d’un jour à l’autre. Ces totaux ne servent qu’à savoir ce qui est utile.</p>
+    <p>Le site compte les pages vues, jour par jour : combien de visites, quelles pages, et d’où l’on vient (moteur de recherche, autre site, adresse tapée). Il n’enregistre ni adresse IP, ni identifiant, et ne dépose rien dans votre navigateur : un visiteur ne peut pas être reconnu d’un jour à l’autre. Ces totaux ne servent qu’à savoir quelles pages sont utiles (intérêt légitime ; aucune donnée personnelle n’est gardée).</p>
     <h2>Les demandes de contact</h2>
-    <p>Quand vous envoyez une demande, les informations du formulaire sont transmises à ${esc(G.nom || 'l’agence')}${K.cle_web3forms ? ', par e-mail via le service Web3Forms' : ''}. Elles servent uniquement à répondre à votre demande et sont conservées 180 jours au plus dans la page de modification du site, sauf si un contrat est conclu.</p>${K.traitement ? `\n    <p>${esc(K.traitement)}</p>` : ''}
+    <p><b>Données :</b> nom, téléphone ou e-mail (l’un des deux suffit), et, si vous le souhaitez, société, type de demande, type de site, ville et message.</p>
+    <p><b>Pourquoi :</b> répondre à votre demande (mesures précontractuelles, art. 6.1.b du RGPD) et, si vous devenez client, suivre la relation (contrat). Ces données ne servent ni à la prospection ni à de la revente.</p>
+    <p><b>Qui les reçoit :</b> ${resp}${K.cle_web3forms ? ' ; le service Web3Forms transmet la demande par e-mail' : ''}. Elles sont enregistrées dans la mémoire du site (hébergée par Cloudflare) et peuvent être traitées par ses prestataires techniques (hébergement, e-mail, notifications).</p>
+    <p><b>Combien de temps :</b> 180 jours au plus après la demande, sauf si un contrat est conclu (les données utiles sont alors gardées pour la durée du contrat puis selon les obligations légales).</p>${K.traitement ? `\n    <p>${esc(K.traitement)}</p>` : ''}
+    <p><b>Hors de l’Union européenne :</b> Cloudflare est une société américaine ; ses serveurs peuvent être situés hors de l’Union européenne. Les transferts sont encadrés par les garanties prévues par le RGPD (clauses contractuelles types ou décision d’adéquation).</p>
     <h2>Vos droits</h2>
-    <p>Vous pouvez demander l’accès, la correction ou la suppression de vos données${G.email ? ` en écrivant à <a href="mailto:${esc(G.email)}">${esc(G.email)}</a>` : ''}, et saisir la CNIL.</p>
+    <p>Vous pouvez demander l’accès, la rectification, l’effacement, la limitation ou la portabilité de vos données, et vous opposer à leur traitement, en écrivant à ${joindre}. Une réponse vous est donnée dans un délai d’un mois. Si vous estimez que vos droits ne sont pas respectés, vous pouvez saisir la CNIL (<a href="https://www.cnil.fr/fr/plaintes" rel="noopener">cnil.fr/fr/plaintes</a>).</p>
   </div></section>`,
   };
 }

@@ -1,5 +1,13 @@
 # Reprise dans une nouvelle session (30 octobre 2026)
 
+## État réel au 04/11/2026 (lot A, contrôles relancés sous Windows par GLM)
+- **Environnement de Greg** : Windows, Node 24.18, GitHub connecté (`gregoiremuel`). Les dépôts `kit-sites-boutiques` et `agence-eims` sont clonés à côté du site. Tout est fusionné dans `main` (le site était à jour au 30/10, rien à refusionner).
+- **Correctif Windows** : `outils/tester.mjs` appelait `wrangler` à la façon Linux (échec ENOENT/INVAL sous Windows) ; il appelle maintenant wrangler par son point d'entrée JS et arrête le serveur de test par `taskkill` (plus de serveur fantôme sur le port 8799). Reporté dans `modeles/agence-operia` du kit. Playwright ajouté en dépendance de développement (nécessaire à `npm run accessibilite`).
+- **Contrôles du 04/11** : `npm run verifier` aucune erreur, 0 alerte ; `npm test` **132 ok, 0 échec** ; `npm run accessibilite` aucun problème ; `npm run referencement` un point à revoir (/agence, 133 mots : peu de texte) ; `npm run look-ia` sans nouvel indice.
+- **Pas encore vérifié** (Cloudflare injoignable depuis l'agent) : construction `main` verte, Secrets `ADMIN_HASH`/`SESSION_SECRET` en place, `/admin` en ligne, cause des constructions de branches qui échouent en 0 seconde. **Greg doit regarder** (voir ci-dessous).
+- **Sécurité en attente** : le mot de passe de départ et les deux Secrets ont été affichés le 28/10 dans une conversation : remplacement à faire par Greg (`npm run mot-de-passe`, nouveaux Secrets Cloudflare, changement du mot de passe dans `/admin`).
+- **Décisions du jour** : domaine probable « Sterenn Création » (Greg décide ce soir — attention : nom différent du nom légal, à réfléchir pour le registre et la protection du nom) ; e-mail pro voulu sur le futur domaine ; VPS Hostinger accessible ; rien de fait côté administratif (ACRE avant le 17/12, CFE avant le 31/12).
+
 ## Prompt à coller en premier message (après un « clear »)
 > Ajoute `gregoiremuel/kit-sites-boutiques` (et `gregoiremuel/site-operia` si on parle d'Opéria). Suis le skill `sites-boutiques` du kit, lis `CLAUDE.md`, `LISEZMOI.md` et `docs/REPRISE.md` du site. Branche `ccr-04ab3608-pccm5z` (si elle est fusionnée : repars de `main` avec le même nom). Sujet du jour : [à préciser]. Réponse en trois parties.
 

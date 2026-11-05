@@ -14,13 +14,14 @@ Cloudflare n'est pas joignable depuis l'espace de Claude : **toutes les étapes 
 - [ ] **Salarié en parallèle** : relis ton contrat (clause d'exclusivité, déclaration d'une activité annexe à l'employeur). Tu m'as dit travailler dans la joaillerie : si ton employeur est dans la même branche que ton futur Atelier Muel, c'est surtout un sujet pour la joaillerie plus tard, pas pour les sites. À confirmer par la lecture du contrat.
 
 ## 1. Le nom de domaine
-1. Achète `gregoiremuel.fr` (et `ateliermuel.fr` pour réserver le nom de la joaillerie), environ 10 € par an chacun, **à ton nom** et avec ton e-mail personnel. Cloudflare ne vend pas toujours le `.fr` : **à vérifier** ; sinon un bureau d'enregistrement français convient (OVHcloud, Gandi…).
-2. Ajoute le domaine à ton compte Cloudflare (« Add a domain », offre gratuite) et change les serveurs de noms chez le bureau d'enregistrement pour ceux que Cloudflare indique. Délai : de quelques minutes à 24 heures.
-3. Dis-moi quand c'est actif : j'ajoute la route `{ "pattern": "gregoiremuel.fr", "custom_domain": true }` dans `wrangler.jsonc` et `"reglages": { "url": "https://gregoiremuel.fr" }` dans le contenu (utile pour le plan du site).
+1. ~~Achète le domaine~~ **Fait le 05/11/2026** : `sterenncreation.fr` acheté chez OVHcloud (commande 263462179, 5,99 € TTC la première année avec Zimbra Starter ; renouvellement ~8,60 €/an). Le nom « Sterenn Création » est différent du nom légal : à déclarer comme nom commercial au Guichet unique avant l'ouverture. `ateliermuel.fr` (joaillerie) et `gregoiremuel.fr` restent **à réserver** si tu les veux (achats séparés).
+2. Ajoute le domaine à ton compte Cloudflare (« Add a domain », offre gratuite) — **fait le 05/11/2026**, serveurs Cloudflare attribués (`jobs.ns.cloudflare.com`, `shubhi.ns.cloudflare.com`), MX et SPF recopiés. Reste : changer les serveurs de noms chez OVHcloud pour ceux de Cloudflare (seulement après disparition complète du DS DNSSEC, désactivé le 05/11 vers 23 h) puis « Check nameservers ». Délai : de quelques minutes à 24 heures.
+3. Dis-moi quand c'est actif : la route `{ "pattern": "sterenncreation.fr", "custom_domain": true }` est déjà préparée dans `wrangler.jsonc` (demande de fusion du lot B) et `reglages.url` = `https://sterenncreation.fr` est déjà dans le contenu.
 
-## 2. L'e-mail professionnel
-- Pour **recevoir** : « Email Routing » de Cloudflare (gratuit) : `contact@gregoiremuel.fr` redirigé vers ta boîte actuelle.
-- Pour **répondre depuis cette adresse** : il faut une vraie messagerie (celle de ton bureau d'enregistrement, ou ton fournisseur actuel si son offre accepte un domaine personnalisé : certaines offres gratuites ne l'acceptent pas). **À vérifier** avant d'afficher l'adresse partout. Quand elle marche : je la mets dans « Coordonnées » et dans les mentions légales.
+## 2. L'e-mail professionnel — **choix fait le 05/11/2026 : Zimbra Starter chez OVHcloud** (1re année offerte, 3,60 €/an ensuite)
+- `contact@sterenncreation.fr` **créée le 05/11/2026**. Webmail : https://mail.zimbra.ovh.net · application mobile « Zimbra » (Play Store / App Store).
+- Réglages pour une app mail (IMAP/SMTP, doc OVH du 04/05/2026) : réception `imap.mail.ovh.net` port 993 SSL/TLS ; envoi `smtp.mail.ovh.net` port 465 SSL/TLS ; utilisateur = l'adresse complète.
+- Reste à faire après la bascule Cloudflare : vérifier SPF, ajouter le DKIM du Zimbra et un DMARC (`p=none`) chez Cloudflare, test d'envoi vers Gmail et Proton, puis l'adresse dans « Coordonnées » et les mentions légales. L'ancienne piste « Email Routing Cloudflare » est abandonnée (le Zimbra la remplace).
 
 ## 3. Mettre le site sur Cloudflare (depuis GitHub, sans ordinateur)
 1. https://dash.cloudflare.com : « Workers & Pages », « Create application », « Import a repository », choisis `site-atelier-muel`.

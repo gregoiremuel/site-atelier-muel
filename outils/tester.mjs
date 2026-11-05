@@ -249,7 +249,7 @@ async function tests() {
   r = await req('/contact', { cookie: false }); h2 = await r.text();
   verif(/Conservation : 180 jours/.test(h2) && /href="\/confidentialite">politique de confidentialité/.test(h2) && !/type="checkbox"[^>]*(checked|name="(consent|newsletter))/.test(h2.replace(/<input type="checkbox" name="botcheck"[^>]*>/, '')), 'Formulaire : mention d’information sous le formulaire, aucune case cochée d’avance');
   verif(/href="\/confidentialite#cookies">Cookies<\/a>/.test(h), 'Pied de page : lien Cookies');
-  verif(!/<(script|link|iframe)[^>]+(src|href)="https?:\/\/(?!gregoiremuel\.fr)/.test(h), 'Aucun script, style ni cadre chargé depuis un autre site (pas de consentement à demander)');
+   verif(!/<(script|link|iframe)[^>]+(src|href)="https?:\/\/(?!sterenncreation\.fr)/.test(h), 'Aucun script, style ni cadre chargé depuis un autre site (pas de consentement à demander)');
   await req('/expertises', { cookie: false, headers: ua });
   await req('/', { cookie: false, headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1)' } });
   await req('/nexistepas', { cookie: false, headers: ua });
@@ -291,9 +291,9 @@ async function tests() {
   r = await req('/api/contact', { method: 'POST', cookie: false, ...corpsJson(client) }); verif(r.status === 403, 'Formulaire fermé : demandes refusées par le serveur');
 
   /* Adresse canonique : seulement hors version de travail et si l'adresse du site est connue */
-  const Cc = structuredClone(C); Cc.reglages = { ...(Cc.reglages || {}), url: 'https://gregoiremuel.fr/' };
+   const Cc = structuredClone(C); Cc.reglages = { ...(Cc.reglages || {}), url: 'https://sterenncreation.fr/' };
   const Cs = structuredClone(C); Cs.reglages = { ...(Cs.reglages || {}), url: '' };
-  verif(/<link rel="canonical" href="https:\/\/gregoiremuel\.fr\/expertises">/.test(rendrePage(Cc, '/expertises', { maquette: false }).html) && !/rel="canonical"/.test(rendrePage(Cc, '/expertises', { maquette: true }).html) && !/rel="canonical"/.test(rendrePage(Cs, '/expertises', { maquette: false }).html), 'Adresse canonique ajoutée seulement en ligne et avec l’adresse du site');
+   verif(/<link rel="canonical" href="https:\/\/sterenncreation\.fr\/expertises">/.test(rendrePage(Cc, '/expertises', { maquette: false }).html) && !/rel="canonical"/.test(rendrePage(Cc, '/expertises', { maquette: true }).html) && !/rel="canonical"/.test(rendrePage(Cs, '/expertises', { maquette: false }).html), 'Adresse canonique ajoutée seulement en ligne et avec l’adresse du site');
 
   /* Rien sur la joaillerie dans les pages vues par les visiteurs */
   { let tout = ''; for (const ch of routes(C)) tout += rendrePage(C, ch, { maquette: false }).html; verif(!/joaill|bijou/i.test(tout), 'Aucune mention de la joaillerie sur le site'); }

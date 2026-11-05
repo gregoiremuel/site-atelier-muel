@@ -111,6 +111,11 @@ async function tests() {
 
   /* Page de modification */
   r = await req('/admin'); verif([301, 302, 307, 308].includes(r.status), '/admin redirige vers /admin/');
+  /* Le domaine nu seul : www renvoie vers lui (301, chemin conservé) — Node fetch ne peut pas forcer l'en-tête Host, d'où curl */
+  { const cibleSortie = process.platform === 'win32' ? 'NUL' : '/dev/null';
+    const c = spawnSync('curl', ['-s', '-o', cibleSortie, '-w', '%{http_code} %{redirect_url}', '-H', 'Host: www.exemple.fr', BASE + '/expertises'], { encoding: 'utf8' });
+    const [code, cible] = (c.stdout || '').trim().split(' ');
+    verif(code === '301' && /^https?:\/\/exemple\.fr\/expertises$/.test(cible || ''), 'www est redirigé vers le domaine nu (301, chemin conservé)'); }
   r = await req('/admin/'); verif(r.status === 200 && /no-store/.test(r.headers.get('cache-control') || '') && r.headers.get('x-frame-options') === 'DENY', 'Page de modification : jamais en cache, pas dans un cadre');
   r = await req('/api/apparence'); let j = await r.json(); verif(j.ok && j.boutique.nom === C.agence.nom, 'Nom pour l’écran de connexion');
   r = await req('/api/contenu'); verif(r.status === 401, 'Contenu refusé sans connexion');

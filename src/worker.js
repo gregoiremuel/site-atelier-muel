@@ -242,6 +242,11 @@ export default {
     const methode = req.method;
 
     try {
+      /* Le vrai domaine est le domaine nu : www est redirigé d'un coup (301), chemin et demande conservés */
+      if (url.hostname.startsWith('www.')) {
+        url.hostname = url.hostname.slice(4);
+        return Response.redirect(url.toString(), 301);
+      }
       /* Lien court vers le formulaire d'avis Google (agence.lien_avis) : à imprimer en QR code sur les factures, cartes, vitrine */
       if (methode === 'GET' && p === '/avis') {
         const lien = String(((await lireContenu(env)).agence || {}).lien_avis || '').trim();

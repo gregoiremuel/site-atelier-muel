@@ -28,7 +28,8 @@ const MDP = 'test-' + randomBytes(6).toString('hex');
 const sel = randomBytes(16);
 const HASH = `pbkdf2$10000$${sel.toString('base64')}$${pbkdf2Sync(MDP, sel, 10000, 32, 'sha256').toString('base64')}`;
 const memoireTest = mkdtempSync(join(tmpdir(), 'agence-test-'));
-const wrangler = join(racine, 'node_modules', '.bin', 'wrangler');
+const wrangler = process.execPath; /* Node sous Windows ne lance pas les .cmd : on appelle wrangler par son point d'entrée JS */
+const wranglerArgs = (args) => ['node_modules/wrangler/bin/wrangler.js', ...args];
 /* Configuration de test : celle du site, plus un stockage R2 « SAUVEGARDE » local pour essayer la copie nocturne (la vraie configuration n'est pas modifiée) */
 const configTest = join(racine, '.wrangler-test.json');
 const cfg = JSON.parse(readFileSync(join(racine, 'wrangler.jsonc'), 'utf8').split('\n').filter((l) => !l.trim().startsWith('//')).join('\n'));
@@ -36,15 +37,15 @@ cfg.r2_buckets = [{ binding: 'SAUVEGARDE', bucket_name: 'sauvegarde-test' }];
 delete cfg.routes;
 writeFileSync(configTest, JSON.stringify(cfg, null, 2));
 if (process.argv[2]) {
-  const r = spawnSync(wrangler, ['kv', 'key', 'put', 'contenu', '--path', fichier, '--binding', 'CONTENU', '--local', '--persist-to', memoireTest, '-c', configTest], { cwd: racine, encoding: 'utf8' });
+  const r = spawnSync(wrangler, wranglerArgs(['kv', 'key', 'put', 'contenu', '--path', fichier, '--binding', 'CONTENU', '--local', '--persist-to', memoireTest, '-c', configTest]), { cwd: racine, encoding: 'utf8' });
   if (r.status !== 0) { console.error('Impossible de déposer le contenu de test :\n' + r.stderr); process.exit(1); }
 }
-const serveur = spawn(wrangler, ['dev', '-c', configTest, '--test-scheduled', '--port', String(PORT), '--ip', '127.0.0.1', '--persist-to', memoireTest, '--show-interactive-dev-session=false',
-  '--var', 'ADMIN_HASH:' + HASH, '--var', 'SESSION_SECRET:' + randomBytes(24).toString('hex'), '--var', 'MAQUETTE:non', '--var', `N8N_WEBHOOK_URL:http://127.0.0.1:${PORT_N8N}/webhook`, '--var', 'N8N_SECRET:' + SECRET_N8N, '--var', 'INDEXNOW_KEY:' + CLE_IDX, '--var', `INDEXNOW_URL:http://127.0.0.1:${PORT_IDX}/indexnow`, '--var', 'CREDIT_SITE:Site réalisé par Essai|https://exemple.fr'],
+const serveur = spawn(wrangler, wranglerArgs(['dev', '-c', configTest, '--test-scheduled', '--port', String(PORT), '--ip', '127.0.0.1', '--persist-to', memoireTest, '--show-interactive-dev-session=false',
+  '--var', 'ADMIN_HASH:' + HASH, '--var', 'SESSION_SECRET:' + randomBytes(24).toString('hex'), '--var', 'MAQUETTE:non', '--var', `N8N_WEBHOOK_URL:http://127.0.0.1:${PORT_N8N}/webhook`, '--var', 'N8N_SECRET:' + SECRET_N8N, '--var', 'INDEXNOW_KEY:' + CLE_IDX, '--var', `INDEXNOW_URL:http://127.0.0.1:${PORT_IDX}/indexnow`, '--var', 'CREDIT_SITE:Site réalisé par Essai|https://exemple.fr']),
 { cwd: racine, detached: true, stdio: ['ignore', 'pipe', 'pipe'] });
 let journal = '';
 serveur.stdout.on('data', (d) => { journal += d; }); serveur.stderr.on('data', (d) => { journal += d; });
-const arreter = () => { try { fauxN8N.close(); fauxIdx.close(); } catch (e) { /* déjà fermé */ } try { process.kill(-serveur.pid, 'SIGTERM'); } catch (e) { /* déjà arrêté */ } try { rmSync(memoireTest, { recursive: true, force: true }); rmSync(configTest, { force: true }); } catch (e) { /* rien */ } };
+const arreter = () => { try { fauxN8N.close(); fauxIdx.close(); } catch (e) { /* déjà fermé */ } if (process.platform === 'win32') { try { spawnSync('taskkill', ['/T', '/F', '/PID', String(serveur.pid)]); } catch (e) { /* déjà arrêté */ } } else { try { process.kill(-serveur.pid, 'SIGTERM'); } catch (e) { /* déjà arrêté */ } } try { rmSync(memoireTest, { recursive: true, force: true }); rmSync(configTest, { force: true }); } catch (e) { /* rien */ } };
 process.on('SIGINT', () => { arreter(); process.exit(130); });
 
 let ok = 0; const echecs = [];

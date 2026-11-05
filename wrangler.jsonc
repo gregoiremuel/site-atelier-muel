@@ -9,7 +9,9 @@
   // "oui" tant que les textes et les prix ne sont pas validés : bandeau, non indexé, demandes en démonstration.
   "vars": { "MAQUETTE": "oui" },
   // Copie de sauvegarde du contenu chaque nuit (vers 3 h 17, heure de Paris en hiver).
-  "triggers": { "crons": ["17 2 * * *"] }
+  "triggers": { "crons": ["17 2 * * *"] },
+  // Aperçus de branches (Workers Builds lance « wrangler preview ») : valeurs sûres pour les aperçus, jamais les secrets de production.
+  "previews": { "vars": { "MAQUETTE": "oui" } }
   // Copie externe facultative (contenu, photos et vidéos) : créer le stockage R2 (jurisdiction UE possible), puis ajouter
   // "r2_buckets": [{ "binding": "SAUVEGARDE", "bucket_name": "sauvegarde-site-atelier-muel" }]
   // Après l'achat du domaine (zone ajoutée sur Cloudflare) :

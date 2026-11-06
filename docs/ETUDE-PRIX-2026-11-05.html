@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Étude de prix — Grégoire Muel, création de sites — 5 novembre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Spline+Sans+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --papier: #FAF6EE;
+  --carte: #FFFFFF;
+  --encre: #20242B;
+  --marine: #1F4E79;
+  --marine-clair: #2E6DA4;
+  --vert: #2F6B4F;
+  --vert-fond: #E7F0EA;
+  --ocre: #A85F0B;
+  --ocre-fond: #F6EBDA;
+  --gris: #8B857A;
+  --filet: #DDD5C4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --papier: #191C22;
+    --carte: #22262E;
+    --encre: #EAE4D6;
+    --marine: #8FB8DC;
+    --marine-clair: #A9CBE8;
+    --vert: #7FC49E;
+    --vert-fond: #22352B;
+    --ocre: #E0A45E;
+    --ocre-fond: #3A2F1E;
+    --gris: #9B958A;
+    --filet: #3A3E46;
+  }
+}
+:root[data-theme="dark"] {
+  --papier: #191C22;
+  --carte: #22262E;
+  --encre: #EAE4D6;
+  --marine: #8FB8DC;
+  --marine-clair: #A9CBE8;
+  --vert: #7FC49E;
+  --vert-fond: #22352B;
+  --ocre: #E0A45E;
+  --ocre-fond: #3A2F1E;
+  --gris: #9B958A;
+  --filet: #3A3E46;
+}
+html { overflow-x: clip; }
+body {
+  background: var(--papier);
+  color: var(--encre);
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  margin: 0;
+  padding: 0 1rem 4rem;
+}
+.page { max-width: 46rem; margin: 0 auto; }
+h1, h2, h3 {
+  font-family: "Fraunces", Georgia, serif;
+  color: var(--marine);
+  line-height: 1.18;
+  margin: 2.6rem 0 0.6rem;
+}
+h1 { font-size: 1.9rem; font-weight: 700; margin-top: 1.2rem; }
+h2 { font-size: 1.42rem; font-weight: 700; border-bottom: 1px solid var(--filet); padding-bottom: 0.35rem; }
+h3 { font-size: 1.08rem; font-weight: 600; color: var(--marine-clair); margin: 1.6rem 0 0.4rem; }
+p { margin: 0.55rem 0; }
+strong { font-weight: 600; }
+a { color: var(--marine-clair); }
+
+.sur-titre { font-family: "Spline Sans Mono", Consolas, monospace; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gris); margin: 0; }
+.date-ligne { font-family: "Spline Sans Mono", Consolas, monospace; font-size: 0.85rem; color: var(--gris); margin: 0.2rem 0 1rem; }
+
+.resume { border-left: 3px solid var(--marine); padding: 0.5rem 0 0.5rem 0.9rem; margin: 0 0 1.1rem; color: var(--encre); }
+.resume p { margin: 0.25rem 0; font-style: italic; }
+
+.tampons { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.2rem 0; }
+.tampon {
+  display: block;
+  border: 2px solid var(--vert);
+  color: var(--vert);
+  font-family: "Spline Sans Mono", Consolas, monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.6rem;
+  border-radius: 3px;
+  background: var(--vert-fond);
+}
+.tampon.attente { border-color: var(--ocre); color: var(--ocre); background: var(--ocre-fond); }
+
+.prov {
+  display: inline-block;
+  font-family: "Spline Sans Mono", Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  border: 1px solid var(--filet);
+  color: var(--gris);
+  border-radius: 3px;
+  padding: 0 0.3rem;
+  vertical-align: 0.12em;
+  white-space: nowrap;
+}
+.prov.verifie { color: var(--vert); border-color: var(--vert); }
+.prov.vigilance { color: var(--ocre); border-color: var(--ocre); }
+
+.de { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+th {
+  font-family: "Spline Sans Mono", Consolas, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gris);
+  font-weight: 400;
+  text-align: left;
+  border-bottom: 2px solid var(--encre);
+  padding: 0.4rem 0.6rem 0.35rem;
+}
+td { border-bottom: 1px solid var(--filet); padding: 0.5rem 0.6rem; vertical-align: top; }
+td.chiffre, th.chiffre { text-align: right; font-family: "Spline Sans Mono", Consolas, monospace; font-size: 0.88rem; }
+tr.total td { border-top: 2px solid var(--encre); border-bottom: none; font-weight: 600; }
+
+.jauge { margin: 0.7rem 0; }
+.jauge .ligne { display: flex; align-items: center; gap: 0.6rem; margin: 0.3rem 0; }
+.jauge .nom { flex: 0 0 13rem; font-size: 0.9rem; }
+.jauge .piste { flex: 1 1 auto; background: var(--filet); height: 1.05rem; position: relative; }
+.jauge .rempl {
+  display: block;
+  height: 1.05rem;
+  min-width: 2px;
+  background: var(--marine);
+}
+.jauge .rempl.point { background: var(--vert); }
+.jauge .valeur { flex: 0 0 4.5rem; font-family: "Spline Sans Mono", Consolas, monospace; font-size: 0.85rem; text-align: right; }
+
+.persona {
+  background: var(--carte);
+  border: 1px solid var(--filet);
+  border-radius: 4px;
+  padding: 0.9rem 1rem;
+  margin: 0.8rem 0;
+}
+.persona h3 { margin-top: 0; }
+.persona blockquote {
+  margin: 0.5rem 0;
+  padding-left: 0.8rem;
+  border-left: 3px solid var(--filet);
+  font-style: italic;
+  color: var(--gris);
+}
+.persona .lecon { margin: 0.4rem 0 0; padding-top: 0.4rem; border-top: 1px dashed var(--filet); }
+
+.note {
+  background: var(--carte);
+  border: 1px solid var(--filet);
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+}
+.note.vigilance { border-left: 4px solid var(--ocre); }
+
+nav.sommaire {
+  background: var(--carte);
+  border: 1px solid var(--filet);
+  border-radius: 4px;
+  padding: 0.9rem 1.2rem;
+  margin: 1.4rem 0;
+}
+nav.sommaire ol { margin: 0.3rem 0; padding-left: 1.3rem; }
+nav.sommaire li { margin: 0.18rem 0; }
+
+.bouton-theme {
+  position: fixed;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  font-family: "Spline Sans Mono", Consolas, monospace;
+  font-size: 0.75rem;
+  background: var(--carte);
+  color: var(--encre);
+  border: 1px solid var(--filet);
+  border-radius: 4px;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+}
+
+.pied { margin-top: 3rem; border-top: 2px solid var(--encre); padding-top: 0.8rem; font-size: 0.88rem; color: var(--gris); }
+@media (max-width: 640px) {
+  .jauge .nom { flex-basis: 9rem; font-size: 0.8rem; }
+  h1 { font-size: 1.55rem; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<p class="sur-titre">Dossier de décision — usage interne</p>
+<h1>À quel prix vendre mes sites&nbsp;?</h1>
+<p class="date-ligne">Grégoire Muel, créateur de sites · Paris 16e et à distance · établi le 5 novembre 2026, soir</p>
+
+<div class="resume">
+<p>Ce dossier justifie chaque prix affiché sur mon site (590&nbsp;€, 1&nbsp;290&nbsp;€, 1&nbsp;900&nbsp;€, abonnements 19&nbsp;/&nbsp;49&nbsp;€, Visibilité Google 39&nbsp;€) par trois choses&nbsp;: le marché relevé à deux dates, ce que trente acheteurs simulés en ont dit, et ce qu'il me reste par euro encaissé.</p>
+<p>Conclusion en une ligne&nbsp;: <strong>les prix tiennent, le vrai chantier est la preuve</strong> — deux sites de professionnels déjà en ligne de mire sont la meilleure réponse.</p>
+</div>
+
+<h2>Décisions du jour</h2>
+<div class="tampons">
+  <span class="tampon">Vitrine&nbsp;: 590&nbsp;€ maintenus</span>
+  <span class="tampon">Boutique 1&nbsp;290&nbsp;€ · Entreprise 1&nbsp;900&nbsp;€</span>
+  <span class="tampon">Abonnements 19&nbsp;/&nbsp;49&nbsp;/&nbsp;39&nbsp;€ inchangés</span>
+  <span class="tampon attente">Pas de prix pilote — 2 chantiers «&nbsp;connaissances&nbsp;» au tarif plein</span>
+</div>
+<p>Objectif de revenu&nbsp;: le maximum possible, en travaillant les soirs à côté d'un CDI de joaillier. Les scénarios du chapitre&nbsp;6 sont recalculés pour cette contrainte de temps.</p>
+
+<nav class="sommaire">
+  <p class="sur-titre" style="margin:0 0 0.3rem">Sommaire</p>
+  <ol>
+    <li><a href="#qui">Qui vend, qui achète</a></li>
+    <li><a href="#marche">Le marché, relevé à deux dates</a></li>
+    <li><a href="#panel">Ce que disent trente acheteurs simulés</a></li>
+    <li><a href="#visages">Sept visages devant le prix</a></li>
+    <li><a href="#rentabilite">Ce qu'il me reste par euro encaissé</a></li>
+    <li><a href="#pourquoi">Pourquoi 590&nbsp;/&nbsp;1&nbsp;290&nbsp;/&nbsp;1&nbsp;900 et 19&nbsp;/&nbsp;49&nbsp;/&nbsp;39</a></li>
+    <li><a href="#honetete">Les règles d'honnêteté</a></li>
+    <li><a href="#action">Le plan d'action</a></li>
+    <li><a href="#sources">Sources, fraîcheur, lexique</a></li>
+  </ol>
+</nav>
+
+<h2 id="qui">1. Qui vend, qui achète</h2>
+<div class="resume"><p>Un vendeur qui démarre (aucun client montrable), une méthode rodée, et des acheteurs qui ne comparent pas des sites&nbsp;: ils comparent un risque.</p></div>
+<p><strong>Moi&nbsp;:</strong> entrepreneur individuel depuis octobre 2026, activité de création et refonte de sites pour commerces, artisans et petites entreprises, Paris 16e et alentours, à distance partout en France. CDI à côté (joaillerie)&nbsp;: je produis les soirs et les week-ends. Frais fixes de l'année&nbsp;: environ 400&nbsp;€ <span class="prov">calculé</span> (domaines, RC Pro, banque)&nbsp;— deux domaines déjà payés ce soir chez OVH pour 5,99&nbsp;€.</p>
+<p><strong>Eux&nbsp;:</strong> restaurateurs, artisans du bâtiment et du dépannage, fleuristes, commerces de bouche, petits dirigeants. Ils ne passent pas des appels d'offres&nbsp;: ils achètent à une personne, souvent après une visite en boutique, une maquette sous les yeux. Le site n'est pas leur métier&nbsp;; leur question n'est pas «&nbsp;est-ce bien codé&nbsp;?&nbsp;» mais «&nbsp;est-ce que ça va me ramener des clients, et qui répond s'il y a un souci&nbsp;?&nbsp;».</p>
+
+<h2 id="marche">2. Le marché, relevé à deux dates</h2>
+<div class="resume"><p>Les constructeurs en ligne coûtent 12 à 30&nbsp;€ par mois&nbsp;; les freelances démarrent à 800&nbsp;€&nbsp;; les agences finissent la course bien plus haut. Mes 590&nbsp;€ une fois se placent sous tout le monde en coût trois ans — c'est ma marge de manoeuvre, pas ma gloire.</p></div>
+
+<h3>Les constructeurs en ligne (le comparateur internalisé de mes clients)</h3>
+<div class="de">
+<table>
+  <thead>
+    <tr><th>Constructeur</th><th class="chiffre">Prix mensuel</th><th class="chiffre">Prix annuel (à l'année)</th><th>Relevé</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Squarespace «&nbsp;Basic&nbsp;»</td><td class="chiffre">17&nbsp;€/mois</td><td class="chiffre">12&nbsp;€/mois</td><td><span class="prov verifie">vérifié 05/11/2026</span></td></tr>
+    <tr><td>Squarespace «&nbsp;Essentiel&nbsp;»</td><td class="chiffre">24&nbsp;€/mois</td><td class="chiffre">18&nbsp;€/mois</td><td><span class="prov verifie">vérifié 05/11/2026</span></td></tr>
+    <tr><td>Squarespace «&nbsp;Plus&nbsp;»</td><td class="chiffre">42&nbsp;€/mois</td><td class="chiffre">32&nbsp;€/mois</td><td><span class="prov verifie">vérifié 05/11/2026</span></td></tr>
+    <tr><td>Wix et autres, entrée de gamme</td><td class="chiffre">16,80 à 30&nbsp;€/mois</td><td class="chiffre">—</td><td><span class="prov vigilance">relevé 28/10/2026, à revérifier</span></td></tr>
+    <tr class="total"><td>Coeffort «&nbsp;fait main&nbsp;» sur 3 ans</td><td class="chiffre" colspan="2">605 à 1&nbsp;080&nbsp;€ rien qu'en abonnement</td><td><span class="prov">calculé 28/10</span></td></tr>
+  </tbody>
+</table>
+</div>
+<p>C'est le chiffre que mes clients ne font jamais&nbsp;: <strong>3 ans de Wix ou Squarespace coûtent plus cher que mon site payé une fois</strong> — sans compter le temps passé à le construire soi-même. Mon site affiche déjà ce tableau (page Offres, «&nbsp;un constructeur en ligne, ou moi&nbsp;?&nbsp;»).</p>
+
+<h3>Les humains (freelances et agences)</h3>
+<div class="de">
+<table>
+  <thead>
+    <tr><th>Qui</th><th class="chiffre">Fourchette</th><th>Relevé</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Freelance débutant, site vitrine</td><td class="chiffre">800 – 2&nbsp;500&nbsp;€</td><td><span class="prov vigilance">relevé 28/10/2026, à revérifier</span></td></tr>
+    <tr><td>Concurrent local «&nbsp;clé en main&nbsp;», offre d'entrée</td><td class="chiffre">690&nbsp;€ puis 22&nbsp;€/mois</td><td><span class="prov vigilance">relevé 28/10/2026, à revérifier</span></td></tr>
+    <tr><td>Agences (vitrine pro)</td><td class="chiffre">au-dessus de 2&nbsp;500&nbsp;€</td><td><span class="prov">repère, à vérifier</span></td></tr>
+    <tr><td>Gestion de fiche Google — CCI (Landes)</td><td class="chiffre">50&nbsp;€&nbsp;HT/mois</td><td><span class="prov vigilance">relevé 28/10/2026</span></td></tr>
+    <tr><td>Gestion de fiche Google — agences</td><td class="chiffre">150 – 800&nbsp;€/mois</td><td><span class="prov vigilance">relevé 28/10/2026</span></td></tr>
+  </tbody>
+</table>
+</div>
+<p>Ma place&nbsp;: <strong>sous le premier freelance, au-dessus du «&nbsp;pas cher&nbsp;»</strong>, avec pour compensation la maquette gratuite, la page de modification (le client garde la main) et l'absence d'abonnement obligatoire.</p>
+
+<h2 id="panel">3. Ce que disent trente acheteurs simulés</h2>
+<div class="resume"><p>Deux panels (20 acheteurs le 28/10, 10 autres le 29/10), pitchs honnêtes, aucune objection suggérée. Résultat identique deux fois&nbsp;: personne n'achète à froid, tout le monde demande la même chose — une preuve. Le prix, lui, ne bloque personne.</p></div>
+<p>Ce sont des simulations (modèles de langage), pas des clients&nbsp;: elles servent à trouver les objections, pas à prévoir les ventes. <span class="prov">simulé 28–29/10/2026</span></p>
+
+<h3>Le prix qu'ils jugent acceptable (méthode Van Westendorp, 20 réponses)</h3>
+<div class="jauge">
+  <div class="ligne"><span class="nom">Trop bas, suspect</span><span class="piste"><b class="rempl" style="width:31%"></b></span><span class="valeur">250&nbsp;€</span></div>
+  <div class="ligne"><span class="nom">Point de confort</span><span class="piste"><b class="rempl point" style="width:37%"></b></span><span class="valeur">300&nbsp;€</span></div>
+  <div class="ligne"><span class="nom">Cher mais juste</span><span class="piste"><b class="rempl" style="width:50%"></b></span><span class="valeur">400&nbsp;€</span></div>
+  <div class="ligne"><span class="nom">Trop cher, refusé</span><span class="piste"><b class="rempl" style="width:87%"></b></span><span class="valeur">700&nbsp;€</span></div>
+</div>
+<p><strong>590&nbsp;€ est dans la zone acceptable</strong>&nbsp;: au-dessus du point de confort (donc pas un prix «&nbsp;de bradage&nbsp;»), sous la limite haute de 700&nbsp;€. Personne, dans aucun des deux panels, n'a dit «&nbsp;trop cher&nbsp;» à 590&nbsp;€&nbsp;— ceux qui refusent refusent le risque, pas le tarif. <span class="prov">simulé</span></p>
+
+<h3>Ce qui bloque vraiment (par ordre de fréquence)</h3>
+<div class="de">
+<table>
+  <thead><tr><th>Objection</th><th class="chiffre">Panel 1 (20)</th><th class="chiffre">Panel 2 (10)</th></tr></thead>
+  <tbody>
+    <tr><td>«&nbsp;Ça va me ramener des clients&nbsp;? Prouvez-le.&nbsp;»</td><td class="chiffre">13</td><td class="chiffre">6</td></tr>
+    <tr><td>«&nbsp;Ma fiche Google marche déjà&nbsp;»</td><td class="chiffre">—</td><td class="chiffre">—</td></tr>
+    <tr><td>«&nbsp;Qui répond si ça casse dans un an&nbsp;?&nbsp;»</td><td class="chiffre">present</td><td class="chiffre">present</td></tr>
+    <tr><td>«&nbsp;Je compare avec Wix à 17&nbsp;€/mois&nbsp;»</td><td class="chiffre">—</td><td class="chiffre">2</td></tr>
+    <tr><td>«&nbsp;Mes données chez un hébergeur américain&nbsp;»</td><td class="chiffre">—</td><td class="chiffre">3</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Le détail chiffré et les citations complètes sont dans <code>docs/validation-2026-10-28/RESULTATS.md</code> et <code>docs/panel-acheteurs-resultats.md</code>.</p>
+
+<h2 id="visages">4. Sept visages devant le prix</h2>
+<div class="resume"><p>Le même devis de 590&nbsp;€ ne dit pas la même chose selon qui le lit. Sept personnalités tirées des citations réelles des panels — et la réponse que le site doit apporter à chacune.</p></div>
+
+<div class="persona">
+<h3>Le comparateur de tableur</h3>
+<p>Un artisan qui fait ses devis le soir sur tableur. Il a déjà ouvert Wix, il connaît le «&nbsp;17&nbsp;€ par mois&nbsp;» par coeur.</p>
+<blockquote>«&nbsp;Pour 590&nbsp;€ plus l'abonnement, je compare avec Wix à 17&nbsp;€ par mois et je trouve que l'écart n'est pas justifié tant que je ne vois pas ce que ça change sur mes appels.&nbsp;»</blockquote>
+<p class="lecon"><strong>Comment il lit 590&nbsp;€&nbsp;:</strong> comme 35 mois d'abonnement. <strong>Ce qui le décide&nbsp;:</strong> le coût sur 3 ans écrit noir sur blanc (déjà sur mon site), et un exemple d'artisan de son métier qui reçoit des appels. Il signe sur le tableau, pas sur le tarif.</p>
+</div>
+
+<div class="persona">
+<h3>La méfiante des données</h3>
+<p>Elle ne signe «&nbsp;pas un abonnement avec quelqu'un que je ne connais pas&nbsp;». Ses mots&nbsp;: hébergeur américain, «&nbsp;je ne sais pas qui touche à mon site quand je ne suis pas là&nbsp;».</p>
+<blockquote>«&nbsp;Un hébergement en France ou en Europe, écrit noir sur blanc, et quelqu'un que je peux appeler quand ça bloque.&nbsp;»</blockquote>
+<p class="lecon"><strong>Comment elle lit 590&nbsp;€&nbsp;:</strong> un ticket d'entrée — la question est ailleurs. <strong>Ce qui la décide&nbsp;:</strong> la page Engagements (qui détient quoi, l'accès fermé à sa demande), la localisation des serveurs écrite clairement, mon numéro de téléphone affiché. Un prix trop bas aggraverait sa méfiance.</p>
+</div>
+
+<div class="persona">
+<h3>Le débordé</h3>
+<p>Les mains dans le fil toute la journée, sa compta le soir à 22&nbsp;h. Modifier ses horaires lui-même, même sur téléphone, il ne le fera jamais.</p>
+<blockquote>«&nbsp;Si quelqu'un d'autre fait les modifications à ma place, pour un petit forfait, et que je n'ai qu'à lui téléphoner.&nbsp;»</blockquote>
+<p class="lecon"><strong>Comment il lit 590&nbsp;€&nbsp;:</strong> il n'a même pas fait la division par heure. <strong>Ce qui le décide&nbsp;:</strong> «&nbsp;je m'en occupe&nbsp;» et l'abonnement Sérénité à 19&nbsp;€/mois — moins cher que son temps. C'est le client abonnement idéal, pas le client remise.</p>
+</div>
+
+<div class="persona">
+<h3>Le local fidèle</h3>
+<p>Paris 16e ou alentours&nbsp;: il achète à quelqu'un qui peut passer à la boutique, pas à une plateforme au Luxembourg.</p>
+<blockquote>«&nbsp;Quelqu'un que je peux appeler au téléphone quand ça bloque et qui vient me voir à la boutique.&nbsp;»</blockquote>
+<p class="lecon"><strong>Ce qui le décide&nbsp;:</strong> la visite de proximité, la maquette gratuite faite <em>de sa boutique</em>. Contre un freelance à distance à 800&nbsp;€ ou une agence à 2&nbsp;500&nbsp;€, mes 590&nbsp;€ plus ma présence sont imbattables <em>sur sa carte</em>.</p>
+</div>
+
+<div class="persona">
+<h3>Le «&nbsp;ma fiche Google me suffit&nbsp;»</h3>
+<p>13 des 20 premiers acheteurs le disent d'une façon ou d'une autre&nbsp;: leurs clients les trouvent déjà par Maps et le bouche-à-oreille.</p>
+<blockquote>«&nbsp;Je suis surtout sur Google Maps et Facebook, donc un site neuf ne me sert pas à grand-chose pour le moment.&nbsp;»</blockquote>
+<p class="lecon"><strong>Ce qui le décide&nbsp;:</strong> ne pas lui vendre le site&nbsp;! La Visibilité Google à 39&nbsp;€/mois et le mini-diagnostic gratuit sont faits pour lui&nbsp;— et c'est par là qu'il viendra au site plus tard. Le tester sur le prix du site serait une erreur de cible.</p>
+</div>
+
+<div class="persona">
+<h3>La prudente qui veut le total en une ligne</h3>
+<p>Elle compare deux devis ligne à ligne et déteste les surprises&nbsp;: «&nbsp;ça coûte quoi, tout compris, la première année&nbsp;?&nbsp;»</p>
+<blockquote>«&nbsp;Un prix total clair, sans abonnement obligatoire, avec un exemple d'artisan comme moi qui a déjà un site qui marche.&nbsp;»</blockquote>
+<p class="lecon"><strong>Ce qui la décide&nbsp;:</strong> le coût de première année en une ligne (déjà affiché&nbsp;: environ 600&nbsp;€ sans abonnement), le devis détaillé, la licence du moteur qui précise qu'elle garde son contenu. Rien à changer au prix&nbsp;: tout est dans la présentation.</p>
+</div>
+
+<div class="persona">
+<h3>Le dirigeant de PME</h3>
+<p>5 à 20 salariés, un vieux site ou pas de site. Il compare une agence à 3&nbsp;000&nbsp;€+ et un inconnu à 590&nbsp;€ — et le prix bas l'inquiète autant que l'agence l'agace.</p>
+<p class="lecon"><strong>Comment il lit 590&nbsp;€&nbsp;:</strong> «&nbsp;et si j'ai besoin de plus&nbsp;?&nbsp;» <strong>Ce qui le décide&nbsp;:</strong> l'offre Entreprise à 1&nbsp;900&nbsp;€ (refonte, pages multiples, méthode), les engagements écrits, la licence du moteur. Le dégradé de prix fait le travail&nbsp;: 590&nbsp;€ rend 1&nbsp;900&nbsp;€ sérieux.</p>
+</div>
+
+<h2 id="rentabilite">5. Ce qu'il me reste par euro encaissé</h2>
+<div class="resume"><p>Tous les calculs viennent de <code>docs/CHIFFRES.md</code> (hypothèses&nbsp;: cotisations micro-BNC 25,6&nbsp;%, ACRE 19,2&nbsp;%, temps estimés). Chaque euro encaissé me laisse 74&nbsp;centimes avant impôt — et le vrai ennemi du taux horaire n'est pas le prix, c'est la prospection.</p></div>
+
+<h3>Par offre</h3>
+<div class="de">
+<table>
+  <thead><tr><th>Offre</th><th class="chiffre">Prix</th><th class="chiffre">Net (sans ACRE)</th><th class="chiffre">Heures est.</th><th class="chiffre">Net/heure</th></tr></thead>
+  <tbody>
+    <tr><td>Site vitrine</td><td class="chiffre">590&nbsp;€</td><td class="chiffre">438&nbsp;€</td><td class="chiffre">12&nbsp;h</td><td class="chiffre">36&nbsp;€</td></tr>
+    <tr><td>Boutique et catalogue</td><td class="chiffre">1&nbsp;290&nbsp;€</td><td class="chiffre">957&nbsp;€</td><td class="chiffre">25&nbsp;h</td><td class="chiffre">38&nbsp;€</td></tr>
+    <tr><td>Entreprise / refonte</td><td class="chiffre">1&nbsp;900&nbsp;€</td><td class="chiffre">1&nbsp;410&nbsp;€</td><td class="chiffre">35&nbsp;h</td><td class="chiffre">40&nbsp;€</td></tr>
+    <tr><td>Sérénité (mois)</td><td class="chiffre">19&nbsp;€</td><td class="chiffre">14,10&nbsp;€</td><td class="chiffre">0,75&nbsp;h</td><td class="chiffre">19&nbsp;€</td></tr>
+    <tr><td>Croissance (mois)</td><td class="chiffre">49&nbsp;€</td><td class="chiffre">36,36&nbsp;€</td><td class="chiffre">1,25&nbsp;h</td><td class="chiffre">29&nbsp;€</td></tr>
+    <tr><td>Visibilité Google (mois)</td><td class="chiffre">39&nbsp;€</td><td class="chiffre">28,94&nbsp;€</td><td class="chiffre">1&nbsp;h</td><td class="chiffre">29&nbsp;€</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Avec ACRE (à demander <strong>avant le 17 décembre 2026</strong>&nbsp;<span class="prov vigilance">à vérifier sur urssaf.fr</span>)&nbsp;: le vitrine laisse 476&nbsp;€ pour 12&nbsp;h, soit 40&nbsp;€/h. <span class="prov">calculé</span></p>
+
+<h3>Le coût caché&nbsp;: la prospection</h3>
+<p>Un site à 590&nbsp;€ ne coûte pas 12&nbsp;h. À 15 visites par semaine et 2&nbsp;% de signatures, <strong>un site signé demande environ 50&nbsp;h de prospection + 12&nbsp;h de production</strong>&nbsp;: le net réel tombe autour de <strong>7&nbsp;€/h</strong> au démarrage. <span class="prov">calculé, hypothèse 2&nbsp;%</span> Conclusion&nbsp;: le bouche-à-oreille (preuves, témoignages, fiche Google) vaut plus que n'importe quel ajustement de prix. Les deux chantiers «&nbsp;connaissances&nbsp;» équivalent à 50&nbsp;h de prospection économisées&nbsp;— c'est eux, mes pilotes.</p>
+
+<h3>Trois scénarios sur 12 mois, version «&nbsp;CDI + soirées&nbsp;»</h3>
+<p>Hypothèse de temps&nbsp;: 12 à 15&nbsp;h disponibles par semaine en comptant visites et production. <span class="prov">estimé, à ajuster</span></p>
+<div class="de">
+<table>
+  <thead><tr><th>Scénario</th><th class="chiffre">Sites sur 12 mois</th><th class="chiffre">CA</th><th class="chiffre">Net avant impôt</th></tr></thead>
+  <tbody>
+    <tr><td>Prudent (1er semestre lent, 2 chantiers connaissances + 4 ventes)</td><td class="chiffre">6</td><td class="chiffre">4&nbsp;410&nbsp;€</td><td class="chiffre">3&nbsp;272&nbsp;€</td></tr>
+    <tr><td>Moyen (le rythme s'installe après les 2 preuves)</td><td class="chiffre">12</td><td class="chiffre">9&nbsp;310&nbsp;€</td><td class="chiffre">6&nbsp;908&nbsp;€</td></tr>
+    <tr><td>Bon (bouche-à-oreille + refontes 1&nbsp;290&nbsp;/&nbsp;1&nbsp;900&nbsp;€ en plus)</td><td class="chiffre">24 et plus</td><td class="chiffre">18&nbsp;865&nbsp;€+</td><td class="chiffre">13&nbsp;998&nbsp;€+</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Les abonnements ne sont pas comptés dans ces totaux d'origine&nbsp;; en fin d'année «&nbsp;moyenne&nbsp;», 8 abonnés ajoutent environ 1&nbsp;400&nbsp;€ de CA récurrent. <span class="prov">calculé</span> Repère&nbsp;: pour 1&nbsp;000&nbsp;€ nets par mois, il faut environ 1&nbsp;350&nbsp;€ de CA, soit <strong>2,3 sites vitrine par mois</strong> — tenable en soirées si la prospection tourne.</p>
+
+<h2 id="pourquoi">6. Pourquoi 590&nbsp;/&nbsp;1&nbsp;290&nbsp;/&nbsp;1&nbsp;900 et 19&nbsp;/&nbsp;49&nbsp;/&nbsp;39</h2>
+<div class="resume"><p>Le dégradé fait le travail psychologique&nbsp;: 590&nbsp;€ rend 1&nbsp;290&nbsp;€ raisonnable et 1&nbsp;900&nbsp;€ sérieux. «&nbsp;Payé une fois&nbsp;» répond à Wix&nbsp;; les abonnements restent sous le marché. Baisser ne signerait rien — la preuve signe.</p></div>
+<h3>Cinq mécaniques à l'oeuvre</h3>
+<p><strong>1. L'ancrage par le haut.</strong> Le visiteur voit d'abord le tableau&nbsp;: constructeurs 605 à 1&nbsp;080&nbsp;€ sur 3 ans, freelances dès 800&nbsp;€. Mon 590&nbsp;€ arrive en dernier et paraît prudent, pas cheap. <span class="prov">calculé / relevé 28/10</span></p>
+<p><strong>2. Le dégradé 590&nbsp;→&nbsp;1&nbsp;290&nbsp;→&nbsp;1&nbsp;900.</strong> La boutique à 1&nbsp;290&nbsp;€ profite de la vitrine&nbsp;; la refonte à 1&nbsp;900&nbsp;€ profite des deux. Chaque palier tient dans une phrase («&nbsp;je vends en ligne&nbsp;», «&nbsp;j'ai une équipe, des services&nbsp;»).</p>
+<p><strong>3. «&nbsp;Payé une fois&nbsp;» contre «&nbsp;17&nbsp;€ par mois&nbsp;».</strong> Les acheteurs comparent en mois, pas en années&nbsp;; le site fait la conversion pour eux (coût 3 ans). C'est mon argument structurel — aucun constructeur ne peut le copier.</p>
+<p><strong>4. Les abonnements sous le marché.</strong> Maintenance freelance&nbsp;: 30–100&nbsp;€/mois de références&nbsp;<span class="prov vigilance">à vérifier</span>. Fiche Google&nbsp;: CCI 50&nbsp;€&nbsp;HT, agences 150–800&nbsp;€. Mes 19&nbsp;/&nbsp;49&nbsp;/&nbsp;39&nbsp;€ sont en bas du marché avec un interlocuteur unique — cohérent pour un lancement, à relever plus tard.</p>
+<p><strong>5. Le piège du trop-bas.</strong> À 290&nbsp;€ je gagnerais 18&nbsp;€/h <span class="prov">calculé</span> et j'enverrais le signal «&nbsp;débutant désespéré&nbsp;» aux méfiants. Les panels ne demandent pas de baisse&nbsp;: 0 des 30 acheteurs ne cite le prix comme bloquant principal. Ne pas céder.</p>
+
+<h2 id="honetete">7. Les règles d'honnêteté qui cadrent ces prix</h2>
+<div class="resume"><p>Un prix n'est tenable que si tout ce qui l'entoure est vrai. Six règles non négociables, tirées du dépôt.</p></div>
+<div class="note vigilance">
+<p><strong>1.</strong> Les deux chantiers «&nbsp;connaissances&nbsp;» ne seront montrés sur mon site <em>qu'avec un accord écrit</em> (formulaire du dépôt&nbsp;: «&nbsp;Accord d'affichage&nbsp;»), témoignage compris.</p>
+<p><strong>2.</strong> Aucun avis client ne sera publié sans l'accord écrit de son auteur — jamais rédigé par moi ou pour lui.</p>
+<p><strong>3.</strong> Aucune promesse de place dans Google, nulle part. Le site l'écrit déjà&nbsp;; le garder.</p>
+<p><strong>4.</strong> Pas de faux comptes à rebours, pas de «&nbsp;3 places&nbsp;» de complaisance. Une offre d'exception n'existe que si elle est vraie.</p>
+<p><strong>5.</strong> Les engagements tenus comptent plus que le prix&nbsp;: réponse sous 2 jours ouvrés, sauvegardes, accès fermé à la demande — si je ne peux pas les tenir un mois, je les retire du site.</p>
+<p><strong>6.</strong> Franchise de TVA («&nbsp;TVA non applicable, art.&nbsp;293&nbsp;B&nbsp;»)&nbsp;: à confirmer sur impots.gouv.fr avant l'ouverture — la mention des devis et factures en dépend. <span class="prov vigilance">à vérifier</span></p>
+</div>
+
+<h2 id="action">8. Le plan d'action</h2>
+<div class="resume"><p>Sept actions datées. Les deux premières valent tous les remises du monde&nbsp;: elles fabriquent la preuve.</p></div>
+<div class="de">
+<table>
+  <thead><tr><th>Quand</th><th>Action</th></tr></thead>
+  <tbody>
+    <tr><td>Cette semaine</td><td><strong>Signer les 2 chantiers connaissances à 590&nbsp;€</strong> (devis <code>docs/modeles/01-devis.md</code>), avec accord écrit d'afficher le site et de recueillir un témoignage.</td></tr>
+    <tr><td>Pendant ces 2 chantiers</td><td><strong>Chronométrer mes heures réelles</strong> (l'hypothèse «&nbsp;12&nbsp;h&nbsp;» est une estimation)&nbsp;; corriger <code>docs/CHIFFRES.md</code>.</td></tr>
+    <tr><td>Avant le 17/12/2026</td><td>Demande <strong>ACRE</strong> sur le Guichet unique / Urssaf. <span class="prov vigilance">à vérifier</span></td></tr>
+    <tr><td>Dès les 2 preuves en ligne</td><td>Passer le site en public (MAQUETTE&nbsp;«&nbsp;non&nbsp;»), fiche Google, visites hebdomadaires.</td></tr>
+    <tr><td>Sur les 6 premiers devis réels</td><td>Test 490&nbsp;€ sur une moitié, 590&nbsp;€ sur l'autre&nbsp;; compter les signatures. Décision au réel, pas à l'intuition.</td></tr>
+    <tr><td>Après 3 réalisations montrables</td><td>Revoir le plancher&nbsp;: 690&nbsp;€ devient défendable (toujours sous les 800&nbsp;€ du marché).</td></tr>
+    <tr><td>Chaque trimestre</td><td>Relire ce dossier&nbsp;: heures réelles, taux de signature, abonnés&nbsp;; relever les prix des constructeurs le jour de l'ouverture du site (consigne du LISEZMOI).</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="sources">9. Sources, fraîcheur, lexique</h2>
+<h3>D'où vient chaque chiffre</h3>
+<div class="de">
+<table>
+  <thead><tr><th>Donnée</th><th>Source</th><th>État</th></tr></thead>
+  <tbody>
+    <tr><td>Prix Squarespace France</td><td>fr.squarespace.com/pricing</td><td><span class="prov verifie">vérifié le 05/11/2026</span></td></tr>
+    <tr><td>Wix 16,80–30&nbsp;€/mois&nbsp;; freelances 800–2&nbsp;500&nbsp;€&nbsp;; concurrent 690&nbsp;€+22&nbsp;€&nbsp;; fiche Google CCI/agences</td><td>Relevé web du kit, <code>METHODE.md</code> partie&nbsp;9</td><td><span class="prov vigilance">relevé 28/10/2026 — revérifier le jour de l'ouverture</span></td></tr>
+    <tr><td>Van Westendorp 250/300/400/700&nbsp;€</td><td><code>docs/validation-2026-10-28/RESULTATS.md</code> (20 acheteurs simulés)</td><td><span class="prov">simulé</span></td></tr>
+    <tr><td>Citations d'acheteurs (P001–P020)</td><td><code>docs/panel-acheteurs-resultats.md</code></td><td><span class="prov">simulé</span></td></tr>
+    <tr><td>Nets, taux horaires, scénarios, seuils</td><td><code>docs/CHIFFRES.md</code> (script <code>chiffres.py</code>)</td><td><span class="prov">calculé sur hypothèses</span></td></tr>
+    <tr><td>Cotisations 25,6&nbsp;%&nbsp;; ACRE 19,2&nbsp;%</td><td>Sources multiples citées dans <code>docs/PLAN-ENTREPRISE.md</code></td><td><span class="prov vigilance">à confirmer dans l'espace Urssaf</span></td></tr>
+  </tbody>
+</table>
+</div>
+<p>Rien ici n'a été validé par un expert-comptable&nbsp;; les points fiscaux sont des repères à vérifier, pas des conseils.</p>
+
+<h3>Lexique</h3>
+<p><strong>Van Westendorp&nbsp;:</strong> méthode qui demande aux acheteurs quatre prix (trop bas / correct / cher / trop cher) pour dessiner la zone acceptable. <strong>ACRE&nbsp;:</strong> aide à la création ou à la reprise d'entreprise, réduit les cotisations la première année. <strong>Micro-BNC&nbsp;:</strong> régime fiscal des prestations intellectuelles en micro-entreprise. <strong>Ancrage&nbsp;:</strong> le premier prix vu conditionne la lecture de tous les suivants. <strong>Coût d'acquisition&nbsp;:</strong> temps et argent dépensés pour signer une vente (visites, maquettes gratuites).</p>
+
+<p class="pied">Dossier établi avec les outils du dépôt <code>site-atelier-muel</code> · usage interne · décisions reprises dans la liste «&nbsp;À valider&nbsp;» du LISEZMOI.md. Aucun chiffre inventé&nbsp;: chaque valeur porte sa provenance.</p>
+
+</div>
+<button class="bouton-theme" type="button" onclick="var r=document.documentElement;if(r.dataset.theme==='dark'){r.dataset.theme='light';this.textContent='Mode sombre'}else{r.dataset.theme='dark';this.textContent='Mode clair'}">Mode sombre</button>
+</body>
+</html>

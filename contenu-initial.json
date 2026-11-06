@@ -349,7 +349,7 @@
       "Autre demande"
     ],
     "cle_web3forms": "",
-    "email": "",
+    "email": "contact@sterenncreation.fr",
     "confirmation": "Merci, votre demande est bien partie. Je vous recontacte pour en parler.",
     "traitement": "Traitement automatique : une fois le site ouvert, chaque demande est aussi transmise à un outil d’automatisation (n8n) hébergé sur un serveur situé à Paris (Hostinger). Il avertit l’éditeur par e-mail et par message privé (Telegram), et peut vous envoyer un accusé de réception. Ces outils n’ont qu’un rôle technique. Aucune intelligence artificielle ne lit votre demande aujourd’hui ; si cela change, cette page sera mise à jour avant."
   },
@@ -359,15 +359,15 @@
     "rcs": "131 703 951 00015 (Registre national des entreprises)",
     "adresse": "36 rue Chardon-Lagache, 75016 Paris",
     "directeur_publication": "Grégoire Muel",
-    "email": "",
+    "email": "contact@sterenncreation.fr",
     "mediateur": "",
     "tva": "TVA non applicable, article 293 B du code général des impôts",
-    "nom_commercial": "Grégoire Muel",
+    "nom_commercial": "Sterenn Création",
     "hebergeur_telephone": ""
   },
   "credits_photos": "Vignettes : captures d’écran des démonstrations. Photos d’illustration des démonstrations (Unsplash) : Sander Hallaste, Bailey Alexander, Craft Kitties, HENG YIN, Minh Đức (atelier) ; Vika Fleysher, Oxana Melis, Viktoriia Yatsentiuk, Roman Kraft (fleuriste) ; Timur Shakerzianov (plombier) ; Glenov Brankovic, Antonio Araujo (restaurant). Photos d’illustration du site (Unsplash) : le poste de travail (Christin Hume) et la rue parisienne (Shalev Cohen) ne montrent ni l’auteur ni un client. Les démonstrations ne montrent pas de vrais clients.",
   "reglages": {
-    "url": "https://gregoiremuel.fr",
+    "url": "https://sterenncreation.fr",
     "image_partage": "/assets/photos/partage.jpg"
   },
   "libelles": {

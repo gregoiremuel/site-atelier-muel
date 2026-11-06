@@ -6,7 +6,7 @@ Aucune promesse de position : personne ne peut garantir une place dans Google, e
 - Un **titre et une description différents par page**, et l'aperçu des liens partagés (Open Graph).
 - Des **données structurées** pour Google : fiche d'entreprise sur l'accueil, **questions fréquentes** sur les pages par métier (`/site-restaurant`, `/site-plombier`, `/site-fleuriste`, `/site-commerce-de-bouche`, `/visibilite-google`).
 - **`/robots.txt`** et **`/sitemap.xml`** : le plan du site n'est annoncé qu'une fois `MAQUETTE` passé à « non ». Tant que le site est en « version de travail », il est volontairement **fermé aux moteurs** (`noindex`).
-- Une **adresse canonique** (ajoutée le 28/10/2026) : chaque page dit à Google quelle est son adresse officielle. Elle apparaît seulement hors version de travail et si l'adresse du site est renseignée (`reglages.url`, par exemple `https://gregoiremuel.fr`). Sans elle, l'adresse provisoire `…workers.dev` et le vrai domaine peuvent être vus comme deux sites identiques.
+- Une **adresse canonique** (ajoutée le 28/10/2026) : chaque page dit à Google quelle est son adresse officielle. Elle apparaît seulement hors version de travail et si l'adresse du site est renseignée (`reglages.url`, aujourd'hui `https://sterenncreation.fr`). Sans elle, l'adresse provisoire `…workers.dev` et le vrai domaine peuvent être vus comme deux sites identiques.
 - Un site **rapide, lisible sur téléphone, en HTTPS**, sans cookie ni publicité (critères que Google regarde).
 - Des pages **par métier** avec un vrai texte, des prix de départ et une démonstration : ce sont tes meilleures chances d'apparaître sur « site internet restaurant Paris 16e » et assimilés.
 
@@ -16,15 +16,15 @@ Aucune promesse de position : personne ne peut garantir une place dans Google, e
 Les deux sont à relancer après chaque changement important, avec `npm run verifier` et `npm test`.
 
 ## 2. Avant l'ouverture (avec toi, dans `docs/MISE-EN-LIGNE.md`)
-1. Domaine acheté et actif sur Cloudflare.
-2. Dans le contenu : `reglages.url` = `https://gregoiremuel.fr` (je le fais quand tu me dis « go »).
+1. Domaine acheté et actif sur Cloudflare (fait le 05/11/2026 pour `sterenncreation.fr` : achat OVHcloud, zone Cloudflare créée, serveurs de noms à basculer).
+2. Dans le contenu : `reglages.url` = `https://sterenncreation.fr` (fait le 05/11/2026).
 3. `MAQUETTE` passé à « non » (même moment).
 4. **Fermer l'adresse provisoire** pour éviter le doublon : option `"workers_dev": false` dans `wrangler.jsonc` (**à vérifier** dans la documentation de wrangler de ta version), ou la désactiver dans les réglages du Worker sur Cloudflare.
 5. Vérifier à la main : `/robots.txt`, `/sitemap.xml`, et dans le code source de l'accueil la ligne `rel="canonical"`.
 
 ## 3. Les cinq gestes qui comptent le plus (par ordre d'effet pour un indépendant local)
 1. **Fiche d'établissement Google** (business.google.com, ex-Google My Business). Catégorie principale proche de « Service de création de sites Web » (**à vérifier** dans la liste), zone de service « Paris 16e et à distance », téléphone, horaires, lien vers le site, quelques photos, description honnête. La validation se fait par vidéo, appel ou courrier (**à vérifier**). Si tu ne veux pas publier ton adresse (domicile), choisis « zone de service » sans afficher l'adresse. C'est ce que `docs/PLAN-ENTREPRISE.md` appelle ta meilleure vitrine.
-2. **Search Console** (search.google.com/search-console) : propriété « Domaine », validation par un enregistrement DNS (à ajouter dans Cloudflare), puis envoi de `https://gregoiremuel.fr/sitemap.xml`. Ensuite « Inspection de l'URL » sur l'accueil et sur chaque page par métier, puis « Demander une indexation ». Délai habituel : de quelques jours à quelques semaines (**aucune garantie**).
+2. **Search Console** (search.google.com/search-console) : propriété « Domaine », validation par un enregistrement DNS (à ajouter dans Cloudflare), puis envoi de `https://sterenncreation.fr/sitemap.xml`. Ensuite « Inspection de l'URL » sur l'accueil et sur chaque page par métier, puis « Demander une indexation ». Délai habituel : de quelques jours à quelques semaines (**aucune garantie**).
 3. **Avis de vrais clients** : tes trois clients pilotes sont la priorité. Donne-leur le lien d'avis de ta fiche. **Jamais** de faux avis, ni d'avis offerts en échange d'un rabais (interdit par Google et par la loi).
 4. **Mêmes nom, adresse (ou zone), téléphone et horaires partout** : site, fiche Google, LinkedIn, Instagram, annuaires. Une différence (« 07 80 00 81 37 » ici, un autre numéro là) affaiblit la fiche.
 5. **Quelques liens depuis d'autres sites** : association ou groupement de commerçants du 16e, annuaires professionnels sérieux, les sites de tes clients (une ligne « site réalisé par Grégoire Muel » avec leur accord), LinkedIn. Peu de liens, de vrais sites, pas d'achat de liens.

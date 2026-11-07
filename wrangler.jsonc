@@ -11,11 +11,11 @@
   // Copie de sauvegarde du contenu chaque nuit (vers 3 h 17, heure de Paris en hiver).
   "triggers": { "crons": ["17 2 * * *"] },
   // Aperçus de branches (Workers Builds lance « wrangler preview ») : valeurs sûres pour les aperçus, jamais les secrets de production.
-  "previews": { "vars": { "MAQUETTE": "oui" } }
+  "previews": { "vars": { "MAQUETTE": "oui" } },
   // Copie externe facultative (contenu, photos et vidéos) : créer le stockage R2 (jurisdiction UE possible), puis ajouter
   // "r2_buckets": [{ "binding": "SAUVEGARDE", "bucket_name": "sauvegarde-site-atelier-muel" }]
-  // Après l'achat du domaine (zone ajoutée sur Cloudflare) :
-  // "routes": [{ "pattern": "sterenncreation.fr", "custom_domain": true }, { "pattern": "www.sterenncreation.fr", "custom_domain": true }]
-  // (www est attaché au Worker pour que sa redirection 301 vers le domaine nu fonctionne ; décommenter seulement quand la zone Cloudflare est active,
-  // sinon le déploiement échoue. Une fois le domaine validé : MAQUETTE à "non" et workers_dev désactivé — à vérifier dans la doc wrangler.)
+  // Domaine officiel (zone Cloudflare ajoutée le 05/11/2026, sterenncreation.fr acheté chez OVHcloud) :
+  "routes": [{ "pattern": "sterenncreation.fr", "custom_domain": true }, { "pattern": "www.sterenncreation.fr", "custom_domain": true }]
+  // (www est attaché au Worker pour que sa redirection 301 vers le domaine nu fonctionne ; ne déployer QUE quand la zone Cloudflare est « Active »
+  // (sinon le déploiement échoue). Une fois le domaine vérifié : MAQUETTE à "non" et workers_dev désactivé — à vérifier dans la doc wrangler.)
 }

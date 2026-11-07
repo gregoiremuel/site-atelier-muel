@@ -1,5 +1,13 @@
 # Reprise dans une nouvelle session (30 octobre 2026)
 
+## État réel au 05/11/2026 (soir, GLM)
+- **Domaine** : `sterenncreation.fr` acheté chez OVHcloud (commande 263462179, livrée le 05/11 ; 4,99 € HT + Zimbra Starter 3,60 €/an offert la 1re année). Le nom commercial « Sterenn Création » est différent du nom légal : à déclarer au Guichet unique avant l'ouverture. `ateliermuel.fr` et `gregoiremuel.fr` non achetés (à réserver si voulu).
+- **E-mail pro** : boîte `contact@sterenncreation.fr` créée sur le Zimbra (webmail https://mail.zimbra.ovh.net, app mobile Zimbra ; IMAP `imap.mail.ovh.net:993`, SMTP `smtp.mail.ovh.net:465`). MX actuels : `mx0/1/2/3.mail.ovh.net`.
+- **Cloudflare** : zone `sterenncreation.fr` ajoutée (offre Free) ; MX et SPF recopiés ; serveurs à coller chez OVH : `jobs.ns.cloudflare.com` et `shubhi.ns.cloudflare.com`. **DNSSEC désactivé chez OVH** le 05/11 vers 23 h (DS en cours de disparition, TTL 1 h, jusqu'à 24 h) : basculer les serveurs de noms seulement quand le DS a disparu partout.
+- **Lot B prêt** (branche, demande de fusion) : routes `sterenncreation.fr` + `www` décommentées dans `wrangler.jsonc`, `reglages.url` = `https://sterenncreation.fr`, testeur mis à jour (l'ancien domaine était codé en dur). `npm run verifier` 0 erreur, `npm test` **133 ok, 0 échec**. **Fusionner seulement quand la zone Cloudflare est « Active »** (sinon le déploiement échoue).
+- **Prix validés par Greg le 05/11** (voir `docs/ETUDE-PRIX-2026-11-05.html`) : 590 / 1 290 / 1 900 € et 19 / 49 / 39 € inchangés ; pas de prix pilote — deux chantiers « connaissances » au tarif plein, avec accord écrit d'affichage et témoignage. LISEZMOI à jour (points 1 et 2).
+- **À faire ensuite** : bascule serveurs de noms → fusion lot B → DKIM/DMARC chez Cloudflare + test délivrabilité → liste « À valider » restante → `MAQUETTE` à « non » → Search Console + fiche Google. Ticket OVH si problème de livraison (non nécessaire à ce jour).
+
 ## État réel au 04/11/2026 (lot A, contrôles relancés sous Windows par GLM)
 - **Environnement de Greg** : Windows, Node 24.18, GitHub connecté (`gregoiremuel`). Les dépôts `kit-sites-boutiques` et `agence-eims` sont clonés à côté du site. Tout est fusionné dans `main` (le site était à jour au 30/10, rien à refusionner).
 - **Correctif Windows** : `outils/tester.mjs` appelait `wrangler` à la façon Linux (échec ENOENT/INVAL sous Windows) ; il appelle maintenant wrangler par son point d'entrée JS et arrête le serveur de test par `taskkill` (plus de serveur fantôme sur le port 8799). Reporté dans `modeles/agence-operia` du kit. Playwright ajouté en dépendance de développement (nécessaire à `npm run accessibilite`).

@@ -5,7 +5,8 @@ import { existsSync, mkdtempSync, rmSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-const racine = new URL('../', import.meta.url).pathname;
+import { fileURLToPath } from 'node:url';
+const racine = fileURLToPath(new URL('../', import.meta.url));
 const require = createRequire(import.meta.url);
 let chromium;
 try { ({ chromium } = require('playwright')); } catch (e) { console.error('Playwright est absent : npm i -D playwright, ou lancez-le avec le Playwright global (NODE_PATH).'); process.exit(1); }

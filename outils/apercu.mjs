@@ -4,12 +4,13 @@
 // Usage : node outils/apercu.mjs [fichier de contenu]   (par défaut : contenu-initial.json)
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { TOUS_FICHIERS_POLICES } from '../public/assets/polices.js';
 import { verifier } from './verifier.mjs';
 
 const ici = (f) => new URL('../' + f, import.meta.url);
 const lire = (f) => readFileSync(ici(f), 'utf8');
-const C = JSON.parse(readFileSync(resolve(process.argv[2] || new URL('../contenu-initial.json', import.meta.url).pathname), 'utf8'));
+const C = JSON.parse(readFileSync(resolve(process.argv[2] || fileURLToPath(new URL('../contenu-initial.json', import.meta.url))), 'utf8'));
 const { erreurs } = verifier(C);
 if (erreurs.length) { console.error(`Le contenu a ${erreurs.length} erreur(s) : lancez « npm run verifier » pour les voir. Aucun fichier fabriqué.`); process.exit(1); }
 /* Les images du site (logo, photos dans /assets/) sont intégrées au fichier de démonstration */

@@ -1,7 +1,7 @@
 {
   "_schema": "agence v1",
   "agence": {
-    "nom": "Grégoire Muel",
+    "nom": "Sterenn Création",
     "logo": "/assets/gregoire-muel-monogramme.svg",
     "nom_image": "",
     "nom_image_blanc": "",
@@ -316,7 +316,7 @@
   ],
   "presentation": {
     "titre": "À propos",
-    "texte": "Je suis Grégoire Muel. Je crée et je tiens à jour les sites des commerces, des artisans et des entreprises, depuis Auteuil, dans le 16e arrondissement de Paris, et à distance partout en France.\n\nJe travaille seul : c’est moi que vous avez au téléphone, qui prépare votre maquette, qui fais votre site et qui réponds à vos questions. Si vous ne savez pas par où commencer, appelez-moi : on regarde ensemble ce dont vous avez besoin.",
+    "texte": "Je suis Grégoire Muel, de Sterenn Création. Je crée et je tiens à jour les sites des commerces, des artisans et des entreprises, depuis Auteuil, dans le 16e arrondissement de Paris, et à distance partout en France.\n\nJe travaille seul : c’est moi que vous avez au téléphone, qui prépare votre maquette, qui fais votre site et qui réponds à vos questions. Si vous ne savez pas par où commencer, appelez-moi : on regarde ensemble ce dont vous avez besoin.",
     "photo": "/assets/photos/gregoire-portrait.jpg",
     "photo_2": "/assets/photos/travail-clavier.jpg"
   },
@@ -505,7 +505,7 @@
     "intro": "Un constructeur en ligne comme Wix est un bon choix si vous voulez tout faire vous-même et que vous avez le temps. Voici ce qui change.",
     "colonnes": [
       "Un constructeur en ligne (type Wix)",
-      "Grégoire Muel"
+      "Sterenn Création"
     ],
     "lignes": [
       {
@@ -849,27 +849,27 @@
   ],
   "seo": {
     "/": {
-      "titre": "Création et refonte de site internet à Paris | Grégoire Muel",
+      "titre": "Création de site internet à Paris | Sterenn Création",
       "description": "Création et refonte de site internet pour commerces, artisans et entreprises, à Paris et partout en France. Maquette gratuite en 48 h, site dès 590 €."
     },
     "/expertises": {
-      "titre": "Site vitrine, boutique en ligne, refonte | Grégoire Muel",
+      "titre": "Site vitrine, boutique en ligne, refonte | Sterenn Création",
       "description": "Site vitrine, boutique ou catalogue en ligne, site d’entreprise et refonte : formules, prix affichés et abonnement facultatif, avec une page pour tout modifier."
     },
     "/realisations": {
-      "titre": "Exemples de sites pour commerces et artisans | Grégoire Muel",
+      "titre": "Exemples de sites de commerces | Sterenn Création",
       "description": "Quatre démonstrations de sites pour un ébéniste, un fleuriste, un plombier et un restaurant. Essayez la page de modification : rien n’est publié."
     },
     "/agence": {
-      "titre": "Créateur de site internet à Paris 16e | Grégoire Muel",
-      "description": "Grégoire Muel, entrepreneur individuel à Paris 16e : création, refonte et entretien du site de votre commerce, de votre atelier ou de votre entreprise."
+      "titre": "Créateur de site internet à Paris 16e | Sterenn Création",
+      "description": "Sterenn Création (Grégoire Muel, entrepreneur à Paris 16e) : création, refonte et entretien du site de votre commerce, de votre atelier ou de votre entreprise."
     },
     "/engagements": {
-      "titre": "Hébergement, données, sauvegardes du site | Grégoire Muel",
+      "titre": "Hébergement, données, sauvegardes du site | Sterenn Création",
       "description": "Hébergement, données personnelles, sauvegardes, délai de réponse et fin d’abonnement : les engagements écrits avant de signer la création de votre site."
     },
     "/contact": {
-      "titre": "Demander une maquette gratuite de site | Grégoire Muel",
+      "titre": "Demander une maquette gratuite de site | Sterenn Création",
       "description": "Décrivez votre activité en quelques lignes pour recevoir une maquette gratuite de votre futur site en 48 h, à Paris ou à distance, sans engagement."
     },
     "/site-restaurant": {
@@ -885,7 +885,7 @@
       "description": "Un site de fleuriste : fleurs de la semaine, bouquets à commander et jour de retrait dans les horaires de la boutique. À partir de 590 €, une fois."
     },
     "/site-commerce-de-bouche": {
-      "titre": "Site internet de commerce de bouche | Grégoire Muel",
+      "titre": "Site internet de commerce de bouche | Sterenn Création",
       "description": "Un site de commerce de bouche : produits du moment, commandes à retirer (plateaux, gâteaux, coffrets) et horaires. À partir de 590 €, une fois."
     },
     "/visibilite-google": {

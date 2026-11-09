@@ -14,7 +14,7 @@
     "email": "",
     "linkedin": "",
     "instagram": "",
-    "description_google": "Création et refonte de sites pour commerces, artisans et entreprises à Paris 16e et partout en France : maquette gratuite en 48 h, site dès 590 € une fois."
+    "description_google": "Création et refonte de sites pour commerces, artisans et entreprises à Paris 16e et partout en France : maquette gratuite en 5 jours ouvrés, site dès 590 € une fois."
   },
   "theme": {
     "fond": "#f4f6f8",
@@ -38,8 +38,8 @@
     "texte": "Je crée le site de votre commerce, de votre atelier ou de votre entreprise. Vous recevez les demandes de vos clients, et vous changez vos horaires ou vos photos depuis votre téléphone.",
     "reperes": [
       "Une seule personne | Vous parlez à celui qui fait le travail, de la maquette à l’entretien",
-      "Maquette gratuite | À votre nom, en 48 h ouvrées : vous jugez avant de payer",
-      "Payé une fois | Pas d’abonnement obligatoire, et le nom de domaine est à vous",
+      "Maquette gratuite | À votre nom, en 5 jours ouvrés : vous jugez avant de payer",
+      "Payé une fois | Pas d’abonnement : le nom de domaine est à vous",
       "Vous gardez la main | Vos textes, horaires et photos se changent depuis votre téléphone"
     ],
     "intro_titre": "",
@@ -63,10 +63,10 @@
       "id": "site-vitrine",
       "nom": "Site vitrine",
       "accroche": "Pour qu’un client vous trouve, voie vos horaires et vous appelle en un geste.",
-      "prix": "590 € | une fois, sans abonnement obligatoire",
-      "texte": "Le site que vos clients consultent avant de passer vous voir. Il se lit d’abord sur téléphone : horaires du jour, itinéraire et appel en un geste.\n\nVous le tenez à jour vous-même, ou vous me confiez les changements (compris dans Sérénité, sur devis sinon). Mise en ligne sous deux semaines après réception de vos textes et photos. Le nom de domaine reste à votre charge (environ 10 € par an) ; l’hébergement ne coûte rien. Pages en plus, boutique ou réservation : sur devis.",
+      "prix": "590 € | une fois",
+      "texte": "Le site que vos clients consultent avant de passer vous voir. Il se lit d’abord sur téléphone : horaires du jour, itinéraire et appel en un geste.\n\nVous le tenez à jour vous-même, ou vous me confiez les changements (sur devis). Mise en ligne sous deux semaines après réception de vos textes et photos. Le nom de domaine reste à votre charge (environ 10 € par an) ; l’hébergement ne coûte rien. Pages en plus, boutique ou réservation : sur devis.",
       "points": [
-        "Maquette gratuite à votre nom en 48 h ouvrées, après réception de vos informations",
+        "Maquette gratuite à votre nom en 5 jours ouvrés, après réception de vos informations",
         "Un site d’une page complète, deux séries de corrections comprises",
         "Vos photos recadrées et allégées ; à Paris, quelques photos prises sur place si besoin",
         "Horaires, tarifs, photos et textes modifiables par vous",
@@ -79,7 +79,7 @@
       "id": "boutique-catalogue",
       "nom": "Boutique et catalogue",
       "accroche": "Vos produits en vitrine : collections, fiches détaillées, panier et demandes de commande.",
-      "prix": "dès 1 290 € | une fois, abonnement facultatif",
+      "prix": "dès 1 290 € | une fois",
       "texte": "Un catalogue à votre image, rangé par collections et par types, avec une fiche pour chaque pièce : photos, prix, matières, options.\n\nVos clients composent un panier et vous envoient une demande de commande ; vous confirmez avec eux. Pas de commission sur vos ventes.",
       "points": [
         "Collections, types et fiches de pièces",
@@ -94,7 +94,7 @@
       "id": "site-entreprise",
       "nom": "Site d’entreprise ou refonte",
       "accroche": "Pour rassurer un client qui ne vous connaît pas : vos métiers, vos réalisations, vos demandes de projet.",
-      "prix": "dès 1 900 € | une fois, abonnement facultatif",
+      "prix": "dès 1 900 € | une fois",
       "texte": "Un site qui inspire confiance à un client qui ne vous connaît pas encore : vos expertises, des réalisations classées par secteur, votre façon de travailler, vos engagements.\n\nSi vous avez déjà un site, je reprends ce qui est bon et je refais le reste.",
       "points": [
         "Pages métiers, réalisations et méthode",
@@ -104,30 +104,13 @@
         "Reprise des contenus de l’ancien site"
       ],
       "photo": "/assets/photos/real-plombier-exemple.jpg"
-    },
-    {
-      "id": "visibilite-google",
-      "nom": "Visibilité Google",
-      "accroche": "Pour être trouvé sur Google Maps, avec ou sans site : votre fiche tenue à jour chaque mois.",
-      "prix": "39 € | par mois, sans engagement de durée",
-      "texte": "Quand quelqu’un cherche « plombier près de moi » ou « fleuriste Paris 16 », la première chose qu’il voit est une fiche Google. Je la tiens à jour chaque mois : horaires, photos, un message publié, réponses aux avis préparées pour que vous les validiez.\n\nJe ne promets pas une place dans Google ni dans les réponses des assistants IA : personne ne peut la garantir. Je promets un travail fait chaque mois, et un rapport d’une page qui le montre.",
-      "points": [
-        "Mini-diagnostic gratuit de votre fiche, avant de décider",
-        "Horaires, congés et jours fériés à jour",
-        "Un message publié chaque mois, que vous validez",
-        "Réponses aux avis préparées, que vous validez",
-        "Rapport d’une page chaque mois",
-        "Sans site nécessaire, sans engagement de durée"
-      ],
-      "photo": "",
-      "lien": "/visibilite-google"
     }
   ],
   "etapes": [
     {
-      "titre": "Une maquette gratuite en 48 h",
+      "titre": "Une maquette gratuite en 5 jours ouvrés",
       "points": [
-        "Vous m’envoyez votre nom, votre activité et votre fiche Google ou quelques photos ; la maquette à votre nom arrive dans les 48 h ouvrées. Elle ne vous plaît pas : vous ne devez rien."
+        "Vous m’envoyez votre nom, votre activité et votre fiche Google ou quelques photos ; la maquette à votre nom arrive dans les 5 jours ouvrés. Elle ne vous plaît pas : vous ne devez rien."
       ]
     },
     {
@@ -422,55 +405,10 @@
     "eng_lien": "Voir tous les engagements",
     "pages_titre": "Par métier"
   },
-  "abonnements": {
-    "titre": "Un coup de main au mois, si vous le souhaitez",
-    "intro": "Le site est à vous dès sa livraison : vous pouvez le gérer seul depuis la page de modification. Si vous préférez que je m’en occupe, choisissez une formule mensuelle, sans engagement de durée. Vous pourrez en changer plus tard.",
-    "formules": [
-      {
-        "nom": "Sans abonnement",
-        "prix": "0 €",
-        "periode": "par mois",
-        "description": "Vous gérez votre site vous-même, quand vous voulez.",
-        "points": [
-          "Page de modification pour changer textes, horaires, prix et photos",
-          "Aide pour la prise en main à la livraison",
-          "Intervention ponctuelle sur devis"
-        ],
-        "recommande": false
-      },
-      {
-        "nom": "Sérénité",
-        "prix": "19 €",
-        "periode": "par mois",
-        "description": "Pour ceux qui veulent que je fasse leurs petits changements : horaires, prix, photos.",
-        "points": [
-          "Votre site reste en ligne, et l’adresse du site (nom de domaine) est renouvelée",
-          "Copie de sauvegarde du contenu, plus une copie complète chaque mois",
-          "Petites modifications comprises : jusqu’à 30 minutes par mois",
-          "Réponse sous 2 jours ouvrés"
-        ],
-        "recommande": true
-      },
-      {
-        "nom": "Croissance",
-        "prix": "49 €",
-        "periode": "par mois",
-        "description": "Pour que le site amène des clients, pas seulement des visites : plus de temps, et des chiffres.",
-        "points": [
-          "Tout ce que comprend Sérénité",
-          "Jusqu’à 1 heure de modifications par mois",
-          "Chiffres des visites chaque mois, conseils chaque trimestre",
-          "Nouvelles pages ou nouvelle fonction sur devis"
-        ],
-        "recommande": false
-      }
-    ],
-    "note": "Ce que ça coûte la première année, site vitrine compris et nom de domaine inclus : environ 600 € sans abonnement, environ 830 € avec Sérénité, environ 1 190 € avec Croissance. Sans engagement de durée : les formules s’arrêtent à tout moment ; le site, son contenu et son nom de domaine restent à vous. Je ne promets pas de place dans Google : je promets un travail fait chaque mois."
-  },
   "engagements": [
     {
       "titre": "Hébergement",
-      "texte": "Votre site est hébergé chez Cloudflare, une société américaine dont les serveurs sont répartis dans le monde : je ne peux pas garantir que vos données restent en Europe.\n\nAujourd’hui, l’hébergement de départ est gratuit chez Cloudflare. Seul le nom de domaine se paie, environ 10 € par an, et il est à votre nom. Si l’hébergement devenait payant, je vous le dirais avant toute facture.",
+      "texte": "Votre site est hébergé chez Cloudflare, une société américaine dont les serveurs sont répartis dans le monde : je ne peux pas garantir que vos données restent en Europe.\n\nAujourd’hui, l’hébergement de départ est gratuit chez Cloudflare. Seul le nom de domaine se paie, environ 10 € par an, et il est à votre nom. Si l’hébergement devenait payant, je vous le dirais avant toute facture.\n\nLe site est hébergé sur mon compte Cloudflare. Si vous arrêtez de travailler avec moi, je vous remets une copie complète du contenu et des photos, et je transfère le nom de domaine à votre demande.",
       "points": []
     },
     {
@@ -480,17 +418,12 @@
     },
     {
       "titre": "Sauvegardes",
-      "texte": "Le contenu du site est enregistré chez l’hébergeur, et la page de modification garde la version précédente : un clic suffit pour revenir en arrière après une erreur.\n\nChaque nuit, le serveur garde une copie du contenu pendant 7 nuits. Avec une formule mensuelle, je fais en plus, chaque mois, une copie complète (textes, réglages et photos) que je garde de mon côté. Sans abonnement, je vous remets une copie complète à la livraison, puis sur simple demande.",
+      "texte": "Le contenu du site est enregistré chez l’hébergeur, et la page de modification garde la version précédente : un clic suffit pour revenir en arrière après une erreur.\n\nChaque nuit, le serveur garde une copie du contenu pendant 7 nuits. Je vous remets une copie complète (textes, réglages et photos) à la livraison, puis sur simple demande.",
       "points": []
     },
     {
       "titre": "Délai de réponse",
-      "texte": "Une demande envoyée par le formulaire ou par téléphone reçoit une réponse sous 2 jours ouvrés, avec ou sans abonnement. La maquette gratuite est livrée dans les 48 h ouvrées qui suivent la réception de vos informations (nom, activité, fiche Google ou photos).\n\nUne modification qui relève de votre formule mensuelle est faite dans le même délai. Hors formule, je vous envoie un devis avant de commencer.",
-      "points": []
-    },
-    {
-      "titre": "Si vous arrêtez l’abonnement",
-      "texte": "Vous pouvez arrêter à tout moment : il n’y a pas de durée minimale.\n\nLe site reste en ligne, son contenu et son nom de domaine restent à vous, et vous gardez la page de modification. Ce qui s’arrête : les sauvegardes régulières, les modifications comprises et le suivi. Le nom de domaine, lui, se renouvelle alors à votre charge.\n\nSi vous voulez déménager le site ailleurs, je vous remets une copie du contenu et des photos.",
+      "texte": "Une demande envoyée par le formulaire ou par téléphone reçoit une réponse sous 5 jours ouvrés. La maquette gratuite est livrée dans les 5 jours ouvrés qui suivent la réception de vos informations (nom, activité, fiche Google ou photos).\n\nPour une modification, je vous envoie un devis avant de commencer.",
       "points": []
     },
     {
@@ -516,7 +449,7 @@
       {
         "critere": "Ce que vous payez",
         "a": "Un abonnement chaque mois, tant que le site existe : environ 17 € (forfait Light) à 30 € (forfait Essentiel)",
-        "b": "590 € une fois pour un site vitrine. L’abonnement est facultatif"
+        "b": "590 € une fois pour un site vitrine. Pas d’abonnement"
       },
       {
         "critere": "Coût sur 3 ans, site vitrine",
@@ -526,7 +459,7 @@
       {
         "critere": "Changer un horaire ou un prix",
         "a": "Vous, depuis l’éditeur du constructeur",
-        "b": "Vous, depuis une page privée sur téléphone, ou moi (30 minutes par mois avec Sérénité)"
+        "b": "Vous, depuis une page privée sur téléphone, ou moi (sur devis)"
       },
       {
         "critere": "Paiement en ligne, très gros catalogue",
@@ -550,7 +483,7 @@
       "description": "La carte, la réservation et les horaires du service, lisibles sur téléphone, que vous changez vous-même ou que je change pour vous.",
       "accroche": "La carte, la réservation et les horaires du service, lisibles sur téléphone, que vous changez vous-même ou que je change pour vous.",
       "texte": "Un client qui cherche un restaurant regarde trois choses : la carte, les horaires, et comment réserver. Le site les met en haut, sur téléphone, avec votre numéro cliquable.\n\nLa carte se change sans rien installer : un plat qui sort, un prix qui bouge. La réservation arrive dans votre page privée avec le jour, l’heure et le nombre de couverts ; vous rappelez le client pour confirmer.",
-      "prix": "À partir de 590 €, une fois. Abonnement facultatif",
+      "prix": "À partir de 590 €, une fois",
       "points": [
         "Carte par catégorie, prix saisis par vous",
         "Réservation avec jour, heure et nombre de couverts",
@@ -566,7 +499,7 @@
       "questions": [
         {
           "q": "Puis-je changer ma carte moi-même ?",
-          "r": "Oui, depuis une page privée qui s’ouvre sur votre téléphone : un plat ou un prix se change en quelques secondes. Si vous préférez, vous m’envoyez les changements et je les fais : c’est compris dans l’abonnement Sérénité, sur devis sinon."
+          "r": "Oui, depuis une page privée qui s’ouvre sur votre téléphone : un plat ou un prix se change en quelques secondes. Si vous préférez, vous m’envoyez les changements et je les fais : sur devis."
         },
         {
           "q": "Comment arrivent les réservations ?",
@@ -574,11 +507,7 @@
         },
         {
           "q": "Combien ça coûte ?",
-          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 48 h ouvrées après réception de vos informations. Pas d’abonnement obligatoire. Le nom de domaine se renouvelle environ 10 € par an."
-        },
-        {
-          "q": "Et pour être trouvé sur Google Maps ?",
-          "r": "C’est l’offre Visibilité Google, 39 € par mois, sans engagement de durée : je tiens votre fiche à jour. Pour commencer, je regarde la vôtre gratuitement."
+          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 5 jours ouvrés après réception de vos informations. Le nom de domaine se renouvelle environ 10 € par an."
         },
         {
           "q": "Puis-je voir un exemple ?",
@@ -595,7 +524,7 @@
       "description": "Votre numéro en haut de chaque écran et « Dépannage ou devis » dès l’arrivée : le client sait quoi faire en deux secondes.",
       "accroche": "Votre numéro en haut de chaque écran et « Dépannage ou devis » dès l’arrivée : le client sait quoi faire en deux secondes.",
       "texte": "Quand une fuite ou une panne arrive, le client veut un numéro, vite. Le site met votre téléphone en haut de chaque écran, avec « Dépannage ou devis » dès l’arrivée.\n\nVous indiquez votre zone d’intervention et vos horaires ; la demande de devis arrive dans votre page privée.",
-      "prix": "À partir de 590 €, une fois. Abonnement facultatif",
+      "prix": "À partir de 590 €, une fois",
       "points": [
         "Téléphone cliquable sur chaque écran",
         "« Dépannage ou devis » en haut de la page",
@@ -611,7 +540,7 @@
       "questions": [
         {
           "q": "Mon téléphone sonnera-t-il davantage ?",
-          "r": "Je ne peux pas promettre un nombre d’appels. Le site rend votre numéro visible et cliquable. Pour être mieux trouvé sur Google Maps, c’est l’offre Visibilité Google."
+          "r": "Je ne peux pas promettre un nombre d’appels. Le site rend votre numéro visible et cliquable."
         },
         {
           "q": "Puis-je afficher mes tarifs ?",
@@ -623,11 +552,11 @@
         },
         {
           "q": "Combien ça coûte ?",
-          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 48 h ouvrées après réception de vos informations. Pas d’abonnement obligatoire. Le nom de domaine se renouvelle environ 10 € par an."
+          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 5 jours ouvrés après réception de vos informations. Le nom de domaine se renouvelle environ 10 € par an."
         },
         {
           "q": "Puis-je tout changer moi-même ?",
-          "r": "Oui, depuis une page privée qui s’ouvre sur votre téléphone. Si vous préférez, vous m’envoyez les changements et je les fais : c’est compris dans l’abonnement Sérénité, sur devis sinon."
+          "r": "Oui, depuis une page privée qui s’ouvre sur votre téléphone. Si vous préférez, vous m’envoyez les changements et je les fais : sur devis."
         }
       ],
       "liste": true,
@@ -640,7 +569,7 @@
       "description": "Les fleurs de la semaine, des bouquets à commander et un jour de retrait choisi dans les horaires de la boutique.",
       "accroche": "Les fleurs de la semaine, des bouquets à commander et un jour de retrait choisi dans les horaires de la boutique.",
       "texte": "Une boutique de fleurs change chaque semaine. Le site montre les horaires du jour, les fleurs de saison et les bouquets à commander, avec un jour de retrait choisi dans vos horaires.\n\nVous changez les fleurs de la semaine depuis votre téléphone, en quelques gestes, et les commandes arrivent dans votre page privée.",
-      "prix": "À partir de 590 €, une fois. Abonnement facultatif",
+      "prix": "À partir de 590 €, une fois",
       "points": [
         "Horaires avec l’ouverture du jour",
         "Fleurs de la semaine, par saison",
@@ -660,7 +589,7 @@
         },
         {
           "q": "Puis-je changer les fleurs de la semaine ?",
-          "r": "Oui, depuis votre téléphone, sans rien installer. Ou vous m’envoyez la liste et je la change (compris dans l’abonnement Sérénité, sur devis sinon)."
+          "r": "Oui, depuis votre téléphone, sans rien installer. Ou vous m’envoyez la liste et je la change (sur devis)."
         },
         {
           "q": "Qui prend les photos ?",
@@ -668,11 +597,7 @@
         },
         {
           "q": "Combien ça coûte ?",
-          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 48 h ouvrées après réception de vos informations. Pas d’abonnement obligatoire. Le nom de domaine se renouvelle environ 10 € par an."
-        },
-        {
-          "q": "Et pour être trouvé sur Google Maps ?",
-          "r": "C’est l’offre Visibilité Google, 39 € par mois, sans engagement de durée : je tiens votre fiche à jour. Pour commencer, je regarde la vôtre gratuitement."
+          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 5 jours ouvrés après réception de vos informations. Le nom de domaine se renouvelle environ 10 € par an."
         }
       ],
       "liste": true,
@@ -685,7 +610,7 @@
       "description": "Les produits du moment, les offres sur commande (plateaux, gâteaux, coffrets) et les horaires, pour être trouvé et pour que les clients commandent à retirer.",
       "accroche": "Les produits du moment, les offres sur commande (plateaux, gâteaux, coffrets) et les horaires, pour être trouvé et pour que les clients commandent à retirer.",
       "texte": "Un commerce de bouche vit de ses habitués et de ceux qui passent devant : il faut être trouvé, montrer les produits du moment et dire quand on est ouvert.\n\nLe site présente vos produits comme sur une ardoise, vos offres sur commande, et permet de commander à retirer un jour de votre choix.",
-      "prix": "À partir de 590 €, une fois. Abonnement facultatif",
+      "prix": "À partir de 590 €, une fois",
       "points": [
         "Produits du moment rangés par catégorie, prix saisis par vous",
         "Offres sur commande : plateaux, gâteaux, coffrets",
@@ -701,7 +626,7 @@
       "questions": [
         {
           "q": "Avez-vous une démonstration pour mon métier ?",
-          "r": "Pas encore pour chaque commerce de bouche. La démonstration fleuriste montre le même fonctionnement : produits de saison et commande à retirer. Je prépare la maquette à votre nom en 48 h, gratuitement."
+          "r": "Pas encore pour chaque commerce de bouche. La démonstration fleuriste montre le même fonctionnement : produits de saison et commande à retirer. Je prépare la maquette à votre nom en 5 jours ouvrés, gratuitement."
         },
         {
           "q": "Et les allergènes ?",
@@ -709,152 +634,25 @@
         },
         {
           "q": "Combien ça coûte ?",
-          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 48 h ouvrées après réception de vos informations. Pas d’abonnement obligatoire. Le nom de domaine se renouvelle environ 10 € par an."
-        },
-        {
-          "q": "Et pour être trouvé sur Google Maps ?",
-          "r": "C’est l’offre Visibilité Google, 39 € par mois, sans engagement de durée : je tiens votre fiche à jour. Pour commencer, je regarde la vôtre gratuitement."
+          "r": "590 € une fois pour un site vitrine, avec la maquette gratuite en 5 jours ouvrés après réception de vos informations. Le nom de domaine se renouvelle environ 10 € par an."
         },
         {
           "q": "Puis-je tout changer moi-même ?",
-          "r": "Oui, depuis une page privée qui s’ouvre sur votre téléphone. Si vous préférez, vous m’envoyez les changements et je les fais : c’est compris dans l’abonnement Sérénité, sur devis sinon."
+          "r": "Oui, depuis une page privée qui s’ouvre sur votre téléphone. Si vous préférez, vous m’envoyez les changements et je les fais : sur devis."
         }
       ],
       "liste": true,
       "visible": true
-    },
-    {
-      "id": "visibilite-google",
-      "nom": "Visibilité Google",
-      "titre": "Votre fiche Google, tenue à jour chaque mois",
-      "description": "Pour être trouvé sur Google Maps, avec ou sans site : horaires, photos, un message par mois et réponses aux avis, que vous validez.",
-      "accroche": "Pour être trouvé sur Google Maps, avec ou sans site : horaires, photos, un message par mois et réponses aux avis, que vous validez.",
-      "texte": "Quand quelqu’un cherche « plombier près de moi » ou « fleuriste Paris 16 », la première chose qu’il voit est une fiche Google. Je la tiens à jour chaque mois : horaires, photos, un message publié, réponses aux avis préparées pour que vous les validiez.\n\nJe ne promets pas une place dans Google ni dans les réponses des assistants IA : personne ne peut la garantir. Je promets un travail fait chaque mois, et un rapport d’une page qui le montre.",
-      "prix": "39 € par mois, sans engagement de durée",
-      "points": [
-        "Mini-diagnostic gratuit de votre fiche, avant de décider",
-        "Horaires, congés et jours fériés à jour",
-        "Un message publié chaque mois, que vous validez",
-        "Réponses aux avis préparées, que vous validez",
-        "Rapport d’une page chaque mois",
-        "Sans site nécessaire, sans engagement de durée"
-      ],
-      "demo": "",
-      "demo_texte": "",
-      "bouton": "Demander mon diagnostic gratuit",
-      "photo": "",
-      "questions": [
-        {
-          "q": "Que contient le mini-diagnostic gratuit ?",
-          "r": "Une page qui regarde votre fiche Google : horaires, catégories, photos, description, produits ou services, site, réponses aux avis. Elle liste ce qui manque et trois actions à faire en premier. C’est gratuit et sans engagement ; vous gardez la page."
-        },
-        {
-          "q": "Garantissez-vous une place dans Google ?",
-          "r": "Non. Personne ne peut garantir une place dans Google ni dans les réponses des assistants IA. Je m’engage sur le travail fait chaque mois, que le rapport montre."
-        },
-        {
-          "q": "Faut-il un site ?",
-          "r": "Non, la fiche se tient sans site. Avec un site, les deux se complètent."
-        },
-        {
-          "q": "Qui répond aux avis ?",
-          "r": "Je prépare les réponses, vous les validez avant qu’elles soient publiées. Je ne publie jamais de faux avis."
-        },
-        {
-          "q": "Combien de temps cela me demande-t-il ?",
-          "r": "Quelques minutes par mois : valider le message du mois et les réponses aux avis."
-        },
-        {
-          "q": "Puis-je arrêter ?",
-          "r": "À tout moment, sans durée minimale. Je suis ajouté comme gestionnaire de votre fiche ; vous en restez propriétaire et vous pouvez me retirer quand vous voulez."
-        }
-      ],
-      "liste": false,
-      "visible": true,
-      "exemple": {
-        "titre": "Mini-diagnostic de votre fiche Google",
-        "commerce": "Le Pétale Sauvage, fleuriste imaginaire",
-        "date": "29 octobre 2026",
-        "lignes": [
-          {
-            "point": "Nom",
-            "etat": "ok",
-            "note": "Le nom réel du commerce, sans mot ajouté"
-          },
-          {
-            "point": "Catégories",
-            "etat": "afaire",
-            "note": "Une seule catégorie : en ajouter deux ou trois"
-          },
-          {
-            "point": "Adresse et zone",
-            "etat": "ok",
-            "note": "Exactes"
-          },
-          {
-            "point": "Téléphone",
-            "etat": "ok",
-            "note": "Le bon numéro"
-          },
-          {
-            "point": "Horaires",
-            "etat": "afaire",
-            "note": "Jours fériés et congés absents"
-          },
-          {
-            "point": "Site",
-            "etat": "manque",
-            "note": "Aucun lien sur la fiche"
-          },
-          {
-            "point": "Description",
-            "etat": "manque",
-            "note": "Champ vide"
-          },
-          {
-            "point": "Photos",
-            "etat": "afaire",
-            "note": "Trois photos, la dernière date de plus de deux ans"
-          },
-          {
-            "point": "Produits",
-            "etat": "manque",
-            "note": "Aucun produit listé"
-          },
-          {
-            "point": "Messages",
-            "etat": "manque",
-            "note": "Aucun message publié depuis un an"
-          },
-          {
-            "point": "Avis",
-            "etat": "afaire",
-            "note": "Quatre avis sur trente et un sans réponse"
-          },
-          {
-            "point": "Cohérence",
-            "etat": "ok",
-            "note": "Mêmes horaires et même numéro partout"
-          }
-        ],
-        "actions": [
-          "Ajouter les jours fériés et les congés",
-          "Répondre aux quatre avis restés sans réponse",
-          "Ajouter cinq photos : la devanture, le comptoir, trois bouquets"
-        ],
-        "legende": "Exemple de page remise au commerçant. Commerce imaginaire, sans rapport avec un établissement réel."
-      },
-      "sur": "Offre"
     }
   ],
   "seo": {
     "/": {
       "titre": "Création de site internet à Paris | Sterenn Création",
-      "description": "Création et refonte de site internet pour commerces, artisans et entreprises, à Paris et partout en France. Maquette gratuite en 48 h, site dès 590 €."
+      "description": "Création et refonte de site internet pour commerces, artisans et entreprises, à Paris et partout en France. Maquette gratuite en 5 jours ouvrés, site dès 590 €."
     },
     "/expertises": {
       "titre": "Site vitrine, boutique en ligne, refonte | Sterenn Création",
-      "description": "Site vitrine, boutique ou catalogue en ligne, site d’entreprise et refonte : formules, prix affichés et abonnement facultatif, avec une page pour tout modifier."
+      "description": "Site vitrine, boutique ou catalogue en ligne, site d’entreprise et refonte : formules, prix affichés, avec une page pour tout modifier."
     },
     "/realisations": {
       "titre": "Exemples de sites de commerces | Sterenn Création",
@@ -866,15 +664,15 @@
     },
     "/engagements": {
       "titre": "Hébergement, données, sauvegardes du site | Sterenn Création",
-      "description": "Hébergement, données personnelles, sauvegardes, délai de réponse et fin d’abonnement : les engagements écrits avant de signer la création de votre site."
+      "description": "Hébergement, données personnelles, sauvegardes, délai de réponse et suites : les engagements écrits avant de signer la création de votre site."
     },
     "/contact": {
       "titre": "Demander une maquette gratuite de site | Sterenn Création",
-      "description": "Décrivez votre activité en quelques lignes pour recevoir une maquette gratuite de votre futur site en 48 h, à Paris ou à distance, sans engagement."
+      "description": "Décrivez votre activité en quelques lignes pour recevoir une maquette gratuite de votre futur site en 5 jours ouvrés, à Paris ou à distance, sans engagement."
     },
     "/site-restaurant": {
       "titre": "Site internet de restaurant : carte, réservation",
-      "description": "Un site de restaurant lisible sur téléphone : carte, réservation, horaires du service. À partir de 590 €, une fois, abonnement facultatif. Maquette gratuite."
+      "description": "Un site de restaurant lisible sur téléphone : carte, réservation, horaires du service. À partir de 590 €, une fois. Maquette gratuite."
     },
     "/site-plombier": {
       "titre": "Site internet de plombier ou d’artisan du bâtiment",
@@ -887,10 +685,6 @@
     "/site-commerce-de-bouche": {
       "titre": "Site internet de commerce de bouche | Sterenn Création",
       "description": "Un site de commerce de bouche : produits du moment, commandes à retirer (plateaux, gâteaux, coffrets) et horaires. À partir de 590 €, une fois."
-    },
-    "/visibilite-google": {
-      "titre": "Fiche Google Maps tenue à jour chaque mois",
-      "description": "Votre fiche Google tenue à jour chaque mois : horaires, photos, un message par mois et réponses aux avis que vous validez. 39 € par mois, sans engagement."
     }
   }
 }

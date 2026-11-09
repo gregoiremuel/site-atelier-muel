@@ -1,5 +1,29 @@
 # Reprise dans une nouvelle session (30 octobre 2026)
 
+## État réel au 06/11/2026 (GLM) — LIRE CE BLOC EN PREMIER
+
+### Le point bloquant en cours (première chose à faire en reprenant)
+**La PR n° 30 est fusionnée dans `main`, mais le site ne répond pas** : `https://sterenncreation.fr` et `https://www.sterenncreation.fr` → **erreur 521**, et le site provisoire `https://site-atelier-muel.gregoire-muel.workers.dev` → **404** (mesuré à l'instant). Diagnostic probable : la construction Workers Builds après fusion a échoué ou tourné mal — piste n° 1 : **conflit entre les `custom_domain` de `wrangler.jsonc` et les enregistrements A proxied existants** (`sterenncreation.fr` et `www` → 213.186.33.5, la page parking OVH) ; l'erreur classique de wrangler est « record already exists ».
+**Marche à suivre** :
+1. Re-tester : `curl.exe -s -o NUL -w "%{http_code}" https://sterenncreation.fr` (et workers.dev).
+2. Toujours 521/404 → **avec Greg**, dashboard Cloudflare → Workers & Pages → `site-atelier-muel` → **Deployments/Builds** : la dernière construction de `main` est-elle verte ? Si rouge, lire le journal ensemble (capture dans `captures/`, je lis par OCR Windows).
+3. **Settings → Domains & Routes** : `sterenncreation.fr` et `www.sterenncreation.fr` y figurent-ils ? S'ils manquent : dans **DNS**, supprimer les enregistrements **A** de `@` et `www` (213.186.33.5) — **garder** MX ×3, TXT SPF (`~all`), TXT `_dmarc`, TXT OVH internes et CNAME ftp — puis rattacher : soit « Retry deployment » de la construction, soit bouton **« Connect Worker » / Add custom domain** sur la page du domaine (zone Overview → DNS → « No Workers connected » → Connect Worker), soit relancer un déploiement (commit trivial sur `main` — demander à Greg).
+4. Dès que ça répond **200** : vérifs complètes (accueil 200, `www` → 301 vers domaine nu, `/robots.txt` (Disallow attendu, MAQUETTE=oui), `/sitemap.xml`, `/admin/` connexion, bandeau « version de travail » présent).
+5. Puis **mettre à jour le contenu du site en ligne** (sa mémoire KV ne suit pas le dépôt) : `/admin` → rubrique « Coordonnées… » et réglages → `reglages.url` = `https://sterenncreation.fr`, `contact.email` = `contact@sterenncreation.fr`, `mentions.email` idem, `mentions.nom_commercial` = « Sterenn Création ».
+
+### Ce qui est fait et acquis (06/11)
+- **Domaine `sterenncreation.fr`** : acheté 05/11 chez OVH (avec Zimbra Starter), **zone Cloudflare ACTIVE** (serveurs `jobs.ns.cloudflare.com` / `shubhi.ns.cloudflare.com`, basculés le 06/11). DNSSEC désactivé chez OVH, **DS retiré partout** (vérifié sur 6 serveurs). ⚠️ Leçon : mon détecteur DS comptait les réponses « NODATA » (SOA) comme des DS présents — **toujours filtrer sur `QueryType -eq 'DS'`** avant de conclure (à reporter dans METHODE.md partie 4).
+- **PR n° 30 fusionnée** dans `main` : routes `custom_domain` (`sterenncreation.fr` + `www`), `reglages.url`, e-mail pro dans `contact.email`/`mentions.email`, nom commercial « Sterenn Création » dans les mentions, prix validés (étude `docs/ETUDE-PRIX-2026-11-05.html`, LISEZMOI points 1-2), docs MISE-EN-LIGNE/REFERENCEMENT à jour, testeur 133 ok.
+- **E-mail pro opérationnel** : `contact@sterenncreation.fr` (Zimbra OVH, webmail https://mail.zimbra.ovh.net). Outlook mobile configuré et testé (IMAP `imap.mail.ovh.net:993` SSL, SMTP `smtp.mail.ovh.net:465` SSL). App Zimbra abandonnée (déconnexions systématiques). Yahoo/Proton refusés (pas d'IMAP sans OAuth2 / payant).
+- **DNS Cloudflare** : MX `mx1/2/3.mail.ovh.net` (1/5/100) et SPF `v=spf1 include:mx.ovh.com ~all` alignés sur la zone OVH, **DMARC posé** (`_dmarc` = `v=DMARC1; p=none; rua=mailto:contact@sterenncreation.fr`). Bot Preference Sync désactivé ; Search/Agents autorisés, Training autorisé.
+- **Administratif** : nom commercial **« Sterenn Création » déclaré au Guichet unique le 06/11** (remplace « Atelier Muel »). **ACRE NON demandée** (limite **17/12/2026**) ; impots.gouv.fr jamais ouvert (TVA à confirmer). Décision : pas d'achat de `ateliermuel.fr`/`gregoiremuel.fr` pour l'instant.
+
+### Reste à faire (après le déblocage ci-dessus)
+1. DKIM : manager OVH → Web Cloud → Emails → Zimbra → `sterenncreation.fr` → activer/lire le DKIM → coller le TXT `selecteur._domainkey` chez Cloudflare (aucun DKIM dans la zone au 06/11, testé). Test d'envoi vers Gmail et Proton.
+2. Réactiver **DNSSEC depuis Cloudflare** (DNS → Settings → Enable DNSSEC → DS à déclarer chez OVH) une fois le site stabilisé.
+3. Avant l'ouverture : fiche RNE affichant « Sterenn Création » (quelques jours), TVA confirmée, mentions + engagements relus par Greg, photos (`docs/PHOTOS-A-FOURNIR.md`), décision marque visible (Sterenn Création vs Grégoire Muel), éventuel accord Opéria.
+4. Ouverture : `MAQUETTE` à « non » + `workers_dev: false` + contrôles complets + PR, sur le « go » de Greg. Puis Search Console (propriété Domaine, DNS, `https://sterenncreation.fr/sitemap.xml`) et fiche Google. Puis lots D (/admin enrichi), E (VPS/n8n), H (DOCUMENT-FINAL.html refait).
+
 ## État réel au 05/11/2026 (soir, GLM)
 - **Domaine** : `sterenncreation.fr` acheté chez OVHcloud (commande 263462179, livrée le 05/11 ; 4,99 € HT + Zimbra Starter 3,60 €/an offert la 1re année). Le nom commercial « Sterenn Création » est différent du nom légal : à déclarer au Guichet unique avant l'ouverture. `ateliermuel.fr` et `gregoiremuel.fr` non achetés (à réserver si voulu).
 - **E-mail pro** : boîte `contact@sterenncreation.fr` créée sur le Zimbra (webmail https://mail.zimbra.ovh.net, app mobile Zimbra ; IMAP `imap.mail.ovh.net:993`, SMTP `smtp.mail.ovh.net:465`). MX actuels : `mx0/1/2/3.mail.ovh.net`.
@@ -18,7 +42,7 @@
 - **Décisions du jour** : domaine probable « Sterenn Création » (Greg décide ce soir — attention : nom différent du nom légal, à réfléchir pour le registre et la protection du nom) ; e-mail pro voulu sur le futur domaine ; VPS Hostinger accessible ; rien de fait côté administratif (ACRE avant le 17/12, CFE avant le 31/12).
 
 ## Prompt à coller en premier message (après un « clear »)
-> Ajoute `gregoiremuel/kit-sites-boutiques` (et `gregoiremuel/site-operia` si on parle d'Opéria). Suis le skill `sites-boutiques` du kit, lis `CLAUDE.md`, `LISEZMOI.md` et `docs/REPRISE.md` du site. Branche `ccr-04ab3608-pccm5z` (si elle est fusionnée : repars de `main` avec le même nom). Sujet du jour : [à préciser]. Réponse en trois parties.
+> Lis `AGENTS.md` puis `docs/REPRISE.md` du dépôt, **en commençant par le bloc « État réel au 06/11/2026 »**. Reprends exactement où on s'est arrêté : la PR n° 30 est fusionnée mais `sterenncreation.fr` répond 521 et le site provisoire 404 — diagnostique avec moi (construction Cloudflare, Domains & Routes), répare, fais les vérifications complètes, puis continue la liste « Reste à faire ». Français, tutoiement, réponse en trois parties, clic par clic pour mes gestes.
 
 Le skill `sites-boutiques` (dans le kit, importé aussi dans l'app) dit déjà quoi lire, quels skills de design lancer, quels contrôles faire et comment mettre en ligne : inutile de tout redire.
 

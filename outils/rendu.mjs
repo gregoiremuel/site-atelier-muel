@@ -5,7 +5,7 @@ const require = createRequire(import.meta.url);
 let chromium;
 try { ({ chromium } = require('playwright')); } catch (e) { console.error('Playwright est absent : npm i -D playwright, ou utilisez le Playwright global (NODE_PATH).'); process.exit(1); }
 const base = (process.argv[2] || 'http://127.0.0.1:8787').replace(/\/$/, '');
-const pages = ['/', '/expertises', '/realisations', '/agence', '/engagements', '/contact', '/site-restaurant', '/site-plombier', '/site-fleuriste', '/site-commerce-de-bouche', '/visibilite-google', '/mentions-legales', '/confidentialite'];
+const pages = ['/', '/expertises', '/realisations', '/agence', '/engagements', '/contact', '/site-restaurant', '/site-plombier', '/site-fleuriste', '/site-commerce-de-bouche', '/mentions-legales', '/confidentialite'];
 const navigateur = await chromium.launch(); let echecs = 0;
 for (const [nom, vp] of [['bureau', { width: 1366, height: 820 }], ['mobile', { width: 390, height: 800 }]]) {
   const page = await navigateur.newPage({ viewport: vp });

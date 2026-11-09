@@ -1,8 +1,16 @@
 # Reprise dans une nouvelle session (30 octobre 2026)
 
-## État réel au 06/11/2026 (GLM) — LIRE CE BLOC EN PREMIER
+## État réel au 09/11/2026 (GLM) — LIRE CE BLOC EN PREMIER
+- **Blocage 521/404 réparé** : la construction du 07/11 22:19 UTC (fusion PR 30) avait uploadé une version mais échoué à l'attachement des custom domains (A proxified OVH 213.186.33.5 en conflit ; aucun déploiement créé ; workers.dev coupé → 404 brut). Fix : A `@` et `www` supprimés dans DNS Cloudflare, puis `npx wrangler deploy` depuis `main` (f396d42) → version fd6767cc. Vérifs : accueil 200, `www` 301, robots Disallow (MAQUETTE=oui), sitemap 200, `/admin/` 200, bandeau présent ; `npm run verifier` 0 erreur 0 alerte ; `npm test` 133 ok.
+- **Mémoire KV** : la clé « contenu » (essai pré-lot-B : `reglages.url` gregoiremuel.fr, annonce « SITE TEST », e-mails vides, nom commercial « Grégoire Muel ») écrasait `contenu-initial.json`. Sauvegardée dans `C:\Users\orreg\sauvegardes-site-atelier-muel\2026-11-09-contenu-kv.json` puis supprimée dans le dashboard KV (le namespace lié est invisible pour `wrangler kv` : binding sans id, auto-provisionné ; les 2 namespaces listés en CLI sont vides). Le site sert maintenant le contenu de `main` (e-mail pro, « Sterenn Création » dans /mentions-legales, og:image bon). `reglages.url` et `image_partage` ne sont PAS éditables dans `/admin`. La prochaine modification dans `/admin` recréera la clé.
+- **DKIM opérationnel** : OVH Zimbra activé ; CNAME `ovhmo-selector-1/2._domainkey` → `...5090863/5090864.ni.dkim.mail.ovh.net` posés chez Cloudflare en DNS only (gris). Test réel : SPF pass, DKIM pass (`ovhmo-selector-1`), DMARC pass sur Proton et Yahoo.
+- **workers.dev** reste 404 (coupé le 07/11) : sans importance, `workers_dev` passera à false à l'ouverture.
+- **DNSSEC (09/11)** : activé chez Cloudflare (DNS → Settings → Enable DNSSEC ; la carte est apparue après rechargement) → statut « pending » côté Cloudflare. DS : Key Tag 2371, algorithme 13 (ECDSAP256SHA256), digest type 2 (SHA256), flag 257 (KSK). Déclaré **à la main chez OVH** (Domaines → DS Records ; le formulaire OVH demande Key Tag, Flag 257, Algorithme 13 et clé publique base64, pas le digest) : message « changements pris en compte », tâche OVH en cours de traitement. **À vérifier le 10/11** : DS visible (`Resolve-DnsName sterenncreation.fr -Type DS`, filtrer sur `QueryType -eq 'DS'`), DNSSEC « Active » dans Cloudflare, OVH affiche l'entrée DS. Ne pas dire « terminé » avant.
+- **Dépôt** : `main` à jour (f396d42). Fichier non suivi à ne pas perdre : `docs/PROMPT-OUVERTURE-GLM.md`. Le bloc 06/11 ci-dessous (ex-commit 6be26a1, jamais fusionné) est réconcilié ici.
 
-### Le point bloquant en cours (première chose à faire en reprenant)
+## État réel au 06/11/2026 (GLM) — point bloquant résolu le 09/11 (voir ci-dessus)
+
+### Le point bloquant (RÉSOLU le 09/11, historique de l'analyse)
 **La PR n° 30 est fusionnée dans `main`, mais le site ne répond pas** : `https://sterenncreation.fr` et `https://www.sterenncreation.fr` → **erreur 521**, et le site provisoire `https://site-atelier-muel.gregoire-muel.workers.dev` → **404** (mesuré à l'instant). Diagnostic probable : la construction Workers Builds après fusion a échoué ou tourné mal — piste n° 1 : **conflit entre les `custom_domain` de `wrangler.jsonc` et les enregistrements A proxied existants** (`sterenncreation.fr` et `www` → 213.186.33.5, la page parking OVH) ; l'erreur classique de wrangler est « record already exists ».
 **Marche à suivre** :
 1. Re-tester : `curl.exe -s -o NUL -w "%{http_code}" https://sterenncreation.fr` (et workers.dev).
@@ -18,10 +26,10 @@
 - **DNS Cloudflare** : MX `mx1/2/3.mail.ovh.net` (1/5/100) et SPF `v=spf1 include:mx.ovh.com ~all` alignés sur la zone OVH, **DMARC posé** (`_dmarc` = `v=DMARC1; p=none; rua=mailto:contact@sterenncreation.fr`). Bot Preference Sync désactivé ; Search/Agents autorisés, Training autorisé.
 - **Administratif** : nom commercial **« Sterenn Création » déclaré au Guichet unique le 06/11** (remplace « Atelier Muel »). **ACRE NON demandée** (limite **17/12/2026**) ; impots.gouv.fr jamais ouvert (TVA à confirmer). Décision : pas d'achat de `ateliermuel.fr`/`gregoiremuel.fr` pour l'instant.
 
-### Reste à faire (après le déblocage ci-dessus)
-1. DKIM : manager OVH → Web Cloud → Emails → Zimbra → `sterenncreation.fr` → activer/lire le DKIM → coller le TXT `selecteur._domainkey` chez Cloudflare (aucun DKIM dans la zone au 06/11, testé). Test d'envoi vers Gmail et Proton.
-2. Réactiver **DNSSEC depuis Cloudflare** (DNS → Settings → Enable DNSSEC → DS à déclarer chez OVH) une fois le site stabilisé.
-3. Avant l'ouverture : fiche RNE affichant « Sterenn Création » (quelques jours), TVA confirmée, mentions + engagements relus par Greg, photos (`docs/PHOTOS-A-FOURNIR.md`), décision marque visible (Sterenn Création vs Grégoire Muel), éventuel accord Opéria.
+### Reste à faire (mis à jour le 09/11)
+1. ~~DKIM~~ **FAIT le 09/11** (voir bloc 09/11).
+2. **DNSSEC** : DS déclaré chez OVH le 09/11, **à confirmer le 10/11** (DS visible, zone « Active » côté Cloudflare).
+3. Avant l'ouverture : fiche RNE affichant « Sterenn Création » (quelques jours), TVA confirmée, mentions + engagements relus par Greg, photos (`docs/PHOTOS-A-FOURNIR.md`), décision marque visible (Sterenn Création vs Grégoire Muel), éventuel accord Opéria, ACRE (limite 17/12/2026).
 4. Ouverture : `MAQUETTE` à « non » + `workers_dev: false` + contrôles complets + PR, sur le « go » de Greg. Puis Search Console (propriété Domaine, DNS, `https://sterenncreation.fr/sitemap.xml`) et fiche Google. Puis lots D (/admin enrichi), E (VPS/n8n), H (DOCUMENT-FINAL.html refait).
 
 ## État réel au 05/11/2026 (soir, GLM)

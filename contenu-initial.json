@@ -408,7 +408,7 @@
   "engagements": [
     {
       "titre": "Hébergement",
-      "texte": "Votre site est hébergé chez Cloudflare, une société américaine dont les serveurs sont répartis dans le monde : je ne peux pas garantir que vos données restent en Europe.\n\nAujourd’hui, l’hébergement de départ est gratuit chez Cloudflare. Seul le nom de domaine se paie, environ 10 € par an, et il est à votre nom. Si l’hébergement devenait payant, je vous le dirais avant toute facture.\n\nLe site est hébergé sur mon compte Cloudflare. Si vous arrêtez de travailler avec moi, je vous remets une copie complète du contenu et des photos, et je transfère le nom de domaine à votre demande.",
+      "texte": "Votre site est hébergé chez Cloudflare, une société américaine dont les serveurs sont répartis dans le monde : je ne peux pas garantir que vos données restent en Europe.\n\nAujourd’hui, l’hébergement de départ est gratuit chez Cloudflare. Seul le nom de domaine se paie, environ 10 € par an, et il est à votre nom. Si l’hébergement devenait payant, je vous le dirais avant toute facture.\n\nLe site est hébergé sur mon compte Cloudflare. Si vous arrêtez de travailler avec moi, je vous remets sur demande une copie complète du site (textes, réglages, photos, code et fichiers de design). Le nom de domaine est enregistré à votre nom dès le départ : il reste à vous.",
       "points": []
     },
     {
@@ -418,7 +418,7 @@
     },
     {
       "titre": "Sauvegardes",
-      "texte": "Le contenu du site est enregistré chez l’hébergeur, et la page de modification garde la version précédente : un clic suffit pour revenir en arrière après une erreur.\n\nChaque nuit, le serveur garde une copie du contenu pendant 7 nuits. Je vous remets une copie complète (textes, réglages et photos) à la livraison, puis sur simple demande.",
+      "texte": "Le contenu du site est enregistré chez l’hébergeur, et la page de modification garde la version précédente : un clic suffit pour revenir en arrière après une erreur.\n\nChaque nuit, le serveur garde une copie du contenu pendant 7 nuits. Je vous remets une copie complète (textes, réglages, photos, code et fichiers de design) à la livraison, puis sur simple demande.",
       "points": []
     },
     {
@@ -648,7 +648,7 @@
   "seo": {
     "/": {
       "titre": "Création de site internet à Paris | Sterenn Création",
-      "description": "Création et refonte de site internet pour commerces, artisans et entreprises, à Paris et partout en France. Maquette gratuite en 5 jours ouvrés, site dès 590 €."
+      "description": "Création et refonte de site internet pour commerces, artisans et entreprises, à Paris et en France. Maquette gratuite en 5 jours ouvrés, dès 590 €."
     },
     "/expertises": {
       "titre": "Site vitrine, boutique en ligne, refonte | Sterenn Création",
@@ -660,15 +660,15 @@
     },
     "/agence": {
       "titre": "Créateur de site internet à Paris 16e | Sterenn Création",
-      "description": "Sterenn Création (Grégoire Muel, entrepreneur à Paris 16e) : création, refonte et entretien du site de votre commerce, de votre atelier ou de votre entreprise."
+      "description": "Sterenn Création (Grégoire Muel, Paris 16e) : création, refonte et entretien du site de votre commerce, de votre atelier ou de votre entreprise."
     },
     "/engagements": {
-      "titre": "Hébergement, données, sauvegardes du site | Sterenn Création",
+      "titre": "Hébergement, données, sauvegardes | Sterenn Création",
       "description": "Hébergement, données personnelles, sauvegardes, délai de réponse et suites : les engagements écrits avant de signer la création de votre site."
     },
     "/contact": {
       "titre": "Demander une maquette gratuite de site | Sterenn Création",
-      "description": "Décrivez votre activité en quelques lignes pour recevoir une maquette gratuite de votre futur site en 5 jours ouvrés, à Paris ou à distance, sans engagement."
+      "description": "Décrivez votre activité en quelques lignes pour recevoir une maquette gratuite de votre site en 5 jours ouvrés, à Paris ou à distance, sans engagement."
     },
     "/site-restaurant": {
       "titre": "Site internet de restaurant : carte, réservation",
@@ -676,7 +676,7 @@
     },
     "/site-plombier": {
       "titre": "Site internet de plombier ou d’artisan du bâtiment",
-      "description": "Un site de plombier ou d’artisan du bâtiment : numéro cliquable en haut de chaque écran, « Dépannage ou devis » dès l’arrivée. À partir de 590 €, une fois."
+      "description": "Un site de plombier ou d’artisan du bâtiment : numéro cliquable en haut de chaque écran, « Dépannage ou devis » dès l’arrivée. Dès 590 €, une fois."
     },
     "/site-fleuriste": {
       "titre": "Site internet de fleuriste : bouquets et retrait",

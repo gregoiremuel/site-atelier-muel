@@ -281,6 +281,7 @@ ${page.corps}
     </div>
   </div>
 </footer>
+${(C.theme || {}).gabarit === 'edition' && G.telephone && !/^\/(contact|admin)/.test(page.chemin || '') ? `<nav class="barre-mobile" aria-label="Contact rapide"><a class="btn" href="/contact">${esc(libelle(C, 'bouton_principal'))}</a><a class="barre-tel" href="${esc(telHref(G.telephone))}" aria-label="Appeler">${ico.tel}</a></nav>` : ''}
 ${page.jsonld ? `<script type="application/ld+json">${JSON.stringify(page.jsonld).replace(/</g, '\\u003c')}</script>` : ''}
 ${scripts}
 </body>

@@ -631,7 +631,7 @@ select.saisie{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.
 .g-edition .planche-nom{display:block;margin-top:12px;font-size:.9375rem;font-weight:600;line-height:1.25;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.3em}
 .g-edition .planche-tel:hover .planche-ecran{transform:none}
 @media (hover:hover){.g-edition .planche-tel:hover .planche-ecran{transform:translateY(-6px)}}
-.g-edition .planche-note{margin:18px 0 0;font-size:.9375rem;color:rgba(255,255,255,.82)}
+.g-edition .planche-note{margin:18px 0 0;padding:10px 14px;background:var(--marine);font-size:.9375rem;color:#fff}
 .g-edition .hero-gar{grid-column:1 / -1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;margin:clamp(12px,2vw,28px) calc(-1 * max(var(--gut),calc((100vw - 1320px) / 2 + var(--gut)))) 0;padding:0;border:0;max-width:none;color:#fff}
 .g-edition .hero-gar li{display:grid;align-content:start;gap:6px;padding:26px max(var(--gut),20px);background:rgba(255,255,255,.07)}
 .g-edition .hero-gar li::before{display:none}
@@ -1207,3 +1207,7 @@ select.saisie{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.
 @media (max-width:600px){.g-edition .btn-choisir{width:100%}}
 .g-edition .carte-txt{flex:1 1 auto}
 @media (max-width:600px){.g-edition .btn-choisir{justify-content:flex-start}}
+
+/* Barre fixe téléphone : l'appel à l'action reste sous le pouce (10/11/2026) */
+.barre-mobile{display:none}
+@media (max-width:700px){.barre-mobile{display:flex;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:25;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));background:var(--marine)}.g-edition .barre-mobile .btn{flex:1;justify-content:center;background:#fff !important;border-color:#fff !important;color:var(--encre) !important;font-size:.9375rem;line-height:1.2;padding:8px 12px}.g-edition .barre-mobile .btn svg,.g-edition .barre-mobile .btn::after,.g-edition .barre-mobile .btn::before{display:none}.barre-mobile .barre-tel{display:inline-flex;align-items:center;justify-content:center;width:48px;min-height:48px;color:#fff;border:2px solid #fff}.barre-mobile .barre-tel svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8}body{padding-bottom:72px}}

@@ -39,7 +39,7 @@
     "reperes": [
       "Une seule personne | Vous parlez à celui qui fait le travail, de la maquette à l’entretien",
       "Maquette gratuite | À votre nom, en 5 jours ouvrés : vous jugez avant de payer",
-      "Payé une fois | Pas d’abonnement : le nom de domaine est à vous",
+      "Payé une fois | Seul le nom de domaine se renouvelle : environ 10 € par an, à votre nom",
       "Vous gardez la main | Vos textes, horaires et photos se changent depuis votre téléphone"
     ],
     "intro_titre": "",
@@ -299,7 +299,7 @@
   ],
   "presentation": {
     "titre": "À propos",
-    "texte": "Je suis Grégoire Muel, de Sterenn Création. Je crée et je tiens à jour les sites des commerces, des artisans et des entreprises, depuis Auteuil, dans le 16e arrondissement de Paris, et à distance partout en France.\n\nJe travaille seul : c’est moi que vous avez au téléphone, qui prépare votre maquette, qui fais votre site et qui réponds à vos questions. Si vous ne savez pas par où commencer, appelez-moi : on regarde ensemble ce dont vous avez besoin.",
+    "texte": "Je suis Grégoire Muel. Sterenn Création est le nom commercial de mon entreprise individuelle (Grégoire Muel EI) : vous payez et signez avec moi, sans intermédiaire. Je crée et je tiens à jour les sites des commerces, des artisans et des entreprises, depuis Auteuil, dans le 16e arrondissement de Paris, et à distance partout en France.\n\nJe travaille seul : c’est moi que vous avez au téléphone, qui prépare votre maquette, qui fais votre site et qui réponds à vos questions. Si vous ne savez pas par où commencer, appelez-moi : on regarde ensemble ce dont vous avez besoin.",
     "photo": "/assets/photos/gregoire-portrait.jpg",
     "photo_2": "/assets/photos/travail-clavier.jpg"
   },
@@ -362,7 +362,7 @@
     "bouton_appel": "Demander ma maquette",
     "intro_lien": "À propos",
     "exp_sur": "Offres",
-    "exp_titre": "Quatre offres, prix affichés",
+    "exp_titre": "Trois offres, prix affichés",
     "exp_lien": "Le détail",
     "essai_sur": "À essayer",
     "real_sur": "Réalisations",

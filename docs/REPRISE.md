@@ -1,3 +1,10 @@
+## Séance du 10/11/2026 (audits et retests)
+- PR 38 (barre fixe mobile, légende du hero), 39 (cohérence IP/cookie, libellés 14 px), 40 (domaine au nom du client, copie complète, descriptions Google) fusionnées ; contenu ressaisi dans /admin (Hébergement, Données personnelles, Sauvegardes, Site vitrine, Corps d'état, titre des offres, texte de L'agence).
+- Décisions de Greg : domaine enregistré au nom du client dès le départ ; copie complète (code et design) sur demande ; entretien sur devis ; aucun relais promis en cas d'absence.
+- Audits Impeccable, Taste et 8 personas Haiku : note design 7/10, verdict « hésiter » pour tous. Freins restants : bandeau « Version de travail » (retiré seulement au « go »), aucune démo coiffure/beauté, formulaire et À propos jugés en retrait, prix de maintenance non affiché (voulu : sur devis).
+- Piège : les titres/descriptions Google par page ne sont pas modifiables dans /admin (clé de contenu non exposée) ; trois descriptions dépassent 155 caractères de 2 à 5 caractères.
+- Pas ouvert : MAQUETTE reste à « oui ». Reste : « go » de Greg, test d'envoi réel (Web3Forms), marque INPI, relecture juridique, TVA.
+
 # Reprise dans une nouvelle session (30 octobre 2026)
 
 ## État réel au 09/11/2026 (GLM) — LIRE CE BLOC EN PREMIER

@@ -1,3 +1,11 @@
+## OUVERT AU PUBLIC le 10/11/2026 (soir) — LIRE EN PREMIER
+- Sur demande explicite de Greg : MAQUETTE « non », workers_dev false, PR 42 fusionnée. Constaté en ligne : plus de bandeau, pas de noindex, robots.txt (Disallow /admin/ + Sitemap), sitemap daté, www en 301, formulaire /api/contact actif.
+- Démos : fleuriste, plombier et restaurant refaits (CSS par démo dans exemples/css/, ajouté par outils/demos.mjs ; le kit reste intact). Atelier : version précédente conservée (préférée par Greg). Vignettes refaites (ImageMagick installé ; alias convert nécessaire sous Windows).
+- Formule « Sur mesure et entretien » (sur devis, aucun prix) ajoutée à contenu-initial.json ET au KV en ligne (sauvegarde : sauvegardes-site-atelier-muel/2026-11-10-contenu-kv.json). Piège : le KV prime, toute modification de contenu se refait dans le KV ou /admin.
+- Avis DA indépendant : démos 6-7/10 « pro », 4-7/10 « sans look gabarit » ; squelette commun encore visible. Améliorations possibles : vraies photos, compositions d'accueil différentes, logo plombier noir/jaune, légende illustration de l'atelier.
+- Skills installés : find-skills et web-design-guidelines (Vercel), actifs après redémarrage.
+- Reste à Greg : envoyer une vraie demande de test (mail Web3Forms), Search Console (propriété + plan du site), fiche Google, marque INPI, relecture juridique des mentions, TVA, ACRE (17/12), CFE (31/12).
+
 ## Séance du 10/11/2026 (audits et retests)
 - PR 38 (barre fixe mobile, légende du hero), 39 (cohérence IP/cookie, libellés 14 px), 40 (domaine au nom du client, copie complète, descriptions Google) fusionnées ; contenu ressaisi dans /admin (Hébergement, Données personnelles, Sauvegardes, Site vitrine, Corps d'état, titre des offres, texte de L'agence).
 - Décisions de Greg : domaine enregistré au nom du client dès le départ ; copie complète (code et design) sur demande ; entretien sur devis ; aucun relais promis en cas d'absence.

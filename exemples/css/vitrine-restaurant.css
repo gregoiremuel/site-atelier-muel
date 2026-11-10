@@ -111,3 +111,5 @@ body.g-carte .g-horaires .carte-box .btn-contour{background:transparent;color:va
 body.g-carte .foot{background:var(--nuit);color:#d8d0ba;border-top:6px double var(--laiton)}
 body.g-carte .foot a,body.g-carte .foot h3{color:var(--ivoire)}
 body.g-carte .foot :focus-visible{outline-color:var(--laiton-clair)}
+
+body.g-carte .c-genre{display:none}

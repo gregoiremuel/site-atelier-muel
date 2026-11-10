@@ -23,6 +23,9 @@ try {
     const perso = join(racine, 'exemples', 'css', contenu + '.css'); if (existsSync(perso)) appendFileSync(join(tmp, 'public', 'assets', 'site.css'), '\n' + readFileSync(perso, 'utf8'));
     const r = spawnSync('node', ['outils/apercu.mjs', join(racine, 'exemples', contenu + '.json')], { cwd: tmp, encoding: 'utf8' });
     if (r.status !== 0) { console.error(`${contenu} : échec\n${r.stdout}${r.stderr}`); process.exit(1); }
+    // Barre du haut (hors de l'iframe, donc hors de site.css) : exemples/css/<contenu>.barre.css est injecté dans la page.
+    const barre = join(racine, 'exemples', 'css', contenu + '.barre.css');
+    if (existsSync(barre)) writeFileSync(join(tmp, 'demonstration.html'), readFileSync(join(tmp, 'demonstration.html'), 'utf8').replace('</head>', '<style>' + readFileSync(barre, 'utf8') + '</style></head>'));
     const page = readFileSync(join(tmp, 'demonstration.html'), 'utf8');
     if (/fromagerie|la fontaine|tcheskiss|atelier muel/i.test(page)) { console.error(`${sortie} : le fichier cite un nom interdit (Fromagerie, Tcheskiss ou Atelier Muel). Arrêt.`); process.exit(1); }
     copyFileSync(join(tmp, 'demonstration.html'), join(racine, 'public', 'demos', sortie + '.html'));

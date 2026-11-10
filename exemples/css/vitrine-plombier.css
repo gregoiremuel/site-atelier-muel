@@ -218,3 +218,4 @@ body.g-depannage .legal a{color:#fff}
   body.g-depannage .sec h2::before{font-size:1.25rem;margin-right:12px}
 }
 @media (prefers-reduced-motion:reduce){body.g-depannage *{transition:none!important;animation:none!important}}
+

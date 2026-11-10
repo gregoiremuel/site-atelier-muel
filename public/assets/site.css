@@ -60,7 +60,7 @@ svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .lien{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:.9375rem;text-decoration:none;color:var(--marine);border-bottom:1px solid var(--or);padding-bottom:4px}
 .lien svg{width:18px;height:18px;transition:transform .3s}
 .lien:hover svg,a:hover .lien svg{transform:translateX(4px)}
-.sur{display:flex;align-items:center;gap:14px;font-size:.8125rem;font-weight:500;letter-spacing:.02em;color:var(--gris);margin-bottom:16px}
+.sur{display:flex;align-items:center;gap:14px;font-size:.875rem;font-weight:500;letter-spacing:.02em;color:var(--gris);margin-bottom:16px}
 .sur::before{content:"";width:36px;height:1px;background:var(--or);flex:none}
 .sur-clair,.sombre .sur{color:rgba(255,255,255,.78)}
 .chapo{font-size:clamp(1rem,1.3vw,1.125rem);line-height:1.65;color:var(--gris);max-width:58ch}
@@ -1211,3 +1211,5 @@ select.saisie{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.
 /* Barre fixe téléphone : l'appel à l'action reste sous le pouce (10/11/2026) */
 .barre-mobile{display:none}
 @media (max-width:700px){.barre-mobile{display:flex;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:25;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));background:var(--marine)}.g-edition .barre-mobile .btn{flex:1;justify-content:center;background:#fff !important;border-color:#fff !important;color:var(--encre) !important;font-size:.9375rem;line-height:1.2;padding:8px 12px}.g-edition .barre-mobile .btn svg,.g-edition .barre-mobile .btn::after,.g-edition .barre-mobile .btn::before{display:none}.barre-mobile .barre-tel{display:inline-flex;align-items:center;justify-content:center;width:48px;min-height:48px;color:#fff;border:2px solid #fff}.barre-mobile .barre-tel svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8}body{padding-bottom:72px}}
+
+@media (max-width:700px){html{scroll-padding-bottom:88px}}

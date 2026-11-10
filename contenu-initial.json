@@ -104,6 +104,20 @@
         "Reprise des contenus de l’ancien site"
       ],
       "photo": "/assets/photos/real-plombier-exemple.jpg"
+    },
+    {
+      "id": "sur-mesure",
+      "nom": "Sur mesure et entretien",
+      "accroche": "Un besoin qui sort des trois formules, ou des changements que vous préférez me confier.",
+      "prix": "sur devis | selon votre projet",
+      "texte": "Pages en plus, boutique, réservation, ou modifications et entretien de votre site fait par mes soins : je vous chiffre par écrit après un échange, avant tout travail.\n\nPas de prix tout fait ici : chaque projet est différent, et vous savez ce que vous payez avant de dire oui.",
+      "points": [
+        "Échange gratuit, réponse sous 5 jours ouvrés, devis écrit",
+        "Prix fixé avant le début des travaux, aucune mauvaise surprise",
+        "Vos changements faits par moi, quand vous préférez ne pas les faire vous-même",
+        "Pages, boutique ou réservation en plus d’une formule"
+      ],
+      "photo": "/assets/photos/real-restaurant-exemple.jpg"
     }
   ],
   "etapes": [
@@ -362,7 +376,7 @@
     "bouton_appel": "Demander ma maquette",
     "intro_lien": "À propos",
     "exp_sur": "Offres",
-    "exp_titre": "Trois offres, prix affichés",
+    "exp_titre": "Trois offres à prix affiché, une formule sur devis",
     "exp_lien": "Le détail",
     "essai_sur": "À essayer",
     "real_sur": "Réalisations",

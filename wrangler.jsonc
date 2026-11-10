@@ -7,7 +7,8 @@
   // Mémoire du site (le contenu) : créée toute seule au premier déploiement (wrangler 4.45 ou plus), puis toujours la même.
   "kv_namespaces": [{ "binding": "CONTENU" }],
   // "oui" tant que les textes et les prix ne sont pas validés : bandeau, non indexé, demandes en démonstration.
-  "vars": { "MAQUETTE": "oui" },
+  "vars": { "MAQUETTE": "non" },
+  "workers_dev": false,
   // Copie de sauvegarde du contenu chaque nuit (vers 3 h 17, heure de Paris en hiver).
   "triggers": { "crons": ["17 2 * * *"] },
   // Aperçus de branches (Workers Builds lance « wrangler preview ») : valeurs sûres pour les aperçus, jamais les secrets de production.

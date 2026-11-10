@@ -1,0 +1,113 @@
+/* La Cuillère Haute : carte de table, soirée. Vert-noir, ivoire, laiton. Filets doubles, points de conduite, coins coupés. */
+body.g-carte{
+  --fond:#0f1914;--creme:#14221b;--bleu-pale:#14221b;
+  --bleu:#c9a45c;--bleu-fonce:#e2c27c;--encre:#f2ead7;--gris:#c4bca6;--trait:#3a4a3f;
+  --ivoire:#f2ead7;--laiton:#c9a45c;--laiton-clair:#e2c27c;--panneau:#14221b;--nuit:#0a110d;
+  background:var(--fond);color:var(--ivoire);color-scheme:dark;
+}
+body.g-carte :focus-visible{outline:2px solid var(--laiton-clair);outline-offset:3px}
+body.g-carte a{color:var(--laiton-clair)}
+body.g-carte h1,body.g-carte h2,body.g-carte h3{color:var(--ivoire)}
+
+/* Bandeau Démonstration et barre du haut */
+body.g-carte .maquette{background:var(--nuit);color:#d8d0ba;border-bottom:1px solid var(--trait)}
+body.g-carte .c-tete{background:var(--fond);border-bottom:6px double var(--laiton)}
+body.g-carte .c-tel{color:var(--ivoire)}
+body.g-carte .c-barre .g-nom{color:var(--ivoire)}
+body.g-carte .c-nav{border-top:0}
+body.g-carte .c-nav a{color:var(--ivoire);text-decoration:none;border-bottom:1px solid transparent}
+body.g-carte .c-nav a:hover{color:var(--laiton-clair);border-bottom-color:var(--laiton)}
+body.g-carte .c-barre .menu-btn{color:var(--ivoire);border-color:var(--laiton)}
+body.g-carte .btn,body.g-carte .c-barre .g-cta{background:var(--laiton);border-color:var(--laiton);color:#14100a;border-radius:0}
+body.g-carte .btn:hover,body.g-carte .c-barre .g-cta:hover{background:var(--laiton-clair);border-color:var(--laiton-clair);color:#14100a}
+body.g-carte .actions .btn-contour{background:transparent;color:var(--laiton-clair);border-color:var(--laiton)}
+body.g-carte .actions .btn-contour:hover{background:var(--panneau);color:var(--ivoire)}
+
+/* Accueil : le titre d'abord, la photo en bandeau fin dessous */
+body.g-carte .c-hero{display:flex;flex-direction:column;align-items:stretch;background:var(--fond)}
+body.g-carte .c-tete{order:1}
+body.g-carte .c-intro{order:2;max-width:880px;padding-top:clamp(40px,7vw,88px);padding-bottom:clamp(32px,5vw,56px)}
+body.g-carte .c-bandeau{order:3;position:relative;width:min(1040px,calc(100% - 2 * var(--gut)));margin:0 auto clamp(40px,6vw,80px);padding:2px;background:var(--laiton);
+  clip-path:polygon(36px 0,calc(100% - 36px) 0,100% 36px,100% calc(100% - 36px),calc(100% - 36px) 100%,36px 100%,0 calc(100% - 36px),0 36px)}
+body.g-carte .c-bandeau img{height:clamp(150px,24vw,260px);filter:saturate(.8) brightness(.82);
+  clip-path:polygon(35px 0,calc(100% - 35px) 0,100% 35px,100% calc(100% - 35px),calc(100% - 35px) 100%,35px 100%,0 calc(100% - 35px),0 35px)}
+body.g-carte .c-genre{font-size:1rem;color:var(--laiton-clair);display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:8px}
+body.g-carte .c-genre::before,body.g-carte .c-genre::after{content:"";width:clamp(32px,10vw,96px);height:5px;border-top:1px solid var(--laiton);border-bottom:1px solid var(--laiton)}
+body.g-carte .c-intro h1{font-size:clamp(1.875rem,6vw,3.5rem);line-height:1.08;max-width:20ch;text-wrap:balance;margin:20px auto 24px;color:var(--ivoire);letter-spacing:-.01em}
+body.g-carte .c-intro h1::after{content:"◆";display:block;margin-top:24px;font-size:.75rem;color:var(--laiton)}
+body.g-carte .c-intro .statut{color:var(--laiton-clair)}
+body.g-carte .c-intro>p:not(.c-genre):not(.statut){color:#e3dbc6}
+
+/* Rubriques */
+body.g-carte .sec{background:var(--fond);border-top:0}
+body.g-carte .sec h2{font-size:clamp(1.5rem,4vw,2rem)}
+body.g-carte .sec > .wrap > h2::before,body.g-carte .sec > .wrap > h2::after,body.g-carte .cmd-intro h2::before,body.g-carte .cmd-intro h2::after,body.g-carte .about .txt h2::before,body.g-carte .about .txt h2::after{
+  content:"";flex:1;max-width:96px;height:5px;font-size:inherit;border-top:1px solid var(--laiton);border-bottom:1px solid var(--laiton)}
+body.g-carte .c-carte-tete h2{display:flex;align-items:center;justify-content:center;gap:18px}
+body.g-carte .c-carte-tete h2::before,body.g-carte .c-carte-tete h2::after{content:"";flex:1;max-width:96px;height:5px;border-top:1px solid var(--laiton);border-bottom:1px solid var(--laiton);background:none;margin:0;width:auto}
+body.g-carte .c-carte-tete p,body.g-carte .intro{color:var(--gris)}
+body.g-carte .c-carte,body.g-carte .c-formules{background:var(--fond)}
+body.g-carte #demande,body.g-carte #questions,body.g-carte .c-formules{background:var(--creme)}
+
+/* La carte : une seule colonne, cadre à filets doubles, points de conduite */
+body.g-carte .c-familles{display:grid;grid-template-columns:minmax(0,1fr);max-width:720px;column-count:auto;gap:48px;border:6px double var(--laiton);padding:clamp(28px,6vw,64px) clamp(20px,6vw,64px)}
+body.g-carte .c-famille,body.g-carte .c-famille:last-child:nth-child(odd){width:auto;margin:0}
+body.g-carte .c-famille h3{font-size:1.75rem;color:var(--laiton-clair);border-bottom:0;padding-bottom:0;margin-bottom:20px}
+body.g-carte .c-famille h3::after{content:"◆";display:block;font-size:.625rem;color:var(--laiton);margin-top:12px}
+body.g-carte .c-plats li{flex-wrap:wrap;padding:14px 0;gap:2px 12px;align-items:baseline}
+body.g-carte .c-nom{order:1;font:400 1.1875rem/1.3 "Young Serif",var(--titres);color:var(--ivoire)}
+body.g-carte .c-plats li:not(:has(.c-prix))::after{content:"";order:2;flex:1;min-width:24px;border-bottom:2px dotted var(--laiton);transform:translateY(-4px)}
+body.g-carte .c-plats li:not(:has(.c-prix))::before{content:"◆" / "";order:3;font-size:.625rem;color:var(--laiton)}
+body.g-carte .c-fil{order:2;border-bottom-color:var(--laiton)}
+body.g-carte .c-prix{order:3;color:var(--laiton-clair)}
+body.g-carte .c-desc{order:4;color:var(--gris);font-style:italic;padding-right:2.5rem}
+body.g-carte .c-carte-fig img{aspect-ratio:21/9;filter:saturate(.8) brightness(.85)}
+
+/* Réserver : trois cartons séparés par des filets doubles, sans boîtes */
+body.g-carte .c-formules-liste{gap:0}
+body.g-carte .c-formules-liste li{background:transparent;border:0;border-top:6px double var(--laiton);padding:28px 20px}
+body.g-carte .c-formules-liste li:last-child{border-bottom:6px double var(--laiton)}
+body.g-carte .c-formules-liste b{color:var(--laiton-clair);font-size:1.75rem}
+body.g-carte .c-formules-liste span{color:var(--gris)}
+@media (min-width:900px){
+  body.g-carte .c-formules-liste li{border-top:6px double var(--laiton);border-bottom:6px double var(--laiton);border-left:0}
+  body.g-carte .c-formules-liste li + li{border-left:6px double var(--laiton)}
+}
+
+/* Formulaire de réservation */
+body.g-carte .cmd-form,body.g-carte .cmd-ok{background:var(--fond);border:6px double var(--laiton);color:var(--ivoire)}
+body.g-carte .saisie{background:var(--nuit);color:var(--ivoire);border:0;border-bottom:1px solid var(--laiton)}
+body.g-carte .saisie::placeholder{color:#b4ac96}
+body.g-carte .saisie:disabled{background:var(--nuit);color:var(--gris)}
+body.g-carte .choix{border-color:var(--trait);background:transparent}
+body.g-carte .choix:hover{border-color:var(--laiton)}
+body.g-carte .choix:has(input:checked){background:var(--panneau);border-color:var(--laiton);box-shadow:inset 0 0 0 1px var(--laiton)}
+body.g-carte .choix input{accent-color:var(--laiton)}
+body.g-carte .cmd-form a,body.g-carte .cmd-intro a{color:var(--laiton-clair)}
+
+/* Le restaurant : photo en arche, filet double */
+body.g-carte #boutique .ph-main{width:min(100%,340px);aspect-ratio:3/4;margin:0 auto 40px;border-radius:170px 170px 0 0;outline:4px double var(--laiton);outline-offset:10px;object-fit:cover;filter:saturate(.8) brightness(.85)}
+body.g-carte #boutique .about{text-align:center}
+body.g-carte #boutique .txt p{color:#e3dbc6}
+
+/* Questions */
+body.g-carte .faq summary{color:var(--ivoire)}
+body.g-carte .faq details + details::before{color:var(--laiton)}
+body.g-carte .faq details p{color:#e3dbc6}
+
+/* Horaires : cartouche à double filet */
+body.g-carte .g-horaires{background:var(--fond);color:var(--ivoire)}
+body.g-carte .g-horaires h2,body.g-carte .g-horaires .gros,body.g-carte .g-horaires .statut,body.g-carte .g-horaires .hnote{color:var(--ivoire)}
+body.g-carte .g-horaires-i h3{color:var(--laiton-clair)}
+body.g-carte .g-horaires-grille{outline:0;background:var(--panneau);border:6px double var(--laiton);padding:clamp(32px,5vw,56px) clamp(20px,5vw,48px);max-width:680px}
+body.g-carte .g-horaires .hours div{border-color:var(--laiton);border-bottom-style:dotted}
+body.g-carte .g-horaires .btn{background:var(--laiton);border-color:var(--laiton);color:#14100a}
+body.g-carte .g-horaires .carte-box,body.g-carte .carte-box{background:var(--panneau);border:1px solid var(--laiton);color:var(--ivoire)}
+body.g-carte .carte-box p{color:var(--gris)}
+body.g-carte .g-horaires .carte-box :focus-visible{outline-color:var(--laiton-clair)}
+body.g-carte .g-horaires .carte-box .btn-contour{background:transparent;color:var(--laiton-clair);border-color:var(--laiton)}
+
+/* Pied de page */
+body.g-carte .foot{background:var(--nuit);color:#d8d0ba;border-top:6px double var(--laiton)}
+body.g-carte .foot a,body.g-carte .foot h3{color:var(--ivoire)}
+body.g-carte .foot :focus-visible{outline-color:var(--laiton-clair)}

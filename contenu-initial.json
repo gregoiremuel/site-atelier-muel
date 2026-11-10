@@ -64,7 +64,7 @@
       "nom": "Site vitrine",
       "accroche": "Pour qu’un client vous trouve, voie vos horaires et vous appelle en un geste.",
       "prix": "590 € | une fois",
-      "texte": "Le site que vos clients consultent avant de passer vous voir. Il se lit d’abord sur téléphone : horaires du jour, itinéraire et appel en un geste.\n\nVous le tenez à jour vous-même, ou vous me confiez les changements (sur devis). Mise en ligne sous deux semaines après réception de vos textes et photos. Le nom de domaine reste à votre charge (environ 10 € par an) ; l’hébergement ne coûte rien. Pages en plus, boutique ou réservation : sur devis.",
+      "texte": "Le site que vos clients consultent avant de passer vous voir. Il se lit d’abord sur téléphone : horaires du jour, itinéraire et appel en un geste.\n\nVous le tenez à jour vous-même, ou vous me confiez les changements (sur devis). Le nom de domaine reste à votre charge (environ 10 € par an) ; l’hébergement est gratuit aujourd’hui (je vous préviens avant toute facture). Pages en plus, boutique ou réservation : sur devis.",
       "points": [
         "Maquette gratuite à votre nom en 5 jours ouvrés, après réception de vos informations",
         "Un site d’une page complète, deux séries de corrections comprises",
@@ -413,7 +413,7 @@
     },
     {
       "titre": "Données personnelles (RGPD)",
-      "texte": "Le site ne dépose aucun cookie, ni de mesure d’audience ni de publicité. Il compte seulement les pages vues, jour par jour (combien de visites, quelles pages, d’où l’on vient), sans enregistrer d’adresse IP ni d’identifiant : un visiteur ne peut pas être reconnu d’un jour à l’autre.\n\nLes demandes envoyées par le formulaire (nom, téléphone, e-mail, message) servent uniquement à vous répondre. Elles sont effacées automatiquement après 180 jours. Pour le site d’un commerce ou d’une entreprise, ce sont les données de ses propres clients : elles lui appartiennent et je ne les utilise pas pour moi.\n\nVous pouvez demander l’accès, la correction ou la suppression de vos données en m’appelant ou en m’écrivant, et vous pouvez saisir la CNIL.",
+      "texte": "Les pages publiques du site ne déposent aucun cookie, ni de mesure d’audience ni de publicité (un seul cookie technique existe, réservé à la page de modification). Il compte seulement les pages vues, jour par jour (combien de visites, quelles pages, d’où l’on vient), sans enregistrer d’adresse IP ni d’identifiant : un visiteur ne peut pas être reconnu d’un jour à l’autre.\n\nLes demandes envoyées par le formulaire (nom, téléphone, e-mail, message) servent uniquement à vous répondre. Elles sont effacées automatiquement après 180 jours. Pour limiter les abus, l’adresse IP de l’envoi est gardée dix minutes au plus. Pour le site d’un commerce ou d’une entreprise, ce sont les données de ses propres clients : elles lui appartiennent et je ne les utilise pas pour moi.\n\nVous pouvez demander l’accès, la correction ou la suppression de vos données en m’appelant ou en m’écrivant, et vous pouvez saisir la CNIL.",
       "points": []
     },
     {

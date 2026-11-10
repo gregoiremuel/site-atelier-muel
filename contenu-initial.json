@@ -334,7 +334,7 @@
     "cle_web3forms": "",
     "email": "contact@sterenncreation.fr",
     "confirmation": "Merci, votre demande est bien partie. Je vous recontacte pour en parler.",
-    "traitement": "Traitement automatique : une fois le site ouvert, chaque demande est aussi transmise à un outil d’automatisation (n8n) hébergé sur un serveur situé à Paris (Hostinger). Il avertit l’éditeur par e-mail et par message privé (Telegram), et peut vous envoyer un accusé de réception. Ces outils n’ont qu’un rôle technique. Aucune intelligence artificielle ne lit votre demande aujourd’hui ; si cela change, cette page sera mise à jour avant."
+    "traitement": ""
   },
   "mentions": {
     "raison_sociale": "Grégoire Muel EI",

@@ -42,11 +42,11 @@
     }
   },
   "theme": {
-    "couleur": "#8a5a2b",
+    "couleur": "#7d4f24",
     "couleur_foncee": "#231a12",
     "couleur_pale": "#f4efe7",
     "accent": "#e3c694",
-    "polices": "classique",
+    "polices": "etabli",
     "accueil": "sobre",
     "titres": "filet",
     "angles": "droits",
@@ -144,7 +144,7 @@
     "boutique_titre": "L’atelier",
     "boutique_texte": "L’Atelier du Merrain restaure et fabrique des meubles à Paris 11e. Chaque pièce est examinée avant tout travail : on vous explique ce qui est possible, le délai et le prix, par écrit.\n\nOn passe à l’atelier sur rendez-vous, ou on vous donne un premier avis par téléphone à partir de quelques photos.",
     "boutique_photo_1": "/photos/atelier-bailey",
-    "boutique_photo_2": "/photos/atelier-craft",
+    "boutique_photo_2": "/photos/atelier-sander",
     "produits_titre": "Ce que fait l’atelier",
     "produits_intro": "Quatre types de travaux, chacun avec son délai indicatif.",
     "produits_photo": "/photos/atelier-heng",

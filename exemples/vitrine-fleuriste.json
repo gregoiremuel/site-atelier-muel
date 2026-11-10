@@ -58,10 +58,10 @@
     }
   },
   "theme": {
-    "couleur": "#2f5d50",
-    "couleur_foncee": "#1f4037",
-    "couleur_pale": "#edf3ee",
-    "accent": "#d98aa0",
+    "couleur": "#2d5a47",
+    "couleur_foncee": "#16372c",
+    "couleur_pale": "#e3e9da",
+    "accent": "#b3452a",
     "polices": "jardin",
     "accueil": "sobre",
     "titres": "simple",
@@ -139,7 +139,7 @@
     "questions": true
   },
   "textes": {
-    "titre": "Des fleurs de saison, des bouquets à emporter",
+    "titre": "Des fleurs de saison,\ndes bouquets à emporter",
     "intro": "Fleuriste à Paris 16e. Les fleurs changent chaque semaine ; les bouquets se commandent en ligne et se retirent en boutique le jour choisi.",
     "photo_accueil": "/photos/fleuriste-roman",
     "boutique_titre": "La boutique",

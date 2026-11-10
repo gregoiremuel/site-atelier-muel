@@ -2,7 +2,7 @@
 // Chaque démonstration a son contenu dans exemples/*.json (photos dans exemples/photos/, écrites « /photos/nom » dans le contenu).
 // Usage : node outils/demos.mjs [dossier du kit]   (par défaut : ../kit-sites-boutiques)
 // Le modèle du kit n'est jamais modifié : il est copié dans un dossier temporaire. Rien du modèle ne reste dans le site (pas de contenu de boutique).
-import { cpSync, mkdtempSync, rmSync, copyFileSync, existsSync, readFileSync } from 'node:fs';
+import { cpSync, mkdtempSync, rmSync, copyFileSync, existsSync, readFileSync, writeFileSync, appendFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -18,6 +18,9 @@ const tmp = mkdtempSync(join(tmpdir(), 'demos-'));
 try {
   cpSync(modele, tmp, { recursive: true, filter: (s) => !/node_modules|\.wrangler|demonstration\.html|apercu-site\.html|demo-en-ligne/.test(s) });
   for (const [contenu, sortie] of DEMOS) {
+    // Style propre à la démonstration : exemples/css/<contenu>.css est ajouté à la fin de site.css (copie temporaire, le kit reste intact).
+    const base = readFileSync(join(modele, 'public', 'assets', 'site.css'), 'utf8'); writeFileSync(join(tmp, 'public', 'assets', 'site.css'), base);
+    const perso = join(racine, 'exemples', 'css', contenu + '.css'); if (existsSync(perso)) appendFileSync(join(tmp, 'public', 'assets', 'site.css'), '\n' + readFileSync(perso, 'utf8'));
     const r = spawnSync('node', ['outils/apercu.mjs', join(racine, 'exemples', contenu + '.json')], { cwd: tmp, encoding: 'utf8' });
     if (r.status !== 0) { console.error(`${contenu} : échec\n${r.stdout}${r.stderr}`); process.exit(1); }
     const page = readFileSync(join(tmp, 'demonstration.html'), 'utf8');

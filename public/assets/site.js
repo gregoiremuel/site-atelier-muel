@@ -29,6 +29,42 @@
   /* Photos manquantes : on les cache */
   $$('img').forEach(function (im) { im.addEventListener('error', function () { im.style.visibility = 'hidden'; }); });
 
+  /* Accueil : le nom du commerce reste sur l'appareil (sessionStorage) et réapparaît dans le message du formulaire de contact. Rien n'est envoyé avant. */
+  (function () {
+    var cle = 'cv-nom', lire = function () { try { return sessionStorage.getItem(cle) || ''; } catch (e) { return ''; } };
+    var f = $('[data-cv-nom]');
+    if (f) {
+      var champ = $('input', f); champ.value = lire();
+      f.addEventListener('submit', function (e) { e.preventDefault(); try { sessionStorage.setItem(cle, champ.value.trim().slice(0, 80)); } catch (x) { /* rien */ } location.href = '/contact'; });
+    }
+    var msg = $('#d-msg'), nom = lire();
+    if (msg && nom && !msg.value) msg.value = 'Mon commerce : ' + nom + '.\n';
+  })();
+
+  /* Couloir des vitrines : un seul écouteur passif ; requestAnimationFrame écrit trois variables CSS (--s, --u, --pr) et le fond de la scène.
+     Rien n'est détourné : le défilement reste celui du navigateur. Sans JavaScript ou avec « moins d'animations », la liste des démonstrations reste lisible. */
+  (function () {
+    var sec = $('[data-cv]'), sc = sec && $('.cv-scene', sec), ps = sec ? $$('.cv-p', sec) : [];
+    if (!sc || !ps.length || document.body.classList.contains('calme') || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+    sec.classList.add('cv-on');
+    var N = ps.length, cur = -2, att = false;
+    var liens = ps.map(function (p) { return $$('a', p); });
+    var maj = function () {
+      att = false;
+      var h = sec.offsetHeight - window.innerHeight; if (h <= 0) return;
+      var p = Math.min(1, Math.max(0, -sec.getBoundingClientRect().top / h));
+      var s = Math.min(1, Math.max(0, 1 - p / 0.1)), u = Math.min(1, Math.max(0, (p - 0.1) / 0.9)) * (N - 1);
+      sc.style.setProperty('--s', s.toFixed(4)); sc.style.setProperty('--u', u.toFixed(4)); sc.style.setProperty('--pr', p.toFixed(4));
+      var k = s > 0.5 ? -1 : Math.round(u);
+      if (k !== cur) {
+        cur = k; sc.style.setProperty('--fond', k < 0 ? '#f5f5f7' : ps[k].getAttribute('data-c')); sc.classList.toggle('cv-haut', k < 0);
+        ps.forEach(function (x, i) { x.classList.toggle('on', i === k); liens[i].forEach(function (a) { a.setAttribute('tabindex', i === k ? '0' : '-1'); }); });
+      }
+    };
+    var plan = function () { if (!att) { att = true; window.requestAnimationFrame(maj); } };
+    window.addEventListener('scroll', plan, { passive: true }); window.addEventListener('resize', plan); maj();
+  })();
+
   /* Aperçu (page de modification, démonstration) : les liens internes changent la page affichée par le parent */
   if (A.apercu) {
     document.addEventListener('click', function (e) {

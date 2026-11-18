@@ -1,115 +1,179 @@
-/* La Cuillère Haute : carte de table, soirée. Vert-noir, ivoire, laiton. Filets doubles, points de conduite, coins coupés. */
+/* =====================================================================
+   La Cuillère Haute : le lieu porte tout (direction Taste « place-carries-it », 16/11/2026).
+   La salle en plein écran ; le texte se pose en bas comme un générique. Ensuite, des paragraphes
+   courts dans une colonne étroite, entre des photos montrées en grand.
+   Fond tabac, texte couleur os, un seul vert olive pour l'action, une seule bande ocre (les formules).
+   Angles droits, aucun filet, aucun losange, aucune ombre. Young Serif + Figtree.
+   ===================================================================== */
 body.g-carte{
-  --fond:#0f1914;--creme:#14221b;--bleu-pale:#14221b;
-  --bleu:#c9a45c;--bleu-fonce:#e2c27c;--encre:#f2ead7;--gris:#c4bca6;--trait:#3a4a3f;
-  --ivoire:#f2ead7;--laiton:#c9a45c;--laiton-clair:#e2c27c;--panneau:#14221b;--nuit:#0a110d;
-  background:var(--fond);color:var(--ivoire);color-scheme:dark;
+  --fond:#3b2416;--surface:#47301f;--surface2:#2a1a0f;--encre:#ece6d6;--gris:#c9b9a2;
+  --olive:#5b6a1f;--olive-fonce:#46521a;--ocre:#c79a3e;--ocre-encre:#2b170a;
+  --bleu:var(--olive);--bleu-fonce:var(--surface2);
+  background:var(--fond);color:var(--encre);
 }
-body.g-carte :focus-visible{outline:2px solid var(--laiton-clair);outline-offset:3px}
-body.g-carte a{color:var(--laiton-clair)}
-body.g-carte h1,body.g-carte h2,body.g-carte h3{color:var(--ivoire)}
+body.g-carte ::selection{background:var(--ocre);color:var(--ocre-encre)}
+body.g-carte :focus-visible{outline:2px solid var(--ocre);outline-offset:3px}
+body.g-carte h1,body.g-carte h2,body.g-carte h3{font-family:var(--titres);color:var(--encre);font-weight:400;font-style:normal}
+body.g-carte .sec h2,body.g-carte .cmd-intro h2{font-size:clamp(2rem,3.2vw,2.75rem);line-height:1.05;letter-spacing:-.01em}
+body.g-carte h2::before,body.g-carte h2::after,body.g-carte .c-carte-tete::before,body.g-carte .c-carte-tete::after{content:none!important}
+body.g-carte .sec .intro,body.g-carte .hnote,body.g-carte p{color:var(--gris)}
+body.g-carte .sec{text-align:left}
+body.g-carte .illus{background:var(--surface2);color:var(--encre);border:0;border-radius:0}
 
-/* Bandeau Démonstration et barre du haut */
-body.g-carte .maquette{background:var(--nuit);color:#d8d0ba;border-bottom:1px solid var(--trait)}
-body.g-carte .c-tete{background:var(--fond);border-bottom:6px double var(--laiton)}
-body.g-carte .c-tel{color:var(--ivoire)}
-body.g-carte .c-barre .g-nom{color:var(--ivoire)}
-body.g-carte .c-nav{border-top:0}
-body.g-carte .c-nav a{color:var(--ivoire);text-decoration:none;border-bottom:1px solid transparent}
-body.g-carte .c-nav a:hover{color:var(--laiton-clair);border-bottom-color:var(--laiton)}
-body.g-carte .c-barre .menu-btn{color:var(--ivoire);border-color:var(--laiton)}
-body.g-carte .btn,body.g-carte .c-barre .g-cta{background:var(--laiton);border-color:var(--laiton);color:#14100a;border-radius:0}
-body.g-carte .btn:hover,body.g-carte .c-barre .g-cta:hover{background:var(--laiton-clair);border-color:var(--laiton-clair);color:#14100a}
-body.g-carte .actions .btn-contour{background:transparent;color:var(--laiton-clair);border-color:var(--laiton)}
-body.g-carte .actions .btn-contour:hover{background:var(--panneau);color:var(--ivoire)}
+/* ---------- Boutons ---------- */
+body.g-carte .btn,body.g-carte .g-cta,body.g-carte .cmd-envoyer{border-radius:0;border:0;background:var(--olive);color:var(--encre);font-weight:700;min-height:48px;padding:0 26px}
+body.g-carte .btn:hover,body.g-carte .g-cta:hover,body.g-carte .cmd-envoyer:hover{background:var(--olive-fonce)}
+body.g-carte .btn:active,body.g-carte .g-cta:active,body.g-carte .cmd-envoyer:active{transform:scale(.97)}
+body.g-carte .actions .btn-contour{background:none;border:0;color:var(--encre);padding:0 6px;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px;text-decoration-color:var(--ocre)}
+body.g-carte .actions .btn-contour:hover{background:none;color:#fff}
+@media (prefers-reduced-motion:no-preference){body.g-carte .btn,body.g-carte .g-cta,body.g-carte .cmd-envoyer,body.g-carte .c-nav a{transition:background-color .2s ease,color .2s ease,text-decoration-color .2s ease,transform .12s ease}}
 
-/* Accueil : le titre d'abord, la photo en bandeau fin dessous */
-body.g-carte .c-hero{display:flex;flex-direction:column;align-items:stretch;background:var(--fond)}
-body.g-carte .c-tete{order:1}
-body.g-carte .c-intro{order:2;max-width:880px;padding-top:clamp(40px,7vw,88px);padding-bottom:clamp(32px,5vw,56px)}
-body.g-carte .c-bandeau{order:3;position:relative;width:min(1040px,calc(100% - 2 * var(--gut)));margin:0 auto clamp(40px,6vw,80px);padding:2px;background:var(--laiton);
-  clip-path:polygon(36px 0,calc(100% - 36px) 0,100% 36px,100% calc(100% - 36px),calc(100% - 36px) 100%,36px 100%,0 calc(100% - 36px),0 36px)}
-body.g-carte .c-bandeau img{height:clamp(150px,24vw,260px);filter:saturate(.8) brightness(.82);
-  clip-path:polygon(35px 0,calc(100% - 35px) 0,100% 35px,100% calc(100% - 35px),calc(100% - 35px) 100%,35px 100%,0 calc(100% - 35px),0 35px)}
-body.g-carte .c-genre{font-size:1rem;color:var(--laiton-clair);display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:8px}
-body.g-carte .c-genre::before,body.g-carte .c-genre::after{content:"";width:clamp(32px,10vw,96px);height:5px;border-top:1px solid var(--laiton);border-bottom:1px solid var(--laiton)}
-body.g-carte .c-intro h1{font-size:clamp(1.875rem,6vw,3.5rem);line-height:1.08;max-width:20ch;text-wrap:balance;margin:20px auto 24px;color:var(--ivoire);letter-spacing:-.01em}
-body.g-carte .c-intro h1::after{content:"◆";display:block;margin-top:24px;font-size:.75rem;color:var(--laiton)}
-body.g-carte .c-intro .statut{color:var(--laiton-clair)}
-body.g-carte .c-intro>p:not(.c-genre):not(.statut){color:#e3dbc6}
+/* ---------- Premier écran : la salle en plein écran ---------- */
+body.g-carte .c-hero{position:relative;min-height:100svh;display:flex;flex-direction:column;background:var(--surface2);overflow:hidden;border:0;text-align:left}
+body.g-carte .c-hero::before,body.g-carte .c-hero::after{content:none}
+body.g-carte .c-bandeau{position:absolute;inset:0;margin:0;width:auto;height:auto;max-width:none;border:0;border-radius:0;clip-path:none;z-index:0}
+body.g-carte .c-bandeau::before,body.g-carte .c-bandeau::after{content:none}
+body.g-carte .c-bandeau img{width:100%;height:100%;object-fit:cover;border:0;border-radius:0;aspect-ratio:auto;max-height:none}
+/* voile neutre, seulement sous le texte (en haut pour la barre, en bas pour le générique) */
+body.g-carte .c-hero .c-tete,body.g-carte .c-hero .c-intro{position:relative;z-index:1}
+body.g-carte .c-hero .c-tete{background:rgba(20,12,7,.55);border:0;box-shadow:none}
+body.g-carte .c-tete .c-barre{text-align:left}
+body.g-carte .c-tete .g-nom{color:var(--encre);font-family:var(--titres)}
+body.g-carte .c-tete .c-tel{color:var(--encre)}
+body.g-carte .c-nav{border:0;box-shadow:none}
+body.g-carte .c-nav a{color:var(--encre);font-weight:600;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:6px;text-decoration-thickness:2px}
+body.g-carte .c-nav a:hover{text-decoration-color:var(--ocre)}
+body.g-carte .menu-btn{border-radius:0;border:1.5px solid var(--encre);color:var(--encre);background:none}
+body.g-carte .c-bandeau .illus{position:absolute;right:12px;left:auto;bottom:auto;top:calc(100% - 44px);z-index:3}
+body.g-carte .c-hero .c-intro{margin-top:auto;margin-left:0;margin-right:0;max-width:none;width:100%;text-align:left;padding-top:48px;padding-bottom:56px;background:rgba(20,12,7,.62)}
+body.g-carte .c-intro .c-genre{display:none}
+body.g-carte .c-intro h1{font-size:clamp(2.25rem,5vw,3.75rem);line-height:1.04;letter-spacing:-.015em;max-width:18ch;margin:0;color:var(--encre);text-align:left}
+body.g-carte .c-intro h1::before,body.g-carte .c-intro h1::after{content:none}
+body.g-carte .c-intro > p{max-width:46ch;margin:18px 0 0;color:#e2d8c6;text-align:left}
+body.g-carte .c-intro .statut{color:var(--ocre);font-weight:700}
+body.g-carte .c-intro .actions{justify-content:flex-start;align-items:center;gap:18px;margin-top:26px}
 
-/* Rubriques */
-body.g-carte .sec{background:var(--fond);border-top:0}
-body.g-carte .sec h2{font-size:clamp(1.5rem,4vw,2rem)}
-body.g-carte .sec > .wrap > h2::before,body.g-carte .sec > .wrap > h2::after,body.g-carte .cmd-intro h2::before,body.g-carte .cmd-intro h2::after,body.g-carte .about .txt h2::before,body.g-carte .about .txt h2::after{
-  content:"";flex:1;max-width:96px;height:5px;font-size:inherit;border-top:1px solid var(--laiton);border-bottom:1px solid var(--laiton)}
-body.g-carte .c-carte-tete h2{display:flex;align-items:center;justify-content:center;gap:18px}
-body.g-carte .c-carte-tete h2::before,body.g-carte .c-carte-tete h2::after{content:"";flex:1;max-width:96px;height:5px;border-top:1px solid var(--laiton);border-bottom:1px solid var(--laiton);background:none;margin:0;width:auto}
-body.g-carte .c-carte-tete p,body.g-carte .intro{color:var(--gris)}
-body.g-carte .c-carte,body.g-carte .c-formules{background:var(--fond)}
-body.g-carte #demande,body.g-carte #questions,body.g-carte .c-formules{background:var(--creme)}
+/* ---------- La carte : trois familles côte à côte, sans pointillés ---------- */
+body.g-carte .c-carte{background:var(--fond)}
+body.g-carte .c-carte-tete{text-align:left;max-width:46ch;margin:0 0 36px}
+body.g-carte .c-carte-tete h2{justify-content:flex-start}
+body.g-carte .c-familles{display:grid;gap:4px;grid-template-columns:minmax(0,1fr);border:0;outline:0;padding:0;background:none;box-shadow:none;max-width:none}
+body.g-carte .c-familles::before,body.g-carte .c-familles::after{content:none}
+body.g-carte .c-familles > *{background:var(--surface);padding:28px 26px;margin:0;border:0}
+body.g-carte .c-familles h3{font-size:1.625rem;text-align:left;margin:0 0 14px;color:var(--ocre)}
+body.g-carte .c-familles h3::before,body.g-carte .c-familles h3::after{content:none}
+body.g-carte .c-familles ul{display:grid;gap:16px;padding:0;margin:0;list-style:none}
+body.g-carte .c-familles li{display:grid;gap:2px;text-align:left;border:0;padding:0;margin:0}
+body.g-carte .c-familles li::before,body.g-carte .c-familles li::after,body.g-carte .c-nom::after{content:none;display:none}
+body.g-carte .c-nom{font:400 1.1875rem/1.3 var(--titres);color:var(--encre);background:none}
+body.g-carte .c-desc{color:var(--gris);font-style:normal;font-size:1rem}
 
-/* La carte : une seule colonne, cadre à filets doubles, points de conduite */
-body.g-carte .c-familles{display:grid;grid-template-columns:minmax(0,1fr);max-width:720px;column-count:auto;gap:48px;border:6px double var(--laiton);padding:clamp(28px,6vw,64px) clamp(20px,6vw,64px)}
-body.g-carte .c-famille,body.g-carte .c-famille:last-child:nth-child(odd){width:auto;margin:0}
-body.g-carte .c-famille h3{font-size:1.75rem;color:var(--laiton-clair);border-bottom:0;padding-bottom:0;margin-bottom:20px}
-body.g-carte .c-famille h3::after{content:"◆";display:block;font-size:.625rem;color:var(--laiton);margin-top:12px}
-body.g-carte .c-plats li{flex-wrap:wrap;padding:14px 0;gap:2px 12px;align-items:baseline}
-body.g-carte .c-nom{order:1;font:400 1.1875rem/1.3 "Young Serif",var(--titres);color:var(--ivoire)}
-body.g-carte .c-plats li:not(:has(.c-prix))::after{content:"";order:2;flex:1;min-width:24px;border-bottom:2px dotted var(--laiton);transform:translateY(-4px)}
-body.g-carte .c-plats li:not(:has(.c-prix))::before{content:"◆" / "";order:3;font-size:.625rem;color:var(--laiton)}
-body.g-carte .c-fil{order:2;border-bottom-color:var(--laiton)}
-body.g-carte .c-prix{order:3;color:var(--laiton-clair)}
-body.g-carte .c-desc{order:4;color:var(--gris);font-style:italic;padding-right:2.5rem}
-body.g-carte .c-carte-fig img{aspect-ratio:21/9;filter:saturate(.8) brightness(.85)}
+/* ---------- Formules : la seule bande ocre ---------- */
+body.g-carte .c-formules{background:var(--ocre);color:var(--ocre-encre)}
+body.g-carte .c-formules h2,body.g-carte .c-formules h3,body.g-carte .c-formules b{color:var(--ocre-encre)}
+body.g-carte .c-formules p,body.g-carte .c-formules .intro,body.g-carte .c-formules span{color:#4a2d14}
+body.g-carte .c-formules-liste{display:grid;gap:4px;grid-template-columns:minmax(0,1fr);padding:0;margin:0;list-style:none;border:0}
+body.g-carte .c-formules-liste li{display:grid;gap:6px;padding:24px 26px;background:#d4ab55;border:0;border-radius:0;text-align:left;margin:0}
+body.g-carte .c-formules-liste li::before,body.g-carte .c-formules-liste li::after{content:none}
+body.g-carte .c-formules-liste b{font:400 1.75rem/1.1 var(--titres)}
+body.g-carte .c-formules .actions{justify-content:flex-start;align-items:center;gap:18px;margin-top:28px}
+body.g-carte .c-formules .actions .btn:not(.btn-contour){background:var(--ocre-encre);color:var(--encre)}
+body.g-carte .c-formules .actions .btn:not(.btn-contour):hover{background:#000}
+body.g-carte .c-formules .actions .btn-contour{color:var(--ocre-encre);text-decoration-color:var(--ocre-encre)}
+body.g-carte .c-formules :focus-visible{outline-color:var(--ocre-encre)}
 
-/* Réserver : trois cartons séparés par des filets doubles, sans boîtes */
-body.g-carte .c-formules-liste{gap:0}
-body.g-carte .c-formules-liste li{background:transparent;border:0;border-top:6px double var(--laiton);padding:28px 20px}
-body.g-carte .c-formules-liste li:last-child{border-bottom:6px double var(--laiton)}
-body.g-carte .c-formules-liste b{color:var(--laiton-clair);font-size:1.75rem}
-body.g-carte .c-formules-liste span{color:var(--gris)}
+/* ---------- Réserver ---------- */
+body.g-carte #demande{background:var(--fond)}
+body.g-carte .cmd-intro,body.g-carte .cmd-intro *{text-align:left}
+body.g-carte .cmd-etapes{text-align:left}
+body.g-carte .cmd-etapes li::marker{color:var(--ocre);font-weight:700}
+body.g-carte .cmd-form,body.g-carte .cmd-ok{background:var(--surface);border:0;outline:0;border-radius:0;box-shadow:none;padding:clamp(24px,4vw,40px)}
+body.g-carte .cmd-form label,body.g-carte .champ-bloc label,body.g-carte legend{color:var(--encre)}
+body.g-carte .saisie{border:1.5px solid #8c7660;border-radius:0;background:var(--surface2);color:var(--encre);padding-left:14px}
+body.g-carte .saisie::placeholder{color:#a8977f}
+body.g-carte .saisie:focus{outline:2px solid var(--ocre);outline-offset:1px;border-color:var(--encre)}
+body.g-carte .choix{border:1.5px solid #6e5843;border-radius:0;background:var(--surface2);color:var(--encre);box-shadow:none}
+body.g-carte .choix:has(input:checked){background:#56401f;border-color:var(--ocre)}
+body.g-carte .choix input{accent-color:var(--ocre)}
+body.g-carte .choix-txt b{color:var(--encre)}
+body.g-carte .choix-txt em,body.g-carte .choix-txt span{font-style:normal;color:var(--gris)}
+body.g-carte .cmd-info,body.g-carte .champ-bloc small{color:var(--gris)}
+
+/* ---------- Le restaurant : une photo en grand, une colonne étroite ---------- */
+body.g-carte #boutique{background:var(--surface2)}
+body.g-carte #boutique .about{gap:32px;align-items:center;text-align:left}
+body.g-carte #boutique .about > div:first-child::before,body.g-carte #boutique .about > div:first-child::after{content:none}
+body.g-carte #boutique .ph-main,body.g-carte #boutique .ph-small{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border:0;outline:0;border-radius:0;box-shadow:none;transform:none;margin:0}
+body.g-carte #boutique .ph-small{width:min(60%,300px);margin-top:20px}
+body.g-carte #boutique .txt h2{justify-content:flex-start}
+
+/* ---------- Questions ---------- */
+body.g-carte #questions{background:var(--fond)}
+body.g-carte #questions .wrap{display:grid;gap:12px;text-align:left}
+body.g-carte #questions h2{text-align:left;justify-content:flex-start}
+body.g-carte .faq{display:grid;gap:4px;margin:16px 0 0;max-width:none}
+body.g-carte .faq details,body.g-carte .faq details:first-child,body.g-carte .faq details:last-child{background:var(--surface);border:0;border-radius:0;padding:0 20px;margin:0}
+body.g-carte .faq summary{display:flex;justify-content:space-between;align-items:center;gap:20px;list-style:none;cursor:pointer;font:600 1.0625rem/1.35 var(--texte);font-style:normal;color:var(--encre);padding:20px 0;text-align:left}
+body.g-carte .faq summary::before{content:none}
+body.g-carte .faq summary::-webkit-details-marker{display:none}
+body.g-carte .faq summary::after{content:"+";flex:none;width:auto;height:auto;margin:0;border:0;background:none;transform:none;font:500 1.5rem/1 var(--texte);color:var(--ocre)}
+body.g-carte .faq details[open] summary::after{content:"\2212"}
+body.g-carte .faq .rep,body.g-carte .faq .rep p{color:var(--gris);text-align:left}
+
+/* ---------- Horaires ---------- */
+body.g-carte .g-horaires{background:var(--surface2);text-align:left}
+body.g-carte .g-horaires-grille{text-align:left}
+body.g-carte .g-horaires-h{background:var(--surface);border:0;outline:0;border-radius:0;box-shadow:none;padding:clamp(24px,4vw,40px);text-align:left}
+body.g-carte .g-horaires-h h2{justify-content:flex-start}
+body.g-carte .g-horaires .hours div{border-color:#5c4330}
+body.g-carte .g-horaires .hours .today{color:var(--ocre);font-weight:700}
+body.g-carte .g-horaires-i{background:none;border:0;text-align:left}
+body.g-carte .g-horaires-i h3{font:700 .9375rem/1.3 var(--texte);color:var(--gris)}
+body.g-carte .g-horaires .gros{color:var(--encre)}
+body.g-carte .g-horaires .carte-box:not(.carte-ouverte){background:var(--surface)!important;border:0!important;border-radius:0}
+body.g-carte .g-horaires .carte-box p{color:var(--gris)}
+
+/* ---------- Pied ---------- */
+body.g-carte .foot{background:#1f130b;color:var(--gris);border:0;text-align:left}
+body.g-carte .foot::before,body.g-carte .foot::after{content:none}
+body.g-carte .foot h3,body.g-carte .foot a,body.g-carte .foot .nom{color:var(--encre)}
+body.g-carte .foot .legal,body.g-carte .foot .legal *{color:#b3a38c}
+
+/* ---------- Corrections après captures (règles du gabarit carte plus fortes) ---------- */
+body.g-carte .c-hero .wrap.c-intro{display:block}
+body.g-carte .c-carte .c-familles{display:grid}
+body.g-carte .c-carte .c-familles h3{border:0;padding-bottom:0}
+body.g-carte .cmd-intro a,body.g-carte .sec p a{color:var(--encre);text-decoration-color:var(--ocre)}
+body.g-carte .cmd-intro{max-width:52ch}
+body.g-carte .cmd-etapes{margin-left:0;padding-left:1.4em}
+
+/* ---------- Ordinateur ---------- */
 @media (min-width:900px){
-  body.g-carte .c-formules-liste li{border-top:6px double var(--laiton);border-bottom:6px double var(--laiton);border-left:0}
-  body.g-carte .c-formules-liste li + li{border-left:6px double var(--laiton)}
+  body.g-carte .c-tete .c-barre{min-height:72px}
+  body.g-carte .c-familles{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:4px;row-gap:4px;column-count:auto}
+  body.g-carte .c-familles > .c-famille:last-child:nth-child(odd){grid-column:auto;width:auto;margin-inline:0}
+  body.g-carte .c-formules-liste{grid-template-columns:repeat(3,minmax(0,1fr))}
+  body.g-carte .cmd{grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(40px,6vw,96px);text-align:left}
+  body.g-carte #boutique .about{grid-template-columns:minmax(0,6fr) minmax(0,5fr);column-gap:clamp(48px,7vw,112px)}
+  body.g-carte #questions .wrap{grid-template-columns:minmax(0,4fr) minmax(0,8fr);column-gap:64px;align-items:start}
+  body.g-carte .faq{margin-top:0}
+  body.g-carte .sec{padding-top:clamp(88px,9vw,136px);padding-bottom:clamp(88px,9vw,136px)}
 }
 
-/* Formulaire de réservation */
-body.g-carte .cmd-form,body.g-carte .cmd-ok{background:var(--fond);border:6px double var(--laiton);color:var(--ivoire)}
-body.g-carte .saisie{background:var(--nuit);color:var(--ivoire);border:0;border-bottom:1px solid var(--laiton)}
-body.g-carte .saisie::placeholder{color:#b4ac96}
-body.g-carte .saisie:disabled{background:var(--nuit);color:var(--gris)}
-body.g-carte .choix{border-color:var(--trait);background:transparent}
-body.g-carte .choix:hover{border-color:var(--laiton)}
-body.g-carte .choix:has(input:checked){background:var(--panneau);border-color:var(--laiton);box-shadow:inset 0 0 0 1px var(--laiton)}
-body.g-carte .choix input{accent-color:var(--laiton)}
-body.g-carte .cmd-form a,body.g-carte .cmd-intro a{color:var(--laiton-clair)}
-
-/* Le restaurant : photo en arche, filet double */
-body.g-carte #boutique .ph-main{width:min(100%,340px);aspect-ratio:3/4;margin:0 auto 40px;border-radius:170px 170px 0 0;outline:4px double var(--laiton);outline-offset:10px;object-fit:cover;filter:saturate(.8) brightness(.85)}
-body.g-carte #boutique .about{text-align:center}
-body.g-carte #boutique .txt p{color:#e3dbc6}
-
-/* Questions */
-body.g-carte .faq summary{color:var(--ivoire)}
-body.g-carte .faq details + details::before{color:var(--laiton)}
-body.g-carte .faq details p{color:#e3dbc6}
-
-/* Horaires : cartouche à double filet */
-body.g-carte .g-horaires{background:var(--fond);color:var(--ivoire)}
-body.g-carte .g-horaires h2,body.g-carte .g-horaires .gros,body.g-carte .g-horaires .statut,body.g-carte .g-horaires .hnote{color:var(--ivoire)}
-body.g-carte .g-horaires-i h3{color:var(--laiton-clair)}
-body.g-carte .g-horaires-grille{outline:0;background:var(--panneau);border:6px double var(--laiton);padding:clamp(32px,5vw,56px) clamp(20px,5vw,48px);max-width:680px}
-body.g-carte .g-horaires .hours div{border-color:var(--laiton);border-bottom-style:dotted}
-body.g-carte .g-horaires .btn{background:var(--laiton);border-color:var(--laiton);color:#14100a}
-body.g-carte .g-horaires .carte-box,body.g-carte .carte-box{background:var(--panneau);border:1px solid var(--laiton);color:var(--ivoire)}
-body.g-carte .carte-box p{color:var(--gris)}
-body.g-carte .g-horaires .carte-box :focus-visible{outline-color:var(--laiton-clair)}
-body.g-carte .g-horaires .carte-box .btn-contour{background:transparent;color:var(--laiton-clair);border-color:var(--laiton)}
-
-/* Pied de page */
-body.g-carte .foot{background:var(--nuit);color:#d8d0ba;border-top:6px double var(--laiton)}
-body.g-carte .foot a,body.g-carte .foot h3{color:var(--ivoire)}
-body.g-carte .foot :focus-visible{outline-color:var(--laiton-clair)}
-
-body.g-carte .c-genre{display:none}
+/* ---------- Mouvement : la salle recule quand on entre, les photos s'ouvrent en grand ---------- */
+body.g-carte .rev,.anime body.g-carte .rev{opacity:1;transform:none;transition:none}
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    body.g-carte .c-bandeau img{animation:cuillere-salle linear both;animation-timeline:view();animation-range:exit 0% exit 100%}
+    body.g-carte .c-intro{animation:cuillere-generique linear both;animation-timeline:view();animation-range:exit 0% exit 60%}
+    body.g-carte #boutique .ph-main{animation:cuillere-ouvre linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+    body.g-carte .c-familles > *,body.g-carte .c-formules-liste li{animation:cuillere-monte linear both;animation-timeline:view();animation-range:entry 0% entry 90%}
+    body.g-carte .c-familles > :nth-child(2),body.g-carte .c-formules-liste li:nth-child(2){animation-range:entry 10% entry 100%}
+    body.g-carte .c-familles > :nth-child(3),body.g-carte .c-formules-liste li:nth-child(3){animation-range:entry 20% cover 30%}
+  }
+}
+@keyframes cuillere-salle{to{transform:scale(1.12) translateY(6%)}}
+@keyframes cuillere-generique{to{transform:translateY(-12%)}}
+@keyframes cuillere-ouvre{from{clip-path:inset(14% 18% 14% 18%)}to{clip-path:inset(0)}}
+@keyframes cuillere-monte{from{transform:translateY(40px)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){body.g-carte *{transition:none!important;animation:none!important}}

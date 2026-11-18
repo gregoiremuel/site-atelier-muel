@@ -5,8 +5,8 @@
    Rien de cette feuille ne sert aux autres démonstrations (tout est sous body.g-depannage).
    ===================================================================== */
 body.g-depannage{
-  --enc:#101214;--jaune:#ffd400;--papier:#eef0f2;--blanc:#fbfbfa;--fil:3px;
-  --gris:#454b52;--trait:#101214;
+  --enc:#0a2540;--jaune:#ffd400;--papier:#eef2f6;--blanc:#fbfcfd;--fil:3px;
+  --gris:#3f4f63;--trait:#0a2540;
   background:var(--papier);color:var(--enc);
   --reseau:repeating-linear-gradient(0deg,rgba(16,18,20,.07) 0 1px,transparent 1px 32px),repeating-linear-gradient(90deg,rgba(16,18,20,.07) 0 1px,transparent 1px 32px);
   counter-reset:rub;
@@ -18,7 +18,6 @@ body.g-depannage h1,body.g-depannage h2,body.g-depannage h3{font-family:var(--ti
 
 /* ---------- Bande d'urgence : jaune plein, liseré rayé jaune et noir ---------- */
 body.g-depannage .d-urgence{position:relative;background:var(--jaune);color:var(--enc);padding-top:12px}
-body.g-depannage .d-urgence::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background:repeating-linear-gradient(-45deg,var(--enc) 0 12px,var(--jaune) 12px 24px)}
 body.g-depannage .d-urgence p{font:700 1.125rem/1 var(--titres);text-transform:uppercase;letter-spacing:.06em}
 body.g-depannage .d-urgence a{font:700 1.875rem/1 var(--titres);letter-spacing:.02em;text-decoration:none;border-bottom:3px solid var(--enc);padding:8px 0 2px}
 
@@ -93,7 +92,6 @@ body.g-depannage .d-tete-liste{max-width:none;margin-bottom:28px}
 body.g-depannage .d-prestations{background:var(--papier);counter-reset:tuile}
 body.g-depannage .d-tuiles{gap:var(--fil);background:var(--enc);border:var(--fil) solid var(--enc)}
 body.g-depannage .d-tuiles li{counter-increment:tuile;position:relative;border:0;background:var(--blanc);padding:20px 20px 22px;gap:8px;align-content:start}
-body.g-depannage .d-tuiles li::before{content:counter(tuile,decimal-leading-zero);font:700 3.25rem/.9 var(--titres);color:var(--enc);margin-bottom:6px}
 body.g-depannage .d-tuiles b{font:700 1.625rem/1.05 var(--titres);text-transform:uppercase;letter-spacing:.01em}
 body.g-depannage .d-tuiles span{color:var(--gris)}
 body.g-depannage .d-tuiles em{justify-self:start;margin-top:6px;padding:5px 9px;background:var(--enc);color:#fff;font:600 .875rem/1 var(--texte);text-transform:uppercase;letter-spacing:.08em}
@@ -122,8 +120,7 @@ body.g-depannage #demande .cmd-intro h2,body.g-depannage #demande .cmd-intro,bod
 body.g-depannage #demande .cmd-intro h2::before{border-color:var(--jaune)}
 body.g-depannage #demande .cmd-intro h2::after{background:var(--jaune)}
 body.g-depannage #demande .cmd-etapes{list-style:none;padding:0;counter-reset:etape;display:grid;gap:12px;max-width:52ch}
-body.g-depannage #demande .cmd-etapes li{counter-increment:etape;display:grid;grid-template-columns:3.2rem minmax(0,1fr);align-items:start;border-top:2px solid #fff;padding-top:12px}
-body.g-depannage #demande .cmd-etapes li::before{content:counter(etape,decimal-leading-zero);font:700 2rem/1 var(--titres);color:var(--jaune)}
+body.g-depannage #demande .cmd-etapes li{display:block;border-top:2px solid #fff;padding-top:12px}
 body.g-depannage #demande .hnote{color:#fff}
 body.g-depannage #demande .hnote a{color:var(--jaune);font-weight:700}
 body.g-depannage .cmd-form{background:var(--blanc);border:var(--fil) solid var(--jaune);border-radius:0;color:var(--enc)}
@@ -188,7 +185,6 @@ body.g-depannage .carte-box.carte-ouverte{border:var(--fil) solid var(--enc);bor
 
 /* ---------- Pied de page : noir, liseré rayé ---------- */
 body.g-depannage .foot{position:relative;background:var(--enc);border-top:0;padding-top:76px}
-body.g-depannage .foot::before{content:"";position:absolute;left:0;right:0;top:0;height:16px;background:repeating-linear-gradient(-45deg,var(--enc) 0 12px,var(--jaune) 12px 24px)}
 body.g-depannage .foot h3{font:700 1.125rem/1 var(--titres);text-transform:uppercase;letter-spacing:.08em;color:var(--jaune)}
 body.g-depannage .foot .nom{font:700 1.5rem/1 var(--titres);text-transform:uppercase;letter-spacing:.03em}
 body.g-depannage .foot a{color:#fff}
@@ -216,6 +212,65 @@ body.g-depannage .legal a{color:#fff}
   body.g-depannage .faq summary{font-size:1.25rem}
   body.g-depannage .faq .rep{padding-left:20px}
   body.g-depannage .sec h2::before{font-size:1.25rem;margin-right:12px}
+}
+/* =====================================================================
+   Ligne de flottaison (direction Taste « type-only-statement », 17/11/2026) : le titre est coupé par un
+   niveau d'eau. Au-dessus, blanc et encre ; en dessous, bleu profond, texte blanc. Le jaune ne sert qu'à l'action.
+   Ces règles remplacent la « plaque » ci-dessus ; plus de rayures, de quadrillage, de numéros ni de filets épais au premier écran.
+   ===================================================================== */
+body.g-depannage{--reseau:none;--eau:var(--enc)}
+body.g-depannage .d-urgence{padding-top:0}
+body.g-depannage .d-urgence::before,body.g-depannage .foot::before{content:none}
+body.g-depannage .foot{padding-top:48px}
+body.g-depannage .sec > .wrap > h2::before,body.g-depannage .cmd-intro h2::before,body.g-depannage .about .txt h2::before,body.g-depannage .g-horaires-h h2::before,body.g-depannage .d-tete-liste h2::before,body.g-depannage .d-tuiles li::before{content:none;display:none}
+body.g-depannage .sec > .wrap > h2::after,body.g-depannage .cmd-intro h2::after,body.g-depannage .about .txt h2::after,body.g-depannage .g-horaires-h h2::after,body.g-depannage .d-tete-liste h2::after{content:none}
+
+body.g-depannage .d-hero .d-scene{
+  --g:var(--gut,16px);position:relative;display:grid;gap:0;width:100%;max-width:none;margin:0;border:0;background:var(--blanc);
+  grid-template-columns:var(--g) minmax(0,1fr) var(--g);
+}
+body.g-depannage .d-hero .d-scene::before,body.g-depannage .d-hero .d-scene::after{padding:0;font:0/0 serif;letter-spacing:0;color:transparent}
+/* moitié basse du titre : même boîte que le titre, coupée à mi-hauteur = la ligne de flottaison */
+body.g-depannage .d-hero .d-scene::before{content:"";grid-area:3/1/4/-1;order:0;background:var(--eau);clip-path:inset(50% 0 0 0);z-index:0}
+/* tout ce qui est sous le titre : l'eau */
+body.g-depannage .d-hero .d-scene::after{content:"";grid-area:4/1/6/-1;order:0;background:var(--eau);z-index:0;display:block}
+body.g-depannage .d-hero .d-scene > *,body.g-depannage .d-hero .d-hero-txt > *{position:relative;z-index:1;background:none}
+body.g-depannage .d-hero .d-hero-txt > p:not(.statut){grid-area:1/2;order:0;margin:0;padding:clamp(28px,4vw,56px) 0 clamp(20px,3vw,36px);font-size:1.1875rem;line-height:1.5;color:var(--enc);max-width:46ch}
+body.g-depannage .d-hero .statut{grid-area:2/2;order:0;margin:0;padding:0 0 18px;font:700 1.0625rem/1.3 var(--titres);letter-spacing:.06em;color:var(--enc)}
+body.g-depannage .d-scene:has(.statut[hidden]) .d-hero-txt > p:not(.statut){grid-column:2}
+body.g-depannage .d-hero .d-hero-txt > h1{
+  grid-area:3/2;order:0;margin:0;padding:clamp(12px,2vw,24px) 0;max-width:none;
+  font:700 clamp(1.875rem,6.4vw,3.5rem)/1.02 var(--titres);letter-spacing:.005em;text-wrap:balance;
+  /* taste-skill-ignore : deux aplats collés (encre / blanc), pas un dégradé : c'est la ligne de flottaison qui coupe les lettres */
+  background:linear-gradient(var(--enc) 0 50%,#fff 50% 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+}
+body.g-depannage .d-hero .d-actions{grid-area:4/2;display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin:0;padding:clamp(28px,4vw,44px) 0 0;background:none}
+body.g-depannage .d-hero .d-actions .btn{min-height:64px;font:700 clamp(1.375rem,5vw,2rem)/1 var(--titres);border:0;border-radius:0;margin:0}
+body.g-depannage .d-hero .d-actions .d-appel{background:var(--jaune);color:var(--enc)}
+body.g-depannage .d-hero .d-actions .d-appel:hover{background:#fff}
+body.g-depannage .d-hero .d-actions .d-devis{background:none;color:#fff;min-height:56px!important;font-size:1.25rem!important;box-shadow:inset 0 0 0 2px #fff}
+body.g-depannage .d-hero .d-actions .d-devis:hover{background:#fff;color:var(--enc)}
+body.g-depannage .d-hero .d-hero-fig{grid-area:5/2;order:0;margin:28px 0 0;padding-bottom:clamp(28px,4vw,44px)}
+body.g-depannage .d-hero .d-hero-fig img{height:clamp(180px,48vw,260px);filter:grayscale(1) contrast(1.05);mix-blend-mode:luminosity;opacity:.9;border:0}
+body.g-depannage .d-hero .d-hero-fig .illus{left:0;bottom:clamp(28px,4vw,44px)}
+body.g-depannage .d-hero .d-scene.sans-photo::after{grid-area:4/1/5/-1}
+body.g-depannage .d-hero .d-scene.sans-photo .d-actions{padding-bottom:clamp(28px,4vw,44px)}
+@media (min-width:900px){
+  body.g-depannage .d-hero .d-scene{grid-template-columns:minmax(var(--g),1fr) minmax(0,calc((var(--wrap,1136px) - 2*var(--g) - 56px)/2)) minmax(0,calc((var(--wrap,1136px) - 2*var(--g) - 56px)/2)) minmax(var(--g),1fr);column-gap:56px}
+  body.g-depannage .d-hero .d-scene::before{grid-area:2/1/3/-1}
+  body.g-depannage .d-hero .d-scene::after{grid-area:3/1/4/-1}
+  body.g-depannage .d-hero .d-hero-txt > p:not(.statut){grid-area:1/2}
+  body.g-depannage .d-hero .statut{grid-area:1/3;align-self:end;padding:clamp(28px,4vw,56px) 0 clamp(20px,3vw,36px);text-align:right}
+  body.g-depannage .d-hero .d-hero-txt > h1{grid-area:2/2/3/4;white-space:nowrap}
+  body.g-depannage .d-hero .d-actions{grid-area:3/2;padding-bottom:clamp(40px,5vw,64px);align-content:start}
+  body.g-depannage .d-hero .d-hero-fig{grid-area:3/3;margin:clamp(28px,4vw,44px) 0 0;padding-bottom:clamp(40px,5vw,64px)}
+  body.g-depannage .d-hero .d-hero-fig img{height:260px}
+  body.g-depannage .d-hero .d-hero-fig .illus{bottom:clamp(40px,5vw,64px)}
+  body.g-depannage .d-hero .d-scene.sans-photo .d-actions{grid-column:2/4}
+}
+@media (max-width:500px){
+  body.g-depannage .d-hero .d-scene::before{grid-area:3/1/4/-1}
+  body.g-depannage .d-hero .d-hero-txt > h1{font-size:1.875rem}
 }
 @media (prefers-reduced-motion:reduce){body.g-depannage *{transition:none!important;animation:none!important}}
 

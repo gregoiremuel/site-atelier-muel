@@ -234,7 +234,7 @@ async function sauvegarder(env) {
 }
 
 /* ---------- Routes ---------- */
-export default {
+const worker = {
   async scheduled(event, env, ctx) { ctx.waitUntil(sauvegarder(env)); },
   async fetch(req, env, ctx) {
     const url = new URL(req.url);
@@ -447,3 +447,19 @@ export default {
     }
   },
 };
+
+/* En-têtes de sécurité sur toutes les réponses (pages, fichiers, API). Les démonstrations et /admin ont des scripts en ligne : 'unsafe-inline' reste permis.
+   frame-ancestors 'self' (et non DENY) : l'accueil peut afficher une démonstration dans un cadre. Pas de preload HSTS (difficile à retirer). */
+const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'";
+function securiser(r) {
+  const s = new Response(r.body, r), h = s.headers;
+  h.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  h.set('X-Frame-Options', 'SAMEORIGIN');
+  h.set('X-Content-Type-Options', 'nosniff');
+  h.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=(), usb=()');
+  if (!h.has('Referrer-Policy')) h.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  if ((h.get('Content-Type') || '').startsWith('text/html')) h.set('Content-Security-Policy', CSP);
+  return s;
+}
+const site = { scheduled: worker.scheduled, fetch: async (req, env, ctx) => securiser(await worker.fetch(req, env, ctx)) };
+export { site as default };

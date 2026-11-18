@@ -33,6 +33,7 @@ export const POLICES = {
       ['Besley', 500, 'besley-latin-500-normal.woff2', 'normal'],
       ['Besley', 500, 'besley-latin-500-italic.woff2', 'italic'],
       ['Besley', 600, 'besley-latin-600-normal.woff2', 'normal'],
+      ['Red Hat Display', 900, 'red-hat-display-latin-900-normal.woff2', 'normal'], // titres de l'accueil (class .p-accueil)
       ['Schibsted Grotesk', 400, 'schibsted-grotesk-latin-400-normal.woff2', 'normal'],
       ['Schibsted Grotesk', 400, 'schibsted-grotesk-latin-400-italic.woff2', 'italic'],
       ['Schibsted Grotesk', 500, 'schibsted-grotesk-latin-500-normal.woff2', 'normal'],

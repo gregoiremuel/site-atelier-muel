@@ -1213,3 +1213,289 @@ select.saisie{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.
 @media (max-width:700px){.barre-mobile{display:flex;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:25;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));background:var(--marine)}.g-edition .barre-mobile .btn{flex:1;justify-content:center;background:#fff !important;border-color:#fff !important;color:var(--encre) !important;font-size:.9375rem;line-height:1.2;padding:8px 12px}.g-edition .barre-mobile .btn svg,.g-edition .barre-mobile .btn::after,.g-edition .barre-mobile .btn::before{display:none}.barre-mobile .barre-tel{display:inline-flex;align-items:center;justify-content:center;width:48px;min-height:48px;color:#fff;border:2px solid #fff}.barre-mobile .barre-tel svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8}body{padding-bottom:72px}}
 
 @media (max-width:700px){html{scroll-padding-bottom:88px}}
+
+/* =====================================================================
+   Accueil v4 (17/11/2026) : le couloir des vitrines, la bande des offres.
+   Fond blanc, encre #101216, un accent mandarine sur les boutons (texte encre dessus). Titres Red Hat Display 900 en capitales.
+   Le fond de la scène prend la couleur réelle de la démonstration affichée. transform / opacity seulement (le fond change de couleur, c'est tout).
+   Sans JavaScript ou avec « moins d'animations » : la liste des démonstrations, lisible, sans scène collante (docs/REGLES-DESIGN.md).
+   ===================================================================== */
+body.p-accueil{--mand:#f7941d;--ink:#101216;--m:max(clamp(20px,4vw,48px),calc((100vw - 1320px)/2 + clamp(20px,4vw,48px)));--tit:"Red Hat Display","Arial Black","Helvetica Neue",Arial,sans-serif;background:#fff;color:var(--ink)}
+body.p-accueil .tete{background:#fff;border-bottom:0}
+body.p-accueil :focus-visible{outline:3px solid var(--ink);outline-offset:3px;box-shadow:none}
+body.p-accueil h1,body.p-accueil h2,body.p-accueil h3,body.p-accueil .cv-leg b,body.p-accueil .cv-mot{font-family:var(--tit);font-weight:900;text-transform:uppercase;letter-spacing:-.03em;line-height:.92;font-style:normal}
+.cv-couloir h1{font-size:clamp(2.25rem,5vw,3.5rem);max-width:12ch;margin:0 0 22px}
+.cv-chapo{font-size:1.1875rem;line-height:1.55;max-width:44ch;margin:0 0 28px;color:var(--ink)}
+.cv-nom label{display:block;font-weight:700;font-size:1rem;margin-bottom:8px}
+.cv-nom-ligne{display:flex;flex-wrap:wrap;gap:8px}
+.cv-nom .saisie{flex:1 1 220px;width:auto;min-width:0;border:2px solid var(--ink);border-radius:0;background:#fff}
+.cv-nom .saisie:focus{outline:3px solid var(--ink);outline-offset:2px;box-shadow:none}
+.cv-btn,.cv-mot{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:0;background:var(--mand);color:var(--ink);font:800 1rem/1.1 var(--texte);min-height:52px;padding:0 24px;cursor:pointer;text-decoration:none}
+.cv-btn:hover,.cv-mot:hover{background:#ffa73d}
+.cv-btn:active,.cv-mot:active{transform:scale(.98)}
+.cv-aide,.cv-sous{font-size:.9375rem;line-height:1.5;color:#3b414a;margin:10px 0 0;max-width:46ch}
+.cv-sous{margin-top:16px;font-weight:600;color:var(--ink)}
+.cv-lien{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:inherit;text-decoration:underline;text-decoration-color:var(--mand);text-decoration-thickness:3px;text-underline-offset:5px}
+.cv-lien svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* ---- Sans scène collante : intro, puis les démonstrations en liste ---- */
+.cv-intro{padding:clamp(40px,6vw,88px) var(--m) clamp(32px,5vw,64px)}
+.cv-tete{padding:clamp(24px,4vw,56px) var(--m) 24px;background:#fff}
+.cv-tete h2{font-size:clamp(1.5rem,3vw,2.25rem);margin:0 0 12px}
+.cv-tete p{max-width:56ch;margin:0}
+.cv-panneaux{list-style:none;margin:0;padding:0;display:grid;gap:4px;grid-template-columns:minmax(0,1fr)}
+.cv-p{background:var(--c);color:#fff;padding:24px var(--m) 32px;position:relative}
+.cv-vue{display:block;aspect-ratio:16/10;overflow:hidden;background:var(--c)}
+.cv-img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.cv-leg{display:grid;gap:8px;margin-top:16px;max-width:60ch}
+.cv-leg b{font-size:1.75rem}
+.cv-leg span{font-size:1rem;line-height:1.5}
+.cv-leg a{color:#fff}
+.cv-p :focus-visible{outline-color:#fff}
+.cv-prog{display:none}
+@media (min-width:900px){.cv-panneaux{grid-template-columns:repeat(2,minmax(0,1fr))}.cv-p{padding-left:clamp(20px,3vw,40px);padding-right:clamp(20px,3vw,40px)}}
+
+/* ---- Avec la scène collante : on avance dans le couloir en défilant ---- */
+.cv-on{height:520svh}
+.cv-on .cv-scene{--s:1;--u:0;--pr:0;--fond:#fff;position:sticky;top:64px;height:calc(100svh - 64px);overflow:hidden;background:var(--fond);transition:background-color .5s ease;perspective:1200px;perspective-origin:62% 50%}
+.cv-on .cv-intro{position:absolute;z-index:3;left:0;top:50%;width:min(100%,calc(var(--m) + 540px));padding:0 0 0 var(--m);transform:translate3d(calc((1 - var(--s)) * -6vw),-50%,0);opacity:clamp(0,calc(var(--s) * 2 - 1),1)}
+.cv-on .cv-scene:not(.cv-haut) .cv-intro{pointer-events:none;visibility:hidden}
+.cv-on .cv-tete{position:absolute;z-index:2;left:0;top:0;padding:28px var(--m) 0;background:none;color:#fff;opacity:calc(1 - var(--s));pointer-events:none}
+.cv-on .cv-panneaux{position:absolute;inset:0;display:block;transform-style:preserve-3d}
+.cv-on .cv-p{--d:calc(var(--i) - var(--u));position:absolute;left:50%;top:52%;width:min(56vw,820px);padding:0;background:none;transform:translate3d(calc(-50% + var(--s) * 28vw + var(--d) * 7vw),calc(-50% + var(--d) * -4vh),calc(var(--d) * -760px)) rotateY(calc(var(--s) * -14deg + var(--d) * -6deg));opacity:calc(max(0,min(1,3 - var(--d) * 1.2)) * max(0,min(1,2 + var(--d) * 5)));pointer-events:none;will-change:transform,opacity}
+.cv-on .cv-p.on{pointer-events:auto}
+.cv-on .cv-leg{position:absolute;left:0;top:100%;margin-top:18px;opacity:calc(max(0,1 - max(var(--d),var(--d) * -1) * 3) * (1 - var(--s)))}
+.cv-on .cv-prog{display:block;position:absolute;z-index:4;left:0;bottom:0;width:100%;height:4px;background:var(--mand);transform:scaleX(var(--pr));transform-origin:0 50%}
+
+/* ---- La bande des offres : carrousel au doigt, épinglée et horizontale sur grand écran ---- */
+.cv-offres{background:var(--ink);color:#fff}
+.cv-offres-pin{padding:clamp(56px,8vw,104px) 0 clamp(40px,6vw,72px)}
+.cv-offres h2{font-size:clamp(1.5rem,3vw,2.25rem);margin:0 var(--m) 28px;color:#fff}
+.cv-piste{list-style:none;margin:0;padding:0 var(--m);display:flex;gap:4px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.cv-piste::-webkit-scrollbar{display:none}
+.cv-offre{flex:0 0 min(80vw,360px);scroll-snap-align:start;background:#1b2028;padding:28px 26px 30px;display:grid;gap:14px;align-content:start;min-height:300px}
+.cv-offre{padding:0 0 30px;gap:0;display:flex;flex-direction:column}
+.cv-offre .cv-lien{margin-top:auto;align-self:flex-start}
+.cv-offre > *:not(.cv-offre-vue){margin-left:26px;margin-right:26px}
+.cv-offre-vue{margin:0 0 22px;aspect-ratio:16/10;overflow:hidden;background:#2a303a}
+.cv-offre-img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.cv-offre:not(:has(.cv-offre-vue)){padding-top:28px}
+.cv-offre h3{font-size:1.75rem;color:#fff;margin-bottom:12px}
+.cv-offre p{margin:0 26px 14px;font-size:1.0625rem;line-height:1.55;color:#e4e7eb}
+.cv-offre .cv-prix{font:800 1.125rem/1.2 var(--texte);color:var(--mand);margin-top:0;margin-bottom:18px}
+.cv-offre .cv-lien{color:#fff}
+.cv-offres :focus-visible{outline-color:#fff}
+.cv-note{margin:28px var(--m) 0;max-width:62ch;font-size:.9375rem;line-height:1.55;color:#c9ced6}
+@supports (animation-timeline:view()){@media (min-width:900px) and (min-height:760px) and (prefers-reduced-motion:no-preference){
+  .cv-offres{height:260svh;view-timeline-name:--off}
+  .cv-offres-pin{position:sticky;top:64px;height:calc(100svh - 64px);padding:0;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+  .cv-piste{overflow:visible;scroll-snap-type:none;width:max-content;animation:cv-glisse linear both;animation-timeline:--off;animation-range:contain 0% contain 100%}
+  .cv-offre{flex-basis:clamp(340px,36vw,520px);min-height:340px}
+}}
+@keyframes cv-glisse{to{transform:translate3d(calc(-100% + 100vw - 2 * var(--m)),0,0)}}
+
+/* ---- Une seule personne, appel final ---- */
+.cv-seul{padding:clamp(56px,8vw,112px) var(--m)}
+.cv-seul-in{display:grid;gap:28px;align-items:center;max-width:1120px;margin:0 auto}
+.cv-seul h2,.cv-final h2{font-size:clamp(1.75rem,3.4vw,2.25rem);margin:0 0 16px}
+.cv-seul p{font-size:1.1875rem;line-height:1.55;max-width:46ch;margin:0 0 14px}
+.cv-portrait{margin:0}
+.cv-portrait-img{display:block;width:min(70vw,320px);height:auto;aspect-ratio:1;object-fit:cover;border-radius:0;filter:grayscale(1) contrast(1.05)}
+.cv-tel{display:flex;align-items:center;gap:10px;font-weight:700}
+.cv-tel svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8}
+.cv-tel a{color:inherit;text-decoration-color:var(--mand);text-decoration-thickness:3px;text-underline-offset:5px}
+@media (min-width:900px){.cv-seul-in{grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:72px}}
+.cv-final{padding:clamp(48px,7vw,96px) var(--m) clamp(64px,9vw,128px);text-align:left;max-width:calc(1120px + 2 * var(--m));margin:0 auto}
+.cv-mot{font-size:clamp(2rem,6.4vw,3.5rem);letter-spacing:-.03em;text-transform:uppercase;font-family:var(--tit);font-weight:900;min-height:clamp(88px,12vw,128px);padding:0 clamp(28px,5vw,64px);margin-top:8px}
+.cv-final-tel{margin:20px 0 0;font-size:1.0625rem}
+.cv-final-tel a{color:inherit;font-weight:700;text-decoration-color:var(--mand);text-decoration-thickness:3px;text-underline-offset:5px}
+
+/* ---- Téléphone : titres de 30 / 24 px (docs/REGLES-DESIGN.md), scène plus courte, panneaux plus hauts que larges ---- */
+@media (max-width:700px){
+  .cv-couloir h1{font-size:1.875rem}
+  .cv-tete h2,.cv-offres h2,.cv-seul h2,.cv-final h2{font-size:1.5rem}
+  .cv-leg b,.cv-offre h3{font-size:1.5rem}
+  .cv-on{height:270svh}
+  .cv-seul{padding-top:40px;padding-bottom:40px}
+  .cv-final{padding-top:32px;padding-bottom:56px}
+  .cv-on .cv-scene{height:calc(100svh - 64px - 72px)}
+  .cv-on .cv-p{top:58%;opacity:calc(max(0,min(1,1.4 - var(--d) * 3)) * max(0,min(1,2 + var(--d) * 5)) * (1 - var(--s)))}
+  .cv-on .cv-intro{top:20px;transform:translate3d(calc((1 - var(--s)) * -6vw),0,0);width:100%;padding-right:var(--m)}
+  .cv-on .cv-p{width:78vw;transform:translate3d(calc(-50% + var(--s) * 42vw + var(--d) * 5vw),calc(-46% + var(--d) * -3vh),calc(var(--d) * -620px)) rotateY(calc(var(--s) * -14deg + var(--d) * -6deg))}
+  .cv-on .cv-vue{aspect-ratio:4/5}
+  .cv-on .cv-img{object-position:28% 0}
+}
+@media (prefers-reduced-motion:reduce){.cv-btn,.cv-mot{transition:none}.cv-on .cv-scene{transition:none}}
+
+/* =====================================================================
+   Accueil v4.1 (18/11/2026) : « enseigne de commerce », couleurs douces.
+   Sauge et pin : fond blanc en majorité, bande sauge pour les formules, encre pin, un seul safran doux.
+   Boutons = étiquettes de prix percées ; rayures de store en bandeau ; formules = façades dessinées (rendu.js, DESSINS).
+   ===================================================================== */
+body.p-accueil{--mand:#e3b04b;--ink:#1e2d26;--sauge:#e3e9df;color:var(--ink)}
+body.p-accueil .tete,body.p-accueil .tete.defile{backdrop-filter:none;-webkit-backdrop-filter:none;background:#fff!important}
+body.p-accueil .pied,body.p-accueil footer{background:var(--ink)}
+/* étiquette de prix : encoche à gauche, trou percé, elle penche un peu au survol */
+.cv-btn,.cv-mot,body.p-accueil .tete-in .btn{position:relative;border:0;border-radius:0;background:var(--mand);color:var(--ink);padding-left:44px;clip-path:polygon(18px 0,100% 0,100% 100%,18px 100%,0 50%);transform-origin:0 50%}
+.cv-btn::before,.cv-mot::before,body.p-accueil .tete-in .btn::before{content:"";position:absolute;left:13px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:#fff}
+.cv-btn:hover,.cv-mot:hover,body.p-accueil .tete-in .btn:hover{background:#ecc069;transform:rotate(-1.5deg)}
+.cv-mot{padding-left:clamp(56px,9vw,96px);clip-path:polygon(clamp(28px,4vw,44px) 0,100% 0,100% 100%,clamp(28px,4vw,44px) 100%,0 50%)}
+.cv-mot::before{left:clamp(16px,2.6vw,28px);width:clamp(10px,1.4vw,14px);height:clamp(10px,1.4vw,14px);margin-top:calc(clamp(10px,1.4vw,14px) / -2)}
+body.p-accueil .barre-mobile{background:var(--ink)}
+/* formules : bande sauge, cartes blanches, dessin en tête, rayures de store au-dessus */
+.cv-offres{background:var(--sauge);color:var(--ink)}
+.cv-offres::before,.cv-final::before{content:"";display:block;height:30px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='30'%3E%3Cpath d='M0 0h40v10a20 20 0 0 1-40 0z' fill='%23e3b04b'/%3E%3Cpath d='M40 0h40v10a20 20 0 0 1-40 0z' fill='%23fff'/%3E%3C/svg%3E") repeat-x}
+.cv-final{position:relative;max-width:none;padding-left:max(var(--m),calc((100vw - 1120px)/2));padding-right:var(--m)}
+.cv-final::before{margin:0 calc(-1 * max(var(--m),calc((100vw - 1120px)/2))) 40px calc(-1 * max(var(--m),calc((100vw - 1120px)/2)));margin-right:calc(-1 * var(--m))}
+.cv-offres h2,.cv-offre h3,.cv-offre .cv-lien{color:var(--ink)}
+.cv-offre{background:#fff}
+.cv-offre p,.cv-note{color:#2f3f37}
+.cv-offre .cv-prix{align-self:flex-start;margin:0 26px 18px;padding:4px 10px;background:var(--mand);color:var(--ink)}
+.cv-offre-vue{background:#eef2ec;aspect-ratio:8/5}
+.cv-dessin{display:block;width:100%;height:100%}
+.cv-offres :focus-visible{outline-color:var(--ink)}
+
+/* =====================================================================
+   Accueil v5 (18/11/2026) : majorité blanc, gris très clair, cartes arrondies douces (esprit Apple Vision Pro).
+   Des informations d'abord (le couloir ne montre plus les démonstrations), puis étapes, formules détaillées, exemples.
+   ===================================================================== */
+body.p-accueil{--ink:#1d1d1f;--gris-fond:#f5f5f7;--txt2:#515154}
+.cv-offres::before{content:none}
+.cv-p{color:var(--ink)}
+.cv-carte{background:#fff;border-radius:28px;padding:clamp(24px,4vw,56px);min-height:clamp(280px,32vw,400px);display:grid;align-content:center;gap:14px}
+.cv-carte h3,.cv-carte h2{font-size:clamp(1.5rem,3vw,2.25rem);margin:0}
+.cv-carte p{margin:0;font-size:1.0625rem;line-height:1.6;color:var(--txt2);max-width:52ch}
+.cv-carte .cv-gros{font-size:clamp(1.1875rem,1.8vw,1.5rem);line-height:1.4;font-weight:600;color:var(--ink)}
+.cv-on .cv-tete{color:var(--ink)}
+.cv-on .cv-scene{--fond:#f5f5f7}
+.cv-on .cv-scene.cv-haut .cv-tete{visibility:hidden}
+.cv-on .cv-p{padding:0}
+.cv-panneaux .cv-p{padding-top:20px;padding-bottom:20px}
+.cv-on .cv-panneaux .cv-p{padding:0}
+.cv-etapes,.cv-exemples{padding:clamp(56px,8vw,104px) var(--m)}
+.cv-bloc{max-width:1320px;margin:0 auto}
+.cv-etapes h2,.cv-exemples h2,.cv-offres-tete h2{font-size:clamp(1.5rem,3vw,2.25rem);margin:0 0 12px}
+.cv-intro-sec,.cv-offres-tete p{max-width:60ch;margin:0 0 32px;font-size:1.1875rem;line-height:1.55;color:var(--txt2)}
+.cv-etapes-liste{list-style:none;margin:0;padding:0;display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+.cv-etapes-liste li{background:var(--gris-fond);border-radius:24px;padding:28px}
+.cv-etapes-liste h3{font-size:1.375rem;margin:0 0 12px}
+.cv-etapes-liste p{margin:0;font-size:1.0625rem;line-height:1.6;color:var(--txt2)}
+@media (min-width:900px){.cv-etapes-liste{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.cv-offres{background:var(--gris-fond);color:var(--ink)}
+.cv-offres-tete{margin:0 var(--m)}
+.cv-offres-pin{padding-top:clamp(48px,7vw,96px)}
+.cv-offres .cv-offre{flex:0 0 min(84vw,380px);background:#fff;border-radius:24px;padding:28px;gap:14px;min-height:0}
+.cv-offres .cv-offre > *{margin-left:0;margin-right:0}
+.cv-offres .cv-offre p{margin:0}
+.cv-offre h3{font-size:1.5rem;margin:0}
+.cv-offre .cv-accroche{font-size:1.125rem;line-height:1.45;font-weight:600;color:var(--ink)}
+.cv-points{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.cv-points li{position:relative;padding-left:28px;font-size:1rem;line-height:1.5;color:var(--txt2)}
+.cv-points li::before{content:"";position:absolute;left:3px;top:.42em;width:11px;height:6px;border-left:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(-45deg)}
+.cv-offres .cv-offre .cv-prix{margin:auto 0 0;align-self:flex-start;padding:4px 10px;background:var(--mand)}
+.cv-offres .cv-offre .cv-lien{margin:0}
+@supports (animation-timeline:view()){@media (min-width:900px) and (min-height:760px) and (prefers-reduced-motion:no-preference){.cv-offres .cv-offre{flex-basis:clamp(340px,30vw,440px)}}}
+.cv-ex-liste{list-style:none;margin:0;padding:0;display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.cv-ex-liste::-webkit-scrollbar{display:none}
+.cv-ex-liste li{flex:0 0 min(78vw,320px);scroll-snap-align:start}
+.cv-ex-liste a{display:grid;gap:8px;color:inherit;text-decoration:none;align-content:start}
+.cv-ex-vue{display:block;aspect-ratio:16/10;border-radius:18px;overflow:hidden;background:var(--gris-fond)}
+.cv-ex-img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.cv-ex-liste b{font:900 1.125rem/1.1 var(--tit);text-transform:uppercase;letter-spacing:-.02em;margin-top:6px}
+.cv-ex-liste span{font-size:1rem;line-height:1.5;color:var(--txt2)}
+.cv-ex-liste .cv-lien{color:var(--ink)}
+@media (min-width:900px){.cv-ex-liste{overflow:visible;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}.cv-ex-liste li{flex:none}}
+.cv-seul{background:#fff}
+.plan-vue{display:none}
+
+/* =====================================================================
+   Accueil v6 (18/11/2026) : verre liquide sur la scène du haut (la photo de la rue se devine derrière), bordeaux franc en petites touches,
+   prix et comparatif, boutons plus sobres, focus jamais rogné.
+   ===================================================================== */
+body.p-accueil{--bx:#7a1f33;--bx2:#5d1626}
+.cv-couloir h1{max-width:14ch}
+/* étiquettes : bordeaux franc, texte blanc, plus petites ; le contour de focus n'est pas rogné par le clip-path */
+.cv-btn,.cv-mot{background:var(--bx);color:#fff}
+.cv-btn:hover,.cv-mot:hover{background:var(--bx2)}
+.cv-btn:focus-visible,.cv-mot:focus-visible,body.p-accueil .tete-in .btn:focus-visible{clip-path:none;outline:3px solid var(--ink);outline-offset:3px}
+.cv-mot{font-size:clamp(1.25rem,2vw,1.625rem);min-height:60px;padding:0 28px 0 54px;margin-top:4px;clip-path:polygon(24px 0,100% 0,100% 100%,24px 100%,0 50%)}
+.cv-mot::before{left:14px;width:9px;height:9px;margin-top:-4.5px}
+.cv-final h2{font-size:clamp(1.5rem,2.6vw,2rem)}
+/* verre liquide : la photo reste visible derrière, voilée par la teinte du panneau en cours */
+.cv-fond,.cv-voile{display:none}
+.cv-on .cv-scene{background:#dde4e0}
+.cv-on .cv-fond{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.cv-on .cv-voile{display:block;position:absolute;inset:0;z-index:0;background:var(--fond);opacity:.5;transition:background-color .5s ease}
+.cv-on .cv-intro,.cv-on .cv-tete,.cv-on .cv-carte{background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(26px) saturate(1.6);backdrop-filter:blur(26px) saturate(1.6);border:1px solid rgba(255,255,255,.75)}
+.cv-on .cv-intro{left:var(--m);width:min(560px,calc(100% - 2 * var(--m)));padding:36px 38px;border-radius:32px}
+.cv-on .cv-tete{left:var(--m);top:20px;width:fit-content;max-width:calc(100% - 2 * var(--m));padding:14px 22px;border-radius:20px;color:var(--ink)}
+.cv-on .cv-tete h2{margin:0 0 4px}.cv-on .cv-tete p{margin:0}
+.cv-on .cv-prog{background:var(--bx)}
+@media (max-width:700px){.cv-on .cv-intro{top:14px;left:var(--m);width:calc(100% - 2 * var(--m));padding:20px 18px;border-radius:24px}.cv-on .cv-tete{padding:10px 16px}}
+/* bordeaux franc, en petites touches */
+.cv-points li::before{border-color:var(--bx)}
+.cv-lien{text-decoration-color:var(--bx)}
+.cv-offres .cv-offre{box-shadow:inset 0 6px 0 var(--bx)}
+.cv-etapes-liste li{box-shadow:inset 0 6px 0 var(--bx)}
+.cv-offres .cv-offre .cv-prix{padding:0;background:none;color:var(--bx);font:600 1rem/1.3 var(--texte)}
+.cv-prix .prix-v{display:inline-block;font:900 2rem/1 var(--tit);letter-spacing:-.03em}
+.cv-prix .prix-v::after{content:none}
+.cv-prix .prix-l{display:block;margin-top:4px;font:500 .9375rem/1.3 var(--texte);color:var(--txt2)}
+.cv-offres{overflow-x:clip}
+@supports (animation-timeline:view()){@media (min-width:900px) and (min-height:760px) and (prefers-reduced-motion:no-preference){.cv-offres-pin{overflow:visible;justify-content:flex-start;padding-top:clamp(28px,5vh,64px)}}}
+/* comparatif */
+.cv-compar{padding:clamp(56px,8vw,104px) var(--m);background:#fff}
+.cv-compar h2{font-size:clamp(1.5rem,3vw,2.25rem);margin:0 0 12px}
+.cv-cmp{display:grid;gap:0;max-width:1100px}
+.cv-cmp-l{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:20px 0;border-bottom:1px solid #d2d2d7}
+.cv-cmp-l b{font-size:1.0625rem}
+.cv-cmp-l span{font-size:1rem;line-height:1.55;color:var(--txt2)}
+.cv-cmp-l i{display:block;font-style:normal;font-weight:700;font-size:.875rem;color:var(--ink);margin-bottom:2px}
+.cv-cmp-nous{color:var(--ink)!important;background:#f6e9ec;border-left:4px solid var(--bx);padding:12px 16px;border-radius:0 14px 14px 0}
+.cv-cmp-tete{display:none}
+@media (min-width:900px){
+  .cv-cmp-l{grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+  .cv-cmp-l i{display:none}
+  .cv-cmp-tete{display:grid;font-weight:700;border-bottom:3px solid var(--ink);padding-bottom:12px}
+  .cv-cmp-tete span{font:800 1.0625rem/1.3 var(--texte);color:var(--ink)}
+  .cv-cmp-tete span:last-child{color:var(--bx)}
+}
+.cv-note-cmp{max-width:70ch;margin:20px 0 0;font-size:.9375rem;line-height:1.55;color:var(--txt2)}
+/* photo d'illustration */
+.cv-photo{margin:40px 0 0}
+.cv-photo-img{display:block;width:100%;height:clamp(200px,32vw,420px);object-fit:cover;border-radius:24px}
+.cv-photo figcaption{margin-top:10px;font-size:.875rem;line-height:1.5;color:var(--txt2)}
+/* une seule carte à la fois dans le couloir (le verre laisse voir ce qui est derrière) */
+.cv-on .cv-p{opacity:calc(max(0,min(1,1.2 - var(--d) * 4)) * max(0,min(1,2 + var(--d) * 5)))}
+.cv-on .cv-intro,.cv-on .cv-tete,.cv-on .cv-carte{background:rgba(255,255,255,.7)}
+
+/* =====================================================================
+   Tout le site (offres, réalisations, actualités, à propos, engagements, contact, pages légales) :
+   mêmes couleurs, mêmes titres, mêmes boutons que l'accueil. Les jetons sont posés sur body.g-edition, donc ils battent le thème du KV.
+   ===================================================================== */
+body.g-edition{--gris-fond:#f5f5f7;--fond:#fff;--encre:#1d1d1f;--gris:#515154;--trait:#d2d2d7;--marine:#1e2d26;--or:#e3b04b;--mand:#e3b04b;--ink:#1d1d1f;--bx:#7a1f33;--bx2:#5d1626;--sauge:#e3e9df;--tit:"Red Hat Display","Arial Black","Helvetica Neue",Arial,sans-serif;background:#fff;color:#1d1d1f}
+body.g-edition{--sable:#f5f5f7;--ciel:#e3e9df;--ardoise:#7a1f33;--r:18px;--titres:"Red Hat Display","Arial Black","Helvetica Neue",Arial,sans-serif}
+body.g-edition .tete,body.g-edition .tete.defile{backdrop-filter:none;-webkit-backdrop-filter:none;background:#fff!important}
+body.g-edition main h1,body.g-edition main h2,body.g-edition main h3,body.g-edition .appel h2{font-family:var(--tit);font-weight:900;text-transform:uppercase;letter-spacing:-.03em;line-height:.95;font-style:normal}
+body.g-edition main h1{font-size:clamp(2.25rem,4.4vw,3rem)}
+body.g-edition main h2{font-size:clamp(1.5rem,3vw,2.25rem)}
+body.g-edition main h3{font-size:clamp(1.125rem,2vw,1.5rem)}
+body.g-edition .sur{display:none}
+/* étiquettes de prix partout : bordeaux pour l'action, safran pour l'accent, liens soulignés pour le reste */
+body.g-edition .btn:not(.btn-ligne):not(.btn-ligne-clair),body.g-edition .tete-in .btn{position:relative;border:0;border-radius:0;background:var(--bx);color:#fff;padding:0 26px 0 44px;clip-path:polygon(18px 0,100% 0,100% 100%,18px 100%,0 50%);font-weight:800;transform-origin:0 50%}
+body.g-edition .btn:not(.btn-ligne):not(.btn-ligne-clair)::before,body.g-edition .tete-in .btn::before{content:"";position:absolute;left:13px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:#fff}
+body.g-edition .btn:not(.btn-ligne):not(.btn-ligne-clair):hover{background:var(--bx2);transform:rotate(-1.5deg)}
+body.g-edition .btn.btn-or{background:var(--or);color:var(--ink)}
+body.g-edition .btn.btn-or:hover{background:#ecc069}
+body.g-edition .tete-in .btn{background:var(--or);color:var(--ink)}
+body.g-edition .btn:focus-visible,body.g-edition .tete-in .btn:focus-visible{clip-path:none;outline:3px solid var(--ink);outline-offset:3px}
+body.g-edition .btn-ligne,body.g-edition .btn-ligne-clair{background:none;border:0;border-radius:0;padding:0 4px;min-height:44px;font-weight:800;text-decoration:underline;text-decoration-color:var(--or);text-decoration-thickness:4px;text-underline-offset:6px}
+body.g-edition .btn-ligne{color:var(--ink)}
+body.g-edition .btn-ligne-clair{color:#fff}
+body.g-edition .cmd-form .btn,body.g-edition .plan .btn,body.g-edition .btn-choisir,body.g-edition .demande .btn{background:var(--bx);color:#fff}
+body.g-edition .cmd-form .btn:hover,body.g-edition .plan .btn:hover,body.g-edition .btn-choisir:hover{background:var(--bx2)}
+body.g-edition .pied,body.g-edition footer{background:#1d1d1f}
+body.g-edition .appel{background:#1e2d26}
+
+@media (max-width:700px){.cv-on .cv-p{top:58%;opacity:calc(max(0,min(1,1.4 - var(--d) * 3)) * max(0,min(1,2 + var(--d) * 5)) * (1 - var(--s)))}}
+@media (max-width:700px){body.g-edition main h1,body.g-edition .cv-couloir h1{font-size:1.875rem}body.g-edition main h2{font-size:1.5rem}body.g-edition main h3{font-size:1.25rem}}

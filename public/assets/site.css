@@ -1538,3 +1538,43 @@ body.g-edition .tete-page.ch-marine .ancres a{background:rgba(255,255,255,.55);c
 .g-edition .tete-fig img{border-radius:18px}
 @media (max-width:700px){.cv-on .cv-p{opacity:calc(max(0,min(1,1.4 - var(--d) * 3)) * max(0,min(1,2 + var(--d) * 5)) * (1 - var(--s)))}}
 .cv-objets circle{stroke:none}
+
+
+/* =====================================================================
+   v9 (18/11/2026) : verre « liquide » teinté de vert (reflets de bord plus marqués, saturation), décor du métier
+   (crayons, règle, ordinateur qui s'ouvre au défilement) à la place des sphères, formules compactes sur téléphone.
+   ===================================================================== */
+.cv-objets .d1{transform:translate3d(0,calc(var(--pr,0) * -200px),0)}
+.cv-objets .d2{transform:translate3d(calc(var(--pr,0) * 120px),calc(var(--pr,0) * -110px),0)}
+.cv-objets .d3{transform:translate3d(0,calc(var(--pr,0) * 120px),0)}
+.cv-on .cv-intro,.cv-on .cv-tete,.cv-on .cv-carte{background:rgba(178,232,208,.3);-webkit-backdrop-filter:blur(22px) saturate(2.1) brightness(1.04);backdrop-filter:blur(22px) saturate(2.1) brightness(1.04);border:1px solid rgba(255,255,255,.7);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.95),inset 1.5px 0 0 rgba(255,255,255,.55),inset 0 -1.5px 0 rgba(255,255,255,.4),inset 0 0 44px rgba(150,230,195,.3),0 24px 60px rgba(20,60,45,.18)}
+@supports not (-webkit-hyphens:none){@supports not (-moz-appearance:none){.cv-on .cv-intro,.cv-on .cv-tete,.cv-on .cv-carte{backdrop-filter:url(#cv-verre) saturate(2.1) brightness(1.04)}}}
+.cv-on .cv-scene{background:#eaf3ee}
+body.g-edition section.tete-page.tete-page{background-color:#eaf3ee;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%271440%27%20height%3D%27420%27%20viewBox%3D%270%200%201440%20420%27%20preserveAspectRatio%3D%27xMaxYMid%20slice%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27j%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%270%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23ffe27a%27%2F%3E%3Cstop%20offset%3D%27.5%27%20stop-color%3D%27%23f2bf33%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23c8921b%27%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%27r%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%270%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23fff%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23dfe8e2%27%2F%3E%3C%2FlinearGradient%3E%3Cfilter%20id%3D%27f%27%20x%3D%27-60%25%27%20y%3D%27-60%25%27%20width%3D%27220%25%27%20height%3D%27220%25%27%3E%3CfeGaussianBlur%20stdDeviation%3D%2746%27%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Crect%20width%3D%271440%27%20height%3D%27420%27%20fill%3D%27%23eef2ef%27%2F%3E%3Cg%20filter%3D%27url(%23f)%27%3E%3Ccircle%20cx%3D%271250%27%20cy%3D%27120%27%20r%3D%27210%27%20fill%3D%27%235fd3a0%27%20fill-opacity%3D%27.6%27%2F%3E%3Ccircle%20cx%3D%27120%27%20cy%3D%27400%27%20r%3D%27190%27%20fill%3D%27%237be0c0%27%20fill-opacity%3D%27.55%27%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%27translate(1000%2090)%20rotate(-24)%27%3E%3Crect%20width%3D%27360%27%20height%3D%2736%27%20rx%3D%273%27%20fill%3D%27url(%23j)%27%2F%3E%3Crect%20x%3D%27-24%27%20width%3D%2728%27%20height%3D%2736%27%20rx%3D%276%27%20fill%3D%27%23e98aa0%27%2F%3E%3Cpolygon%20points%3D%27360%2C0%20430%2C18%20360%2C36%27%20fill%3D%27%23efd3a8%27%2F%3E%3Cpolygon%20points%3D%27412%2C11%20430%2C18%20412%2C25%27%20fill%3D%27%232c2623%27%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%27translate(960%20300)%20rotate(7)%27%3E%3Crect%20width%3D%27330%27%20height%3D%2752%27%20rx%3D%277%27%20fill%3D%27url(%23r)%27%20stroke%3D%27%23b8c4bd%27%20stroke-width%3D%272%27%2F%3E%3Cpath%20d%3D%27M24%200v20M48%200v13M72%200v20M96%200v13M120%200v20M144%200v13M168%200v20M192%200v13M216%200v20M240%200v13M264%200v20M288%200v13M312%200v20%27%20stroke%3D%27%234b5a52%27%20stroke-width%3D%273%27%20fill%3D%27none%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")}
+body.g-edition .tete-page > .wrap{background:rgba(178,232,208,.3);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.95),inset 1.5px 0 0 rgba(255,255,255,.55),inset 0 0 44px rgba(150,230,195,.3),0 24px 60px rgba(20,60,45,.16)}
+/* ordinateur qui s'ouvre : l'écran montre une démonstration */
+.cv-lap{--o:min(1,calc(var(--pr,0) * 3.4));position:absolute;right:max(1vw,calc(var(--m) - 30px));bottom:5%;width:min(44vw,640px);aspect-ratio:1.5;perspective:1700px;transform:translate3d(0,calc(var(--pr,0) * -36px),0)}
+.cv-lap-lid{position:absolute;left:9%;right:9%;bottom:15%;height:78%;transform-origin:50% 100%;transform:rotateX(calc(-88deg + var(--o) * 94deg));background:#1c1e21;border-radius:14px 14px 4px 4px;padding:2.4% 2.4% 3.4%;box-shadow:inset 0 0 0 2px #3b3f45,0 30px 60px rgba(20,40,32,.3)}
+.cv-lap-ecran{width:100%;height:100%;border-radius:6px;overflow:hidden;background:#fff}
+.cv-lap-img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.cv-lap-base{position:absolute;left:0;right:0;bottom:11%;height:5.5%;border-radius:3px 3px 22px 22px;background:#cdd3d1;box-shadow:inset 0 2px 0 rgba(255,255,255,.8),0 18px 36px rgba(20,40,32,.28)}
+.cv-lap-base::before{content:"";position:absolute;left:41%;right:41%;top:0;height:42%;border-radius:0 0 10px 10px;background:#aeb5b2}
+@media (max-width:700px){
+  .cv-lap{width:84vw;right:8vw;bottom:15%}
+  /* formules : plus basses, trois points seulement, pour tenir sur un écran de téléphone */
+  .cv-offres .cv-offre{flex-basis:min(82vw,330px);padding:20px 18px;gap:10px}
+  .cv-offres .cv-offre p,.cv-points li{font-size:.9375rem;line-height:1.45}
+  .cv-offre .cv-accroche{font-size:1rem}
+  .cv-points li:nth-child(n+4){display:none}
+  .cv-prix .prix-v{font-size:1.625rem}
+  .cv-offres-pin{padding-top:36px}
+  .cv-offres h2{margin-bottom:6px}
+  .cv-offres-tete p{margin-bottom:18px;font-size:1rem}
+}
+.cv-lap{width:min(36vw,520px)}
+.cv-carte h2{max-width:22ch}
+.cv-carte .cv-gros{max-width:26ch}
+.cv-carte p{max-width:38ch}
+@media (max-width:700px){.cv-lap{width:84vw}.cv-carte h2,.cv-carte .cv-gros,.cv-carte p{max-width:none}}
+@media (max-width:700px){.cv-on .cv-p{top:49%}.cv-lap{width:60vw;right:20vw;bottom:2%}.cv-carte{padding:20px 18px;min-height:0}.cv-carte p{font-size:.9375rem}.cv-carte .cv-gros{font-size:1.125rem}.cv-carte h2{font-size:1.375rem}}
+@media (max-width:700px){.cv-on .cv-intro{padding:14px 16px 12px}.cv-couloir .cv-chapo{font-size:.875rem;line-height:1.45;margin:0 0 12px}.cv-couloir h1{margin-bottom:10px}.cv-nom label{margin-bottom:4px}.cv-nom .saisie{min-height:46px}.cv-btn{min-height:46px}.cv-aide,.cv-sous{font-size:.875rem;line-height:1.4;margin-top:8px}.cv-objets .d1{display:none}}

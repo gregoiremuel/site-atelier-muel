@@ -407,9 +407,20 @@ const teteFig = (champ) => (src(champ, 1200) ? `<figure class="tete-fig">${img(c
 /* Verre liquide : lentille de réfraction (carte de déplacement dessinée en SVG), flou et saturation. Chromium seulement ; ailleurs, flou classique (site.css). */
 const MAP_VERRE = encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><defs><linearGradient id='a' x1='0' x2='1' y1='0' y2='0'><stop offset='0' stop-color='rgb(255,0,0)'/><stop offset='.1' stop-color='rgb(128,0,0)'/><stop offset='.9' stop-color='rgb(128,0,0)'/><stop offset='1' stop-color='rgb(0,0,0)'/></linearGradient><linearGradient id='b' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='rgb(0,255,0)'/><stop offset='.14' stop-color='rgb(0,128,0)'/><stop offset='.86' stop-color='rgb(0,128,0)'/><stop offset='1' stop-color='rgb(0,0,0)'/></linearGradient></defs><rect width='600' height='400' fill='#000'/><rect width='600' height='400' fill='url(#a)' style='mix-blend-mode:screen'/><rect width='600' height='400' fill='url(#b)' style='mix-blend-mode:screen'/></svg>");
 const SVG_VERRE = `<svg class="cv-defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="cv-verre" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feImage href="data:image/svg+xml,${MAP_VERRE}" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="carte"/><feGaussianBlur in="SourceGraphic" stdDeviation="5" result="flou"/><feDisplacementMap in="flou" in2="carte" scale="46" xChannelSelector="R" yChannelSelector="G"/></filter></svg>`;
-const VER_SITE = '20261118e'; /* à changer à chaque modification de site.css ou site.js (cache du navigateur) */
+const VER_SITE = '20261118f'; /* à changer à chaque modification de site.css ou site.js (cache du navigateur) */
+/* Décor de la scène du haut : des objets du métier (crayons, règle, ordinateur) derrière le verre. L'ordinateur s'ouvre quand on défile ; son écran montre une démonstration. */
+const decor = (ex) => `<svg class="cv-objets" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" focusable="false"><defs>
+<linearGradient id="d-jaune" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe27a"/><stop offset=".5" stop-color="#f2bf33"/><stop offset="1" stop-color="#c8921b"/></linearGradient>
+<linearGradient id="d-bord" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c2415f"/><stop offset=".5" stop-color="#8a2238"/><stop offset="1" stop-color="#5d1626"/></linearGradient>
+<linearGradient id="d-regle" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dfe8e2"/></linearGradient>
+<filter id="d-f4" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter>
+<filter id="d-f40" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="46"/></filter></defs>
+<g class="d3" filter="url(#d-f40)"><circle cx="1120" cy="250" r="250" fill="#5fd3a0" fill-opacity=".6"/><circle cx="260" cy="760" r="230" fill="#7be0c0" fill-opacity=".55"/><circle cx="700" cy="60" r="160" fill="#c7ee9a" fill-opacity=".45"/></g>
+<g class="d2" filter="url(#d-f4)"><g transform="translate(560 770) rotate(16)"><rect width="380" height="34" rx="3" fill="url(#d-bord)"/><polygon points="380,0 452,17 380,34" fill="#e8c9a0"/><polygon points="436,11 452,17 436,23" fill="#3a2a24"/></g><g transform="translate(40 790) rotate(-5)"><rect width="360" height="58" rx="7" fill="url(#d-regle)" stroke="#b8c4bd" stroke-width="2"/><path d="M24 0v22M48 0v14M72 0v22M96 0v14M120 0v22M144 0v14M168 0v22M192 0v14M216 0v22M240 0v14M264 0v22M288 0v14M312 0v22M336 0v14" stroke="#4b5a52" stroke-width="3" fill="none"/></g></g>
+<g class="d1"><g transform="translate(660 190) rotate(-20)"><rect width="400" height="38" rx="3" fill="url(#d-jaune)"/><rect y="12" width="400" height="5" fill="#fff" fill-opacity=".45"/><rect x="-26" width="30" height="38" rx="6" fill="#e98aa0"/><rect x="-8" width="8" height="38" fill="#b8bcc2"/><polygon points="400,0 478,19 400,38" fill="#efd3a8"/><polygon points="458,12 478,19 458,26" fill="#2c2623"/></g></g></svg>
+<div class="cv-lap"><div class="cv-lap-lid"><div class="cv-lap-ecran">${ex[0] ? img(ex[0].photos[0], 1000, 'cv-lap-img', false, '', '(max-width: 700px) 70vw, 36vw') : ''}</div></div><div class="cv-lap-base"></div></div>`;
 const CV = {
-  presente: 'Création et refonte de sites internet pour les commerces, les artisans et les entreprises : un site à votre nom, une maquette gratuite en 5 jours ouvrés, des horaires et des photos que vous changez vous-même.',
+  presente: 'Création et refonte de sites internet pour les commerces, les artisans et les entreprises : site vitrine, boutique et catalogue, site d’entreprise, entretien et modifications. Une maquette gratuite à votre nom, en 5 jours ouvrés.',
   pourquoi: 'Pourquoi un site réalisé pour vous ?', pourquoiTexte: 'Parce que vous gardez votre temps pour votre métier : le site est créé avec vos informations, vous validez, puis vous le modifiez depuis votre téléphone. Sans abonnement mensuel, à la différence d’un constructeur en ligne où tout reste à faire soi-même.',
   champ: 'Le nom de votre commerce', exemple: 'Boulangerie Martin',
   aide: 'Il reste sur cet appareil jusqu’à votre demande de maquette. Rien n’est envoyé avant.',
@@ -422,7 +433,7 @@ const CV = {
     'Pas d’abonnement. Si l’hébergement devenait payant un jour, je vous le dirais avant toute facture. Le nom de domaine est enregistré à votre nom dès le départ.',
     'À la mise en ligne, quinze minutes de prise en main sur votre téléphone. Les demandes de vos clients (commandes, réservations, devis) arrivent dans votre espace.',
   ],
-  teintes: ['#cfe3d6', '#cfe0f0', '#f1d9bf', '#ecc9d1'],
+  teintes: ['#c9ead8', '#cfeee6', '#d8efd0', '#e3f1cf'],
   etapesTitre: 'Comment ça se passe', etapesIntro: 'Trois étapes, du premier échange à la mise en ligne.',
   offres: 'Les formules', offresIntro: 'Choisissez la base, ajoutez ce dont vous avez besoin. Chaque prix est fixé par un devis écrit avant le début des travaux.', prix: 'Sur devis',
   offresNote: 'Le nom de domaine se renouvelle environ 10 € par an, à votre nom. L’hébergement est gratuit aujourd’hui ; je vous préviens avant toute facture.',
@@ -439,18 +450,10 @@ function corpsVitrines(C, D, A, G, essais) {
   return `${SVG_VERRE}
   <section class="cv-couloir" aria-labelledby="cv-h1" data-cv>
     <div class="cv-scene">
-      <span class="cv-voile" aria-hidden="true"></span><span class="cv-fond" aria-hidden="true"><svg class="cv-objets" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs>
-<radialGradient id="o-b" cx=".32" cy=".3" r=".85"><stop offset="0" stop-color="#f6a9ba"/><stop offset=".3" stop-color="#c13a58"/><stop offset=".65" stop-color="#7a1f33"/><stop offset="1" stop-color="#5a1226"/></radialGradient>
-<radialGradient id="o-g" cx=".32" cy=".3" r=".85"><stop offset="0" stop-color="#fff7d6"/><stop offset=".3" stop-color="#f3cd62"/><stop offset=".68" stop-color="#bd851c"/><stop offset="1" stop-color="#8a5d12"/></radialGradient>
-<radialGradient id="o-s" cx=".32" cy=".3" r=".85"><stop offset="0" stop-color="#f4fcf6"/><stop offset=".4" stop-color="#a8ccb4"/><stop offset="1" stop-color="#6b9a82"/></radialGradient>
-<linearGradient id="o-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff4c6"/><stop offset=".35" stop-color="#e8b84c"/><stop offset=".7" stop-color="#9b6f14"/><stop offset="1" stop-color="#f7da80"/></linearGradient>
-<filter id="o-f6" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6"/></filter>
-<filter id="o-f16" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="16"/></filter></defs>
-<g class="d3" filter="url(#o-f16)"><circle cx="1390" cy="70" r="230" fill="url(#o-g)"/><circle cx="90" cy="820" r="190" fill="url(#o-s)"/></g>
-<g class="d2" filter="url(#o-f6)"><circle cx="800" cy="110" r="64" fill="url(#o-s)"/><circle cx="640" cy="790" r="96" fill="url(#o-g)"/><ellipse cx="330" cy="150" rx="120" ry="52" transform="rotate(-18 330 150)" fill="none" stroke="url(#o-r)" stroke-width="30"/></g>
-<g class="d1"><circle cx="1190" cy="250" r="150" fill="url(#o-b)"/><ellipse cx="1040" cy="590" rx="190" ry="84" transform="rotate(-22 1040 590)" fill="none" stroke="url(#o-r)" stroke-width="42"/><ellipse cx="1040" cy="582" rx="190" ry="84" transform="rotate(-22 1040 582)" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="4"/><circle cx="1340" cy="640" r="48" fill="url(#o-g)"/><circle cx="1240" cy="470" r="30" fill="url(#o-s)"/></g></svg></span>
+      <span class="cv-voile" aria-hidden="true"></span><span class="cv-fond" aria-hidden="true">${decor(exemples)}</span>
       <div class="cv-intro">
         <h1 id="cv-h1">${esc(A.titre || G.nom)}</h1>
+        <p class="cv-chapo">${esc(CV.presente)}</p>
         
         <form class="cv-nom" action="/contact" data-cv-nom>
           <label for="cv-nom">${esc(CV.champ)}</label>
@@ -473,7 +476,7 @@ function corpsVitrines(C, D, A, G, essais) {
     <div class="cv-bloc">
       <h2 id="cv-t-etapes">${esc(CV.etapesTitre)}</h2><p class="cv-intro-sec">${esc(CV.etapesIntro)}</p>
       <ol class="cv-etapes-liste">${etapes.map((e) => `<li><h3>${esc(e.titre)}</h3>${(e.points || []).map((p) => `<p>${esc(p)}</p>`).join('')}</li>`).join('')}</ol>
-      ${src((C.presentation || {}).photo_2, 1200) ? `<figure class="cv-photo">${img(C.presentation.photo_2, 1200, 'cv-photo-img', false, 'Un poste de travail : un ordinateur portable et un carnet', '(max-width: 700px) 92vw, 1100px')}<figcaption>Photo d’illustration (Unsplash, Christin Hume) : un poste de travail. Elle ne montre ni mon bureau ni un client.</figcaption></figure>` : ''}
+      ${src((C.presentation || {}).photo_2, 1200) ? `<figure class="cv-photo">${img(C.presentation.photo_2, 1200, 'cv-photo-img', false, 'Un poste de travail : un ordinateur portable et un carnet', '(max-width: 700px) 92vw, 1100px')}</figure>` : ''}
     </div>
   </section>` : ''}
   <aside class="cv-panneau-sec" aria-labelledby="cv-t-pq"><div class="cv-panneau"><h2 id="cv-t-pq">${esc(CV.pourquoi)}</h2><p>${esc(CV.pourquoiTexte)}</p></div></aside>

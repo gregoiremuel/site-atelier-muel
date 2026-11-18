@@ -6,7 +6,7 @@ Branche `audit/refonte-accueil`. Textes : `docs/TEXTES-REFONTE.md`. Règles : `d
 - Accueil : informations d'abord (couloir « Pourquoi me choisir », 4 cartes en verre liquide sur la photo de la rue, vraie 3D au défilement), puis étapes, comparatif, formules (bande horizontale épinglée, prix 590 € / dès 1 290 € / dès 1 900 € / sur devis), exemples (4 démos), portrait, appel final. Plus aucune image dessinée ou générée.
 - Couleurs : majorité blanc / gris `#f5f5f7`, encre `#1d1d1f`, bordeaux franc `#7a1f33` en touches, safran `#e3b04b`, sauge `#e3e9df`. Titres Red Hat Display 900 en capitales (hébergée). Boutons : étiquettes de prix percées.
 - Tout le site (offres, réalisations, actualités, à propos, engagements, contact) suit les mêmes jetons (`body.g-edition` dans `site.css`, bloc « Tout le site »).
-- Comparatif Wix : affiché sur l'accueil même si `comparaison.actif` est faux. Tarifs Wix relevés en octobre 2026 : à revérifier sur wix.com.
+- Comparatif Wix retiré (18/11) : remplacé par un petit panneau « Pourquoi un site réalisé pour vous ? ». Plus de photo en tête : fond blanc quadrillé, verre liquide (filtre SVG de réfraction, Chromium ; flou ailleurs).
 - Photos libres déjà créditées (Unsplash) : rue parisienne (fond), poste de travail (étapes).
 
 ## Pièges

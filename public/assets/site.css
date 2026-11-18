@@ -1537,3 +1537,4 @@ body.g-edition .tete-page.ch-marine .ancres a{background:rgba(255,255,255,.55);c
 @media (min-width:900px){.g-edition .tete-duo .tete-fig{margin-bottom:0;align-self:center}.g-edition .tete-duo{padding-bottom:clamp(40px,5vw,72px)}}
 .g-edition .tete-fig img{border-radius:18px}
 @media (max-width:700px){.cv-on .cv-p{opacity:calc(max(0,min(1,1.4 - var(--d) * 3)) * max(0,min(1,2 + var(--d) * 5)) * (1 - var(--s)))}}
+.cv-objets circle{stroke:none}

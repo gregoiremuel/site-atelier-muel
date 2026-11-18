@@ -403,7 +403,12 @@ const teteFig = (champ) => (src(champ, 1200) ? `<figure class="tete-fig">${img(c
    Les textes ci-dessous sont ceux de docs/TEXTES-REFONTE.md ; le titre et la phrase du premier écran viennent de « accueil » (modifiables dans /admin). */
 /* ---------- Accueil du gabarit « édition » (v5, 18/11/2026) : des informations d'abord, puis les formules, puis des exemples ----------
    Textes : docs/TEXTES-REFONTE.md. Les quatre raisons viennent de « accueil.reperes » (modifiables dans /admin), le reste de ce bloc. Rien d'inventé : chaque phrase reprend un texte déjà en ligne. */
+/* Verre liquide : lentille de réfraction (carte de déplacement dessinée en SVG), flou et saturation. Chromium seulement ; ailleurs, flou classique (site.css). */
+const MAP_VERRE = encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><defs><linearGradient id='a' x1='0' x2='1' y1='0' y2='0'><stop offset='0' stop-color='rgb(255,0,0)'/><stop offset='.1' stop-color='rgb(128,0,0)'/><stop offset='.9' stop-color='rgb(128,0,0)'/><stop offset='1' stop-color='rgb(0,0,0)'/></linearGradient><linearGradient id='b' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='rgb(0,255,0)'/><stop offset='.14' stop-color='rgb(0,128,0)'/><stop offset='.86' stop-color='rgb(0,128,0)'/><stop offset='1' stop-color='rgb(0,0,0)'/></linearGradient></defs><rect width='600' height='400' fill='#000'/><rect width='600' height='400' fill='url(#a)' style='mix-blend-mode:screen'/><rect width='600' height='400' fill='url(#b)' style='mix-blend-mode:screen'/></svg>");
+const SVG_VERRE = `<svg class="cv-defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="cv-verre" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feImage href="data:image/svg+xml,${MAP_VERRE}" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="carte"/><feGaussianBlur in="SourceGraphic" stdDeviation="5" result="flou"/><feDisplacementMap in="flou" in2="carte" scale="46" xChannelSelector="R" yChannelSelector="G"/></filter></svg>`;
 const CV = {
+  presente: 'Création et refonte de sites internet pour les commerces, les artisans et les entreprises : un site à votre nom, une maquette gratuite en 5 jours ouvrés, des horaires et des photos que vous changez vous-même.',
+  pourquoi: 'Pourquoi un site réalisé pour vous ?', pourquoiTexte: 'Parce que vous gardez votre temps pour votre métier : le site est créé avec vos informations, vous validez, puis vous le modifiez depuis votre téléphone. Sans abonnement mensuel, à la différence d’un constructeur en ligne où tout reste à faire soi-même.',
   champ: 'Le nom de votre commerce', exemple: 'Boulangerie Martin',
   aide: 'Il reste sur cet appareil jusqu’à votre demande de maquette. Rien n’est envoyé avant.',
   bouton: 'Voir ma maquette gratuite', sous: 'Gratuite, à votre nom, en 5 jours ouvrés. Elle ne vous plaît pas : vous ne devez rien.',
@@ -429,13 +434,13 @@ function corpsVitrines(C, D, A, G, essais) {
   const court = (x) => String(x.nom).split(',')[0];
   const tel = G.telephone ? telHref(G.telephone) : '';
   const etapes = (D.etapes || []).slice(0, 3);
-  return `
+  return `${SVG_VERRE}
   <section class="cv-couloir" aria-labelledby="cv-h1" data-cv>
     <div class="cv-scene">
-      ${src(A.photo_fond, 1600) ? `${img(A.photo_fond, 1600, 'cv-fond', true, '', '100vw')}<span class="cv-voile" aria-hidden="true"></span>` : ''}
+      <span class="cv-voile" aria-hidden="true"></span><span class="cv-fond" aria-hidden="true"></span>
       <div class="cv-intro">
         <h1 id="cv-h1">${esc(A.titre || G.nom)}</h1>
-        ${A.texte ? `<p class="cv-chapo">${esc(A.texte)}</p>` : ''}
+        <p class="cv-chapo">${esc(CV.presente)}</p>${(D.secteurs || []).length ? `<p class="cv-pour">${D.secteurs.map((s) => esc(s.nom)).join(' · ')}</p>` : ''}
         <form class="cv-nom" action="/contact" data-cv-nom>
           <label for="cv-nom">${esc(CV.champ)}</label>
           <div class="cv-nom-ligne"><input class="saisie" id="cv-nom" type="text" autocomplete="organization" maxlength="80" placeholder="${esc(CV.exemple)}" aria-describedby="cv-aide"><button class="cv-btn" type="submit">${esc(CV.bouton)}</button></div>
@@ -460,17 +465,7 @@ function corpsVitrines(C, D, A, G, essais) {
       ${src((C.presentation || {}).photo_2, 1200) ? `<figure class="cv-photo">${img(C.presentation.photo_2, 1200, 'cv-photo-img', false, 'Un poste de travail : un ordinateur portable et un carnet', '(max-width: 700px) 92vw, 1100px')}<figcaption>Photo d’illustration (Unsplash, Christin Hume) : un poste de travail. Elle ne montre ni mon bureau ni un client.</figcaption></figure>` : ''}
     </div>
   </section>` : ''}
-  ${(() => { const K = D.comparaison; if (!K) return ''; const [c1, c2] = K.colonnes; return `
-  <section class="cv-compar" aria-labelledby="cv-t-cmp">
-    <div class="cv-bloc">
-      <h2 id="cv-t-cmp">${esc(K.titre || libelle(C, 'comparaison_titre'))}</h2>${K.intro ? `<p class="cv-intro-sec">${esc(K.intro)}</p>` : ''}
-      <div class="cv-cmp" role="table" aria-label="${esc(K.titre || '')}">
-        <div class="cv-cmp-l cv-cmp-tete" role="row"><span role="columnheader"><span class="sr">Critère</span></span><span role="columnheader">${esc(c1)}</span><span role="columnheader">${esc(c2)}</span></div>
-        ${K.lignes.map((l) => `<div class="cv-cmp-l" role="row"><b role="rowheader">${esc(l.critere)}</b><span role="cell"><i>${esc(c1)}</i>${esc(l.a)}</span><span role="cell" class="cv-cmp-nous"><i>${esc(c2)}</i>${esc(l.b)}</span></div>`).join('')}
-      </div>
-      ${K.note ? `<p class="cv-note-cmp">${esc(K.note)}</p>` : ''}
-    </div>
-  </section>`; })()}
+  <aside class="cv-panneau-sec" aria-labelledby="cv-t-pq"><div class="cv-panneau"><h2 id="cv-t-pq">${esc(CV.pourquoi)}</h2><p>${esc(CV.pourquoiTexte)}</p></div></aside>
   ${D.metiers.length ? `
   <section class="cv-offres" aria-labelledby="cv-t-off">
     <div class="cv-offres-pin">

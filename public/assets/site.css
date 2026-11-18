@@ -1443,24 +1443,6 @@ body.p-accueil{--bx:#7a1f33;--bx2:#5d1626}
 .cv-prix .prix-l{display:block;margin-top:4px;font:500 .9375rem/1.3 var(--texte);color:var(--txt2)}
 .cv-offres{overflow-x:clip}
 @supports (animation-timeline:view()){@media (min-width:900px) and (min-height:760px) and (prefers-reduced-motion:no-preference){.cv-offres-pin{overflow:visible;justify-content:flex-start;padding-top:clamp(28px,5vh,64px)}}}
-/* comparatif */
-.cv-compar{padding:clamp(56px,8vw,104px) var(--m);background:#fff}
-.cv-compar h2{font-size:clamp(1.5rem,3vw,2.25rem);margin:0 0 12px}
-.cv-cmp{display:grid;gap:0;max-width:1100px}
-.cv-cmp-l{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:20px 0;border-bottom:1px solid #d2d2d7}
-.cv-cmp-l b{font-size:1.0625rem}
-.cv-cmp-l span{font-size:1rem;line-height:1.55;color:var(--txt2)}
-.cv-cmp-l i{display:block;font-style:normal;font-weight:700;font-size:.875rem;color:var(--ink);margin-bottom:2px}
-.cv-cmp-nous{color:var(--ink)!important;background:#f6e9ec;border-left:4px solid var(--bx);padding:12px 16px;border-radius:0 14px 14px 0}
-.cv-cmp-tete{display:none}
-@media (min-width:900px){
-  .cv-cmp-l{grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
-  .cv-cmp-l i{display:none}
-  .cv-cmp-tete{display:grid;font-weight:700;border-bottom:3px solid var(--ink);padding-bottom:12px}
-  .cv-cmp-tete span{font:800 1.0625rem/1.3 var(--texte);color:var(--ink)}
-  .cv-cmp-tete span:last-child{color:var(--bx)}
-}
-.cv-note-cmp{max-width:70ch;margin:20px 0 0;font-size:.9375rem;line-height:1.55;color:var(--txt2)}
 /* photo d'illustration */
 .cv-photo{margin:40px 0 0}
 .cv-photo-img{display:block;width:100%;height:clamp(200px,32vw,420px);object-fit:cover;border-radius:24px}
@@ -1499,3 +1481,35 @@ body.g-edition .appel{background:#1e2d26}
 
 @media (max-width:700px){.cv-on .cv-p{top:58%;opacity:calc(max(0,min(1,1.4 - var(--d) * 3)) * max(0,min(1,2 + var(--d) * 5)) * (1 - var(--s)))}}
 @media (max-width:700px){body.g-edition main h1,body.g-edition .cv-couloir h1{font-size:1.875rem}body.g-edition main h2{font-size:1.5rem}body.g-edition main h3{font-size:1.25rem}}
+
+
+/* =====================================================================
+   v7 (18/11/2026) : plus de photo en tête ; fond blanc quadrillé très légèrement ; verre liquide (réfraction + reflet de bord, Chromium) ;
+   comparatif remplacé par un petit panneau ; en-tête en verre au défilement ; pages intérieures dans le même style, animations légères.
+   ===================================================================== */
+.cv-final::before,.cv-offres::before{content:none!important;display:none!important}
+.cv-pour{margin:0 0 18px;font-weight:700;font-size:.9375rem;line-height:1.4;color:var(--bx)}
+.cv-couloir:not(.cv-on) .cv-intro{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%271440%27%20height%3D%27900%27%20viewBox%3D%270%200%201440%20900%27%20preserveAspectRatio%3D%27xMidYMid%20slice%27%3E%3Cdefs%3E%3Cpattern%20id%3D%27g%27%20width%3D%2760%27%20height%3D%2760%27%20patternUnits%3D%27userSpaceOnUse%27%3E%3Cpath%20d%3D%27M60%200H0V60%27%20fill%3D%27none%27%20stroke%3D%27%231d1d1f%27%20stroke-opacity%3D%27.08%27%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%271440%27%20height%3D%27900%27%20fill%3D%27url(%23g)%27%2F%3E%3Ccircle%20cx%3D%271130%27%20cy%3D%27360%27%20r%3D%27215%27%20fill%3D%27%23f2dfae%27%20fill-opacity%3D%27.75%27%2F%3E%3Ccircle%20cx%3D%271000%27%20cy%3D%27540%27%20r%3D%27150%27%20fill%3D%27%23cfe3d6%27%20fill-opacity%3D%27.85%27%2F%3E%3Ccircle%20cx%3D%271130%27%20cy%3D%27360%27%20r%3D%27310%27%20fill%3D%27none%27%20stroke%3D%27%237a1f33%27%20stroke-opacity%3D%27.4%27%20stroke-width%3D%272%27%2F%3E%3Cpath%20d%3D%27M0%20120H1440%27%20stroke%3D%27%231d1d1f%27%20stroke-opacity%3D%27.18%27%20stroke-width%3D%273%27%2F%3E%3Crect%20x%3D%27980%27%20y%3D%27724%27%20width%3D%27260%27%20height%3D%279%27%20fill%3D%27%237a1f33%27%2F%3E%3Cpath%20d%3D%27M80%20840v-22M120%20840v-12M160%20840v-22M200%20840v-12M240%20840v-22M280%20840v-12M320%20840v-22%27%20stroke%3D%27%231d1d1f%27%20stroke-opacity%3D%27.45%27%20stroke-width%3D%273%27%2F%3E%3C%2Fsvg%3E") center/cover}
+.cv-on .cv-scene{background:#fff}
+.cv-on .cv-fond{display:block;position:absolute;inset:0;z-index:1;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%271440%27%20height%3D%27900%27%20viewBox%3D%270%200%201440%20900%27%20preserveAspectRatio%3D%27xMidYMid%20slice%27%3E%3Cdefs%3E%3Cpattern%20id%3D%27g%27%20width%3D%2760%27%20height%3D%2760%27%20patternUnits%3D%27userSpaceOnUse%27%3E%3Cpath%20d%3D%27M60%200H0V60%27%20fill%3D%27none%27%20stroke%3D%27%231d1d1f%27%20stroke-opacity%3D%27.08%27%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%271440%27%20height%3D%27900%27%20fill%3D%27url(%23g)%27%2F%3E%3Ccircle%20cx%3D%271130%27%20cy%3D%27360%27%20r%3D%27215%27%20fill%3D%27%23f2dfae%27%20fill-opacity%3D%27.75%27%2F%3E%3Ccircle%20cx%3D%271000%27%20cy%3D%27540%27%20r%3D%27150%27%20fill%3D%27%23cfe3d6%27%20fill-opacity%3D%27.85%27%2F%3E%3Ccircle%20cx%3D%271130%27%20cy%3D%27360%27%20r%3D%27310%27%20fill%3D%27none%27%20stroke%3D%27%237a1f33%27%20stroke-opacity%3D%27.4%27%20stroke-width%3D%272%27%2F%3E%3Cpath%20d%3D%27M0%20120H1440%27%20stroke%3D%27%231d1d1f%27%20stroke-opacity%3D%27.18%27%20stroke-width%3D%273%27%2F%3E%3Crect%20x%3D%27980%27%20y%3D%27724%27%20width%3D%27260%27%20height%3D%279%27%20fill%3D%27%237a1f33%27%2F%3E%3Cpath%20d%3D%27M80%20840v-22M120%20840v-12M160%20840v-22M200%20840v-12M240%20840v-22M280%20840v-12M320%20840v-22%27%20stroke%3D%27%231d1d1f%27%20stroke-opacity%3D%27.45%27%20stroke-width%3D%273%27%2F%3E%3C%2Fsvg%3E") center/cover no-repeat}
+.cv-on .cv-voile{opacity:.4}
+.cv-on .cv-intro,.cv-on .cv-tete,.cv-on .cv-carte{background:rgba(255,255,255,.26);-webkit-backdrop-filter:blur(14px) saturate(1.8) brightness(1.06);backdrop-filter:blur(14px) saturate(1.8) brightness(1.06);border:0;box-shadow:inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.95),inset -1px -1px 1px -.5px rgba(255,255,255,.6),inset 0 0 24px rgba(255,255,255,.35),0 14px 40px rgba(29,45,38,.12)}
+@supports not (-webkit-hyphens:none){@supports not (-moz-appearance:none){.cv-on .cv-intro,.cv-on .cv-tete,.cv-on .cv-carte{backdrop-filter:url(#cv-verre) saturate(1.8) brightness(1.06)}}}
+.cv-defs{position:absolute;width:0;height:0}
+/* petit panneau « pourquoi un site réalisé pour vous » */
+.cv-panneau-sec{padding:0 var(--m) clamp(40px,6vw,72px);background:#fff}
+.cv-panneau{max-width:1100px;margin:0 auto;padding:28px 32px;border-radius:24px;background:#f5f5f7;box-shadow:inset 6px 0 0 var(--bx)}
+.cv-panneau h2{font-size:1.25rem;margin:0 0 8px}
+.cv-panneau p{margin:0;max-width:78ch;font-size:1.0625rem;line-height:1.6;color:#515154}
+/* pages intérieures : même quadrillage léger, en-tête en verre, apparition douce */
+body.g-edition .tete-page{background-color:#f5f5f7;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2764%27%20height%3D%2764%27%3E%3Cpath%20d%3D%27M64%200H0V64%27%20fill%3D%27none%27%20stroke%3D%27%231d1d1f%27%20stroke-opacity%3D%27.06%27%2F%3E%3C%2Fsvg%3E")}
+body.g-edition .tete.defile{background:rgba(255,255,255,.72)!important;-webkit-backdrop-filter:blur(18px) saturate(1.8);backdrop-filter:blur(18px) saturate(1.8)}
+body.g-edition .ancres a{background:rgba(255,255,255,.5);color:var(--ink);-webkit-backdrop-filter:blur(10px) saturate(1.6);backdrop-filter:blur(10px) saturate(1.6);box-shadow:inset 1px 1px 1px -.5px rgba(255,255,255,.95),0 4px 14px rgba(29,45,38,.1);border-radius:14px}
+body.g-edition .tete-page.ch-marine .ancres a{background:rgba(255,255,255,.16);color:#fff}
+@keyframes cv-entre{from{transform:translateY(22px)}to{transform:none}}
+@supports (animation-timeline:view()){@media (prefers-reduced-motion:no-preference){
+  body.g-edition:not(.p-accueil) .plan,body.g-edition:not(.p-accueil) .etapes>li,body.g-edition:not(.p-accueil) .carte,body.g-edition:not(.p-accueil) .essai-liens li,body.g-edition:not(.p-accueil) .metier-liens a,body.g-edition:not(.p-accueil) .offre,body.g-edition:not(.p-accueil) .coord,body.g-edition:not(.p-accueil) .cmd-form{animation:cv-entre linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+}}
+.cv-on .cv-panneaux{z-index:2}
+.cv-offres .cv-offre,.cv-etapes-liste li,.cv-panneau{box-shadow:none}
+.cv-offre h3::before,.cv-etapes-liste h3::before,.cv-panneau h2::before{content:"";display:block;width:44px;height:5px;background:var(--bx);margin-bottom:14px}

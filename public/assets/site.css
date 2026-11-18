@@ -1513,3 +1513,27 @@ body.g-edition .tete-page.ch-marine .ancres a{background:rgba(255,255,255,.16);c
 .cv-on .cv-panneaux{z-index:2}
 .cv-offres .cv-offre,.cv-etapes-liste li,.cv-panneau{box-shadow:none}
 .cv-offre h3::before,.cv-etapes-liste h3::before,.cv-panneau h2::before{content:"";display:block;width:44px;height:5px;background:var(--bx);margin-bottom:14px}
+
+
+/* =====================================================================
+   v8 (18/11/2026) : verre dépoli façon « glassmorphism » : objets brillants (sphères, anneaux) derrière un panneau translucide très flouté,
+   liseré clair de 1 px, reflet de bord. Plus de photo, plus de bandeau de fin, plus de feston. Pages intérieures : même bandeau en verre.
+   ===================================================================== */
+.cv-on .cv-scene{background:#eef0f2}
+.cv-on .cv-fond{background:none}
+.cv-objets{display:block;width:100%;height:100%}
+.cv-objets .d1{transform:translate3d(0,calc(var(--pr,0) * -240px),0)}
+.cv-objets .d2{transform:translate3d(calc(var(--pr,0) * 140px),calc(var(--pr,0) * -130px),0)}
+.cv-objets .d3{transform:translate3d(0,calc(var(--pr,0) * 150px),0)}
+.cv-on .cv-voile{opacity:.3}
+.cv-on .cv-intro,.cv-on .cv-tete,.cv-on .cv-carte{background:rgba(255,255,255,.3);-webkit-backdrop-filter:blur(24px) saturate(1.7);backdrop-filter:blur(24px) saturate(1.7);border:1px solid rgba(255,255,255,.6);box-shadow:inset 1px 1px 0 rgba(255,255,255,.85),inset -1px -1px 0 rgba(255,255,255,.3),inset 0 0 30px rgba(255,255,255,.2),0 22px 54px rgba(40,24,30,.16)}
+@supports not (-webkit-hyphens:none){@supports not (-moz-appearance:none){.cv-on .cv-intro,.cv-on .cv-tete,.cv-on .cv-carte{backdrop-filter:url(#cv-verre) saturate(1.7)}}}
+.cv-intro .cv-sous{margin-top:14px}
+body.g-edition section.tete-page.tete-page{position:relative;background-color:#eef0f2;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%271440%27%20height%3D%27420%27%20viewBox%3D%270%200%201440%20420%27%20preserveAspectRatio%3D%27xMaxYMid%20slice%27%3E%3Cdefs%3E%3CradialGradient%20id%3D%27b%27%20cx%3D%27.32%27%20cy%3D%27.3%27%20r%3D%27.85%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23f6a9ba%27%2F%3E%3Cstop%20offset%3D%27.3%27%20stop-color%3D%27%23c13a58%27%2F%3E%3Cstop%20offset%3D%27.65%27%20stop-color%3D%27%237a1f33%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23340a16%27%2F%3E%3C%2FradialGradient%3E%3CradialGradient%20id%3D%27g%27%20cx%3D%27.32%27%20cy%3D%27.3%27%20r%3D%27.85%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23fff7d6%27%2F%3E%3Cstop%20offset%3D%27.3%27%20stop-color%3D%27%23f3cd62%27%2F%3E%3Cstop%20offset%3D%27.68%27%20stop-color%3D%27%23bd851c%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%235e3e08%27%2F%3E%3C%2FradialGradient%3E%3CradialGradient%20id%3D%27s%27%20cx%3D%27.32%27%20cy%3D%27.3%27%20r%3D%27.85%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23f4fcf6%27%2F%3E%3Cstop%20offset%3D%27.4%27%20stop-color%3D%27%23a8ccb4%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%234f8068%27%2F%3E%3C%2FradialGradient%3E%3ClinearGradient%20id%3D%27r%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23fff4c6%27%2F%3E%3Cstop%20offset%3D%27.35%27%20stop-color%3D%27%23e8b84c%27%2F%3E%3Cstop%20offset%3D%27.7%27%20stop-color%3D%27%239b6f14%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23f7da80%27%2F%3E%3C%2FlinearGradient%3E%3Cfilter%20id%3D%27f%27%20x%3D%27-40%25%27%20y%3D%27-40%25%27%20width%3D%27180%25%27%20height%3D%27180%25%27%3E%3CfeGaussianBlur%20stdDeviation%3D%2714%27%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Crect%20width%3D%271440%27%20height%3D%27420%27%20fill%3D%27%23eef0f2%27%2F%3E%3Cg%20filter%3D%27url(%23f)%27%3E%3Ccircle%20cx%3D%271400%27%20cy%3D%2740%27%20r%3D%27200%27%20fill%3D%27url(%23g)%27%2F%3E%3Ccircle%20cx%3D%2760%27%20cy%3D%27420%27%20r%3D%27170%27%20fill%3D%27url(%23s)%27%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%271180%27%20cy%3D%27170%27%20r%3D%27120%27%20fill%3D%27url(%23b)%27%2F%3E%3Cellipse%20cx%3D%271020%27%20cy%3D%27300%27%20rx%3D%27150%27%20ry%3D%2764%27%20transform%3D%27rotate(-22%201020%20300)%27%20fill%3D%27none%27%20stroke%3D%27url(%23r)%27%20stroke-width%3D%2734%27%2F%3E%3Ccircle%20cx%3D%271330%27%20cy%3D%27320%27%20r%3D%2738%27%20fill%3D%27url(%23g)%27%2F%3E%3C%2Fsvg%3E");background-size:cover;background-position:right center;background-repeat:no-repeat}
+body.g-edition section.tete-page.ch-marine{background-color:#eef0f2;color:var(--ink)}
+body.g-edition .tete-page > .wrap{width:min(1200px,calc(100% - 2 * var(--gut)));margin-inline:auto;padding:clamp(24px,3.2vw,44px) clamp(22px,4vw,52px);border-radius:28px;background:rgba(255,255,255,.34);-webkit-backdrop-filter:blur(24px) saturate(1.7);backdrop-filter:blur(24px) saturate(1.7);border:1px solid rgba(255,255,255,.65);box-shadow:inset 1px 1px 0 rgba(255,255,255,.85),inset 0 0 30px rgba(255,255,255,.2),0 22px 54px rgba(40,24,30,.14)}
+body.g-edition .tete-page.ch-marine h1,body.g-edition .tete-page.ch-marine .chapo,body.g-edition .tete-page.ch-marine p{color:var(--ink)}
+body.g-edition .tete-page.ch-marine .ancres a{background:rgba(255,255,255,.55);color:var(--ink)}
+@media (min-width:900px){.g-edition .tete-duo .tete-fig{margin-bottom:0;align-self:center}.g-edition .tete-duo{padding-bottom:clamp(40px,5vw,72px)}}
+.g-edition .tete-fig img{border-radius:18px}
+@media (max-width:700px){.cv-on .cv-p{opacity:calc(max(0,min(1,1.4 - var(--d) * 3)) * max(0,min(1,2 + var(--d) * 5)) * (1 - var(--s)))}}

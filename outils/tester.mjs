@@ -91,7 +91,8 @@ async function tests() {
   if ((C.theme || {}).gabarit === 'studio') { r = await req('/'); const hs = await r.text(); verif(hs.includes('g-studio') && hs.includes('Bricolage Grotesque'), 'Gabarit « studio » : classe et polices du site'); r = await req('/fonts/bricolage-grotesque-latin-700-normal.woff2'); verif(r.status === 200, 'Police du gabarit « studio » servie'); }
   if ((C.theme || {}).gabarit === 'edition') {
     r = await req('/'); const he = await r.text();
-    verif(he.includes('g-edition') && he.includes('Besley') && he.includes('class="hero-gar"'), 'Gabarit « édition » : classe, polices et repères chiffrés');
+    verif(he.includes('g-edition') && he.includes('Besley') && he.includes('Red Hat Display') && he.includes('class="cv-couloir"') && he.includes('data-cv-nom') && he.includes('class="cv-offres"'), 'Gabarit « édition » : classe, polices, couloir des vitrines, champ du nom et bande des offres');
+    r = await req('/fonts/red-hat-display-latin-900-normal.woff2'); verif(r.status === 200, 'Police des titres de l’accueil servie');
     r = await req('/fonts/besley-latin-500-normal.woff2'); verif(r.status === 200, 'Police du gabarit « édition » servie');
     r = await req('/expertises'); const hv = await r.text();
     verif((hv.match(/<li class="plan"/g) || []).length === C.metiers.length, 'Gabarit « édition » : chaque offre est une tuile');
@@ -180,7 +181,8 @@ async function tests() {
     }
     h = await (await req('/actualites/essai-actu-test')).text();
     verif(h.includes('Essai : chantier en cours') && h.includes('BlogPosting') && h.includes('/realisations/' + x0.id), 'Actualité enregistrée : sa page existe, avec ses données pour Google et le lien vers la réalisation');
-    h = await (await req('/')).text(); verif(h.includes('href="/actualites"') && h.includes('/actualites/essai-actu-test'), 'Actualité : lien dans le menu et carte sur l’accueil');
+    /* L'accueil du gabarit « édition » (couloir des vitrines) n'a pas de carte d'actualité : le lien du menu suffit */
+    h = await (await req('/')).text(); verif(h.includes('href="/actualites"') && ((C.theme || {}).gabarit === 'edition' || h.includes('/actualites/essai-actu-test')), 'Actualité : lien dans le menu et carte sur l’accueil');
     h = await (await req('/sitemap.xml')).text(); verif(h.includes('/actualites/essai-actu-test</loc><lastmod>2099-01-01</lastmod>'), 'Actualité : présente dans le plan du site, avec sa date');
     h = await (await req('/realisations/' + x0.id)).text(); verif(h.includes('/actualites/essai-actu-test'), 'La réalisation liée renvoie vers son actualité');
     { const jour = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' }); const sm = await (await req('/sitemap.xml')).text();

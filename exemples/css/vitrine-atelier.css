@@ -1,0 +1,174 @@
+/* =====================================================================
+   Atelier du Merrain : un seul motif (direction Taste « one-motif », 16/11/2026).
+   Le motif est la queue d'aronde, l'assemblage de l'ébéniste : elle découpe chaque photo,
+   donne sa forme au bouton principal et aux puces, et revient en grand sur la bande des travaux.
+   Fond gris clair neutre, encre presque noire, un seul brun noyer. Angles droits, aucun filet,
+   aucun numéro d'index, aucune ombre. Vollkorn pour les titres, Source Sans 3 pour le texte.
+   ===================================================================== */
+body.g-atelier{
+  --fond:#f3f3f1;--surface:#e7e5e1;--encre:#17130f;--gris:#564e46;
+  --noyer:#4a3222;--noyer-fonce:#2f1f15;--noyer-clair:#6b4a33;--copeau:#d8c7b2;
+  --queue:polygon(0 0,100% 0,84% 100%,16% 100%);
+  --queue-btn:polygon(0 0,100% 0,95% 100%,5% 100%);
+  --bleu:var(--noyer);--bleu-fonce:var(--encre);
+  background:var(--fond);color:var(--encre);
+}
+body.g-atelier ::selection{background:var(--copeau);color:var(--encre)}
+body.g-atelier :focus-visible{outline:2px solid var(--noyer);outline-offset:3px}
+body.g-atelier h1,body.g-atelier h2,body.g-atelier h3{font-family:var(--titres);color:var(--encre);font-style:normal}
+body.g-atelier .sec h2,body.g-atelier .cmd-intro h2{font-size:clamp(2rem,3.2vw,2.75rem);font-weight:500;line-height:1.05;letter-spacing:-.01em}
+body.g-atelier h2::before,body.g-atelier h2::after{content:none!important}
+body.g-atelier .sec .intro,body.g-atelier .hnote{color:var(--gris)}
+body.g-atelier .illus{background:var(--fond);color:var(--encre);border:0;border-radius:0}
+
+/* ---------- Barre ---------- */
+body.g-atelier .g-tete,body.g-atelier .a-tete{background:var(--fond);border:0;box-shadow:none;color:var(--encre)}
+body.g-atelier .g-tete .g-nom{color:var(--encre)}
+body.g-atelier .g-tete .g-nav a{color:var(--encre);font-weight:600;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:6px;text-decoration-thickness:2px}
+body.g-atelier .g-tete .g-nav a:hover{text-decoration-color:var(--noyer)}
+body.g-atelier .menu-btn{border-radius:0;border:1.5px solid var(--encre);color:var(--encre);background:none}
+
+/* ---------- Boutons : le principal a la forme du motif, le second est un lien ---------- */
+body.g-atelier .btn,body.g-atelier .g-cta,body.g-atelier .cmd-envoyer{border-radius:0;border:0;background:var(--noyer);color:#fff;font-weight:700;min-height:48px;padding:0 30px;clip-path:var(--queue-btn)}
+body.g-atelier .btn:hover,body.g-atelier .g-cta:hover,body.g-atelier .cmd-envoyer:hover{background:var(--noyer-fonce)}
+body.g-atelier .btn:active,body.g-atelier .g-cta:active,body.g-atelier .cmd-envoyer:active{transform:scale(.97)}
+body.g-atelier .actions .btn-contour{clip-path:none;background:none;border:0;color:var(--encre);padding:0 6px;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px;text-decoration-color:var(--noyer)}
+body.g-atelier .actions .btn-contour:hover{background:none;color:var(--noyer)}
+@media (prefers-reduced-motion:no-preference){body.g-atelier .btn,body.g-atelier .g-cta,body.g-atelier .cmd-envoyer,body.g-atelier .g-nav a{transition:background-color .2s ease,color .2s ease,text-decoration-color .2s ease,transform .12s ease}}
+
+/* ---------- Premier écran : la photo découpée en queue d'aronde ---------- */
+body.g-atelier .a-hero{background:var(--fond);color:var(--encre);min-height:0}
+body.g-atelier .a-scene{position:relative;display:flex;flex-direction:column;min-height:0;background:none;padding:0}
+body.g-atelier .a-scene::before,body.g-atelier .a-scene::after,body.g-atelier .a-hero-fig::before,body.g-atelier .a-hero-fig::after{content:none}
+body.g-atelier .a-scene{justify-content:flex-start;align-items:stretch}
+body.g-atelier .a-hero-fig,body.g-atelier .a-index-fig,body.g-atelier .a-travaux-fig{overflow:hidden}
+body.g-atelier .a-hero-fig{position:relative;inset:auto;z-index:0;width:auto;align-self:stretch;margin:0 16px;height:52svh;min-height:300px;clip-path:var(--queue);background:var(--surface);order:0}
+body.g-atelier .a-hero-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:none;opacity:1}
+body.g-atelier .a-hero-fig .illus,body.g-atelier .a-index-fig .illus,body.g-atelier .a-travaux-fig .illus{position:absolute;left:18%;right:auto;bottom:10px;transform:none;z-index:2}
+body.g-atelier .a-hero-txt{position:relative;order:1;color:var(--encre);background:none;padding-top:36px;padding-bottom:56px;max-width:var(--wrap)}
+body.g-atelier .a-hero-txt .a-genre{display:none}
+body.g-atelier .a-hero-txt h1{font:500 clamp(2.5rem,7vw,4.25rem)/1.02 var(--titres);letter-spacing:-.02em;color:var(--encre);max-width:15ch;margin:0;text-shadow:none}
+body.g-atelier .a-hero .a-hero-txt > p:not(.statut):not(.a-genre){max-width:42ch;margin-top:22px;font-size:1.125rem;line-height:1.6;color:var(--gris);text-shadow:none}
+body.g-atelier .a-hero .a-hero-txt .statut{color:var(--encre);font-weight:700}
+body.g-atelier .a-hero .a-hero-txt .actions{margin-top:28px;align-items:center;gap:18px}
+body.g-atelier .a-hero .a-hero-txt .actions .btn:not(.btn-contour){background:var(--noyer);color:#fff;border:0}
+body.g-atelier .a-hero .a-hero-txt .actions .btn:not(.btn-contour):hover{background:var(--noyer-fonce)}
+body.g-atelier .a-hero .a-hero-txt .actions .btn-contour{color:var(--encre);background:none;border:0}
+
+/* ---------- L'atelier ---------- */
+body.g-atelier #boutique{background:var(--fond)}
+body.g-atelier #boutique .about{gap:32px;align-items:center}
+body.g-atelier #boutique .ph-main,body.g-atelier #boutique .ph-small{width:100%;aspect-ratio:4/5;height:auto;object-fit:cover;border:0;border-radius:0;box-shadow:none;transform:none;clip-path:var(--queue);margin:0}
+body.g-atelier #boutique .ph-small{width:min(70%,320px);margin-top:24px}
+body.g-atelier #boutique .txt p{color:var(--gris)}
+
+/* ---------- Ce que fait l'atelier : rangées, la queue d'aronde comme puce ---------- */
+body.g-atelier .a-index{background:var(--surface)}
+body.g-atelier .a-index-tete{display:grid;gap:28px;align-items:end;margin-bottom:32px}
+body.g-atelier .a-index-fig{margin:0;position:relative;clip-path:var(--queue);aspect-ratio:3/2;border:0}
+body.g-atelier .a-index-fig img{width:100%;height:100%;object-fit:cover}
+body.g-atelier .a-index-fig .illus{left:50%;right:auto;bottom:10px;transform:translateX(-50%)}
+body.g-atelier .a-index-liste{list-style:none;counter-reset:none;display:grid;gap:4px;padding:0;margin:0;border:0}
+body.g-atelier .a-index-liste li{display:grid;grid-template-columns:18px minmax(0,1fr);column-gap:16px;row-gap:4px;padding:20px 22px;background:var(--fond);border:0;margin:0}
+body.g-atelier .a-index-liste li::before{content:"";grid-row:1 / span 3;width:18px;height:14px;margin-top:8px;background:var(--noyer);clip-path:var(--queue)}
+body.g-atelier .a-index-liste .a-num{display:none}
+body.g-atelier .a-index-liste .a-titre{font:500 1.375rem/1.2 var(--titres);color:var(--encre)}
+body.g-atelier .a-index-liste .a-detail{color:var(--gris)}
+body.g-atelier .a-index-liste .a-delai{font-weight:700;color:var(--noyer)}
+body.g-atelier .a-index-liste .a-titre,body.g-atelier .a-index-liste .a-detail,body.g-atelier .a-index-liste .a-delai{grid-column:2;border:0;padding:0}
+
+/* ---------- Travaux courants : la bande noyer, le motif en grand ---------- */
+body.g-atelier .a-travaux{background:var(--noyer);color:#f1ebe4;position:relative;overflow:hidden}
+body.g-atelier .a-travaux::after{content:"";position:absolute;right:-6vw;top:0;width:34vw;height:100%;background:var(--noyer-clair);clip-path:var(--queue);opacity:.55;pointer-events:none}
+body.g-atelier .a-travaux .wrap{position:relative;z-index:1}
+body.g-atelier .a-travaux h2,body.g-atelier .a-travaux h3{color:#fff}
+body.g-atelier .a-travaux .intro,body.g-atelier .a-travaux p{color:#e6dcd1}
+body.g-atelier .a-tiroirs{list-style:none;display:grid;gap:4px;padding:0;margin:28px 0 0;border:0}
+body.g-atelier .a-tiroirs li{display:grid;row-gap:6px;padding:24px;background:var(--noyer-fonce);border:0;border-radius:0;color:#f1ebe4;margin:0}
+body.g-atelier .a-tiroirs li::before,body.g-atelier .a-tiroirs li::after{content:none}
+body.g-atelier .a-tiroirs b{font:500 1.5rem/1.15 var(--titres);color:#fff}
+body.g-atelier .a-tiroirs span{color:#e6dcd1}
+body.g-atelier .a-tiroirs em:empty{display:none}
+body.g-atelier .a-travaux .actions{margin-top:28px;align-items:center;gap:18px}
+body.g-atelier .a-travaux .actions .btn{background:#f1ebe4;color:var(--noyer-fonce)}
+body.g-atelier .a-travaux .actions .btn:hover{background:#fff}
+body.g-atelier .a-travaux .actions .btn-contour{background:none;color:#fff;text-decoration-color:var(--copeau)}
+body.g-atelier .a-travaux :focus-visible{outline-color:#fff}
+body.g-atelier .a-travaux-fig{margin:40px 0 0;position:relative;clip-path:var(--queue);aspect-ratio:16/9;border:0}
+body.g-atelier .a-travaux-fig img{width:100%;height:100%;object-fit:cover;filter:none}
+body.g-atelier .a-travaux-fig .illus{left:50%;right:auto;bottom:10px;transform:translateX(-50%)}
+
+/* ---------- Devis ---------- */
+body.g-atelier #demande{background:var(--fond)}
+body.g-atelier .cmd-form,body.g-atelier .cmd-ok{background:var(--surface);border:0;border-radius:0;box-shadow:none;padding:clamp(24px,4vw,40px)}
+body.g-atelier .cmd-etapes li::marker{color:var(--noyer);font-weight:700}
+body.g-atelier .saisie{border:1.5px solid #948a80;border-radius:0;background:#fff;padding-left:14px}
+body.g-atelier .saisie:focus{outline:2px solid var(--noyer);outline-offset:1px;border-color:var(--encre)}
+body.g-atelier .choix{border:1.5px solid #bdb5ac;border-radius:0;background:#fff;box-shadow:none}
+body.g-atelier .choix:has(input:checked){background:#efe6dc;border-color:var(--noyer)}
+body.g-atelier .choix input{accent-color:var(--noyer)}
+body.g-atelier .choix-txt em{font-style:normal;color:var(--noyer)}
+body.g-atelier .cmd-info,body.g-atelier .champ-bloc small{color:var(--gris)}
+
+/* ---------- Questions ---------- */
+body.g-atelier #questions{background:var(--surface)}
+body.g-atelier #questions .wrap{display:grid;gap:12px;text-align:left}
+body.g-atelier #questions h2{text-align:left;justify-content:flex-start}
+body.g-atelier .faq{display:grid;gap:4px;margin:16px 0 0;max-width:none;counter-reset:none}
+body.g-atelier .faq details,body.g-atelier .faq details:first-child,body.g-atelier .faq details:last-child{background:var(--fond);border:0;border-radius:0;padding:0 20px;margin:0}
+body.g-atelier .faq summary{display:flex;justify-content:space-between;align-items:center;gap:20px;list-style:none;cursor:pointer;font:600 1.0625rem/1.35 var(--texte);font-style:normal;color:var(--encre);padding:20px 0}
+body.g-atelier .faq summary::before{content:none}
+body.g-atelier .faq summary::-webkit-details-marker{display:none}
+body.g-atelier .faq summary::after{content:"+";flex:none;width:auto;height:auto;margin:0;border:0;background:none;transform:none;font:500 1.5rem/1 var(--texte);color:var(--noyer)}
+body.g-atelier .faq details[open] summary::after{content:"\2212"}
+body.g-atelier .faq .rep{color:var(--gris);padding:0 32px 22px 0}
+
+/* ---------- Horaires ---------- */
+body.g-atelier .g-horaires{background:var(--fond);color:var(--encre)}
+body.g-atelier .g-horaires h2,body.g-atelier .g-horaires h3,body.g-atelier .g-horaires .gros{color:var(--encre)}
+body.g-atelier .g-horaires-h{background:var(--surface);color:var(--encre);border:0;border-radius:0;padding:clamp(24px,4vw,40px)}
+body.g-atelier .g-horaires .hours div{border-color:#d5d1cb}
+body.g-atelier .g-horaires .hours .today{color:var(--noyer);font-weight:700}
+body.g-atelier .g-horaires .hnote,body.g-atelier .g-horaires p{color:var(--gris)}
+body.g-atelier .g-horaires-i{background:none;border:0;padding:0}
+body.g-atelier .g-horaires-i h3{font:700 .9375rem/1.3 var(--texte);color:var(--gris)}
+body.g-atelier .g-horaires .carte-box:not(.carte-ouverte){background:var(--surface)!important;border:0!important;border-radius:0}
+
+/* ---------- Pied ---------- */
+body.g-atelier .foot{background:var(--noyer-fonce);color:#ddd2c6;border:0}
+body.g-atelier .foot h3,body.g-atelier .foot a,body.g-atelier .foot .nom{color:#fff}
+body.g-atelier .foot .legal,body.g-atelier .foot .legal *{color:#cbbfb2}
+body.g-atelier .foot :focus-visible{outline-color:#fff}
+
+/* ---------- Ordinateur ---------- */
+@media (min-width:900px){
+  body.g-atelier .a-scene{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;min-height:calc(100svh - 120px)}
+  body.g-atelier .a-hero-fig{order:0;grid-column:2;grid-row:1;margin:0;height:calc(100svh - 120px);min-height:520px}
+  body.g-atelier .a-hero-txt{grid-column:1;grid-row:1;margin:0;max-width:none;padding-left:max(var(--gut),calc((100vw - var(--wrap)) / 2 + var(--gut)));padding-right:clamp(24px,4vw,64px)}
+  body.g-atelier #boutique .about{grid-template-columns:minmax(0,5fr) minmax(0,6fr);column-gap:clamp(48px,7vw,112px)}
+  body.g-atelier .a-index .wrap{grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(40px,5vw,80px);align-items:start}
+  body.g-atelier .a-index-tete{grid-template-columns:minmax(0,1fr);position:sticky;top:32px}
+  body.g-atelier .a-index-liste li{grid-template-columns:18px minmax(0,5fr) minmax(0,5fr) minmax(0,3fr);align-items:baseline}
+  body.g-atelier .a-index-liste li::before{grid-row:1;margin-top:0;align-self:center}
+  body.g-atelier .a-index-liste .a-titre{grid-column:2}
+  body.g-atelier .a-index-liste .a-detail{grid-column:3}
+  body.g-atelier .a-index-liste .a-delai{grid-column:4;text-align:right}
+  body.g-atelier .a-index-liste .a-titre,body.g-atelier .a-index-liste .a-detail,body.g-atelier .a-index-liste .a-delai{grid-row:1}
+  body.g-atelier .a-tiroirs{grid-template-columns:repeat(3,minmax(0,1fr))}
+  body.g-atelier .faq{max-width:820px}
+  body.g-atelier .sec{padding-top:clamp(88px,9vw,136px);padding-bottom:clamp(88px,9vw,136px)}
+}
+
+/* ---------- Mouvement : chaque photo se découvre comme un copeau de rabot ---------- */
+body.g-atelier .rev,.anime body.g-atelier .rev{opacity:1;transform:none;transition:none}
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    body.g-atelier #boutique .ph-main,body.g-atelier .a-index-fig,body.g-atelier .a-travaux-fig{animation:merrain-copeau linear both;animation-timeline:view();animation-range:entry 5% cover 40%}
+    body.g-atelier .a-hero-fig img{animation:merrain-recul linear both;animation-timeline:view();animation-range:exit 0% exit 100%}
+    body.g-atelier .a-index-liste li,body.g-atelier .a-tiroirs li,body.g-atelier .sec h2{animation:merrain-pousse linear both;animation-timeline:view();animation-range:entry 0% entry 80%}
+  }
+}
+@keyframes merrain-copeau{from{clip-path:polygon(0 0,6% 0,5% 100%,1% 100%)}to{clip-path:var(--queue)}}
+@keyframes merrain-recul{to{transform:scale(1.08) translateY(4%)}}
+@keyframes merrain-pousse{from{transform:translateX(-24px)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){body.g-atelier *{transition:none!important;animation:none!important}}

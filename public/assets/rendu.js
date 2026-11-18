@@ -387,7 +387,7 @@ const compoHero = (essais, fond) => {
   const tels4 = essais.filter((x) => x.lien && (x.photos || [])[2]).slice(0, 4);
   if (tels4.length >= 3) return `<div class="hero-compo hero-planche${src(fond, 1600) ? ' hero-avec-fond' : ''}">
       ${src(fond, 1600) ? `${img(fond, 1600, 'hero-fond', true, '', '(max-width: 900px) 100vw, 55vw')}` : ''}
-      <ul class="planche" aria-label="Démonstrations à essayer (entreprises imaginaires)">${tels4.map((x, i) => `<li><a class="planche-tel" href="${esc(x.lien)}"${/^https?:/.test(x.lien) ? ' target="_blank" rel="noopener"' : ''}><span class="planche-ecran">${img(x.photos[2], 500, 'compo-img', i < 2, '', '(max-width: 600px) 42vw, 130px')}</span><span class="planche-nom">${esc(String(x.nom).split(',')[0])}</span></a></li>`).join('')}</ul>
+      <ul class="planche" aria-label="Démonstrations à essayer (entreprises imaginaires)">${tels4.map((x, i) => `<li><a class="planche-tel" href="${esc(x.lien)}"${/^https?:/.test(x.lien) ? ' target="_blank" rel="noopener"' : ''}><span class="planche-ecran">${img(x.photos[2], 500, 'compo-img', true, '', '(max-width: 600px) 42vw, 130px')}</span><span class="planche-nom">${esc(String(x.nom).split(',')[0])}</span></a></li>`).join('')}</ul>
       <p class="planche-note">Démonstrations : entreprises imaginaires. Touchez un téléphone pour l’essayer.</p>
     </div>`;
   const bureau = (essais[0] || {}).photos && essais[0].photos[0], tels = essais.slice(1, 3).map((x) => (x.photos || [])[2] || x.apercu).filter(Boolean);
@@ -399,6 +399,113 @@ const compoHero = (essais, fond) => {
 };
 
 const teteFig = (champ) => (src(champ, 1200) ? `<figure class="tete-fig">${img(champ, 1200, 'tete-img', false, '', '(max-width: 900px) 90vw, 40vw')}</figure>` : '');
+/* ---------- Accueil du gabarit « édition » : le couloir des vitrines, puis la bande des offres (docs/TEXTES-REFONTE.md) ----------
+   Les textes ci-dessous sont ceux de docs/TEXTES-REFONTE.md ; le titre et la phrase du premier écran viennent de « accueil » (modifiables dans /admin). */
+/* ---------- Accueil du gabarit « édition » (v5, 18/11/2026) : des informations d'abord, puis les formules, puis des exemples ----------
+   Textes : docs/TEXTES-REFONTE.md. Les quatre raisons viennent de « accueil.reperes » (modifiables dans /admin), le reste de ce bloc. Rien d'inventé : chaque phrase reprend un texte déjà en ligne. */
+const CV = {
+  champ: 'Le nom de votre commerce', exemple: 'Boulangerie Martin',
+  aide: 'Il reste sur cet appareil jusqu’à votre demande de maquette. Rien n’est envoyé avant.',
+  bouton: 'Voir ma maquette gratuite', sous: 'Gratuite, à votre nom, en 5 jours ouvrés. Elle ne vous plaît pas : vous ne devez rien.',
+  raisons: 'Pourquoi me choisir', raisonsIntro: 'Quatre raisons, dites simplement.',
+  /* complément de chaque raison (même ordre que accueil.reperes) et teinte du fond de la scène */
+  plus: [
+    'Je travaille seul, depuis Auteuil (Paris 16e) et à distance partout en France. C’est moi qui réponds au téléphone, qui prépare la maquette et qui fais le site.',
+    'Vous m’envoyez votre nom, votre activité et votre fiche Google ou quelques photos. La maquette arrive dans les 5 jours ouvrés, sans engagement.',
+    'Pas d’abonnement. Si l’hébergement devenait payant un jour, je vous le dirais avant toute facture. Le nom de domaine est enregistré à votre nom dès le départ.',
+    'À la mise en ligne, quinze minutes de prise en main sur votre téléphone. Les demandes de vos clients (commandes, réservations, devis) arrivent dans votre espace.',
+  ],
+  teintes: ['#cfe3d6', '#cfe0f0', '#f1d9bf', '#ecc9d1'],
+  etapesTitre: 'Comment ça se passe', etapesIntro: 'Trois étapes, du premier échange à la mise en ligne.',
+  offres: 'Les formules', offresIntro: 'Choisissez la base, ajoutez ce dont vous avez besoin. Chaque prix est fixé par un devis écrit avant le début des travaux.', prix: 'Sur devis',
+  offresNote: 'Le nom de domaine se renouvelle environ 10 € par an, à votre nom. L’hébergement est gratuit aujourd’hui ; je vous préviens avant toute facture.',
+  exemples: 'Quatre sites d’exemple', exemplesIntro: 'Ouvrez-en un et changez un horaire : rien n’est publié. Ces entreprises sont imaginaires, les photos sont des photos d’illustration.',
+  seul: 'Une seule personne', seulTexte: 'Je suis Grégoire Muel. C’est moi que vous avez au téléphone, qui prépare votre maquette et qui fais votre site. Je travaille depuis Auteuil, Paris 16e, et à distance partout en France.',
+  final: 'Dites-moi ce que vous faites, je prépare la maquette.', mot: 'Maquette',
+};
+function corpsVitrines(C, D, A, G, essais) {
+  const reperes = garHero(C).map((g) => { const [v, ...r] = g.split('|'); return { t: v.trim(), d: r.join('|').trim() }; }).filter((x) => x.d);
+  const exemples = essais.filter((x) => x.lien && (x.photos || [])[0]).slice(0, 4);
+  const court = (x) => String(x.nom).split(',')[0];
+  const tel = G.telephone ? telHref(G.telephone) : '';
+  const etapes = (D.etapes || []).slice(0, 3);
+  return `
+  <section class="cv-couloir" aria-labelledby="cv-h1" data-cv>
+    <div class="cv-scene">
+      ${src(A.photo_fond, 1600) ? `${img(A.photo_fond, 1600, 'cv-fond', true, '', '100vw')}<span class="cv-voile" aria-hidden="true"></span>` : ''}
+      <div class="cv-intro">
+        <h1 id="cv-h1">${esc(A.titre || G.nom)}</h1>
+        ${A.texte ? `<p class="cv-chapo">${esc(A.texte)}</p>` : ''}
+        <form class="cv-nom" action="/contact" data-cv-nom>
+          <label for="cv-nom">${esc(CV.champ)}</label>
+          <div class="cv-nom-ligne"><input class="saisie" id="cv-nom" type="text" autocomplete="organization" maxlength="80" placeholder="${esc(CV.exemple)}" aria-describedby="cv-aide"><button class="cv-btn" type="submit">${esc(CV.bouton)}</button></div>
+          <p id="cv-aide" class="cv-aide">${esc(CV.aide)}</p>
+        </form>
+        <p class="cv-sous">${esc(CV.sous)}</p>
+      </div>
+      ${reperes.length ? `<div class="cv-tete"><h2>${esc(CV.raisons)}</h2><p>${esc(CV.raisonsIntro)}</p></div>
+      <ul class="cv-panneaux" aria-label="${esc(CV.raisons)}">${reperes.map((x, i) => `
+        <li class="cv-p" style="--i:${i};--c:${CV.teintes[i % CV.teintes.length]}" data-c="${CV.teintes[i % CV.teintes.length]}">
+          <div class="cv-carte"><h2>${esc(x.t)}</h2><p class="cv-gros">${esc(x.d)}</p>${CV.plus[i] ? `<p>${esc(CV.plus[i])}</p>` : ''}</div>
+        </li>`).join('')}
+      </ul>
+      <span class="cv-prog" aria-hidden="true"></span>` : ''}
+    </div>
+  </section>
+  ${etapes.length ? `
+  <section class="cv-etapes" aria-labelledby="cv-t-etapes">
+    <div class="cv-bloc">
+      <h2 id="cv-t-etapes">${esc(CV.etapesTitre)}</h2><p class="cv-intro-sec">${esc(CV.etapesIntro)}</p>
+      <ol class="cv-etapes-liste">${etapes.map((e) => `<li><h3>${esc(e.titre)}</h3>${(e.points || []).map((p) => `<p>${esc(p)}</p>`).join('')}</li>`).join('')}</ol>
+      ${src((C.presentation || {}).photo_2, 1200) ? `<figure class="cv-photo">${img(C.presentation.photo_2, 1200, 'cv-photo-img', false, 'Un poste de travail : un ordinateur portable et un carnet', '(max-width: 700px) 92vw, 1100px')}<figcaption>Photo d’illustration (Unsplash, Christin Hume) : un poste de travail. Elle ne montre ni mon bureau ni un client.</figcaption></figure>` : ''}
+    </div>
+  </section>` : ''}
+  ${(() => { const K = D.comparaison; if (!K) return ''; const [c1, c2] = K.colonnes; return `
+  <section class="cv-compar" aria-labelledby="cv-t-cmp">
+    <div class="cv-bloc">
+      <h2 id="cv-t-cmp">${esc(K.titre || libelle(C, 'comparaison_titre'))}</h2>${K.intro ? `<p class="cv-intro-sec">${esc(K.intro)}</p>` : ''}
+      <div class="cv-cmp" role="table" aria-label="${esc(K.titre || '')}">
+        <div class="cv-cmp-l cv-cmp-tete" role="row"><span role="columnheader"><span class="sr">Critère</span></span><span role="columnheader">${esc(c1)}</span><span role="columnheader">${esc(c2)}</span></div>
+        ${K.lignes.map((l) => `<div class="cv-cmp-l" role="row"><b role="rowheader">${esc(l.critere)}</b><span role="cell"><i>${esc(c1)}</i>${esc(l.a)}</span><span role="cell" class="cv-cmp-nous"><i>${esc(c2)}</i>${esc(l.b)}</span></div>`).join('')}
+      </div>
+      ${K.note ? `<p class="cv-note-cmp">${esc(K.note)}</p>` : ''}
+    </div>
+  </section>`; })()}
+  ${D.metiers.length ? `
+  <section class="cv-offres" aria-labelledby="cv-t-off">
+    <div class="cv-offres-pin">
+      <div class="cv-offres-tete"><h2 id="cv-t-off">${esc(CV.offres)}</h2><p>${esc(CV.offresIntro)}</p></div>
+      <ul class="cv-piste">${D.metiers.map((m) => `
+        <li class="cv-offre"><h3>${esc(m.nom)}</h3>${m.accroche ? `<p class="cv-accroche">${esc(m.accroche)}</p>` : ''}
+          ${(m.points || []).length ? `<ul class="cv-points">${m.points.slice(0, 5).map((p) => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
+          <p class="cv-prix">${m.prix ? prixHtml(m.prix) : esc(CV.prix)}</p><a class="cv-lien" href="/expertises#${esc(m.id)}">${esc(libelle(C, 'exp_lien'))} ${ico.fleche}</a></li>`).join('')}
+      </ul>
+      <p class="cv-note">${esc(CV.offresNote)}</p>
+    </div>
+  </section>` : ''}
+  ${exemples.length ? `
+  <section class="cv-exemples" aria-labelledby="cv-t-ex">
+    <div class="cv-bloc">
+      <h2 id="cv-t-ex">${esc(CV.exemples)}</h2><p class="cv-intro-sec">${esc(CV.exemplesIntro)}</p>
+      <ul class="cv-ex-liste">${exemples.map((x, i) => `
+        <li><a href="${esc(x.lien)}"${/^https?:/.test(x.lien) ? ' target="_blank" rel="noopener"' : ''} data-ouvrir><span class="cv-ex-vue">${img(x.photos[0], 1000, 'cv-ex-img', false, 'Capture de la démonstration : ' + court(x), '(max-width: 700px) 80vw, 25vw')}</span><b>${esc(court(x))}</b>${x.accroche ? `<span>${esc(x.accroche)}</span>` : ''}<span class="cv-lien">${esc(x.lien_texte || 'Essayer la démonstration')} ${ico.fleche}</span></a></li>`).join('')}
+      </ul>
+    </div>
+  </section>` : ''}
+  <section class="cv-seul" aria-labelledby="cv-t-seul">
+    <div class="cv-seul-in">
+      ${src((C.presentation || {}).photo, 800) ? `<figure class="cv-portrait">${img(C.presentation.photo, 800, 'cv-portrait-img', false, 'Grégoire Muel', '(max-width: 700px) 70vw, 360px')}</figure>` : ''}
+      <div><h2 id="cv-t-seul">${esc(CV.seul)}</h2><p>${esc(CV.seulTexte)}</p>${tel ? `<p class="cv-tel">${ico.tel}<a href="${tel}">${esc(G.telephone)}</a></p>` : ''}</div>
+    </div>
+  </section>
+  <section class="cv-final" aria-labelledby="cv-t-fin">
+    <h2 id="cv-t-fin">${esc(CV.final)}</h2>
+    <a class="cv-mot" href="/contact">${esc(CV.mot)}</a>
+    ${tel ? `<p class="cv-final-tel">Ou appelez-moi : <a href="${tel}">${esc(G.telephone)}</a></p>` : ''}
+  </section>`;
+}
+
+
 /* ---------- Pages ---------- */
 function accueil(C, D) {
   const A = C.accueil || {}, G = C.agence || {};
@@ -418,7 +525,7 @@ function accueil(C, D) {
       ...((C.reglages || {}).url ? { url: C.reglages.url } : {}),
       sameAs: [...new Set([G.linkedin, G.instagram, ...(Array.isArray(G.profils) ? G.profils : [])].filter((u) => /^https:\/\/\S+$/.test(String(u || '').trim())).map((u) => u.trim()))] },
       baseSite(C) ? { '@type': 'WebSite', name: G.nom, url: baseSite(C) + '/', inLanguage: 'fr-FR' } : null),
-    corps: `
+    corps: (C.theme || {}).gabarit === 'edition' ? corpsVitrines(C, D, A, G, essais) : `
   <section class="hero">
     ${video ? videoFond(video, src(A.photo, 2200), 'hero-media') : src(A.photo, 2400) ? img(A.photo, 2400, 'hero-media', true, '') : compoHero(essais, A.photo_fond)}
     <div class="hero-txt wrap">
@@ -494,7 +601,6 @@ function accueil(C, D) {
 /* Gabarit « édition » : chaque offre est une tuile (nom, pour qui, prix, ce qui est compris) ; le détail s'ouvre dans la tuile */
 const offrePlan = (C, m, i) => `
         <li class="plan" id="${esc(m.id)}">
-          ${src(m.photo, 1000) ? `<figure class="plan-vue">${img(m.photo, 1000, 'plan-img', i === 0, 'Aperçu d’un site d’exemple de cette offre', '(max-width: 900px) 90vw, 400px')}</figure>` : ''}
           <div class="plan-tete"><h2>${esc(m.nom)}</h2>${m.accroche ? `<p class="plan-pour">${esc(m.accroche)}</p>` : ''}</div>
           ${m.prix ? `<p class="plan-prix">${prixHtml(m.prix)}</p>` : ''}
           ${listeCoches(m.points.slice(0, 5))}

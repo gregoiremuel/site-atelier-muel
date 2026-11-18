@@ -158,6 +158,7 @@ const descr = (C, quoi) => { const G = C.agence || {}; const t = `${quoi} : ${G.
 
 function appel(C, court) {
   const A = C.accueil || {}, G = C.agence || {};
+  if ((C.theme || {}).gabarit === 'edition') return ''; /* v8 : plus de bandeau « Dites-moi ce que vous faites » */
   if (court && (C.theme || {}).gabarit === 'edition') return `
   <section class="appel appel-court">
     <div class="wrap appel-in">
@@ -190,7 +191,7 @@ function document_(C, o, page) {
   const theme = `${cssPolices(o.urlPolice || ((f) => '/fonts/' + f), gabarit === 'classique' ? 'agence' : gabarit)}\n:root{--fond:${hex(T.fond, '#f4f6f8')};--encre:${hex(T.encre, '#15172e')};--gris:${hex(T.gris, '#585b70')};--trait:${hex(T.trait, '#e2ded4')};--marine:${hex(T.marine, '#262a59')};--or:${hex(T.or, '#f8c151')}}`;
   /* Polices du gabarit édition chargées d'avance : moins de décalage quand elles remplacent la police de secours */
   const precharge = gabarit === 'edition' && !o.urlPolice ? ['besley-latin-500-normal.woff2', 'schibsted-grotesk-latin-400-normal.woff2'].map((f) => `<link rel="preload" as="font" type="font/woff2" href="/fonts/${f}" crossorigin>`).join('\n') + '\n' : '';
-  const style = precharge + (o.css != null ? `<style>\n${o.css}\n${theme}\n</style>` : `<link rel="stylesheet" href="${o.cssHref || '/assets/site.css'}">\n<style>${theme}</style>`);
+  const style = precharge + (o.css != null ? `<style>\n${o.css}\n${theme}\n</style>` : `<link rel="stylesheet" href="${(o.cssHref || '/assets/site.css?v=' + VER_SITE)}">\n<style>${theme}</style>`);
   const marque = src(G.nom_image, 600) ? `<img src="${esc(src(G.nom_image, 600))}" alt="${esc(nom)}">` : esc(nom);
   const marqueClaire = src(G.nom_image_blanc, 600) ? `<img src="${esc(src(G.nom_image_blanc, 600))}" alt="${esc(nom)}">` : esc(nom);
   const avecEngagements = Array.isArray(C.engagements) && C.engagements.some((e) => e && e.titre);
@@ -204,7 +205,7 @@ function document_(C, o, page) {
     lib: libellesDemande(C),
   };
   const donneesJs = `var AGENCE=${JSON.stringify(AG).replace(/</g, '\\u003c')};`;
-  const scripts = o.js != null ? `<script>\n${donneesJs}\n${o.js}\n</script>` : `<script>${donneesJs}</script>\n<script src="${o.jsHref || '/assets/site.js'}" defer></script>`;
+  const scripts = o.js != null ? `<script>\n${donneesJs}\n${o.js}\n</script>` : `<script>${donneesJs}</script>\n<script src="${(o.jsHref || '/assets/site.js?v=' + VER_SITE)}" defer></script>`;
   /* Google affiche environ 60 signes : le nom du site n'est ajouté au titre de la page que s'il tient */
   const titreAuto = page.titre ? (page.titre.length + nom.length + 2 <= 60 ? `${page.titre}, ${nom}` : page.titre) : `${nom}, ${G.activite || ''}`.replace(/, $/, '');
   /* Titre et description choisis page par page (clé facultative « seo » : { "/adresse": { titre, description } }) ; sinon ceux calculés ci-dessus */
@@ -406,6 +407,7 @@ const teteFig = (champ) => (src(champ, 1200) ? `<figure class="tete-fig">${img(c
 /* Verre liquide : lentille de réfraction (carte de déplacement dessinée en SVG), flou et saturation. Chromium seulement ; ailleurs, flou classique (site.css). */
 const MAP_VERRE = encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><defs><linearGradient id='a' x1='0' x2='1' y1='0' y2='0'><stop offset='0' stop-color='rgb(255,0,0)'/><stop offset='.1' stop-color='rgb(128,0,0)'/><stop offset='.9' stop-color='rgb(128,0,0)'/><stop offset='1' stop-color='rgb(0,0,0)'/></linearGradient><linearGradient id='b' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='rgb(0,255,0)'/><stop offset='.14' stop-color='rgb(0,128,0)'/><stop offset='.86' stop-color='rgb(0,128,0)'/><stop offset='1' stop-color='rgb(0,0,0)'/></linearGradient></defs><rect width='600' height='400' fill='#000'/><rect width='600' height='400' fill='url(#a)' style='mix-blend-mode:screen'/><rect width='600' height='400' fill='url(#b)' style='mix-blend-mode:screen'/></svg>");
 const SVG_VERRE = `<svg class="cv-defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="cv-verre" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feImage href="data:image/svg+xml,${MAP_VERRE}" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="carte"/><feGaussianBlur in="SourceGraphic" stdDeviation="5" result="flou"/><feDisplacementMap in="flou" in2="carte" scale="46" xChannelSelector="R" yChannelSelector="G"/></filter></svg>`;
+const VER_SITE = '20261118d'; /* à changer à chaque modification de site.css ou site.js (cache du navigateur) */
 const CV = {
   presente: 'Création et refonte de sites internet pour les commerces, les artisans et les entreprises : un site à votre nom, une maquette gratuite en 5 jours ouvrés, des horaires et des photos que vous changez vous-même.',
   pourquoi: 'Pourquoi un site réalisé pour vous ?', pourquoiTexte: 'Parce que vous gardez votre temps pour votre métier : le site est créé avec vos informations, vous validez, puis vous le modifiez depuis votre téléphone. Sans abonnement mensuel, à la différence d’un constructeur en ligne où tout reste à faire soi-même.',
@@ -437,10 +439,19 @@ function corpsVitrines(C, D, A, G, essais) {
   return `${SVG_VERRE}
   <section class="cv-couloir" aria-labelledby="cv-h1" data-cv>
     <div class="cv-scene">
-      <span class="cv-voile" aria-hidden="true"></span><span class="cv-fond" aria-hidden="true"></span>
+      <span class="cv-voile" aria-hidden="true"></span><span class="cv-fond" aria-hidden="true"><svg class="cv-objets" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs>
+<radialGradient id="o-b" cx=".32" cy=".3" r=".85"><stop offset="0" stop-color="#f6a9ba"/><stop offset=".3" stop-color="#c13a58"/><stop offset=".65" stop-color="#7a1f33"/><stop offset="1" stop-color="#5a1226"/></radialGradient>
+<radialGradient id="o-g" cx=".32" cy=".3" r=".85"><stop offset="0" stop-color="#fff7d6"/><stop offset=".3" stop-color="#f3cd62"/><stop offset=".68" stop-color="#bd851c"/><stop offset="1" stop-color="#8a5d12"/></radialGradient>
+<radialGradient id="o-s" cx=".32" cy=".3" r=".85"><stop offset="0" stop-color="#f4fcf6"/><stop offset=".4" stop-color="#a8ccb4"/><stop offset="1" stop-color="#6b9a82"/></radialGradient>
+<linearGradient id="o-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff4c6"/><stop offset=".35" stop-color="#e8b84c"/><stop offset=".7" stop-color="#9b6f14"/><stop offset="1" stop-color="#f7da80"/></linearGradient>
+<filter id="o-f6" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6"/></filter>
+<filter id="o-f16" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="16"/></filter></defs>
+<g class="d3" filter="url(#o-f16)"><circle cx="1390" cy="70" r="230" fill="url(#o-g)"/><circle cx="90" cy="820" r="190" fill="url(#o-s)"/></g>
+<g class="d2" filter="url(#o-f6)"><circle cx="800" cy="110" r="64" fill="url(#o-s)"/><circle cx="640" cy="790" r="96" fill="url(#o-g)"/><ellipse cx="330" cy="150" rx="120" ry="52" transform="rotate(-18 330 150)" fill="none" stroke="url(#o-r)" stroke-width="30"/></g>
+<g class="d1"><circle cx="1190" cy="250" r="150" fill="url(#o-b)"/><ellipse cx="1040" cy="590" rx="190" ry="84" transform="rotate(-22 1040 590)" fill="none" stroke="url(#o-r)" stroke-width="42"/><ellipse cx="1040" cy="582" rx="190" ry="84" transform="rotate(-22 1040 582)" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="4"/><circle cx="1340" cy="640" r="48" fill="url(#o-g)"/><circle cx="1240" cy="470" r="30" fill="url(#o-s)"/></g></svg></span>
       <div class="cv-intro">
         <h1 id="cv-h1">${esc(A.titre || G.nom)}</h1>
-        <p class="cv-chapo">${esc(CV.presente)}</p>${(D.secteurs || []).length ? `<p class="cv-pour">${D.secteurs.map((s) => esc(s.nom)).join(' · ')}</p>` : ''}
+        
         <form class="cv-nom" action="/contact" data-cv-nom>
           <label for="cv-nom">${esc(CV.champ)}</label>
           <div class="cv-nom-ligne"><input class="saisie" id="cv-nom" type="text" autocomplete="organization" maxlength="80" placeholder="${esc(CV.exemple)}" aria-describedby="cv-aide"><button class="cv-btn" type="submit">${esc(CV.bouton)}</button></div>
@@ -492,11 +503,6 @@ function corpsVitrines(C, D, A, G, essais) {
       ${src((C.presentation || {}).photo, 800) ? `<figure class="cv-portrait">${img(C.presentation.photo, 800, 'cv-portrait-img', false, 'Grégoire Muel', '(max-width: 700px) 70vw, 360px')}</figure>` : ''}
       <div><h2 id="cv-t-seul">${esc(CV.seul)}</h2><p>${esc(CV.seulTexte)}</p>${tel ? `<p class="cv-tel">${ico.tel}<a href="${tel}">${esc(G.telephone)}</a></p>` : ''}</div>
     </div>
-  </section>
-  <section class="cv-final" aria-labelledby="cv-t-fin">
-    <h2 id="cv-t-fin">${esc(CV.final)}</h2>
-    <a class="cv-mot" href="/contact">${esc(CV.mot)}</a>
-    ${tel ? `<p class="cv-final-tel">Ou appelez-moi : <a href="${tel}">${esc(G.telephone)}</a></p>` : ''}
   </section>`;
 }
 
